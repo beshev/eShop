@@ -24,6 +24,26 @@
         {
         }
 
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<Template> Templates { get; set; }
+
+        public DbSet<TemplateCategory> TemplateCategories { get; set; }
+
+        public DbSet<ProductTemplate> ProductsTemplates { get; set; }
+
+        public DbSet<OrderInfo> OrdersInfos { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<UserInfo> UsersInfos { get; set; }
+
+        public DbSet<Image> Images { get; set; }
+
+        public DbSet<ProductColor> ProductsColors { get; set; }
+
+        public DbSet<Color> Colors { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
