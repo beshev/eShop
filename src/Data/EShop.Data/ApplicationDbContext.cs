@@ -40,10 +40,6 @@
 
         public DbSet<Image> Images { get; set; }
 
-        public DbSet<ProductColor> ProductsColors { get; set; }
-
-        public DbSet<Color> Colors { get; set; }
-
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

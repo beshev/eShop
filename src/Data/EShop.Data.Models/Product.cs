@@ -12,7 +12,6 @@
             this.ProductTemplates = new HashSet<ProductTemplate>();
             this.ProductOrders = new HashSet<OrderInfo>();
             this.Images = new HashSet<Image>();
-            this.ProductColors = new HashSet<ProductColor>();
         }
 
         [Required]
@@ -20,10 +19,6 @@
         public string Name { get; set; }
 
         public decimal Price { get; set; }
-
-        public int ColorId { get; set; }
-
-        public virtual IEnumerable<ProductColor> ProductColors { get; set; }
 
         public virtual IEnumerable<Image> Images { get; set; }
 
