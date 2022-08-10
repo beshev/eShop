@@ -9,43 +9,152 @@
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#!">@GlobalConstants.SystemName</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Privacy">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <div class="text-center my-5">
+                <h1 class="fw-bolder">Welcome to Blog Home!</h1>
+                <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+            </div>
+        </div>
     </header>
-    
+
     <div class="container">
         <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
+        <div class="row">
             @this.RenderBody()
-        </main>
-    </div>
-    
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <!-- blog entries-->
+            <div class="col-lg-8">
+                <!-- featured blog post-->
+                <div class="card mb-4">
+                    <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                    <div class="card-body">
+                        <div class="small text-muted">january 1, 2022</div>
+                        <h2 class="card-title">featured post title</h2>
+                        <p class="card-text">lorem ipsum dolor sit amet, consectetur adipisicing elit. reiciendis aliquid atque, nulla? quos cum ex quis soluta, a laboriosam. dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
+                        <a class="btn btn-primary" href="#!">read more →</a>
+                    </div>
+                </div>
+                <!-- nested row for non-featured blog posts-->
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!-- blog post-->
+                        <div class="card mb-4">
+                            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <div class="card-body">
+                                <div class="small text-muted">january 1, 2022</div>
+                                <h2 class="card-title h4">post title</h2>
+                                <p class="card-text">lorem ipsum dolor sit amet, consectetur adipisicing elit. reiciendis aliquid atque, nulla.</p>
+                                <a class="btn btn-primary" href="#!">read more →</a>
+                            </div>
+                        </div>
+                        <!-- blog post-->
+                        <div class="card mb-4">
+                            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <div class="card-body">
+                                <div class="small text-muted">january 1, 2022</div>
+                                <h2 class="card-title h4">post title</h2>
+                                <p class="card-text">lorem ipsum dolor sit amet, consectetur adipisicing elit. reiciendis aliquid atque, nulla.</p>
+                                <a class="btn btn-primary" href="#!">read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- blog post-->
+                        <div class="card mb-4">
+                            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <div class="card-body">
+                                <div class="small text-muted">january 1, 2022</div>
+                                <h2 class="card-title h4">post title</h2>
+                                <p class="card-text">lorem ipsum dolor sit amet, consectetur adipisicing elit. reiciendis aliquid atque, nulla.</p>
+                                <a class="btn btn-primary" href="#!">read more →</a>
+                            </div>
+                        </div>
+                        <!-- blog post-->
+                        <div class="card mb-4">
+                            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <div class="card-body">
+                                <div class="small text-muted">january 1, 2022</div>
+                                <h2 class="card-title h4">post title</h2>
+                                <p class="card-text">lorem ipsum dolor sit amet, consectetur adipisicing elit. reiciendis aliquid atque, nulla? quos cum ex quis soluta, a laboriosam.</p>
+                                <a class="btn btn-primary" href="#!">read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- pagination-->
+                <nav aria-label="pagination">
+                    <hr class="my-0" />
+                    <ul class="pagination justify-content-center my-4">
+                        <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">newer</a></li>
+                        <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">3</a></li>
+                        <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">15</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">older</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- side widgets-->
+            <div class="col-lg-4">
+                <!-- search widget-->
+                <div class="card mb-4">
+                    <div class="card-header">search</div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="enter search term..." aria-label="enter search term..." aria-describedby="button-search" />
+                            <button class="btn btn-primary" id="button-search" type="button">go!</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- categories widget-->
+                <div class="card mb-4">
+                    <div class="card-header">categories</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#!">web design</a></li>
+                                    <li><a href="#!">html</a></li>
+                                    <li><a href="#!">freebies</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#!">javascript</a></li>
+                                    <li><a href="#!">css</a></li>
+                                    <li><a href="#!">tutorials</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- side widget-->
+                <div class="card mb-4">
+                    <div class="card-header">side widget</div>
+                    <div class="card-body">you can put anything you want inside of these side widgets. they are easy to use, and feature the bootstrap 5 card component!</div>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <footer class="py-5 bg-dark">
+        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
