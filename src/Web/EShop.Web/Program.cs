@@ -8,6 +8,7 @@
     using EShop.Data.Models;
     using EShop.Data.Repositories;
     using EShop.Data.Seeding;
+    using EShop.Services.Data.Templates;
     using EShop.Services.Mapping;
     using EShop.Services.Messaging;
     using EShop.Web.ViewModels;
@@ -62,6 +63,7 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<ITemplateService, TemplateService>();
         }
 
         private static void Configure(WebApplication app)

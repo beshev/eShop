@@ -16,7 +16,8 @@
 
         public decimal Price { get; set; }
 
-        public IEnumerable<IFormFile> Images { get; set; }
+        [Required]
+        public IFormFile Image { get; set; }
 
         public int ImagesFixedCount { get; set; }
 
@@ -25,5 +26,7 @@
         public bool IsBaseModel { get; set; }
 
         public int TemplateCategoryId { get; set; }
+
+        public IEnumerable<int> ForProducts { get; set; }
     }
 }

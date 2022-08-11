@@ -11,7 +11,6 @@
         {
             this.TemplateProducts = new HashSet<ProductTemplate>();
             this.TemplateOrders = new HashSet<OrderInfo>();
-            this.Images = new HashSet<Image>();
         }
 
         [Required]
@@ -23,6 +22,9 @@
 
         public decimal Price { get; set; }
 
+        [Required]
+        public string Base64Image { get; set; }
+
         public int ImagesFixedCount { get; set; }
 
         public bool HasCustomText { get; set; }
@@ -32,8 +34,6 @@
         public int TemplateCategoryId { get; set; }
 
         public virtual TemplateCategory TemplateCategory { get; set; }
-
-        public virtual IEnumerable<Image> Images { get; set; }
 
         public virtual IEnumerable<ProductTemplate> TemplateProducts { get; set; }
 

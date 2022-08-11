@@ -19,7 +19,7 @@
         </div>
         <div class="form-grup has-danger">
             <label asp-for="Description"></label>
-            <input asp-for="Description" class="form-control" placeholder="Template description..." />
+            <textarea asp-for="Description" class="form-control" placeholder="Template description..."></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <div class="form-grup">
@@ -28,9 +28,9 @@
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
          <div class="form-grup">
-            <label asp-for="Images"></label>
-            <input asp-for="Images" class="form-control" placeholder="Carbohydrates for 100 grams..." />
-            <span asp-validation-for="Images" class="text-danger"></span>
+            <label asp-for="Image"></label>
+            <input asp-for="Image" class="form-control" placeholder="Carbohydrates for 100 grams..." />
+            <span asp-validation-for="Image" class="text-danger"></span>
         </div>
         <div class="form-grup">
             <label asp-for="ImagesFixedCount"></label>
@@ -53,6 +53,13 @@
                 <option value="1">Коледа</option>
                 <option value="2">Великден</option>
                 <option value="3">Именден</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="ForProducts">For Products</label>
+            <select id="select-meal" name="ForProducts" class="form-select" multiple>
+                <option value="1">Чаша</option>
+                <option value="2">Тениска</option>
             </select>
         </div>
         <div class="form-grup" style="margin-top: 2%;">
