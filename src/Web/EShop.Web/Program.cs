@@ -8,9 +8,11 @@
     using EShop.Data.Models;
     using EShop.Data.Repositories;
     using EShop.Data.Seeding;
+    using Eshop.Services.Cloudinary;
     using EShop.Services.Data.Templates;
     using EShop.Services.Mapping;
     using EShop.Services.Messaging;
+    using EShop.Web.Infrastructure.Extensions;
     using EShop.Web.ViewModels;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
@@ -33,37 +35,17 @@
 
         private static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
-                .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
-
-            services.Configure<CookiePolicyOptions>(
-                options =>
-                {
-                    options.CheckConsentNeeded = context => true;
-                    options.MinimumSameSitePolicy = SameSiteMode.None;
-                });
-
-            services.AddControllersWithViews(
-                options =>
-                {
-                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-                }).AddRazorRuntimeCompilation();
-            services.AddRazorPages();
-            services.AddDatabaseDeveloperPageExceptionFilter();
-
-            services.AddSingleton(configuration);
-
-            // Data repositories
-            services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
-            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
-            services.AddScoped<IDbQueryRunner, DbQueryRunner>();
-
-            // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ITemplateService, TemplateService>();
+            services
+                .AddDatabase(configuration)
+                .AddIdentity()
+                .ConfigureCookiePolicyOptions()
+                .AddControllersWithAutoAntiforgeryTokenAttribute()
+                .AddRepositories()
+                .AddRazorPagesExtension()
+                .AddDatabaseDeveloperPageExceptionFilter()
+                .AddSingleton(configuration)
+                .AddCloudinaryConfiguration(configuration)
+                .AddApplicationServices();
         }
 
         private static void Configure(WebApplication app)
