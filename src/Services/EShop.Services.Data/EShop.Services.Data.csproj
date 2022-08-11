@@ -23,6 +23,7 @@
     <ProjectReference Include="..\..\Data\EShop.Data.Common\EShop.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\EShop.Data.Models\EShop.Data.Models.csproj" />
     <ProjectReference Include="..\EShop.Services.Mapping\EShop.Services.Mapping.csproj" />
+    <ProjectReference Include="..\EShop.Services\EShop.Services.csproj" />
   </ItemGroup>
 
 </Project>
