@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220810161618_InitialDatabase")]
+    [Migration("20220811130049_InitialDatabase")]
     partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -144,30 +144,6 @@ namespace EShop.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("EShop.Data.Models.Color", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Colors");
-                });
-
             modelBuilder.Entity("EShop.Data.Models.Image", b =>
                 {
                     b.Property<int>("Id")
@@ -189,19 +165,9 @@ namespace EShop.Data.Migrations
                     b.Property<int?>("OrderInfoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TemplateId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("OrderInfoId");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("TemplateId");
 
                     b.ToTable("Images");
                 });
@@ -290,8 +256,9 @@ namespace EShop.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ColorId")
-                        .HasColumnType("int");
+                    b.Property<string>("Base64Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -307,12 +274,17 @@ namespace EShop.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("ProductCategoryId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductCategoryId");
 
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("EShop.Data.Models.ProductColor", b =>
+            modelBuilder.Entity("EShop.Data.Models.ProductCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -320,25 +292,20 @@ namespace EShop.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ColordId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ColordId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductsColors");
+                    b.ToTable("ProductsCategories");
                 });
 
             modelBuilder.Entity("EShop.Data.Models.ProductTemplate", b =>
@@ -378,12 +345,19 @@ namespace EShop.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Base64Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("HasCustomText")
+                        .HasColumnType("bit");
 
                     b.Property<int>("ImagesFixedCount")
                         .HasColumnType("int");
@@ -601,19 +575,7 @@ namespace EShop.Data.Migrations
                         .WithMany("Images")
                         .HasForeignKey("OrderInfoId");
 
-                    b.HasOne("EShop.Data.Models.Product", "Product")
-                        .WithMany("Images")
-                        .HasForeignKey("ProductId");
-
-                    b.HasOne("EShop.Data.Models.Template", "Template")
-                        .WithMany("Images")
-                        .HasForeignKey("TemplateId");
-
                     b.Navigation("OrderInfo");
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Template");
                 });
 
             modelBuilder.Entity("EShop.Data.Models.OrderInfo", b =>
@@ -639,23 +601,15 @@ namespace EShop.Data.Migrations
                     b.Navigation("Template");
                 });
 
-            modelBuilder.Entity("EShop.Data.Models.ProductColor", b =>
+            modelBuilder.Entity("EShop.Data.Models.Product", b =>
                 {
-                    b.HasOne("EShop.Data.Models.Color", "Colord")
-                        .WithMany("ColorProducts")
-                        .HasForeignKey("ColordId")
+                    b.HasOne("EShop.Data.Models.ProductCategory", "ProductCategory")
+                        .WithMany("Products")
+                        .HasForeignKey("ProductCategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("EShop.Data.Models.Product", "Product")
-                        .WithMany("ProductColors")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Colord");
-
-                    b.Navigation("Product");
+                    b.Navigation("ProductCategory");
                 });
 
             modelBuilder.Entity("EShop.Data.Models.ProductTemplate", b =>
@@ -759,11 +713,6 @@ namespace EShop.Data.Migrations
                     b.Navigation("Roles");
                 });
 
-            modelBuilder.Entity("EShop.Data.Models.Color", b =>
-                {
-                    b.Navigation("ColorProducts");
-                });
-
             modelBuilder.Entity("EShop.Data.Models.Order", b =>
                 {
                     b.Navigation("TemplatesOrders");
@@ -778,19 +727,18 @@ namespace EShop.Data.Migrations
 
             modelBuilder.Entity("EShop.Data.Models.Product", b =>
                 {
-                    b.Navigation("Images");
-
-                    b.Navigation("ProductColors");
-
                     b.Navigation("ProductOrders");
 
                     b.Navigation("ProductTemplates");
                 });
 
+            modelBuilder.Entity("EShop.Data.Models.ProductCategory", b =>
+                {
+                    b.Navigation("Products");
+                });
+
             modelBuilder.Entity("EShop.Data.Models.Template", b =>
                 {
-                    b.Navigation("Images");
-
                     b.Navigation("TemplateOrders");
 
                     b.Navigation("TemplateProducts");

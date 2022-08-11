@@ -32,6 +32,8 @@
 
         public DbSet<ProductTemplate> ProductsTemplates { get; set; }
 
+        public DbSet<ProductCategory> ProductsCategories { get; set; }
+
         public DbSet<OrderInfo> OrdersInfos { get; set; }
 
         public DbSet<Order> Orders { get; set; }
