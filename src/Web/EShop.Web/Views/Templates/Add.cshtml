@@ -1,0 +1,62 @@
+﻿@model TemplateInputModel
+
+@{
+    this.ViewData["Title"] = "Add Template";
+}
+
+<div class="text-center">
+    <h1>
+        @this.ViewData["Title"]
+    </h1>
+
+    <form asp-controller="Templates" asp-action="Add" enctype="multipart/form-data" class="col-lg-6 offset-lg-3">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="form-grup">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" placeholder="Template name..." />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-grup has-danger">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" placeholder="Template description..." />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-grup">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" class="form-control" placeholder="Template price..." />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+         <div class="form-grup">
+            <label asp-for="Images"></label>
+            <input asp-for="Images" class="form-control" placeholder="Carbohydrates for 100 grams..." />
+            <span asp-validation-for="Images" class="text-danger"></span>
+        </div>
+        <div class="form-grup">
+            <label asp-for="ImagesFixedCount"></label>
+            <input asp-for="ImagesFixedCount" class="form-control" placeholder="Template images count..." />
+            <span asp-validation-for="ImagesFixedCount" class="text-danger"></span>
+        </div>
+        <div class="form-grup">
+            <label asp-for="HasCustomText"></label>
+            <input asp-for="HasCustomText" type="checkbox" />
+            <span asp-validation-for="HasCustomText" class="text-danger"></span>
+        </div>
+        <div class="form-grup">
+            <label asp-for="IsBaseModel"></label>
+            <input type="checkbox" asp-for="IsBaseModel" type="checkbox" />
+            <span asp-validation-for="IsBaseModel" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="TemplateCategoryId">Category</label>
+            <select id="select-meal" name="TemplateCategoryId" class="form-select">
+                <option value="1">Коледа</option>
+                <option value="2">Великден</option>
+                <option value="3">Именден</option>
+            </select>
+        </div>
+        <div class="form-grup" style="margin-top: 2%;">
+            <input type="submit" class="btn btn-outline-dark" value="Add" />
+        </div>
+    </form>
+</div>

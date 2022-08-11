@@ -25,6 +25,8 @@
 
         public int ImagesFixedCount { get; set; }
 
+        public bool HasCustomText { get; set; }
+
         public bool IsBaseModel { get; set; }
 
         public int TemplateCategoryId { get; set; }
