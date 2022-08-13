@@ -20,6 +20,10 @@
 
         public decimal Price { get; set; }
 
+        public string Description { get; set; }
+
+        public bool HasCustomText { get; set; }
+
         [Required]
         public string ImageUrl { get; set; }
 

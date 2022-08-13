@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
     using EShop.Common;
     using EShop.Data.Common.Models;
 
