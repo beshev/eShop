@@ -1,6 +1,9 @@
 ﻿namespace EShop.Web.ViewModels.Products
 {
-    public class ProductViewModel
+    using EShop.Data.Models;
+    using EShop.Services.Mapping;
+
+    public class ProductViewModel : IMapFrom<Product>
     {
         public string Name { get; set; }
 

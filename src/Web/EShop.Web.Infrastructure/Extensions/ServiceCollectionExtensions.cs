@@ -7,6 +7,7 @@
     using EShop.Data.Models;
     using EShop.Data.Repositories;
     using Eshop.Services.Cloudinary;
+    using EShop.Services.Data.Products;
     using EShop.Services.Data.Templates;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
@@ -71,6 +72,7 @@
             // Application services
             services.AddTransient<ITemplateService, TemplateService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IProductService, ProductService>();
 
             return services;
         }
