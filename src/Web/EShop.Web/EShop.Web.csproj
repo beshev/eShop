@@ -40,4 +40,10 @@
     <ProjectReference Include="..\EShop.Web.Infrastructure\EShop.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\EShop.Web.ViewModels\EShop.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Administration\Views\Products\" />
+    <Folder Include="Views\Products\" />
+    <Folder Include="Views\Templates\" />
+  </ItemGroup>
 </Project>
