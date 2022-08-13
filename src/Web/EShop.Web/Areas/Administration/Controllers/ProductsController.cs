@@ -1,14 +1,18 @@
 ﻿namespace EShop.Web.Areas.Administration.Controllers
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using EShop.Web.ViewModels.Products;
     using Microsoft.AspNetCore.Mvc;
 
     public class ProductsController : AdministrationController
     {
         public async Task<IActionResult> All()
         {
-            return this.View();
+            var model = new List<ProductViewModel>();
+
+            return this.View(model);
         }
 
         public async Task<IActionResult> Add()

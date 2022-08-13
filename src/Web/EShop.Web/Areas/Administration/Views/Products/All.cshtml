@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ProductViewModel>
+
+@{
+    this.ViewData["Title"] = "Продукти";
+}
+
+<a asp-area="Administration" asp-controller="Products" asp-action="Add" class="btn btn-primary mb-2">Добави продукт</a>
+
+<table class="table table-bordered table-hover text-center">
+    <thead>
+        <tr>
+            <th>@GlobalConstants.ProductDisplayName</th>
+            <th>@GlobalConstants.ProductDisplayPrice</th>
+            <th>@GlobalConstants.ProductDisplayDescription</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in this.Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                 <td>@product.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
