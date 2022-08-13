@@ -9,6 +9,7 @@
     {
         [Required]
         [MaxLength(255)]
+        [Display(Name = "Име на темплейта")]
         public string Name { get; set; }
 
         [Required]
