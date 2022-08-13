@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    using EShop.Common;
     using EShop.Data.Common.Models;
 
     public class Template : BaseModel<int>
@@ -14,7 +14,7 @@
         }
 
         [Required]
-        [MaxLength(255)]
+        [MaxLength(DataConstants.TemplateNameMaxLength)]
         public string Name { get; set; }
 
         [Required]
@@ -23,7 +23,7 @@
         public decimal Price { get; set; }
 
         [Required]
-        public string Base64Image { get; set; }
+        public string ImageUrl { get; set; }
 
         public int ImagesFixedCount { get; set; }
 

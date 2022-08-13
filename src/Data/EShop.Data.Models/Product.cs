@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using EShop.Common;
     using EShop.Data.Common.Models;
 
     public class Product : BaseModel<int>
@@ -14,13 +15,13 @@
         }
 
         [Required]
-        [MaxLength(255)]
+        [MaxLength(DataConstants.ProductNameMaxLength)]
         public string Name { get; set; }
 
         public decimal Price { get; set; }
 
         [Required]
-        public string Base64Image { get; set; }
+        public string ImageUrl { get; set; }
 
         public int ProductCategoryId { get; set; }
 
