@@ -6,7 +6,7 @@
 
     public class TemplatesController : BaseController
     {
-        public async Task<IActionResult> All(int id, string productId = null, string categoryId)
+        public async Task<IActionResult> All(int id, string productId = null, string categoryId = null)
         {
             return this.View();
         }
