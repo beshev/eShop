@@ -3,20 +3,11 @@
     using System.Reflection;
 
     using EShop.Data;
-    using EShop.Data.Common;
-    using EShop.Data.Common.Repositories;
-    using EShop.Data.Models;
-    using EShop.Data.Repositories;
     using EShop.Data.Seeding;
-    using Eshop.Services.Cloudinary;
-    using EShop.Services.Data.Templates;
     using EShop.Services.Mapping;
-    using EShop.Services.Messaging;
     using EShop.Web.Infrastructure.Extensions;
     using EShop.Web.ViewModels;
     using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

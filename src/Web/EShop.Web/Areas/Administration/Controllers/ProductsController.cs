@@ -1,6 +1,5 @@
 ﻿namespace EShop.Web.Areas.Administration.Controllers
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using EShop.Services.Data.Products;
