@@ -10,5 +10,7 @@
         public Task AddAsync(string name, decimal price, string description, int categoryId, bool hasCustomText, IFormFile image);
 
         public Task<IEnumerable<TModel>> GetAllAsync<TModel>(int? categoryId = null);
+
+        public Task CreateCategoryAsync(string name);
     }
 }

@@ -14,13 +14,16 @@
     public class ProductService : IProductService
     {
         private readonly IRepository<Product> productRepo;
+        private readonly IRepository<ProductCategory> productCategoryRepo;
         private readonly ICloudinaryService cloudinaryService;
 
         public ProductService(
             IRepository<Product> productRepo,
+            IRepository<ProductCategory> productCategoryRepo,
             ICloudinaryService cloudinaryService)
         {
             this.productRepo = productRepo;
+            this.productCategoryRepo = productCategoryRepo;
             this.cloudinaryService = cloudinaryService;
         }
 
@@ -40,6 +43,12 @@
 
             await this.productRepo.AddAsync(prodcut);
             await this.productRepo.SaveChangesAsync();
+        }
+
+        public async Task CreateCategoryAsync(string name)
+        {
+            await this.productCategoryRepo.AddAsync(new ProductCategory { Name = name });
+            await this.productCategoryRepo.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(int? categoryId = null)

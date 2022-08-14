@@ -1,8 +1,10 @@
 ﻿namespace EShop.Web.Areas.Administration.Controllers
 {
     using System.Threading.Tasks;
-
+    using EShop.Common;
     using EShop.Services.Data.Products;
+    using EShop.Web.Infrastructure.Attributes;
+    using EShop.Web.ViewModels;
     using EShop.Web.ViewModels.Products;
     using Microsoft.AspNetCore.Mvc;
 
@@ -50,9 +52,15 @@
             return this.View();
         }
 
-        public async Task<IActionResult> AddCategory()
+        [SetTempDataErrorsAttribute(GlobalConstants.NameOfCategory)]
+        public async Task<IActionResult> AddCategory(CategoryInputModel model)
         {
-            return this.View();
+            if (this.ModelState.IsValid)
+            {
+               await this.productService.CreateCategoryAsync(model.CategoryName);
+            }
+
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

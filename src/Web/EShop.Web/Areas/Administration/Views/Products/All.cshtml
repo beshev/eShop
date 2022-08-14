@@ -5,6 +5,17 @@
 }
 
 <a asp-area="Administration" asp-controller="Products" asp-action="Add" class="btn btn-primary mb-2">Добави продукт</a>
+<form asp-area="Administration" asp-controller="Products" asp-action="AddCategory">
+    <span class="text-danger">@this.TempData[GlobalConstants.NameOfCategory]</span>
+
+    <div class="form-group">
+        <label>Създай категория</label>
+        <input name="CategoryName" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Създай" />
+    </div>
+</form>
 
 <table class="table table-bordered table-hover text-center">
     <thead>
@@ -20,7 +31,7 @@
             <tr>
                 <td>@product.Name</td>
                 <td>@product.Price.ToString("F2") лв.</td>
-                 <td>@product.Description</td>
+                <td>@product.Description</td>
             </tr>
         }
     </tbody>
