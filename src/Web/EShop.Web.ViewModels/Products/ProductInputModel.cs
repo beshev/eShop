@@ -8,11 +8,12 @@
 
     public class ProductInputModel
     {
-        [Required]
+        [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
         [MaxLength(DataConstants.ProductNameMaxLength)]
         [Display(Name = GlobalConstants.NameOfName)]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
         [Display(Name = GlobalConstants.NameOfPrice)]
         public decimal Price { get; set; }
 
@@ -22,10 +23,11 @@
         [Display(Name = GlobalConstants.NameOfHasCustomText)]
         public bool HasCustomText { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
         [Display(Name = GlobalConstants.NameOfImage)]
         public IFormFile Image { get; set; }
 
+        [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
         public int CategoryId { get; set; }
 
         public IEnumerable<int> TemplatesIds { get; set; }
