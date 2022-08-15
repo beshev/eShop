@@ -37,18 +37,11 @@
             <input asp-for="HasCustomText" type="checkbox" />
             <span asp-validation-for="HasCustomText" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label asp-for="ProductCategoryId">Category</label>
-            <select id="select-meal" name="ProductCategoryId" class="form-select">
-                <option value="5">Химикал</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label asp-for="TemplatesIds">Templates</label>
-            <select id="select-meal" name="TemplatesIds" class="form-select" multiple>
-                <option value="1">Модел 1</option>
-            </select>
-        </div>
+
+        <vc:product-categories-select></vc:product-categories-select>
+
+        <vc:template-select></vc:template-select>
+
         <div class="form-grup" style="margin-top: 2%;">
             <input type="submit" class="btn btn-outline-dark" value="Add" />
         </div>

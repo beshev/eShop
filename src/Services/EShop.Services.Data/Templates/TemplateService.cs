@@ -7,7 +7,9 @@
     using EShop.Data.Common.Repositories;
     using EShop.Data.Models;
     using Eshop.Services.Cloudinary;
+    using EShop.Services.Mapping;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.EntityFrameworkCore;
 
     public class TemplateService : ITemplateService
     {
@@ -44,6 +46,25 @@
 
             await this.templateRepo.AddAsync(template);
             await this.templateRepo.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(string category = null, int skip = 0, int? take = null)
+        {
+            var templates = this.templateRepo.AllAsNoTracking();
+
+            if (string.IsNullOrWhiteSpace(category) == false)
+            {
+                templates = templates.Where(x => x.TemplateCategory.Name.Equals(category));
+            }
+
+            if (take.HasValue)
+            {
+                templates = templates.Skip(skip).Take(take.Value);
+            }
+
+            return await templates
+                .To<TModel>()
+                .ToListAsync();
         }
     }
 }

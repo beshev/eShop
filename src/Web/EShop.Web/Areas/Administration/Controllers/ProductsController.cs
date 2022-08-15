@@ -1,6 +1,7 @@
 ﻿namespace EShop.Web.Areas.Administration.Controllers
 {
     using System.Threading.Tasks;
+
     using EShop.Common;
     using EShop.Services.Data.Products;
     using EShop.Web.Infrastructure.Attributes;
@@ -37,7 +38,7 @@
                 return this.View(model);
             }
 
-            await this.productService.AddAsync(model.Name, model.Price, model.Description, model.ProductCategoryId, model.HasCustomText, model.Image);
+            await this.productService.AddAsync(model.Name, model.Price, model.Description, model.CategoryId, model.HasCustomText, model.Image, model.TemplatesIds);
 
             return this.RedirectToAction(nameof(this.All));
         }

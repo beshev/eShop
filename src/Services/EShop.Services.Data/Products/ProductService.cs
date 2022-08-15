@@ -27,7 +27,7 @@
             this.cloudinaryService = cloudinaryService;
         }
 
-        public async Task AddAsync(string name, decimal price, string description, int categoryId, bool hasCustomText, IFormFile image)
+        public async Task AddAsync(string name, decimal price, string description, int categoryId, bool hasCustomText, IFormFile image, IEnumerable<int> templatesIds)
         {
             var cloudFolder = $"products/{name}";
 
@@ -39,6 +39,7 @@
                 HasCustomText = hasCustomText,
                 ProductCategoryId = categoryId,
                 ImageUrl = await this.cloudinaryService.UploadAsync(image, cloudFolder),
+                ProductTemplates = templatesIds.Select(templateId => new ProductTemplate { TemplateId = templateId }).ToList(),
             };
 
             await this.productRepo.AddAsync(prodcut);
@@ -62,5 +63,11 @@
 
             return await products.To<TModel>().ToListAsync();
         }
+
+        public async Task<IEnumerable<TModel>> GetCategoriesAsync<TModel>()
+        => await this.productCategoryRepo
+            .AllAsNoTracking()
+            .To<TModel>()
+            .ToListAsync();
     }
 }

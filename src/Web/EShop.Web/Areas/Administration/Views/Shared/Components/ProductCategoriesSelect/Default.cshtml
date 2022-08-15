@@ -1,0 +1,9 @@
+﻿@model IEnumerable<SelectViewModel>
+
+<div class="form-group">
+    <label asp-for="@Model.FirstOrDefault().Name"></label>
+    <select name="CategoryId"
+            class="form-select"
+            asp-items="@(new SelectList(Model, nameof(SelectViewModel.Id), nameof(SelectViewModel.Name)))">
+    </select>
+</div>
