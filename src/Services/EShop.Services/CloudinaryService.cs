@@ -49,5 +49,8 @@
 
             return secureUrl.OriginalString;
         }
+
+        public async Task DeleteAsync(string cloudFolder)
+         => await this.cloudinary.DestroyAsync(new DeletionParams($"E-shop/{cloudFolder}"));
     }
 }

@@ -28,10 +28,15 @@
 
         public const string ProductImageUrl = "Снимка на продукта";
 
+        public const string ProductCloundFolderName = "products/{0}";
+
         // Categories
         public const string NameOfCategory = "Категория";
 
         // Template
         public const string NameOfTemplates = "Темплейти";
+
+        // SQL
+        public const string DeleteFromProductsTemplatesTableQuery = "DELETE FROM [ProductsTemplates] Where ProdcutId = {0}";
     }
 }

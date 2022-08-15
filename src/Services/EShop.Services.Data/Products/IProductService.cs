@@ -9,10 +9,16 @@
     {
         public Task AddAsync(string name, decimal price, string description, int categoryId, bool hasCustomText, IFormFile image, IEnumerable<int> templatesIds);
 
+        public Task DeleteByIdAsync(int id);
+
         public Task<IEnumerable<TModel>> GetAllAsync<TModel>(int? categoryId = null);
+
+        public Task<TModel> GetByIdAsync<TModel>(int id);
 
         public Task CreateCategoryAsync(string name);
 
         public Task<IEnumerable<TModel>> GetCategoriesAsync<TModel>();
+
+        public Task UpdateAsync(int id, string name, decimal price, string description, int categoryId, bool hasCustomText, IFormFile image, IEnumerable<int> templatesIds);
     }
 }

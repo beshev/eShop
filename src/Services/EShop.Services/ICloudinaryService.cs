@@ -7,5 +7,7 @@
     public interface ICloudinaryService
     {
         public Task<string> UploadAsync(IFormFile file, string fileName);
+
+        public Task DeleteAsync(string cloudFolder);
     }
 }

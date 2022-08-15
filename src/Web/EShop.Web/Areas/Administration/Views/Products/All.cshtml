@@ -26,6 +26,7 @@
             <th>@GlobalConstants.ProductDisplayPrice</th>
             <th>@GlobalConstants.ProductDisplayDescription</th>
             <th>@GlobalConstants.ProductImageUrl</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -36,6 +37,10 @@
                 <td>@product.Price.ToString("F2") лв.</td>
                 <td>@product.Description</td>
                 <td><a href="@product.ImageUrl" target="_blank">Снимка</a></td>
+                <td>
+                    <a asp-area="Administration" asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id">Редактиране</a><br />
+                    <a asp-area="Administration" asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id">Изтриване</a>
+                </td>
             </tr>
         }
     </tbody>
