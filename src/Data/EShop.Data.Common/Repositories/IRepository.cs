@@ -17,6 +17,8 @@
 
         void Delete(TEntity entity);
 
+        Task SqlRawAsync(string query, params object[] parameters);
+
         Task<int> SaveChangesAsync();
     }
 }

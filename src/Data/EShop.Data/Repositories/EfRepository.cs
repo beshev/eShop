@@ -1,11 +1,12 @@
 ﻿namespace EShop.Data.Repositories
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using EShop.Data.Common.Repositories;
-
+    using Microsoft.Data.SqlClient;
     using Microsoft.EntityFrameworkCore;
 
     public class EfRepository<TEntity> : IRepository<TEntity>
@@ -41,6 +42,11 @@
         public virtual void Delete(TEntity entity) => this.DbSet.Remove(entity);
 
         public Task<int> SaveChangesAsync() => this.Context.SaveChangesAsync();
+
+        public async Task SqlRawAsync(string query, params object[] parameters)
+        {
+            await this.Context.Database.ExecuteSqlRawAsync(query, parameters);
+        }
 
         public void Dispose()
         {
