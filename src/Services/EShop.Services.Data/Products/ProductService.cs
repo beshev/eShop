@@ -88,6 +88,23 @@
             .To<TModel>()
             .ToListAsync();
 
+        public async Task RemoveCategoryAsync(int categoryId)
+        {
+            var category = await this.productCategoryRepo
+                .All()
+                .Include(x => x.Products)
+                .FirstOrDefaultAsync(x => x.Id.Equals(categoryId));
+
+            foreach (var prodcut in category.Products)
+            {
+                await this.RemoveProductTemplatesAsync(prodcut.Id);
+                this.productRepo.Delete(prodcut);
+            }
+
+            this.productCategoryRepo.Delete(category);
+            await this.productCategoryRepo.SaveChangesAsync();
+        }
+
         public async Task UpdateAsync(int id, string name, decimal price, string description, int categoryId, bool hasCustomText, IFormFile image, IEnumerable<int> templatesIds)
         {
             var product = await this.productRepo

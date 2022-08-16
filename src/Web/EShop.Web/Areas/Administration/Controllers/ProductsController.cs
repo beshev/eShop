@@ -78,5 +78,11 @@
 
             return this.RedirectToAction(nameof(this.All));
         }
+
+        public async Task<IActionResult> RemoveCategory(int categoryId)
+        {
+            await this.productService.RemoveCategoryAsync(categoryId);
+            return this.RedirectToAction(nameof(this.All));
+        }
     }
 }

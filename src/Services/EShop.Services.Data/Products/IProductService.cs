@@ -20,5 +20,7 @@
         public Task<IEnumerable<TModel>> GetCategoriesAsync<TModel>();
 
         public Task UpdateAsync(int id, string name, decimal price, string description, int categoryId, bool hasCustomText, IFormFile image, IEnumerable<int> templatesIds);
+
+        Task RemoveCategoryAsync(int categoryId);
     }
 }

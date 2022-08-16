@@ -17,7 +17,10 @@
     </div>
 </form>
 
-<vc:product-categories-select></vc:product-categories-select>
+<form asp-area="Administration" asp-controller="Products" asp-action="RemoveCategory">
+    <vc:product-categories-select></vc:product-categories-select>
+    <input type="submit" value="Премахни" class="btn btn-danger"/>
+</form>
 
 <table class="table table-bordered table-hover text-center mt-2">
     <thead>
