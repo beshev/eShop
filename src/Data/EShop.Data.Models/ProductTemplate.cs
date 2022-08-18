@@ -4,7 +4,7 @@
 
     public class ProductTemplate : BaseModel<int>
     {
-        public int ProdcutId { get; set; }
+        public int ProductId { get; set; }
 
         public virtual Product Prodcut { get; set; }
 

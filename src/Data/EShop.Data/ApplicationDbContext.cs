@@ -83,10 +83,10 @@
 
             // Disable cascade delete
             var foreignKeys = entityTypes
-                .SelectMany(e => e.GetForeignKeys().Where(f => f.DeleteBehavior == DeleteBehavior.Cascade));
+                .SelectMany(e => e.GetForeignKeys().Where(f => f.DeleteBehavior == DeleteBehavior.NoAction || f.DeleteBehavior == DeleteBehavior.Restrict));
             foreach (var foreignKey in foreignKeys)
             {
-                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+                foreignKey.DeleteBehavior = DeleteBehavior.Cascade;
             }
         }
 

@@ -326,7 +326,7 @@ namespace EShop.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProdcutId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("TemplateId")
@@ -334,7 +334,7 @@ namespace EShop.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProdcutId");
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("TemplateId");
 
@@ -587,7 +587,7 @@ namespace EShop.Data.Migrations
                     b.HasOne("EShop.Data.Models.Order", "Order")
                         .WithMany("TemplatesOrders")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EShop.Data.Models.Product", "Product")
@@ -610,7 +610,7 @@ namespace EShop.Data.Migrations
                     b.HasOne("EShop.Data.Models.ProductCategory", "ProductCategory")
                         .WithMany("Products")
                         .HasForeignKey("ProductCategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ProductCategory");
@@ -620,14 +620,14 @@ namespace EShop.Data.Migrations
                 {
                     b.HasOne("EShop.Data.Models.Product", "Prodcut")
                         .WithMany("ProductTemplates")
-                        .HasForeignKey("ProdcutId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EShop.Data.Models.Template", "Template")
                         .WithMany("TemplateProducts")
                         .HasForeignKey("TemplateId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Prodcut");
@@ -640,7 +640,7 @@ namespace EShop.Data.Migrations
                     b.HasOne("EShop.Data.Models.TemplateCategory", "TemplateCategory")
                         .WithMany("Templates")
                         .HasForeignKey("TemplateCategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("TemplateCategory");
@@ -651,7 +651,7 @@ namespace EShop.Data.Migrations
                     b.HasOne("EShop.Data.Models.Order", "Order")
                         .WithOne("UserInfo")
                         .HasForeignKey("EShop.Data.Models.UserInfo", "OrderId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -662,7 +662,7 @@ namespace EShop.Data.Migrations
                     b.HasOne("EShop.Data.Models.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -671,7 +671,7 @@ namespace EShop.Data.Migrations
                     b.HasOne("EShop.Data.Models.ApplicationUser", null)
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -680,7 +680,7 @@ namespace EShop.Data.Migrations
                     b.HasOne("EShop.Data.Models.ApplicationUser", null)
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -689,13 +689,13 @@ namespace EShop.Data.Migrations
                     b.HasOne("EShop.Data.Models.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EShop.Data.Models.ApplicationUser", null)
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -704,7 +704,7 @@ namespace EShop.Data.Migrations
                     b.HasOne("EShop.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
