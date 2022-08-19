@@ -3,10 +3,12 @@
     using System.ComponentModel.DataAnnotations;
 
     using EShop.Common;
+    using EShop.Data.Models;
+    using EShop.Services.Mapping;
 
-    public class TemplateSelectModel : SelectViewModel
+    public class ProductSelectModel : SelectViewModel, IMapFrom<Product>
     {
-        [Display(Name = GlobalConstants.NameOfTemplates)]
+        [Display(Name = GlobalConstants.NameOfProducts)]
         public override string Name { get => base.Name; set => base.Name = value; }
     }
 }
