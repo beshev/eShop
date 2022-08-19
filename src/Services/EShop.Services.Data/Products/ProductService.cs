@@ -38,7 +38,7 @@
                 HasCustomText = hasCustomText,
                 ProductCategoryId = categoryId,
                 ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.ProductCloundFolderName, name)),
-                ProductTemplates = templatesIds.Select(templateId => new ProductTemplate { TemplateId = templateId }).ToList(),
+                ProductTemplates = templatesIds?.Select(templateId => new ProductTemplate { TemplateId = templateId }).ToList(),
             };
 
             await this.productRepo.AddAsync(prodcut);
@@ -57,7 +57,6 @@
                 .All()
                 .FirstOrDefaultAsync(product => product.Id.Equals(id));
 
-            await this.RemoveProductTemplatesAsync(id);
             await this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.ProductCloundFolderName, product.Name));
             this.productRepo.Delete(product);
             await this.productRepo.SaveChangesAsync();
@@ -92,14 +91,7 @@
         {
             var category = await this.productCategoryRepo
                 .All()
-                .Include(x => x.Products)
                 .FirstOrDefaultAsync(x => x.Id.Equals(categoryId));
-
-            foreach (var prodcut in category.Products)
-            {
-                await this.RemoveProductTemplatesAsync(prodcut.Id);
-                this.productRepo.Delete(prodcut);
-            }
 
             this.productCategoryRepo.Delete(category);
             await this.productCategoryRepo.SaveChangesAsync();
@@ -109,9 +101,8 @@
         {
             var product = await this.productRepo
                 .All()
+                .Include(x => x.ProductTemplates)
                 .FirstOrDefaultAsync(x => x.Id.Equals(id));
-
-            await this.RemoveProductTemplatesAsync(id);
 
             product.Name = name;
             product.Price = price;
@@ -119,15 +110,13 @@
             product.ProductCategoryId = categoryId;
             product.HasCustomText = hasCustomText;
             product.ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.ProductCloundFolderName, name));
-            product.ProductTemplates = templatesIds.Select(templateId => new ProductTemplate { TemplateId = templateId }).ToList();
+            product.ProductTemplates = templatesIds?
+                .Where(x => product.ProductTemplates.Any(pt => !pt.TemplateId.Equals(x)))
+                .Select(templateId => new ProductTemplate { TemplateId = templateId })
+                .ToList();
 
             this.productRepo.Update(product);
             await this.productRepo.SaveChangesAsync();
-        }
-
-        private async Task RemoveProductTemplatesAsync(int productId)
-        {
-            await this.productRepo.SqlRawAsync(GlobalConstants.DeleteFromProductsTemplatesTableQuery, productId);
         }
     }
 }
