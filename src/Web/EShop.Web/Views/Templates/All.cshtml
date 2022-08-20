@@ -1,0 +1,26 @@
+﻿@model ProductTemplatesViewModel
+
+@{
+    this.ViewData["Title"] = $"Темплейти за {this.Model.Product.Name}";
+}
+
+<h1>
+    @this.ViewData["Title"]
+</h1>
+
+
+@foreach (var template in this.Model.Templates)
+{
+    <div class="col-lg-4 border-5">
+        <!-- blog post-->
+        <div class="card mb-4">
+            <a href="#!"><img class="card-img-top" src="@template.ImageUrl" alt="..." /></a>
+            <div class="card-body">
+                <div class="small text-muted">@template.Name</div>
+                <h2 class="card-title h4">@template.Price.ToString("F2") лв</h2>
+                <p class="card-text">@template.Description</p>
+                <a class="btn btn-primary" href="#!">Детайли →</a>
+            </div>
+        </div>
+    </div>
+}

@@ -18,6 +18,16 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">About</a></li>
+                    <li class="dropdown nav-item">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Темплейт за:
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Templates" asp-action="All" asp-route-productId="5">Чаша</a>
+                            </li>
+                        </ul>
+                    </li>
                     @if (this.User.IsInRole("Administrator"))
                     {
                         <li class="nav-item"><a class="nav-link" asp-area="Administration" asp-controller="Dashboard" asp-action="Index">Admin panel</a></li>
@@ -27,15 +37,6 @@
             </div>
         </div>
     </nav>
-
-    <header>
-        <div class="container">
-            <div class="text-center my-5">
-                <h1 class="fw-bolder">Welcome to Blog Home!</h1>
-                <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
-            </div>
-        </div>
-    </header>
 
     <div class="container">
         <partial name="_CookieConsentPartial" />

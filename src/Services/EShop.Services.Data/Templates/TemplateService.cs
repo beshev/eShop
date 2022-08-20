@@ -50,13 +50,18 @@
             await this.templateRepo.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(string category = null, int skip = 0, int? take = null)
+        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(int? productId = null, int? categoryId = null, int skip = 0, int? take = null)
         {
             var templates = this.templateRepo.AllAsNoTracking();
 
-            if (string.IsNullOrWhiteSpace(category) == false)
+            if (productId.HasValue)
             {
-                templates = templates.Where(x => x.TemplateCategory.Name.Equals(category));
+                templates = templates.Where(t => t.TemplateProducts.Any(tp => tp.ProductId.Equals(productId)));
+            }
+
+            if (categoryId.HasValue)
+            {
+                templates = templates.Where(x => x.TemplateCategory.Id.Equals(categoryId));
             }
 
             if (take.HasValue)

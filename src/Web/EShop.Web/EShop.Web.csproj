@@ -43,6 +43,5 @@
 
   <ItemGroup>
     <Folder Include="Views\Products\" />
-    <Folder Include="Views\Templates\" />
   </ItemGroup>
 </Project>
