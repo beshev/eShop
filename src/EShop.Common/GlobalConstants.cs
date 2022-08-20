@@ -26,6 +26,8 @@
 
         public const string ProductDisplayDescription = "Описание на продукта";
 
+        public const string NameOfProducts = "Продукти";
+
         public const string ProductImageUrl = "Снимка на продукта";
 
         public const string ProductCloundFolderName = "products/{0}";
@@ -36,7 +38,12 @@
         // Template
         public const string NameOfTemplates = "Темплейти";
 
-        // SQL
-        public const string DeleteFromProductsTemplatesTableQuery = "DELETE FROM [ProductsTemplates] Where ProdcutId = {0}";
+        public const string TemplateDisplayName = "Име на темплейта";
+
+        public const string TemplateDisplayPrice = "Цена на темплейта";
+
+        public const string TemplateDisplayDescription = "Описание на темплейта";
+
+        public const string TemplateCloundFolderName = "templates/{0}";
     }
 }

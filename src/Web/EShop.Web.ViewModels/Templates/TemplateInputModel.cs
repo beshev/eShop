@@ -26,8 +26,8 @@
 
         public bool IsBaseModel { get; set; }
 
-        public int TemplateCategoryId { get; set; }
+        public int CategoryId { get; set; }
 
-        public IEnumerable<int> ForProducts { get; set; }
+        public IEnumerable<int> ProductsIds { get; set; }
     }
 }

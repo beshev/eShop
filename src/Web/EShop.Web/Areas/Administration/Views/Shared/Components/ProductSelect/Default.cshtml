@@ -1,0 +1,10 @@
+﻿@model IEnumerable<ProductSelectModel>
+
+<div class="form-group">
+    <label asp-for="@Model.FirstOrDefault().Name"></label>
+    <select name="ProductsIds"
+            class="form-select"
+            multiple
+            asp-items="@(new SelectList(Model, nameof(ProductSelectModel.Id), nameof(ProductSelectModel.Name)))">
+    </select>
+</div>

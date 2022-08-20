@@ -43,25 +43,6 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public async Task<IActionResult> Edit(int id)
-        {
-            var viewModel = await this.productService.GetByIdAsync<ProductEditModel>(id);
-            return this.View(viewModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(ProductEditModel model)
-        {
-            if (this.ModelState.IsValid == false)
-            {
-                return this.View(model);
-            }
-
-            await this.productService.UpdateAsync(model.Id, model.Name, model.Price, model.Description, model.CategoryId, model.HasCustomText, model.Image, model.TemplatesIds);
-
-            return this.RedirectToAction(nameof(this.All));
-        }
-
         public async Task<IActionResult> Delete(int id)
         {
             await this.productService.DeleteByIdAsync(id);

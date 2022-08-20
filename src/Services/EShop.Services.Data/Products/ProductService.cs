@@ -96,27 +96,5 @@
             this.productCategoryRepo.Delete(category);
             await this.productCategoryRepo.SaveChangesAsync();
         }
-
-        public async Task UpdateAsync(int id, string name, decimal price, string description, int categoryId, bool hasCustomText, IFormFile image, IEnumerable<int> templatesIds)
-        {
-            var product = await this.productRepo
-                .All()
-                .Include(x => x.ProductTemplates)
-                .FirstOrDefaultAsync(x => x.Id.Equals(id));
-
-            product.Name = name;
-            product.Price = price;
-            product.Description = description;
-            product.ProductCategoryId = categoryId;
-            product.HasCustomText = hasCustomText;
-            product.ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.ProductCloundFolderName, name));
-            product.ProductTemplates = templatesIds?
-                .Where(x => product.ProductTemplates.Any(pt => !pt.TemplateId.Equals(x)))
-                .Select(templateId => new ProductTemplate { TemplateId = templateId })
-                .ToList();
-
-            this.productRepo.Update(product);
-            await this.productRepo.SaveChangesAsync();
-        }
     }
 }

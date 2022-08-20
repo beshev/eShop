@@ -2,7 +2,10 @@
 {
     using System.Threading.Tasks;
 
+    using EShop.Common;
     using EShop.Services.Data.Templates;
+    using EShop.Web.Infrastructure.Attributes;
+    using EShop.Web.ViewModels;
     using EShop.Web.ViewModels.Templates;
     using Microsoft.AspNetCore.Mvc;
 
@@ -28,9 +31,39 @@
                 return this.View(model);
             }
 
-            await this.templateService.AddAsync(model.Name, model.Description, model.Price, model.Image, model.ImagesFixedCount, model.IsBaseModel, model.HasCustomText, model.TemplateCategoryId, model.ForProducts);
+            await this.templateService.AddAsync(model.Name, model.Description, model.Price, model.Image, model.ImagesFixedCount, model.IsBaseModel, model.HasCustomText, model.CategoryId, model.ProductsIds);
 
-            return this.RedirectToAction(nameof(this.Add));
+            return this.RedirectToAction(nameof(this.All));
+        }
+
+        public async Task<IActionResult> All()
+        {
+            var viewModel = await this.templateService.GetAllAsync<TemplateViewModel>();
+
+            return this.View(viewModel);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.templateService.DeleteByIdAsync(id);
+            return this.RedirectToAction(nameof(this.All));
+        }
+
+        [SetTempDataErrorsAttribute(GlobalConstants.NameOfCategory)]
+        public async Task<IActionResult> AddCategory(CategoryInputModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                await this.templateService.CreateCategoryAsync(model.CategoryName);
+            }
+
+            return this.RedirectToAction(nameof(this.All));
+        }
+
+        public async Task<IActionResult> RemoveCategory(int categoryId)
+        {
+            await this.templateService.RemoveCategoryAsync(categoryId);
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }
