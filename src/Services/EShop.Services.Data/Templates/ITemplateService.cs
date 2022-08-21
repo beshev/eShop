@@ -20,5 +20,7 @@
         public Task<TModel> GetByIdAsync<TModel>(int id);
 
         public Task DeleteByIdAsync(int id);
+
+        public Task<bool> IsCompatibleWithProductAsync(int templateId, int productId);
     }
 }

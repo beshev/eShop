@@ -16,15 +16,18 @@
     {
         private readonly IRepository<Template> templateRepo;
         private readonly IRepository<TemplateCategory> templateCategoryRepo;
+        private readonly IRepository<ProductTemplate> productTemplateRepo;
         private readonly ICloudinaryService cloudinaryService;
 
         public TemplateService(
             IRepository<Template> templateRepo,
             IRepository<TemplateCategory> templateCategoryRepo,
+            IRepository<ProductTemplate> productTemplateRepo,
             ICloudinaryService cloudinaryService)
         {
             this.templateRepo = templateRepo;
             this.templateCategoryRepo = templateCategoryRepo;
+            this.productTemplateRepo = productTemplateRepo;
             this.cloudinaryService = cloudinaryService;
         }
 
@@ -113,5 +116,10 @@
             this.templateRepo.Delete(template);
             await this.templateRepo.SaveChangesAsync();
         }
+
+        public async Task<bool> IsCompatibleWithProductAsync(int templateId, int productId)
+            => await this.productTemplateRepo
+            .AllAsNoTracking()
+            .AnyAsync(x => x.ProductId.Equals(productId) && x.TemplateId.Equals(templateId));
     }
 }
