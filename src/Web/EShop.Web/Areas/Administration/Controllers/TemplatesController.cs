@@ -38,7 +38,7 @@
 
         public async Task<IActionResult> All()
         {
-            var viewModel = await this.templateService.GetAllAsync<TemplateViewModel>();
+            var viewModel = await this.templateService.GetAllAsync<TemplateBaseViewModel>();
 
             return this.View(viewModel);
         }

@@ -8,6 +8,6 @@
     {
         public ProductSelectModel Product { get; set; }
 
-        public IEnumerable<TemplateViewModel> Templates { get; set; }
+        public IEnumerable<TemplateBaseViewModel> Templates { get; set; }
     }
 }

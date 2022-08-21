@@ -1,18 +1,11 @@
 ﻿namespace EShop.Web.ViewModels.Templates
 {
-    using EShop.Data.Models;
-    using EShop.Services.Mapping;
-
-    public class TemplateViewModel : IMapFrom<Template>
+    public class TemplateViewModel : TemplateBaseViewModel
     {
-        public int Id { get; set; }
+        public int ImagesFixedCount { get; set; }
 
-        public string Name { get; set; }
+        public bool HasCustomText { get; set; }
 
-        public decimal Price { get; set; }
-
-        public string Description { get; set; }
-
-        public string ImageUrl { get; set; }
+        public bool IsBaseModel { get; set; }
     }
 }
