@@ -45,5 +45,15 @@
         public const string TemplateDisplayDescription = "Описание на темплейта";
 
         public const string TemplateCloundFolderName = "templates/{0}";
+
+        // Order
+        public const string NameOfOrderPrice = "OrderPrice";
+
+        public const string NameOfOrderProductName = "OrderProductName";
+
+        public const string NameOfOrderProductId = "OrderProductId";
+
+        public const string NameOfOrderTemplateId = "OrderTemplateId";
+
     }
 }
