@@ -7,7 +7,7 @@
     public class Image : BaseModel<int>
     {
         [Required]
-        public string Base64 { get; set; }
+        public string ImageUrl { get; set; }
 
         public int? OrderInfoId { get; set; }
 
