@@ -1,6 +1,10 @@
 ﻿@model OrderInfoViewComponentModel
 
-<div class="col-lg-5">
+<div class="col-lg-5 text-center">
+    <h4>
+        Моля, попълнете всички полета
+    </h4>
+
     <form asp-area="" asp-controller="Templates" asp-action="AddToCart" enctype="multipart/form-data">
         @if (this.Model.HasCustomText)
         {
@@ -28,7 +32,7 @@
         </div>
 
         <div class="form-grup" style="margin-top: 2%;">
-            <input type="submit" class="btn btn-outline-dark" value="Add" />
+            <input type="submit" class="btn btn-outline-dark" value="Добави в количката" />
         </div>
     </form>
 </div>

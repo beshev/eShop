@@ -7,5 +7,7 @@
         public bool HasCustomText { get; set; }
 
         public bool IsBaseModel { get; set; }
+
+        public int ProductId { get; set; }
     }
 }

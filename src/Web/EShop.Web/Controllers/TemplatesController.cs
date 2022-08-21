@@ -1,6 +1,8 @@
 ﻿namespace EShop.Web.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
+
     using EShop.Common;
     using EShop.Services.Data.Products;
     using EShop.Services.Data.Templates;
@@ -24,24 +26,34 @@
 
         public async Task<IActionResult> All(int id, int? productId = null, int? categoryId = null)
         {
+            if (productId.HasValue == false)
+            {
+                return this.NotFound();
+            }
+
             var viewModel = new ProductTemplatesViewModel
             {
                 Templates = await this.templateService.GetAllAsync<TemplateBaseViewModel>(productId, categoryId),
                 Product = await this.productService.GetByIdAsync<ProductSelectModel>(productId.Value),
             };
 
-            return this.View(viewModel);
-        }
-
-        public async Task<IActionResult> Details(int templateId)
-        {
-            var viewModel = await this.templateService.GetByIdAsync<TemplateViewModel>(templateId);
-
-            if (viewModel is null)
+            if (viewModel.Templates.Any() == false)
             {
                 return this.NotFound();
             }
 
+            return this.View(viewModel);
+        }
+
+        public async Task<IActionResult> Details(int templateId, int productId)
+        {
+            if (await this.templateService.IsCompatibleWithProductAsync(templateId, productId) == false)
+            {
+                return this.NotFound();
+            }
+
+            var viewModel = await this.templateService.GetByIdAsync<TemplateViewModel>(templateId);
+            viewModel.ProductId = productId;
             return this.View(viewModel);
         }
 
@@ -52,7 +64,12 @@
             model.TemplateId = this.TempData[GlobalConstants.NameOfOrderTemplateId] as int?;
             model.ProductId = this.TempData[GlobalConstants.NameOfOrderProductId] as int?;
 
-            return this.RedirectToAction(nameof(this.All));
+            if (model.TemplateId is null || model.ProductId is null)
+            {
+                return this.NotFound();
+            }
+
+            return this.RedirectToAction(nameof(this.All), new { model.ProductId });
         }
     }
 }

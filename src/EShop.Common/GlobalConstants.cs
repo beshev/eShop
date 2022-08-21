@@ -28,6 +28,8 @@
 
         public const string NameOfProducts = "Продукти";
 
+        public const string NameOfProductId = "ProductId";
+
         public const string ProductImageUrl = "Снимка на продукта";
 
         public const string ProductCloundFolderName = "products/{0}";

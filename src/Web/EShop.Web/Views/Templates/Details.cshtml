@@ -1,9 +1,5 @@
 ﻿@model TemplateViewModel
 
-@{
-    var productId = this.TempData["ProductId"] as int?;
-}
-
 <div class="col-lg-6">
     <div class="card mb-4">
         <img class="card-img-top" src="@this.Model.ImageUrl" alt="..." />
@@ -23,7 +19,7 @@
 
 <vc:order-info
     template-id="@Model.Id"
-    product-id="productId"
+    product-id="@Model.ProductId"
     price="@this.Model.Price" 
     product-name="@this.Model.Name" 
     has-custom-text="@this.Model.HasCustomText" 
