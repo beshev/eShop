@@ -5,7 +5,11 @@
         // Common
         public const string SystemName = "EShop";
 
-        public const string All = "All";
+        public const string HomeController = "Home";
+
+        public const string IndexAction = "Index";
+
+        public const string AllAction = "All";
 
         public const string NameOfCart = "Cart";
 
@@ -20,6 +24,10 @@
         public const string NameOfDescription = "Описание";
 
         public const string NameOfImage = "Снимка";
+
+        public const string NameOfQuantity = "Количество";
+
+        public const string NameOfFontStyle = "Номер на шрифта";
 
         public const string NameOfHasCustomText = "Има тект по избор";
 
@@ -52,7 +60,7 @@
 
         public const string TemplateCloundFolderName = "templates/{0}";
 
-        public const string Template = "Template";
+        public const string TemplatesController = "Templates";
 
         // Order
         public const string NameOfOrderPrice = "OrderPrice";

@@ -4,11 +4,14 @@
     ViewData["Title"] = "Items";
 }
 
-<h1>Items</h1>
+<h1 class="text-center">Items</h1>
 
 <table class="table table-striped">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
@@ -16,19 +19,13 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.FontStyle)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductName)
+                Брой снимки
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TemplateId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductId)
+                @Html.DisplayNameFor(model => model.Quantity)
             </th>
             <th></th>
         </tr>
@@ -38,30 +35,25 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.FontStyle)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
+                    @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TemplateId)
+                    @item.Images.Count()
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ProductId)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    <a asp-area="" asp-action="RemoveItem" asp-controller="Cart" asp-route-id="@item.Id">Премахни</a>
                 </td>
             </tr>
         }
