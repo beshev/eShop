@@ -47,10 +47,10 @@
                     @Html.DisplayFor(modelItem => item.FontStyle)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
+                    @item.Images.Count()
                 </td>
                 <td>
-                    @item.Images.Count()
+                    @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
                     <a asp-area="" asp-action="RemoveItem" asp-controller="Cart" asp-route-id="@item.Id">Премахни</a>

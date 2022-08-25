@@ -42,6 +42,7 @@
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<OrderInfoInputModel, ShoppingCartModel>()
+                .ForMember(ders => ders.Price, src => src.MapFrom(x => x.Price * x.Quantity))
                 .ForMember(ders => ders.Images, src => src.Ignore());
         }
     }
