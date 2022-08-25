@@ -13,7 +13,6 @@
 
         public int Quantity { get; set; }
 
-        [Range(1, 7)]
         public int FontStyle { get; set; }
 
         public IEnumerable<IFormFile> Images { get; set; }

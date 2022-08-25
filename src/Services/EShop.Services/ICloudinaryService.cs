@@ -8,6 +8,8 @@
     {
         public Task<string> UploadAsync(IFormFile file, string fileName);
 
+        public Task<string> UploadAsync(string fileName, byte[] bytes, string cloudFolder);
+
         public Task DeleteAsync(string cloudFolder);
     }
 }

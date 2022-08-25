@@ -50,6 +50,27 @@
             return secureUrl.OriginalString;
         }
 
+        public async Task<string> UploadAsync(string fileName, byte[] bytes, string cloudFolder)
+        {
+            UploadResult uploadResult;
+
+            await using (var ms = new MemoryStream(bytes))
+            {
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(fileName, ms),
+                    PublicId = $"E-shop/{cloudFolder}",
+                    Overwrite = true,
+                };
+
+                uploadResult = await this.cloudinary.UploadAsync(uploadParams);
+            }
+
+            var secureUrl = uploadResult.Url;
+
+            return secureUrl.OriginalString;
+        }
+
         public async Task DeleteAsync(string cloudFolder)
          => await this.cloudinary.DestroyAsync(new DeletionParams($"E-shop/{cloudFolder}"));
     }

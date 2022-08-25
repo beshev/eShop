@@ -1,11 +1,14 @@
 ﻿namespace EShop.Web.Infrastructure.Extensions
 {
+    using System;
+
     using CloudinaryDotNet;
     using EShop.Data;
     using EShop.Data.Common;
     using EShop.Data.Common.Repositories;
     using EShop.Data.Models;
     using EShop.Data.Repositories;
+    using EShop.Services;
     using Eshop.Services.Cloudinary;
     using EShop.Services.Data.Products;
     using EShop.Services.Data.Templates;
@@ -73,6 +76,14 @@
             services.AddTransient<ITemplateService, TemplateService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<ICartService, CartService>();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+            });
 
             return services;
         }

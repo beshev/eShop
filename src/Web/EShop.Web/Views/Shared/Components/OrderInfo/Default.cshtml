@@ -5,7 +5,7 @@
         Моля, попълнете всички полета
     </h4>
 
-    <form asp-area="" asp-controller="Templates" asp-action="AddToCart" enctype="multipart/form-data">
+    <form asp-area="" asp-controller="Cart" asp-action="AddItem" enctype="multipart/form-data">
         @if (this.Model.HasCustomText)
         {
             <div class="form-grup">

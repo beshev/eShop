@@ -5,6 +5,10 @@
         // Common
         public const string SystemName = "EShop";
 
+        public const string All = "All";
+
+        public const string NameOfCart = "Cart";
+
         public const string AdministratorRoleName = "Administrator";
 
         public const string NameOfModelState = "ModelState";
@@ -47,6 +51,8 @@
         public const string TemplateDisplayDescription = "Описание на темплейта";
 
         public const string TemplateCloundFolderName = "templates/{0}";
+
+        public const string Template = "Template";
 
         // Order
         public const string NameOfOrderPrice = "OrderPrice";

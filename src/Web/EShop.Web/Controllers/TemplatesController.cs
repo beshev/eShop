@@ -6,6 +6,7 @@
     using EShop.Common;
     using EShop.Services.Data.Products;
     using EShop.Services.Data.Templates;
+    using EShop.Web.Infrastructure.Extensions;
     using EShop.Web.ViewModels.Orders;
     using EShop.Web.ViewModels.Products;
     using EShop.Web.ViewModels.Templates;
@@ -55,21 +56,6 @@
             var viewModel = await this.templateService.GetByIdAsync<TemplateViewModel>(templateId);
             viewModel.ProductId = productId;
             return this.View(viewModel);
-        }
-
-        public IActionResult AddToCart(OrderInfoInputModel model)
-        {
-            model.ProductName = this.TempData[GlobalConstants.NameOfOrderProductName] as string;
-            model.Price = decimal.Parse(this.TempData[GlobalConstants.NameOfOrderPrice] as string);
-            model.TemplateId = this.TempData[GlobalConstants.NameOfOrderTemplateId] as int?;
-            model.ProductId = this.TempData[GlobalConstants.NameOfOrderProductId] as int?;
-
-            if (model.TemplateId is null || model.ProductId is null)
-            {
-                return this.NotFound();
-            }
-
-            return this.RedirectToAction(nameof(this.All), new { model.ProductId });
         }
     }
 }
