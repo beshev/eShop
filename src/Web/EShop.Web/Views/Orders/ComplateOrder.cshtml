@@ -1,0 +1,33 @@
+﻿@model UserInfoInputModel
+
+<form asp-area="" asp-controller="Orders" asp-action="ComplateOrder" class="col-lg-6 offset-lg-3">
+    <div class="form-grup">
+        <span asp-validation-for="FirsName" class="text-danger"></span>
+        <label asp-for="FirsName"></label>
+        <input asp-for="FirsName" class="form-control" placeholder="Име на темплейта..." />
+    </div>
+    <div class="form-grup has-danger">
+        <span asp-validation-for="LastName" class="text-danger"></span>
+        <label asp-for="LastName"></label>
+        <textarea asp-for="LastName" class="form-control" placeholder="Описание на темплейта..."></textarea>
+    </div>
+    <div class="form-grup">
+        <span asp-validation-for="Phone" class="text-danger"></span>
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" class="form-control" type="number" placeholder="Цена на темплейта..." />
+    </div>
+    <div class="form-grup">
+        <span asp-validation-for="City" class="text-danger"></span>
+        <label asp-for="City"></label>
+        <input asp-for="City" class="form-control" placeholder="Снимка на темплейта..." />
+    </div>
+    <div class="form-grup">
+        <span asp-validation-for="DeliveryAddress" class="text-danger"></span>
+        <label asp-for="DeliveryAddress"></label>
+        <input asp-for="DeliveryAddress"  class="form-control" />
+    </div>
+
+    <div class="form-grup" style="margin-top: 2%;">
+        <input type="submit" class="btn btn-outline-dark" value="Поръчай !" />
+    </div>
+</form>

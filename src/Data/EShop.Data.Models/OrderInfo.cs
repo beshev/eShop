@@ -5,6 +5,7 @@
 
     using EShop.Data.Common.Models;
 
+    // TODO: Rename this class to OrderItem
     public class OrderInfo : BaseModel<int>
     {
         public OrderInfo()
@@ -18,7 +19,7 @@
 
         public int Quantity { get; set; }
 
-        public int FontStyle { get; set; }
+        public int? FontStyle { get; set; }
 
         [Required]
         [MaxLength(255)]
@@ -36,6 +37,6 @@
 
         public virtual Order Order { get; set; }
 
-        public virtual IEnumerable<Image> Images { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
     }
 }

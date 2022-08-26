@@ -10,6 +10,7 @@
     using EShop.Data.Repositories;
     using EShop.Services;
     using Eshop.Services.Cloudinary;
+    using EShop.Services.Data.Orders;
     using EShop.Services.Data.Products;
     using EShop.Services.Data.Templates;
     using Microsoft.AspNetCore.Builder;
@@ -77,6 +78,7 @@
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ICartService, CartService>();
+            services.AddTransient<IOrdersService, OrdersService>();
 
             services.AddSession(options =>
             {
