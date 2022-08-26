@@ -33,21 +33,8 @@
 
             UploadResult uploadResult;
 
-            await using (var ms = new MemoryStream(destination))
-            {
-                var uploadParams = new ImageUploadParams
-                {
-                    File = new FileDescription(file.FileName, ms),
-                    PublicId = $"E-shop/{cloudFolder}",
-                    Overwrite = true,
-                };
-
-                uploadResult = await this.cloudinary.UploadAsync(uploadParams);
-            }
-
-            var secureUrl = uploadResult.Url;
-
-            return secureUrl.OriginalString;
+            // TODO: Check if this work correctly
+            return await this.UploadAsync(file.FileName, destination, cloudFolder);
         }
 
         public async Task<string> UploadAsync(string fileName, byte[] bytes, string cloudFolder)

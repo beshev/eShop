@@ -53,6 +53,7 @@
             cartItem = cartItem.Where(x => x.Id.Equals(id) == false).ToList();
             this.Session.SetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart, cartItem);
 
+            // TODO: Use constnas
             return this.RedirectToAction("Items", "Cart");
         }
     }
