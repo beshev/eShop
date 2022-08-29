@@ -121,5 +121,8 @@
             => await this.productTemplateRepo
             .AllAsNoTracking()
             .AnyAsync(x => x.ProductId.Equals(productId) && x.TemplateId.Equals(templateId));
+
+        public async Task<int> GetCountAsync()
+            => await this.templateRepo.AllAsNoTracking().CountAsync();
     }
 }

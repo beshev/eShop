@@ -1,19 +1,18 @@
 ﻿namespace EShop.Web.Controllers
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using EShop.Common;
     using EShop.Services.Data.Products;
     using EShop.Services.Data.Templates;
-    using EShop.Web.Infrastructure.Extensions;
-    using EShop.Web.ViewModels.Orders;
     using EShop.Web.ViewModels.Products;
     using EShop.Web.ViewModels.Templates;
     using Microsoft.AspNetCore.Mvc;
 
     public class TemplatesController : BaseController
     {
+        private const int TemplatesPerPage = 12;
         private readonly ITemplateService templateService;
         private readonly IProductService productService;
 
@@ -25,16 +24,35 @@
             this.productService = productService;
         }
 
-        public async Task<IActionResult> All(int id, int? productId = null, int? categoryId = null)
+        public async Task<IActionResult> All(int id = 1, int? productId = null, int? categoryId = null)
         {
             if (productId.HasValue == false)
             {
                 return this.NotFound();
             }
 
-            var viewModel = new ProductTemplatesViewModel
+            if (id < 1)
             {
-                Templates = await this.templateService.GetAllAsync<TemplateBaseViewModel>(productId, categoryId),
+                return this.NotFound();
+            }
+
+            int count = await this.templateService.GetCountAsync();
+            int pagesCount = (int)Math.Ceiling((double)count / TemplatesPerPage);
+
+            if (pagesCount != 0 && id > pagesCount)
+            {
+                return this.NotFound();
+            }
+
+            var skip = (id - 1) * TemplatesPerPage;
+
+            var viewModel = new AllTemplatesViewModel
+            {
+                PageNumber = id,
+                PagesCount = pagesCount,
+                ForAction = nameof(this.All),
+                ForController = this.GetType().Name.Replace(nameof(Controller), string.Empty),
+                Templates = await this.templateService.GetAllAsync<TemplateBaseViewModel>(productId, categoryId, skip, TemplatesPerPage),
                 Product = await this.productService.GetByIdAsync<ProductSelectModel>(productId.Value),
             };
 

@@ -1,10 +1,10 @@
-﻿namespace EShop.Web.ViewModels.Products
+﻿namespace EShop.Web.ViewModels.Templates
 {
     using System.Collections.Generic;
 
-    using EShop.Web.ViewModels.Templates;
+    using EShop.Web.ViewModels.Products;
 
-    public class ProductTemplatesViewModel
+    public class AllTemplatesViewModel : PagingViewModel
     {
         public ProductSelectModel Product { get; set; }
 

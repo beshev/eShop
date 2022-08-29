@@ -1,4 +1,4 @@
-﻿@model ProductTemplatesViewModel
+﻿@model AllTemplatesViewModel
 
 @{
     this.ViewData["Title"] = $"Темплейти за {this.Model.Product.Name}";
@@ -13,7 +13,7 @@
 {
     <div class="col-lg-4">
         <!-- blog post-->
-        <div class="card mb-4">
+    <div class="card mb-4">
             <a asp-area="" asp-controller="Templates" asp-action="Details" asp-route-templateId="@template.Id" asp-route-productId="@Model.Product.Id"><img class="card-img-top" src="@template.ImageUrl" alt="..." /></a>
             <div class="card-body">
                 <div class="small text-muted">@template.Name</div>
@@ -24,3 +24,5 @@
         </div>
     </div>
 }
+
+<partial name="_TemplatePagingPartial" model="@this.Model" />

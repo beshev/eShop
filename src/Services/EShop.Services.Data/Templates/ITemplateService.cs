@@ -22,5 +22,7 @@
         public Task DeleteByIdAsync(int id);
 
         public Task<bool> IsCompatibleWithProductAsync(int templateId, int productId);
+
+        public Task<int> GetCountAsync();
     }
 }
