@@ -209,27 +209,27 @@ namespace EShop.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UsersInfos",
+                name: "UsersInfo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirsName = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    City = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    DeliveryAddress = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    Bulstrad = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
-                    Mol = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    FirsName = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    City = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    DeliveryAddress = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Bullstat = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
+                    Mall = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UsersInfos", x => x.Id);
+                    table.PrimaryKey("PK_UsersInfo", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UsersInfos_Orders_OrderId",
+                        name: "FK_UsersInfo_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
@@ -291,15 +291,16 @@ namespace EShop.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrdersInfos",
+                name: "OrderItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ImagesUrls = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    FontStyle = table.Column<int>(type: "int", nullable: false),
+                    FontStyle = table.Column<int>(type: "int", nullable: true),
                     ProductName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     TemplateId = table.Column<int>(type: "int", nullable: true),
                     ProductId = table.Column<int>(type: "int", nullable: true),
@@ -309,20 +310,20 @@ namespace EShop.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrdersInfos", x => x.Id);
+                    table.PrimaryKey("PK_OrderItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrdersInfos_Orders_OrderId",
+                        name: "FK_OrderItems_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrdersInfos_Products_ProductId",
+                        name: "FK_OrderItems_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_OrdersInfos_Templates_TemplateId",
+                        name: "FK_OrderItems_Templates_TemplateId",
                         column: x => x.TemplateId,
                         principalTable: "Templates",
                         principalColumn: "Id");
@@ -354,27 +355,6 @@ namespace EShop.Data.Migrations
                         principalTable: "Templates",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Images",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Base64 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OrderInfoId = table.Column<int>(type: "int", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Images", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Images_OrdersInfos_OrderInfoId",
-                        column: x => x.OrderInfoId,
-                        principalTable: "OrdersInfos",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -427,23 +407,18 @@ namespace EShop.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Images_OrderInfoId",
-                table: "Images",
-                column: "OrderInfoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrdersInfos_OrderId",
-                table: "OrdersInfos",
+                name: "IX_OrderItems_OrderId",
+                table: "OrderItems",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrdersInfos_ProductId",
-                table: "OrdersInfos",
+                name: "IX_OrderItems_ProductId",
+                table: "OrderItems",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrdersInfos_TemplateId",
-                table: "OrdersInfos",
+                name: "IX_OrderItems_TemplateId",
+                table: "OrderItems",
                 column: "TemplateId");
 
             migrationBuilder.CreateIndex(
@@ -467,8 +442,8 @@ namespace EShop.Data.Migrations
                 column: "TemplateCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersInfos_OrderId",
-                table: "UsersInfos",
+                name: "IX_UsersInfo_OrderId",
+                table: "UsersInfo",
                 column: "OrderId",
                 unique: true);
         }
@@ -491,13 +466,13 @@ namespace EShop.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Images");
+                name: "OrderItems");
 
             migrationBuilder.DropTable(
                 name: "ProductsTemplates");
 
             migrationBuilder.DropTable(
-                name: "UsersInfos");
+                name: "UsersInfo");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -506,16 +481,13 @@ namespace EShop.Data.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "OrdersInfos");
-
-            migrationBuilder.DropTable(
-                name: "Orders");
-
-            migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Templates");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "ProductsCategories");

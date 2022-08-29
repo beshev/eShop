@@ -34,11 +34,11 @@
 
         public DbSet<ProductCategory> ProductsCategories { get; set; }
 
-        public DbSet<OrderItem> OrdersInfos { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         public DbSet<Order> Orders { get; set; }
 
-        public DbSet<UserInfo> UsersInfos { get; set; }
+        public DbSet<UserInfo> UsersInfo { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

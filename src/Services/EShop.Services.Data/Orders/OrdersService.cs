@@ -36,9 +36,9 @@
                     FirsName = model.UserInfo.FirsName,
                     LastName = model.UserInfo.LastName,
                     City = model.UserInfo.City,
-                    Bullstat = model.UserInfo.Bulstrad,
+                    Bullstat = model.UserInfo.Bullstat,
                     DeliveryAddress = model.UserInfo.DeliveryAddress,
-                    Mall = model.UserInfo.Mol,
+                    Mall = model.UserInfo.Mall,
                     Phone = model.UserInfo.Phone,
                 },
             };

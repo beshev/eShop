@@ -7,29 +7,29 @@
     public class UserInfoInputModel
     {
         [Required]
-        [MaxLength(GlobalConstants.UserFirsNameMaxLength)]
+        [MaxLength(DataConstants.UserFirsNameMaxLength)]
         public string FirsName { get; set; }
 
         [Required]
-        [MaxLength(GlobalConstants.UserLastNameMaxLength)]
+        [MaxLength(DataConstants.UserLastNameMaxLength)]
         public string LastName { get; set; }
 
         [Required]
-        [MaxLength(GlobalConstants.CityMaxLength)]
+        [MaxLength(DataConstants.CityMaxLength)]
         public string City { get; set; }
 
         [Required]
-        [MaxLength(GlobalConstants.DeliveryAddressMaxLength)]
+        [MaxLength(DataConstants.DeliveryAddressMaxLength)]
         public string DeliveryAddress { get; set; }
 
         [Required]
-        [MaxLength(GlobalConstants.PhoneMaxLength)]
+        [MaxLength(DataConstants.PhoneMaxLength)]
         public string Phone { get; set; }
 
-        [MaxLength(GlobalConstants.BullstatMaxLength)]
+        [MaxLength(DataConstants.BullstatMaxLength)]
         public string Bullstat { get; set; }
 
-        [MaxLength(GlobalConstants.MallMaxLength)]
+        [MaxLength(DataConstants.MallMaxLength)]
         public string Mall { get; set; }
     }
 }

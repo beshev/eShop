@@ -31,8 +31,6 @@
                 destination = ms.ToArray();
             }
 
-            UploadResult uploadResult;
-
             // TODO: Check if this work correctly
             return await this.UploadAsync(file.FileName, destination, cloudFolder);
         }

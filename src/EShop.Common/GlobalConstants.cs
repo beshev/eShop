@@ -15,6 +15,8 @@
 
         public const string AdministratorRoleName = "Administrator";
 
+        public const string AdministrationArea = "Administration";
+
         public const string NameOfModelState = "ModelState";
 
         public const string NameOfName = "Име";
@@ -30,6 +32,12 @@
         public const string NameOfFontStyle = "Номер на шрифта";
 
         public const string NameOfHasCustomText = "Има тект по избор";
+
+        public const string DisplayHasCustomText = "Има ли текст?";
+
+        public const string DisplayIsBaseModel = "Базов модел ли е?";
+
+        public const char Space = ' ';
 
         // Products
         public const string ProductDisplayName = "Име на продукта";
@@ -56,6 +64,11 @@
 
         public const string TemplateDisplayPrice = "Цена на темплейта";
 
+        public const string TemplateDisplayImage = "Снимка на темплейта";
+
+        public const string TemplateDisplayImagesCount = "Брой на снимки за темплейта";
+
+
         public const string TemplateDisplayDescription = "Описание на темплейта";
 
         public const string TemplateCloundFolderName = "templates/{0}";
@@ -72,20 +85,5 @@
         public const string NameOfOrderProductId = "OrderProductId";
 
         public const string NameOfOrderTemplateId = "OrderTemplateId";
-
-        // User info
-        public const int UserFirsNameMaxLength = 250;
-
-        public const int UserLastNameMaxLength = 250;
-
-        public const int CityMaxLength = 250;
-
-        public const int DeliveryAddressMaxLength = 500;
-
-        public const int PhoneMaxLength = 20;
-
-        public const int BullstatMaxLength = 11;
-
-        public const int MallMaxLength = 255;
     }
 }

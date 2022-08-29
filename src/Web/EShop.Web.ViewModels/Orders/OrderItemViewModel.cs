@@ -1,5 +1,6 @@
 ﻿namespace EShop.Web.ViewModels.Orders
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -33,7 +34,7 @@
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<OrderItem, OrderItemViewModel>()
-                .ForMember(dest => dest.Images, src => src.MapFrom(x => x.Images.Select(image => image.ImageUrl)));
+                .ForMember(dest => dest.Images, src => src.MapFrom(x => x.ImagesUrls.Split(GlobalConstants.Space, StringSplitOptions.RemoveEmptyEntries)));
         }
     }
 }

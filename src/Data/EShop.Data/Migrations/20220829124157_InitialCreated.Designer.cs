@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220818143955_InitialCreated")]
+    [Migration("20220829124157_InitialCreated")]
     partial class InitialCreated
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -144,34 +144,6 @@ namespace EShop.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("EShop.Data.Models.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Base64")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("OrderInfoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderInfoId");
-
-                    b.ToTable("Images");
-                });
-
             modelBuilder.Entity("EShop.Data.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -197,7 +169,7 @@ namespace EShop.Data.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("EShop.Data.Models.OrderInfo", b =>
+            modelBuilder.Entity("EShop.Data.Models.OrderItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -211,8 +183,11 @@ namespace EShop.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FontStyle")
+                    b.Property<int?>("FontStyle")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImagesUrls")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -245,7 +220,7 @@ namespace EShop.Data.Migrations
 
                     b.HasIndex("TemplateId");
 
-                    b.ToTable("OrdersInfos");
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("EShop.Data.Models.Product", b =>
@@ -424,11 +399,12 @@ namespace EShop.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Bulstrad")
+                    b.Property<string>("Bullstat")
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -436,28 +412,32 @@ namespace EShop.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeliveryAddress")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("FirsName")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Mol")
+                    b.Property<string>("Mall")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<string>("Phone")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -466,7 +446,7 @@ namespace EShop.Data.Migrations
                     b.HasIndex("OrderId")
                         .IsUnique();
 
-                    b.ToTable("UsersInfos");
+                    b.ToTable("UsersInfo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -575,19 +555,10 @@ namespace EShop.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("EShop.Data.Models.Image", b =>
-                {
-                    b.HasOne("EShop.Data.Models.OrderInfo", "OrderInfo")
-                        .WithMany("Images")
-                        .HasForeignKey("OrderInfoId");
-
-                    b.Navigation("OrderInfo");
-                });
-
-            modelBuilder.Entity("EShop.Data.Models.OrderInfo", b =>
+            modelBuilder.Entity("EShop.Data.Models.OrderItem", b =>
                 {
                     b.HasOne("EShop.Data.Models.Order", "Order")
-                        .WithMany("TemplatesOrders")
+                        .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -721,14 +692,9 @@ namespace EShop.Data.Migrations
 
             modelBuilder.Entity("EShop.Data.Models.Order", b =>
                 {
-                    b.Navigation("TemplatesOrders");
+                    b.Navigation("OrderItems");
 
                     b.Navigation("UserInfo");
-                });
-
-            modelBuilder.Entity("EShop.Data.Models.OrderInfo", b =>
-                {
-                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("EShop.Data.Models.Product", b =>
