@@ -6,22 +6,22 @@
         <div class="card-body">
             <div class="small text-muted">@this.Model.Name</div>
             <h2 class="card-title">@this.Model.Price.ToString("F2") лв</h2>
-            <p class="card-text">
+           @* <p class="card-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean auctor est in purus consectetur, quis facilisis velit posuere. Pellentesque nec sapien non ligula aliquet scelerisque. Quisque nec tortor ligula. Integer nec pharetra magna, id suscipit purus. Ut nec metus pretium nunc consectetur consectetur ac eu sapien. Nunc sed diam mauris. Vestibulum egestas sem sit amet ligula molestie, non porta nisl tempus. Donec a massa non mauris facilisis congue non vitae lorem. In suscipit, lacus in condimentum pulvinar, turpis velit gravida tortor, vitae tempor nunc lacus a risus. Quisque non nisl a leo rutrum tincidunt. Vestibulum quis nulla dictum, consequat mauris ut, porttitor orci.
                 Phasellus vitae pretium est, sit amet interdum felis. Aliquam vestibulum tortor diam, sit amet iaculis velit sollicitudin nec. Cras ac varius metus, at convallis ipsum. Nulla vel nisi mi. Vivamus quis erat cursus, lobortis enim a, ultricies enim. Sed nulla nisi, venenatis eu blandit condimentum, congue convallis enim. Praesent blandit condimentum venenatis. Suspendisse sed nibh imperdiet, interdum orci sit amet, pellentesque nunc. Donec tincidunt erat non felis vestibulum finibus. Curabitur maximus elit id arcu facilisis sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla volutpat tortor vulputate sagittis consequat.
                 Morbi in mauris in tellus sagittis blandit aliquam eu sem. Cras porttitor eros a tortor congue ultrices. Suspendisse nec ante ut quam imperdiet pulvinar a ac arcu. Aenean scelerisque enim nec dolor aliquam, sit amet ullamcorper enim suscipit. Suspendisse posuere justo in metus interdum vehicula. Quisque vel urna sed nunc consequat dapibus. Pellentesque quam enim, mollis a urna eu, vehicula varius tortor. Pellentesque facilisis nisl vel eros fermentum, et volutpat turpis condimentum. Etiam iaculis bibendum diam quis iaculis. In hac habitasse platea dictumst.
                 Nullam eros augue, feugiat in eros ac, porttitor blandit tellus. Proin vulputate, felis eget volutpat iaculis, arcu lacus convallis nibh, semper pulvinar mi justo sit amet magna. Donec vestibulum vitae libero tincidunt pulvinar. Mauris maximus bibendum augue placerat pulvinar. Suspendisse convallis porttitor libero id lacinia. Praesent efficitur libero commodo imperdiet dignissim. Sed congue tincidunt est, eget ultricies justo vehicula vitae. Morbi viverra, felis ornare gravida varius, diam enim semper lorem, eget vehicula magna eros ac nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut dictum ullamcorper elit nec fermentum.
                 Nullam vehicula tempor nibh, quis gravida mi lacinia ut. Donec nisl elit, vestibulum ut nibh non, viverra pharetra nisl. Phasellus id facilisis velit, a imperdiet quam. Donec blandit, mauris a sollicitudin ullamcorper, ligula ipsum mollis nunc, sed lacinia libero nibh ac elit. Curabitur est metus, dapibus eu pulvinar ac, semper imperdiet tellus. Nulla a luctus est, eget faucibus velit. Integer ornare vehicula velit, a sollicitudin sapien vulputate non. Proin porta nisi a felis hendrerit, dignissim molestie mi pellentesque. Pellentesque vitae erat dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt nulla sed dui sagittis, eu cursus erat porta. Phasellus sem turpis, ultricies sed lacinia at, lacinia a odio.
-            </p>
+            </p>*@
         </div>
     </div>
 </div>
 
-<vc:order-info
+<vc:order-item
     template-id="@Model.Id"
     product-id="@Model.ProductId"
     price="@this.Model.Price" 
     product-name="@this.Model.Name" 
     has-custom-text="@this.Model.HasCustomText" 
     images-count="@this.Model.ImagesFixedCount">
-</vc:order-info>
+</vc:order-item>

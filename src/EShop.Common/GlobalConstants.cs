@@ -68,7 +68,6 @@
 
         public const string TemplateDisplayImagesCount = "Брой на снимки за темплейта";
 
-
         public const string TemplateDisplayDescription = "Описание на темплейта";
 
         public const string TemplateCloundFolderName = "templates/{0}";

@@ -9,7 +9,7 @@
     using EShop.Services.Mapping;
     using EShop.Web.ViewModels.Orders;
 
-    public class ShoppingCartModel : IMapFrom<OrderInfoInputModel>, IHaveCustomMappings
+    public class ShoppingCartModel : IMapFrom<OrderItemInputModel>, IHaveCustomMappings
     {
         public ShoppingCartModel()
         {
@@ -41,7 +41,7 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<OrderInfoInputModel, ShoppingCartModel>()
+            configuration.CreateMap<OrderItemInputModel, ShoppingCartModel>()
                 .ForMember(ders => ders.Price, src => src.MapFrom(x => x.Price * x.Quantity))
                 .ForMember(ders => ders.Images, src => src.Ignore());
         }

@@ -9,7 +9,7 @@
 
     public class CartService : ICartService
     {
-        public async Task<ShoppingCartModel> MapCartModelAsync(OrderInfoInputModel model)
+        public async Task<ShoppingCartModel> MapCartModelAsync(OrderItemInputModel model)
         {
             var cartItem = AutoMapperConfig.MapperInstance.Map<ShoppingCartModel>(model);
 

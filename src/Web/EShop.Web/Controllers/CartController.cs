@@ -27,7 +27,7 @@
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> AddItem(OrderInfoInputModel model)
+        public async Task<IActionResult> AddItem(OrderItemInputModel model)
         {
             model.ProductName = this.TempData[GlobalConstants.NameOfOrderProductName] as string;
             model.Price = decimal.Parse(this.TempData[GlobalConstants.NameOfOrderPrice] as string);

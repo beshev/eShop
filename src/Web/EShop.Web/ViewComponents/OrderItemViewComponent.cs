@@ -4,7 +4,7 @@
     using EShop.Web.ViewModels.Orders;
     using Microsoft.AspNetCore.Mvc;
 
-    public class OrderInfoViewComponent : ViewComponent
+    public class OrderItemViewComponent : ViewComponent
     {
         public IViewComponentResult Invoke(int? templateId, int? productId, decimal price, string productName, int imagesCount, bool hasCustomText)
         {
@@ -13,7 +13,7 @@
             this.TempData[GlobalConstants.NameOfOrderTemplateId] = templateId;
             this.TempData[GlobalConstants.NameOfOrderProductId] = productId;
 
-            var componentModel = new OrderInfoViewComponentModel
+            var componentModel = new OrderItemViewComponentModel
             {
                 ImagesCount = imagesCount,
                 HasCustomText = hasCustomText,

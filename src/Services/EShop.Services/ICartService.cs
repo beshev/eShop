@@ -7,6 +7,6 @@
 
     public interface ICartService
     {
-        public Task<ShoppingCartModel> MapCartModelAsync(OrderInfoInputModel orderInfoInputModel);
+        public Task<ShoppingCartModel> MapCartModelAsync(OrderItemInputModel orderInfoInputModel);
     }
 }

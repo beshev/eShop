@@ -1,8 +1,8 @@
 ﻿namespace EShop.Web.ViewModels.Orders
 {
-    public class OrderInfoViewComponentModel
+    public class OrderItemViewComponentModel
     {
-        public OrderInfoInputModel OrderInfo { get; set; }
+        public OrderItemInputModel OrderInfo { get; set; }
 
         public int ImagesCount { get; set; }
 
