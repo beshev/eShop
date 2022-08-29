@@ -2,8 +2,10 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
 
+    using EShop.Common;
     using EShop.Data.Common.Repositories;
     using EShop.Data.Models;
     using Eshop.Services.Cloudinary;
@@ -34,16 +36,16 @@
                     FirsName = model.UserInfo.FirsName,
                     LastName = model.UserInfo.LastName,
                     City = model.UserInfo.City,
-                    Bulstrad = model.UserInfo.Bulstrad,
+                    Bullstat = model.UserInfo.Bulstrad,
                     DeliveryAddress = model.UserInfo.DeliveryAddress,
-                    Mol = model.UserInfo.Mol,
+                    Mall = model.UserInfo.Mol,
                     Phone = model.UserInfo.Phone,
                 },
             };
 
             foreach (var item in model.OrderItems)
             {
-                var orderItem = new OrderInfo
+                var orderItem = new OrderItem
                 {
                     Price = item.Price,
                     Description = item.Description,
@@ -54,11 +56,13 @@
                     ProductId = item.ProductId,
                 };
 
+                var imageUrls = new StringBuilder();
                 foreach (var image in item.Images)
                 {
-                    orderItem.Images.Add(new Image { ImageUrl = await this.cloudinaryService.UploadAsync(image.Key, image.Value, "Orders") });
+                    imageUrls.Append($"{await this.cloudinaryService.UploadAsync(image.Key, image.Value, GlobalConstants.NameOfOrders)} ");
                 }
 
+                orderItem.ImagesUrls = imageUrls.ToString();
                 order.OrderItems.Add(orderItem);
             }
 

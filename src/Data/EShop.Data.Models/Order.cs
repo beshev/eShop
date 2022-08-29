@@ -9,7 +9,7 @@
     {
         public Order()
         {
-            this.OrderItems = new HashSet<OrderInfo>();
+            this.OrderItems = new HashSet<OrderItem>();
         }
 
         public decimal TotalPrice { get; set; }
@@ -18,6 +18,6 @@
 
         public virtual UserInfo UserInfo { get; set; }
 
-        public virtual ICollection<OrderInfo> OrderItems { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }

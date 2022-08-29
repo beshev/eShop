@@ -1,28 +1,35 @@
 ﻿namespace EShop.Web.ViewModels.Orders
 {
     using System.ComponentModel.DataAnnotations;
-    // TODO: Put Constants for on all attributes
+
+    using EShop.Common;
+
     public class UserInfoInputModel
     {
-        [MaxLength(250)]
+        [Required]
+        [MaxLength(GlobalConstants.UserFirsNameMaxLength)]
         public string FirsName { get; set; }
 
-        [MaxLength(250)]
+        [Required]
+        [MaxLength(GlobalConstants.UserLastNameMaxLength)]
         public string LastName { get; set; }
 
-        [MaxLength(250)]
+        [Required]
+        [MaxLength(GlobalConstants.CityMaxLength)]
         public string City { get; set; }
 
-        [MaxLength(500)]
+        [Required]
+        [MaxLength(GlobalConstants.DeliveryAddressMaxLength)]
         public string DeliveryAddress { get; set; }
 
-        [MaxLength(20)]
+        [Required]
+        [MaxLength(GlobalConstants.PhoneMaxLength)]
         public string Phone { get; set; }
 
-        [MaxLength(11)]
-        public string Bulstrad { get; set; }
+        [MaxLength(GlobalConstants.BullstatMaxLength)]
+        public string Bullstat { get; set; }
 
-        [MaxLength(255)]
-        public string Mol { get; set; }
+        [MaxLength(GlobalConstants.MallMaxLength)]
+        public string Mall { get; set; }
     }
 }

@@ -34,13 +34,11 @@
 
         public DbSet<ProductCategory> ProductsCategories { get; set; }
 
-        public DbSet<OrderInfo> OrdersInfos { get; set; }
+        public DbSet<OrderItem> OrdersInfos { get; set; }
 
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<UserInfo> UsersInfos { get; set; }
-
-        public DbSet<Image> Images { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

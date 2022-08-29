@@ -9,7 +9,7 @@
     using EShop.Data.Models;
     using EShop.Services.Mapping;
 
-    public class OrderItemViewModel : IMapFrom<OrderInfo>, IHaveCustomMappings
+    public class OrderItemViewModel : IMapFrom<OrderItem>, IHaveCustomMappings
     {
         [Display(Name = GlobalConstants.NameOfPrice)]
         public decimal Price { get; set; }
@@ -32,7 +32,7 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<OrderInfo, OrderItemViewModel>()
+            configuration.CreateMap<OrderItem, OrderItemViewModel>()
                 .ForMember(dest => dest.Images, src => src.MapFrom(x => x.Images.Select(image => image.ImageUrl)));
         }
     }

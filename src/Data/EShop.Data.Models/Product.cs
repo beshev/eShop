@@ -11,7 +11,7 @@
         public Product()
         {
             this.ProductTemplates = new HashSet<ProductTemplate>();
-            this.ProductOrders = new HashSet<OrderInfo>();
+            this.ProductOrders = new HashSet<OrderItem>();
         }
 
         [Required]
@@ -33,6 +33,6 @@
 
         public virtual IEnumerable<ProductTemplate> ProductTemplates { get; set; }
 
-        public virtual IEnumerable<OrderInfo> ProductOrders { get; set; }
+        public virtual IEnumerable<OrderItem> ProductOrders { get; set; }
     }
 }
