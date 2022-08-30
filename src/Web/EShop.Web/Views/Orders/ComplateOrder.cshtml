@@ -1,30 +1,30 @@
 ﻿@model UserInfoInputModel
 
-<form asp-area="" asp-controller="Orders" asp-action="ComplateOrder" class="col-lg-6 offset-lg-3">
+<form asp-area="" asp-controller="Orders" asp-action="ComplateOrder" class="col-lg-6 offset-lg-3 text-center">
     <div class="form-grup">
         <span asp-validation-for="FirsName" class="text-danger"></span>
         <label asp-for="FirsName"></label>
-        <input asp-for="FirsName" class="form-control" placeholder="Име на темплейта..." />
+        <input asp-for="FirsName" class="form-control" placeholder="Име..." />
     </div>
     <div class="form-grup has-danger">
         <span asp-validation-for="LastName" class="text-danger"></span>
         <label asp-for="LastName"></label>
-        <textarea asp-for="LastName" class="form-control" placeholder="Описание на темплейта..."></textarea>
+        <input asp-for="LastName" class="form-control" placeholder="Фамилия..." />
     </div>
     <div class="form-grup">
         <span asp-validation-for="Phone" class="text-danger"></span>
         <label asp-for="Phone"></label>
-        <input asp-for="Phone" class="form-control" type="number" placeholder="Цена на темплейта..." />
+        <input asp-for="Phone" class="form-control" type="number" placeholder="Телефон..." />
     </div>
     <div class="form-grup">
         <span asp-validation-for="City" class="text-danger"></span>
         <label asp-for="City"></label>
-        <input asp-for="City" class="form-control" placeholder="Снимка на темплейта..." />
+        <input asp-for="City" class="form-control" placeholder="Град..." />
     </div>
     <div class="form-grup">
         <span asp-validation-for="DeliveryAddress" class="text-danger"></span>
         <label asp-for="DeliveryAddress"></label>
-        <input asp-for="DeliveryAddress"  class="form-control" />
+        <input asp-for="DeliveryAddress"  class="form-control"  placeholder="Адрес..."/>
     </div>
 
     <div class="form-grup" style="margin-top: 2%;">

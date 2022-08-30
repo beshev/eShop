@@ -9,6 +9,8 @@
 
         public const string IndexAction = "Index";
 
+        public const string ErrorAction = "Error";
+
         public const string AllAction = "All";
 
         public const string DetailsAction = "Details";
@@ -86,5 +88,21 @@
         public const string NameOfOrderProductId = "OrderProductId";
 
         public const string NameOfOrderTemplateId = "OrderTemplateId";
+
+        // User info
+        public const string DisplayFirsName = "Име";
+
+        public const string DisplayLastName = "Фамилия";
+
+        public const string DisplayCity = "Град";
+
+        public const string DisplayDeliveryAddress = "Адрес за доставка";
+
+        public const string DisplayPhone = "Телофон за връзка";
+
+        public const string DisplayBullstat = "Булстат";
+
+        public const string DisplayMall = "МОЛ";
+
     }
 }
