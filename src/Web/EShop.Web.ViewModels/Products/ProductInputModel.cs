@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using EShop.Common;
+    using EShop.Web.Infrastructure.Attributes;
     using Microsoft.AspNetCore.Http;
 
     public class ProductInputModel
@@ -25,6 +26,7 @@
 
         [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
         [Display(Name = GlobalConstants.NameOfImage)]
+        [AllowedExtensionsAttribute]
         public IFormFile Image { get; set; }
 
         [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]

@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using EShop.Common;
+    using EShop.Web.Infrastructure.Attributes;
     using Microsoft.AspNetCore.Http;
 
     public class OrderItemInputModel
@@ -21,6 +22,7 @@
         [Display(Name = GlobalConstants.NameOfFontStyle)]
         public int? FontStyle { get; set; }
 
+        [AllowedExtensions]
         public IEnumerable<IFormFile> Images { get; set; }
 
         [MaxLength(DataConstants.ProductNameMaxLength)]

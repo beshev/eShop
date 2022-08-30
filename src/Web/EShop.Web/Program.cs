@@ -1,9 +1,16 @@
 ﻿namespace EShop.Web
 {
+    using System;
     using System.Reflection;
 
+    using CloudinaryDotNet;
     using EShop.Data;
     using EShop.Data.Seeding;
+    using EShop.Services;
+    using Eshop.Services.Cloudinary;
+    using EShop.Services.Data.Orders;
+    using EShop.Services.Data.Products;
+    using EShop.Services.Data.Templates;
     using EShop.Services.Mapping;
     using EShop.Web.Infrastructure.Extensions;
     using EShop.Web.ViewModels;
@@ -34,9 +41,10 @@
                 .AddRepositories()
                 .AddRazorPagesExtension()
                 .AddDatabaseDeveloperPageExceptionFilter()
-                .AddSingleton(configuration)
-                .AddCloudinaryConfiguration(configuration)
-                .AddApplicationServices();
+                .AddSingleton(configuration);
+
+            AddApplicationServices(services);
+            AddCloudinaryConfiguration(services, configuration);
         }
 
         private static void Configure(WebApplication app)
@@ -76,6 +84,38 @@
             app.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
             app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
+        }
+
+        private static void AddApplicationServices(IServiceCollection services)
+        {
+            // Application services
+            services.AddTransient<ITemplateService, TemplateService>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<ICartService, CartService>();
+            services.AddTransient<IOrdersService, OrdersService>();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+            });
+        }
+
+        private static void AddCloudinaryConfiguration(
+            IServiceCollection services,
+            IConfiguration configuration)
+            => services.AddSingleton(CloudinaryConfiguration(configuration));
+
+        private static Cloudinary CloudinaryConfiguration(IConfiguration configuration)
+        {
+            var cloudinaryCredentials = new Account(
+                configuration["Cloudinary:CloudName"],
+                configuration["Cloudinary:ApiKey"],
+                configuration["Cloudinary:ApiSecret"]);
+
+            return new Cloudinary(cloudinaryCredentials);
         }
     }
 }

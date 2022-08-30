@@ -17,6 +17,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.435" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -24,8 +25,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\EShop.Data\EShop.Data.csproj" />
-    <ProjectReference Include="..\..\Services\EShop.Services.Data\EShop.Services.Data.csproj" />
-    <ProjectReference Include="..\..\Services\EShop.Services\EShop.Services.csproj" />
   </ItemGroup>
 
 </Project>

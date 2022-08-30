@@ -49,7 +49,7 @@
                 {
                     Price = item.Price,
                     Description = item.Description,
-                    FontStyle = item.FontStyle.Value,
+                    FontStyle = item.FontStyle ?? null,
                     ProductName = item.ProductName,
                     Quantity = item.Quantity,
                     TemplateId = item.TemplateId,
