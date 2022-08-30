@@ -11,6 +11,8 @@
 
         public const string AllAction = "All";
 
+        public const string DetailsAction = "Details";
+
         public const string NameOfCart = "Cart";
 
         public const string AdministratorRoleName = "Administrator";
@@ -75,7 +77,7 @@
         public const string TemplatesController = "Templates";
 
         // Order
-        public const string NameOfOrders = "Orders";
+        public const string OrdersCloundFolderName = "Orders/{0}";
 
         public const string NameOfOrderPrice = "OrderPrice";
 

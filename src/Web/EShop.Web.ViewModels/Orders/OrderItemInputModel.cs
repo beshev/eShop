@@ -22,6 +22,7 @@
         [Display(Name = GlobalConstants.NameOfFontStyle)]
         public int? FontStyle { get; set; }
 
+        // Find way to display this validaion to user
         [AllowedExtensions]
         public IEnumerable<IFormFile> Images { get; set; }
 

@@ -59,7 +59,8 @@
                 var imageUrls = new StringBuilder();
                 foreach (var image in item.Images)
                 {
-                    imageUrls.Append($"{await this.cloudinaryService.UploadAsync(image.Key, image.Value, GlobalConstants.NameOfOrders)} ");
+                    imageUrls.Append(await this.cloudinaryService.UploadAsync(image.Key, image.Value, string.Format(GlobalConstants.OrdersCloundFolderName, image.Key)));
+                    imageUrls.Append(GlobalConstants.Space);
                 }
 
                 orderItem.ImagesUrls = imageUrls.ToString();
