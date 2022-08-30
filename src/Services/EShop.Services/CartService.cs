@@ -19,7 +19,10 @@
                 {
                     using var ms = new MemoryStream();
                     await image.CopyToAsync(ms);
-                    cartItem.Images.Add(image.FileName, ms.ToArray());
+
+                    // This will avoid duplication of keys
+                    var key = image.FileName + cartItem.Images.Count;
+                    cartItem.Images.Add(key, ms.ToArray());
                 }
             }
 
