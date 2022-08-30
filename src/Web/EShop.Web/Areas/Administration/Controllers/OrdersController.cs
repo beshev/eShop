@@ -20,5 +20,12 @@
             var viewModel = await this.ordersService.GetAllAsync<OrderViewModel>();
             return this.View(viewModel);
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var viewModel = await this.ordersService.GetByIdAsync<OrderDetailsModel>(id);
+
+            return this.View(viewModel);
+        }
     }
 }

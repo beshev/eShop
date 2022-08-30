@@ -30,7 +30,11 @@
                     <strong>@order.TotalPrice</strong>
                 </td>
                 <td>
-                    <a asp-area="@GlobalConstants.AdministrationArea" asp-action="@GlobalConstants.DetailsAction" asp-controller="@GlobalConstants.OrdersController">
+                    <a 
+                    asp-area="@GlobalConstants.AdministrationArea" 
+                    asp-action="@GlobalConstants.DetailsAction" 
+                    asp-controller="@GlobalConstants.OrdersController"
+                    asp-route-id="@order.Id">
                         Детайли
                     </a>
                 </td>

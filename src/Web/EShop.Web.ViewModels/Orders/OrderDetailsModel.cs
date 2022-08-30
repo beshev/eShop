@@ -1,19 +1,20 @@
 ﻿namespace EShop.Web.ViewModels.Orders
 {
     using System;
+    using System.Collections.Generic;
 
     using EShop.Data.Models;
     using EShop.Services.Mapping;
     using EShop.Web.ViewModels.UserInfo;
 
-    public class OrderViewModel : IMapFrom<Order>
+    public class OrderDetailsModel : IMapFrom<Order>
     {
-        public int Id { get; set; }
-
         public decimal TotalPrice { get; set; }
+
+        public UserInfoInputModel UserInfo { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
-        public UserInfoViewModel UserInfo { get; set; }
+        public IEnumerable<OrderItemViewModel> OrderItems { get; set; }
     }
 }
