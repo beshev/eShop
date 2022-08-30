@@ -9,6 +9,7 @@
     using EShop.Web.Infrastructure.Extensions;
     using EShop.Web.ViewModels.Orders;
     using EShop.Web.ViewModels.ShoppingCarts;
+    using EShop.Web.ViewModels.UserInfo;
     using Microsoft.AspNetCore.Mvc;
 
     public class OrdersController : BaseController

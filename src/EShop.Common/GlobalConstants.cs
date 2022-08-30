@@ -7,6 +7,8 @@
 
         public const string HomeController = "Home";
 
+        public const string OrdersController = "Orders";
+
         public const string IndexAction = "Index";
 
         public const string ErrorAction = "Error";
@@ -103,6 +105,5 @@
         public const string DisplayBullstat = "Булстат";
 
         public const string DisplayMall = "МОЛ";
-
     }
 }

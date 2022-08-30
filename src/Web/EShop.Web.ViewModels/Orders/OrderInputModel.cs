@@ -4,6 +4,7 @@
 
     using EShop.Data.Models.Enums;
     using EShop.Web.ViewModels.ShoppingCarts;
+    using EShop.Web.ViewModels.UserInfo;
 
     public class OrderInputModel
     {

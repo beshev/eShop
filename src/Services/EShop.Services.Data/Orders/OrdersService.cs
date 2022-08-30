@@ -76,5 +76,12 @@
             .AllAsNoTracking()
             .To<TModel>()
             .ToListAsync();
+
+        public async Task<TModel> GetByIdAsync<TModel>(int orderId)
+            => await this.orderRepo
+            .AllAsNoTracking()
+            .Where(x => x.Id.Equals(orderId))
+            .To<TModel>()
+            .FirstOrDefaultAsync();
     }
 }

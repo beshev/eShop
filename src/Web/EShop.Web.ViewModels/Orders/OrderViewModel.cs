@@ -1,10 +1,10 @@
 ﻿namespace EShop.Web.ViewModels.Orders
 {
     using System;
-    using System.Collections.Generic;
 
     using EShop.Data.Models;
     using EShop.Services.Mapping;
+    using EShop.Web.ViewModels.UserInfo;
 
     public class OrderViewModel : IMapFrom<Order>
     {
@@ -12,6 +12,6 @@
 
         public DateTime CreatedOn { get; set; }
 
-        public IEnumerable<OrderItemViewModel> OrderItems { get; set; }
+        public UserInfoViewModel UserInfo { get; set; }
     }
 }

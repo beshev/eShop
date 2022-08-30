@@ -2,37 +2,39 @@
 
 <h1>Поръчки</h1>
 
-<table class="table table-sm table-bordered">
-    @foreach (var order in this.Model)
-    {
-        @foreach (var item in order.OrderItems)
+<table class="table table-sm table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                Име
+            </th>
+            <th>
+                Дата на поръчка
+            </th>
+            <th>
+                Цена
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in this.Model)
         {
             <tr>
                 <td>
-                    @item.ProductName
+                    @order.UserInfo.FirsName @order.UserInfo.LastName
                 </td>
                 <td>
-                    @item.Price
+                    @order.CreatedOn.ToShortDateString()
                 </td>
                 <td>
-                    @item.Description
+                    <strong>@order.TotalPrice</strong>
                 </td>
                 <td>
-                    @item.Quantity
-                </td>
-                <td>
-                    @item.FontStyle
-                </td>
-                <td>
-                    @item.TemplateName
-                </td>
-                <td>
-                    @foreach (var imageUrl in item.Images)
-                    {
-                        <a href="@imageUrl" target="_blank">Снимка</a>
-                    }
+                    <a asp-area="@GlobalConstants.AdministrationArea" asp-action="@GlobalConstants.DetailsAction" asp-controller="@GlobalConstants.OrdersController">
+                        Детайли
+                    </a>
                 </td>
             </tr>
         }
-    }
+    </tbody>
 </table>

@@ -10,5 +10,7 @@
         public Task ComplateOrderAsync(OrderInputModel order);
 
         public Task<IEnumerable<TModel>> GetAllAsync<TModel>();
+
+        public Task<TModel> GetByIdAsync<TModel>(int orderId);
     }
 }

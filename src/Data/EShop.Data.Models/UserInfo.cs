@@ -9,6 +9,8 @@
     {
         [Required]
         [MaxLength(DataConstants.UserFirsNameMaxLength)]
+
+        // TODO: Fix that name
         public string FirsName { get; set; }
 
         [Required]
