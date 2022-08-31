@@ -8,6 +8,7 @@
     using EShop.Common;
     using EShop.Data.Common.Repositories;
     using EShop.Data.Models;
+    using EShop.Data.Models.Enums;
     using Eshop.Services.Cloudinary;
     using EShop.Services.Mapping;
     using EShop.Web.ViewModels.Orders;
@@ -24,6 +25,16 @@
         {
             this.orderRepo = orderRepo;
             this.cloudinaryService = cloudinaryService;
+        }
+
+        public async Task ChangeStatus(int id, OrderStatus orderStatus)
+        {
+            var order = await this.orderRepo
+                .All()
+                .FirstOrDefaultAsync(x => x.Id.Equals(id));
+            order.Status = orderStatus;
+
+            await this.orderRepo.SaveChangesAsync();
         }
 
         public async Task ComplateOrderAsync(OrderInputModel model)
@@ -81,9 +92,10 @@
             await this.orderRepo.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>()
+        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(OrderStatus orderStatus)
             => await this.orderRepo
             .AllAsNoTracking()
+            .Where(x => x.Status.Equals(orderStatus))
             .To<TModel>()
             .ToListAsync();
 

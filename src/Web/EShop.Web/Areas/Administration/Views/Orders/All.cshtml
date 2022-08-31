@@ -1,7 +1,13 @@
-﻿@model IEnumerable<OrderViewModel>
+﻿@using EShop.Data.Models.Enums
+@model AllOrdersViewModel
 
-<h1>Поръчки</h1>
+<h1 class="text-center">Поръчки</h1>
 
+<a asp-area="Administration" asp-controller="Orders" asp-action="All" asp-route-orderStatus="@OrderStatus.Active">@OrderStatus.Active</a>
+<a asp-area="Administration" asp-controller="Orders" asp-action="All" asp-route-orderStatus="@OrderStatus.Completed">@OrderStatus.Completed</a>
+<a asp-area="Administration" asp-controller="Orders" asp-action="All" asp-route-orderStatus="@OrderStatus.Info">@OrderStatus.Info</a>
+
+<h2 class="text-info text-center">@this.Model.Status</h2>
 <table class="table table-sm table-bordered table-striped">
     <thead>
         <tr>
@@ -17,7 +23,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var order in this.Model)
+        @foreach (var order in this.Model.Orders)
         {
             <tr>
                 <td>
@@ -30,21 +36,50 @@
                     <strong>@order.TotalPrice</strong>
                 </td>
                 <td>
-                    <a 
-                    asp-area="@GlobalConstants.AdministrationArea" 
-                    asp-action="@GlobalConstants.DetailsAction" 
-                    asp-controller="@GlobalConstants.OrdersController"
-                    asp-route-id="@order.Id">
+                    <a asp-area="@GlobalConstants.AdministrationArea"
+                   asp-action="@GlobalConstants.DetailsAction"
+                   asp-controller="@GlobalConstants.OrdersController"
+                   asp-route-id="@order.Id">
                         Детайли
                     </a>
-                     / 
-                    <a 
-                    asp-area="@GlobalConstants.AdministrationArea" 
-                    asp-action="@GlobalConstants.RemoveAction" 
-                    asp-controller="@GlobalConstants.OrdersController"
-                    asp-route-id="@order.Id">
-                        Изтриване
-                    </a>
+                    /
+                    @if (this.Model.Status.Equals(OrderStatus.Completed))
+                    {
+                          <a asp-area="@GlobalConstants.AdministrationArea"
+                           asp-action="@GlobalConstants.RemoveAction"
+                           asp-controller="@GlobalConstants.OrdersController"
+                           asp-route-id="@order.Id">
+                            Изтриване
+                        </a>
+                    }
+                    else if(this.Model.Status.Equals(OrderStatus.Active))
+                    {
+                        <a asp-area="@GlobalConstants.AdministrationArea"
+                           asp-action="@GlobalConstants.ChangeStatusAction"
+                           asp-controller="@GlobalConstants.OrdersController"
+                           asp-route-id="@order.Id"
+                           asp-route-orderStatus="@OrderStatus.Completed">
+                            Завърши
+                        </a>
+                        <text>/</text>
+                        <a asp-area="@GlobalConstants.AdministrationArea"
+                           asp-action="@GlobalConstants.ChangeStatusAction"
+                           asp-controller="@GlobalConstants.OrdersController"
+                           asp-route-id="@order.Id"
+                           asp-route-orderStatus="@OrderStatus.Info">
+                            Изчакване
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="@GlobalConstants.AdministrationArea"
+                           asp-action="@GlobalConstants.ChangeStatusAction"
+                           asp-controller="@GlobalConstants.OrdersController"
+                           asp-route-id="@order.Id"
+                           asp-route-orderStatus="@OrderStatus.Completed">
+                            Завърши
+                        </a>
+                    }
                 </td>
             </tr>
         }
