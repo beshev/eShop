@@ -47,6 +47,8 @@
 
         public const string DisplayIsBaseModel = "Базов модел ли е?";
 
+        public const string ComplatedOrder = "ComplatedOrder";
+
         public const char Space = ' ';
 
         public const char Comma = '.';

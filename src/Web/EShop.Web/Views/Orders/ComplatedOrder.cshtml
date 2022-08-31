@@ -1,0 +1,32 @@
+﻿@model OrderInputModel
+<div class="text-center">
+    <h1>Вашата поръчка беше направена успешно</h1>
+    <h2>Ще се връжем с вас за потвърждение</h2>
+
+</div>
+
+<h3>Вашиете данни</h3>
+<ul>
+    <li>
+        @this.Model.UserInfo.FirsName @this.Model.UserInfo.LastName
+    </li>
+    <li>
+       гр. @this.Model.UserInfo.City, ул. @this.Model.UserInfo.DeliveryAddress
+    </li>
+    <li>
+        @this.Model.UserInfo.Phone
+    </li>
+    @if (!string.IsNullOrWhiteSpace(this.Model.UserInfo.Bullstat))
+    {
+        <li>
+            @this.Model.UserInfo.Bullstat
+        </li>
+        <li>
+            @this.Model.UserInfo.Mall
+        </li>
+    }
+    <li>Цена на поръчката <strong>без доставката</strong>: <h6>@this.Model.OrderItems.Sum(x => x.Price)</h6></li>
+    <li>Брой продукти: <h6>@this.Model.OrderItems.Count()</h6></li>
+</ul>
+
+<a class="btn btn-info" asp-area="" asp-controller="@GlobalConstants.HomeController" asp-action="@GlobalConstants.IndexAction">Обратно към сайта</a>

@@ -46,12 +46,20 @@
                 await this.ordersService.ComplateOrderAsync(orderModel);
                 this.Session.Clear();
 
-                return this.RedirectToAction(GlobalConstants.IndexAction, GlobalConstants.HomeController);
+                this.TempData[GlobalConstants.ComplatedOrder] = orderModel;
+
+                return this.RedirectToAction(nameof(this.ComplatedOrder));
             }
             catch (Exception)
             {
                 return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController);
             }
+        }
+
+        public IActionResult ComplatedOrder()
+        {
+            var viewModel = this.TempData[GlobalConstants.ComplatedOrder];
+            return this.View(viewModel);
         }
     }
 }

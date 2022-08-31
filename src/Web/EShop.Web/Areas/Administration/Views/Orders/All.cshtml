@@ -30,7 +30,7 @@
                     @order.UserInfo.FirsName @order.UserInfo.LastName
                 </td>
                 <td>
-                    @order.CreatedOn.ToShortDateString()
+                    @order.CreatedOn.ToShortDateString() - @order.CreatedOn.ToShortTimeString()
                 </td>
                 <td>
                     <strong>@order.TotalPrice</strong>
