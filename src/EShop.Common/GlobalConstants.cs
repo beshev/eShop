@@ -49,6 +49,10 @@
 
         public const char Space = ' ';
 
+        public const char Comma = '.';
+
+        public const char Slash = '/';
+
         // Products
         public const string ProductDisplayName = "Име на продукта";
 

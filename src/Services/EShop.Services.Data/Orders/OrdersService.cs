@@ -1,5 +1,6 @@
 ﻿namespace EShop.Services.Data.Orders
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
@@ -86,7 +87,23 @@
         {
             var order = await this.orderRepo
                 .All()
+                .Include(order => order.OrderItems)
                 .FirstOrDefaultAsync(x => x.Id.Equals(id));
+
+            foreach (var orderItem in order.OrderItems)
+            {
+                var imagesUrls = orderItem.ImagesUrls.Split(GlobalConstants.Space, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var imageUrl in imagesUrls)
+                {
+                    var fileName = imageUrl
+                        .Split(GlobalConstants.Slash, StringSplitOptions.RemoveEmptyEntries)
+                        .Last()
+                        .Split(GlobalConstants.Comma, StringSplitOptions.RemoveEmptyEntries)
+                        .First();
+
+                    await this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.OrdersCloundFolderName, fileName));
+                }
+            }
 
             this.orderRepo.Delete(order);
             await this.orderRepo.SaveChangesAsync();

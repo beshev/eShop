@@ -56,7 +56,7 @@
             try
             {
                 await this.ordersService.DeleteByIdAsync(id);
-                return this.RedirectToAction(nameof(this.All));
+                return this.RedirectToAction(nameof(this.All), new { OrderStatus = this.TempData[GlobalConstants.ChangeStatusAction] });
             }
             catch (Exception)
             {

@@ -1,5 +1,6 @@
 ﻿namespace EShop.Services
 {
+    using System;
     using System.IO;
     using System.Threading.Tasks;
 
@@ -20,8 +21,7 @@
                     using var ms = new MemoryStream();
                     await image.CopyToAsync(ms);
 
-                    // This will avoid duplication of keys
-                    var key = image.FileName + cartItem.Images.Count;
+                    var key = Guid.NewGuid().ToString();
                     cartItem.Images.Add(key, ms.ToArray());
                 }
             }
