@@ -6,7 +6,7 @@
 
     public class AllTemplatesViewModel : PagingViewModel
     {
-        public ProductSelectModel Product { get; set; }
+        public TemplateProductViewModel Product { get; set; }
 
         public IEnumerable<TemplateBaseViewModel> Templates { get; set; }
     }

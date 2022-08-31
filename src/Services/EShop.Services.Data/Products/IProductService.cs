@@ -17,6 +17,8 @@
 
         public Task CreateCategoryAsync(string name);
 
+        public Task<IEnumerable<TModel>> GetAllWithTemplatesAsync<TModel>();
+
         public Task<IEnumerable<TModel>> GetCategoriesAsync<TModel>();
 
         Task RemoveCategoryAsync(int categoryId);

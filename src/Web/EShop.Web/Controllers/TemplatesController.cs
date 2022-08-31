@@ -37,7 +37,7 @@
                 return this.NotFound();
             }
 
-            int count = await this.templateService.GetCountAsync();
+            int count = await this.templateService.GetCountAsync(productId, categoryId);
             int pagesCount = (int)Math.Ceiling((double)count / TemplatesPerPage);
 
             if (pagesCount != 0 && id > pagesCount)
@@ -55,7 +55,7 @@
                     ForAction = nameof(this.All),
                     ForController = this.GetType().Name.Replace(nameof(Controller), string.Empty),
                     Templates = await this.templateService.GetAllAsync<TemplateBaseViewModel>(productId, categoryId, skip, TemplatesPerPage),
-                    Product = await this.productService.GetByIdAsync<ProductSelectModel>(productId.Value),
+                    Product = await this.productService.GetByIdAsync<TemplateProductViewModel>(productId.Value),
                 };
 
                 if (viewModel.Templates.Any() == false)

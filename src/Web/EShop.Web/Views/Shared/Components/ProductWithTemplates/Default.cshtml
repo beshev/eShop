@@ -1,0 +1,6 @@
+﻿@model IEnumerable<ProductSelectModel>
+
+@foreach(var product in this.Model)
+{
+     <a class="dropdown-item" asp-area="" asp-controller="@GlobalConstants.TemplatesController" asp-action="@GlobalConstants.AllAction" asp-route-productId="@product.Id">@product.Name</a>
+}

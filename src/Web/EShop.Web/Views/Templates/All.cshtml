@@ -1,11 +1,7 @@
 ﻿@model AllTemplatesViewModel
 
-@{
-    this.ViewData["Title"] = $"Темплейти за {this.Model.Product.Name}";
-}
-
 <h1 class="text-center">
-    @this.ViewData["Title"]
+   Темплейти за <a href="@this.Model.Product.ImageUrl" target="_blank">@this.Model.Product.Name</a>
 </h1>
 
 
@@ -17,7 +13,7 @@
             <a asp-area="" asp-controller="Templates" asp-action="Details" asp-route-templateId="@template.Id" asp-route-productId="@Model.Product.Id"><img class="card-img-top" src="@template.ImageUrl" alt="..." /></a>
             <div class="card-body">
                 <div class="small text-muted">@template.Name</div>
-                <h2 class="card-title h4">@template.Price.ToString("F2") лв</h2>
+                <h2 class="card-title h4">@((template.Price + this.Model.Product.Price).ToString("F2")) лв</h2>
                 <p class="card-text">@template.Description</p>
                 <a class="btn btn-primary" asp-area="" asp-controller="Templates" asp-action="Details" asp-route-templateId="@template.Id" asp-route-productId="@Model.Product.Id">Детайли →</a>
             </div>

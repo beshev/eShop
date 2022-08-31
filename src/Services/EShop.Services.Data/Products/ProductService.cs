@@ -74,6 +74,13 @@
             return await products.To<TModel>().ToListAsync();
         }
 
+        public async Task<IEnumerable<TModel>> GetAllWithTemplatesAsync<TModel>()
+            => await this.productRepo
+            .AllAsNoTracking()
+            .Where(x => x.ProductTemplates.Any())
+            .To<TModel>()
+            .ToListAsync();
+
         public async Task<TModel> GetByIdAsync<TModel>(int id)
          => await this.productRepo
             .AllAsNoTracking()

@@ -122,7 +122,22 @@
             .AllAsNoTracking()
             .AnyAsync(x => x.ProductId.Equals(productId) && x.TemplateId.Equals(templateId));
 
-        public async Task<int> GetCountAsync()
-            => await this.templateRepo.AllAsNoTracking().CountAsync();
+        public async Task<int> GetCountAsync(int? productId = null, int? categoryId = null)
+        {
+            var query = this.templateRepo
+            .AllAsNoTracking();
+
+            if (productId.HasValue)
+            {
+                query = query.Where(template => template.TemplateProducts.Any(x => x.ProductId.Equals(productId.Value)));
+            }
+
+            if (categoryId.HasValue)
+            {
+                query = query.Where(template => template.TemplateCategoryId.Equals(categoryId.Value));
+            }
+
+            return await query.CountAsync();
+        }
     }
 }

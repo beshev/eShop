@@ -23,6 +23,6 @@
 
         public Task<bool> IsCompatibleWithProductAsync(int templateId, int productId);
 
-        public Task<int> GetCountAsync();
+        public Task<int> GetCountAsync(int? productId = null, int? categoryId = null);
     }
 }

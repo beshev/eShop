@@ -8,7 +8,7 @@
 
     public class AllowedExtensionsAttribute : ValidationAttribute
     {
-        private readonly string[] extensions = new string[] { "PNG", "JPEG" };
+        private readonly string[] extensions = new string[] { ".png", ".jpeg" };
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
@@ -17,7 +17,7 @@
             if (file != null)
             {
                 var extension = Path.GetExtension(file.FileName);
-                if (this.extensions.Contains(extension) == false)
+                if (this.extensions.Contains(extension.ToLower()) == false)
                 {
                     this.ErrorMessage = $"Allowed extensions: {string.Join(' ', this.extensions)}";
 
