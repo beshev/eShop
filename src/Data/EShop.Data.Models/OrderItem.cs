@@ -19,6 +19,8 @@
 
         [Required]
         [MaxLength(DataConstants.ProductNameMaxLength)]
+
+        // TODO: Maybe this is redundand
         public string ProductName { get; set; }
 
         public int? TemplateId { get; set; }

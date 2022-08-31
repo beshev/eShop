@@ -27,5 +27,11 @@
 
             return this.View(viewModel);
         }
+
+        public async Task<IActionResult> Remove(int id)
+        {
+            await this.ordersService.DeleteByIdAsync(id);
+            return this.RedirectToAction(nameof(this.All));
+        }
     }
 }

@@ -12,5 +12,7 @@
         public Task<IEnumerable<TModel>> GetAllAsync<TModel>();
 
         public Task<TModel> GetByIdAsync<TModel>(int orderId);
+
+        public Task DeleteByIdAsync(int id);
     }
 }

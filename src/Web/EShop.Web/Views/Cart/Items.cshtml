@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<EShop.Web.ViewModels.ShoppingCarts.ShoppingCartModel>
 
 @{
-    ViewData["Title"] = "Items";
+    ViewData["Title"] = "Количка";
 }
 
-<h1 class="text-center">Items</h1>
+<h1 class="text-center">@this.ViewData["Title"]</h1>
 
 <table class="table table-striped">
     <thead>
@@ -59,5 +59,10 @@
         }
     </tbody>
 </table>
+
+<h5>
+    Total price: @this.Model.Sum(x => x.Price)
+</h5>
+<strong class="text-danger">Внимание! Доставката не е вкючена в крайната цена!</strong>
 
 <a asp-area="" asp-controller="Orders" asp-action="ComplateOrder" class="btn btn-info @if(!this.Model.Any()){ <text>disabled</text> }" >Поръчай</a>

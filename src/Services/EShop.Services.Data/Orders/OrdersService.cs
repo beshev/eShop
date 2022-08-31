@@ -71,6 +71,16 @@
             await this.orderRepo.SaveChangesAsync();
         }
 
+        public async Task DeleteByIdAsync(int id)
+        {
+            var order = await this.orderRepo
+                .All()
+                .FirstOrDefaultAsync(x => x.Id.Equals(id));
+
+            this.orderRepo.Delete(order);
+            await this.orderRepo.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<TModel>> GetAllAsync<TModel>()
             => await this.orderRepo
             .AllAsNoTracking()

@@ -11,6 +11,8 @@
 
         public const string IndexAction = "Index";
 
+        public const string RemoveAction = "Remove";
+
         public const string ErrorAction = "Error";
 
         public const string AllAction = "All";

@@ -33,6 +33,7 @@
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<OrderItem, OrderItemViewModel>()
+                .ForMember(dest => dest.ProductName, src => src.MapFrom(x => x.Product.Name))
                 .ForMember(dest => dest.Images, src => src.MapFrom(x => x.ImagesUrls.Split(GlobalConstants.Space, StringSplitOptions.RemoveEmptyEntries)));
         }
     }
