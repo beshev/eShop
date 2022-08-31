@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using EShop.Common;
     using EShop.Services.Data.Products;
     using EShop.Services.Data.Templates;
     using EShop.Web.ViewModels.Products;
@@ -44,24 +45,30 @@
                 return this.NotFound();
             }
 
-            var skip = (id - 1) * TemplatesPerPage;
-
-            var viewModel = new AllTemplatesViewModel
+            try
             {
-                PageNumber = id,
-                PagesCount = pagesCount,
-                ForAction = nameof(this.All),
-                ForController = this.GetType().Name.Replace(nameof(Controller), string.Empty),
-                Templates = await this.templateService.GetAllAsync<TemplateBaseViewModel>(productId, categoryId, skip, TemplatesPerPage),
-                Product = await this.productService.GetByIdAsync<ProductSelectModel>(productId.Value),
-            };
+                var skip = (id - 1) * TemplatesPerPage;
+                var viewModel = new AllTemplatesViewModel
+                {
+                    PageNumber = id,
+                    PagesCount = pagesCount,
+                    ForAction = nameof(this.All),
+                    ForController = this.GetType().Name.Replace(nameof(Controller), string.Empty),
+                    Templates = await this.templateService.GetAllAsync<TemplateBaseViewModel>(productId, categoryId, skip, TemplatesPerPage),
+                    Product = await this.productService.GetByIdAsync<ProductSelectModel>(productId.Value),
+                };
 
-            if (viewModel.Templates.Any() == false)
-            {
-                return this.NotFound();
+                if (viewModel.Templates.Any() == false)
+                {
+                    return this.NotFound();
+                }
+
+                return this.View(viewModel);
             }
-
-            return this.View(viewModel);
+            catch (Exception)
+            {
+                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController);
+            }
         }
 
         public async Task<IActionResult> Details(int templateId, int productId)
@@ -71,9 +78,16 @@
                 return this.NotFound();
             }
 
-            var viewModel = await this.templateService.GetByIdAsync<TemplateViewModel>(templateId);
-            viewModel.ProductId = productId;
-            return this.View(viewModel);
+            try
+            {
+                var viewModel = await this.templateService.GetByIdAsync<TemplateViewModel>(templateId);
+                viewModel.ProductId = productId;
+                return this.View(viewModel);
+            }
+            catch (Exception)
+            {
+                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController);
+            }
         }
     }
 }

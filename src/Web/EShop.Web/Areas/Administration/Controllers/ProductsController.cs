@@ -1,5 +1,6 @@
 ﻿namespace EShop.Web.Areas.Administration.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
     using EShop.Common;
@@ -38,15 +39,28 @@
                 return this.View(model);
             }
 
-            await this.productService.AddAsync(model.Name, model.Price, model.Description, model.CategoryId, model.HasCustomText, model.Image, model.TemplatesIds);
-
-            return this.RedirectToAction(nameof(this.All));
+            try
+            {
+                await this.productService.AddAsync(model.Name, model.Price, model.Description, model.CategoryId, model.HasCustomText, model.Image, model.TemplatesIds);
+                return this.RedirectToAction(nameof(this.All));
+            }
+            catch (Exception)
+            {
+                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController, new { Area = string.Empty });
+            }
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            await this.productService.DeleteByIdAsync(id);
-            return this.RedirectToAction(nameof(this.All));
+            try
+            {
+                await this.productService.DeleteByIdAsync(id);
+                return this.RedirectToAction(nameof(this.All));
+            }
+            catch (Exception)
+            {
+                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController, new { Area = string.Empty });
+            }
         }
 
         [SetTempDataErrorsAttribute(GlobalConstants.NameOfCategory)]
@@ -62,8 +76,15 @@
 
         public async Task<IActionResult> RemoveCategory(int categoryId)
         {
-            await this.productService.RemoveCategoryAsync(categoryId);
-            return this.RedirectToAction(nameof(this.All));
+            try
+            {
+                await this.productService.RemoveCategoryAsync(categoryId);
+                return this.RedirectToAction(nameof(this.All));
+            }
+            catch (Exception)
+            {
+                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController, new { Area = string.Empty });
+            }
         }
     }
 }

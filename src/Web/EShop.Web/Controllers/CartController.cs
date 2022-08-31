@@ -1,5 +1,6 @@
 ﻿namespace EShop.Web.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -29,32 +30,46 @@
 
         public async Task<IActionResult> AddItem(OrderItemInputModel model)
         {
-            model.ProductName = this.TempData[GlobalConstants.NameOfOrderProductName] as string;
-            model.Price = decimal.Parse(this.TempData[GlobalConstants.NameOfOrderPrice] as string);
-            model.TemplateId = this.TempData[GlobalConstants.NameOfOrderTemplateId] as int?;
-            model.ProductId = this.TempData[GlobalConstants.NameOfOrderProductId] as int?;
-
-            if (model.TemplateId is null || model.ProductId is null)
+            try
             {
-                return this.NotFound();
+                model.ProductName = this.TempData[GlobalConstants.NameOfOrderProductName] as string;
+                model.Price = decimal.Parse(this.TempData[GlobalConstants.NameOfOrderPrice] as string);
+                model.TemplateId = this.TempData[GlobalConstants.NameOfOrderTemplateId] as int?;
+                model.ProductId = this.TempData[GlobalConstants.NameOfOrderProductId] as int?;
+
+                if (model.TemplateId is null || model.ProductId is null)
+                {
+                    return this.NotFound();
+                }
+
+                var cartItems = this.Session.GetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart) ?? new List<ShoppingCartModel>();
+                var cartItem = await this.cartService.MapCartModelAsync(model);
+                cartItems.Add(cartItem);
+
+                this.Session.SetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart, cartItems);
+                return this.RedirectToAction(GlobalConstants.AllAction, GlobalConstants.TemplatesController, new { model.ProductId });
             }
-
-            var cartItems = this.Session.GetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart) ?? new List<ShoppingCartModel>();
-            var cartItem = await this.cartService.MapCartModelAsync(model);
-            cartItems.Add(cartItem);
-
-            this.Session.SetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart, cartItems);
-            return this.RedirectToAction(GlobalConstants.AllAction, GlobalConstants.TemplatesController, new { model.ProductId });
+            catch (Exception)
+            {
+                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController);
+            }
         }
 
         public IActionResult RemoveItem(string id)
         {
-            var cartItem = this.Session.GetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart);
-            cartItem = cartItem.Where(x => x.Id.Equals(id) == false).ToList();
-            this.Session.SetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart, cartItem);
+            try
+            {
+                var cartItems = this.Session.GetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart);
+                cartItems = cartItems.Where(x => x.Id.Equals(id) == false).ToList();
+                this.Session.SetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart, cartItems);
 
-            // TODO: Use constnas
-            return this.RedirectToAction("Items", "Cart");
+                // TODO: Use constnas
+                return this.RedirectToAction("Items", "Cart");
+            }
+            catch (Exception)
+            {
+                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController);
+            }
         }
     }
 }

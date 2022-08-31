@@ -1,5 +1,6 @@
 ﻿namespace EShop.Web.Areas.Administration.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
     using EShop.Common;
@@ -31,9 +32,15 @@
                 return this.View(model);
             }
 
-            await this.templateService.AddAsync(model.Name, model.Description, model.Price, model.Image, model.ImagesFixedCount, model.IsBaseModel, model.HasCustomText, model.CategoryId, model.ProductsIds);
-
-            return this.RedirectToAction(nameof(this.All));
+            try
+            {
+                await this.templateService.AddAsync(model.Name, model.Description, model.Price, model.Image, model.ImagesFixedCount, model.IsBaseModel, model.HasCustomText, model.CategoryId, model.ProductsIds);
+                return this.RedirectToAction(nameof(this.All));
+            }
+            catch (Exception)
+            {
+                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController, new { Area = string.Empty });
+            }
         }
 
         public async Task<IActionResult> All()
@@ -45,8 +52,15 @@
 
         public async Task<IActionResult> Delete(int id)
         {
-            await this.templateService.DeleteByIdAsync(id);
-            return this.RedirectToAction(nameof(this.All));
+            try
+            {
+                await this.templateService.DeleteByIdAsync(id);
+                return this.RedirectToAction(nameof(this.All));
+            }
+            catch (Exception)
+            {
+                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController, new { Area = string.Empty });
+            }
         }
 
         [SetTempDataErrorsAttribute(GlobalConstants.NameOfCategory)]
@@ -62,8 +76,15 @@
 
         public async Task<IActionResult> RemoveCategory(int categoryId)
         {
-            await this.templateService.RemoveCategoryAsync(categoryId);
-            return this.RedirectToAction(nameof(this.All));
+            try
+            {
+                await this.templateService.RemoveCategoryAsync(categoryId);
+                return this.RedirectToAction(nameof(this.All));
+            }
+            catch (Exception)
+            {
+                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController, new { Area = string.Empty });
+            }
         }
     }
 }

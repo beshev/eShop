@@ -1,5 +1,6 @@
 ﻿namespace EShop.Web.Areas.Administration.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
     using EShop.Common;
@@ -19,34 +20,61 @@
 
         public async Task<IActionResult> All(OrderStatus orderStatus = OrderStatus.Active)
         {
-            var viewModel = new AllOrdersViewModel
+            try
             {
-                Orders = await this.ordersService.GetAllAsync<OrderViewModel>(orderStatus),
-                Status = orderStatus,
-            };
+                var viewModel = new AllOrdersViewModel
+                {
+                    Orders = await this.ordersService.GetAllAsync<OrderViewModel>(orderStatus),
+                    Status = orderStatus,
+                };
 
-            this.TempData[GlobalConstants.ChangeStatusAction] = orderStatus;
+                this.TempData[GlobalConstants.ChangeStatusAction] = orderStatus;
 
-            return this.View(viewModel);
+                return this.View(viewModel);
+            }
+            catch (Exception)
+            {
+                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController, new { Area = string.Empty });
+            }
         }
 
         public async Task<IActionResult> Details(int id)
         {
-            var viewModel = await this.ordersService.GetByIdAsync<OrderDetailsModel>(id);
-
-            return this.View(viewModel);
+            try
+            {
+                var viewModel = await this.ordersService.GetByIdAsync<OrderDetailsModel>(id);
+                return this.View(viewModel);
+            }
+            catch (Exception)
+            {
+                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController, new { Area = string.Empty });
+            }
         }
 
         public async Task<IActionResult> Remove(int id)
         {
-            await this.ordersService.DeleteByIdAsync(id);
-            return this.RedirectToAction(nameof(this.All));
+            try
+            {
+                await this.ordersService.DeleteByIdAsync(id);
+                return this.RedirectToAction(nameof(this.All));
+            }
+            catch (Exception)
+            {
+                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController, new { Area = string.Empty });
+            }
         }
 
         public async Task<IActionResult> ChangeStatus(int id, OrderStatus orderStatus)
         {
-            await this.ordersService.ChangeStatus(id, orderStatus);
-            return this.RedirectToAction(nameof(this.All), new { OrderStatus = this.TempData[GlobalConstants.ChangeStatusAction] });
+            try
+            {
+                await this.ordersService.ChangeStatus(id, orderStatus);
+                return this.RedirectToAction(nameof(this.All), new { OrderStatus = this.TempData[GlobalConstants.ChangeStatusAction] });
+            }
+            catch (Exception)
+            {
+                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController, new { Area = string.Empty });
+            }
         }
     }
 }
