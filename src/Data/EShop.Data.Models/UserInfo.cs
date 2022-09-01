@@ -26,7 +26,9 @@
         [MaxLength(DataConstants.DeliveryAddressMaxLength)]
         public string DeliveryAddress { get; set; }
 
-        public UsedCarrier UsedCarrier { get; set; }
+        public AddressType DeliveryAddressType { get; set; }
+
+        public Carrier Carrier { get; set; }
 
         [Required]
         [MaxLength(DataConstants.PhoneMaxLength)]

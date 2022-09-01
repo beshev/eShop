@@ -26,7 +26,20 @@
         <label asp-for="DeliveryAddress"></label>
         <input asp-for="DeliveryAddress"  class="form-control"  placeholder="Адрес..."/>
     </div>
-
+    <div class="form-grup">
+         <label asp-for="Carrier"></label>
+        <select asp-for="Carrier" class="form-select">
+            <option value="@Carrier.Econt">@Carrier.Econt</option>
+            <option value="@Carrier.Speedy">@Carrier.Speedy</option>
+        </select>
+    </div>
+     <div class="form-grup">
+         <label asp-for="DeliveryAddressType"></label>
+        <select asp-for="DeliveryAddressType" class="form-select">
+            <option value="@AddressType.Personal">До aдрес</option>
+            <option value="@AddressType.CarrierOffice">До офис</option>
+        </select>
+    </div>
     <div class="form-grup" style="margin-top: 2%;">
         <input type="submit" class="btn btn-outline-dark" value="Поръчай !" />
     </div>

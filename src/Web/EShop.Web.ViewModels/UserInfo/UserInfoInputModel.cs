@@ -4,6 +4,7 @@
 
     using EShop.Common;
     using EShop.Data.Models;
+    using EShop.Data.Models.Enums;
     using EShop.Services.Mapping;
 
     public class UserInfoInputModel : IMapFrom<UserInfo>
@@ -27,6 +28,11 @@
         [MaxLength(DataConstants.DeliveryAddressMaxLength)]
         [Display(Name = GlobalConstants.DisplayDeliveryAddress)]
         public string DeliveryAddress { get; set; }
+
+        [Display(Name = GlobalConstants.DisplayCarrier)]
+        public Carrier Carrier { get; set; }
+
+        public AddressType DeliveryAddressType { get; set; }
 
         [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
         [MaxLength(DataConstants.PhoneMaxLength)]

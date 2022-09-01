@@ -1,8 +1,8 @@
 ﻿namespace EShop.Data.Models.Enums
 {
-    public enum UsedCarrier
+    public enum Carrier
     {
-        Ekont,
+        Econt,
         Speedy,
     }
 }

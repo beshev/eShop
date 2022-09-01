@@ -43,7 +43,7 @@
 
             try
             {
-                await this.ordersService.ComplateOrderAsync(orderModel);
+                // await this.ordersService.ComplateOrderAsync(orderModel);
                 this.Session.Clear();
 
                 this.TempData.Put(GlobalConstants.ComplatedOrder, orderModel);
