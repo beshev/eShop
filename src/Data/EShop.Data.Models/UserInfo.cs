@@ -4,6 +4,7 @@
 
     using EShop.Common;
     using EShop.Data.Common.Models;
+    using EShop.Data.Models.Enums;
 
     public class UserInfo : BaseModel<int>
     {
@@ -25,6 +26,8 @@
         [MaxLength(DataConstants.DeliveryAddressMaxLength)]
         public string DeliveryAddress { get; set; }
 
+        public UsedCarrier UsedCarrier { get; set; }
+
         [Required]
         [MaxLength(DataConstants.PhoneMaxLength)]
         public string Phone { get; set; }
@@ -34,6 +37,11 @@
 
         [MaxLength(DataConstants.MallMaxLength)]
         public string Mall { get; set; }
+
+        [MaxLength(DataConstants.CompanyAddressMaxLength)]
+        public string CompanyAddress { get; set; }
+
+        public bool IsRegisteredByVAT { get; set; }
 
         public int OrderId { get; set; }
 

@@ -25,5 +25,7 @@
         public const int BullstatMaxLength = 11;
 
         public const int MallMaxLength = 255;
+
+        public const int CompanyAddressMaxLength = 500;
     }
 }
