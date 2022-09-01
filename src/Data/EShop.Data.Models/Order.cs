@@ -12,9 +12,6 @@
             this.OrderItems = new HashSet<OrderItem>();
         }
 
-        // TODO: This can be self calculating and is redundand
-        public decimal TotalPrice { get; set; }
-
         public OrderStatus Status { get; set; }
 
         public virtual UserInfo UserInfo { get; set; }

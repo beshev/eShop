@@ -11,8 +11,7 @@
         [Required]
         [MaxLength(DataConstants.UserFirsNameMaxLength)]
 
-        // TODO: Fix that name
-        public string FirsName { get; set; }
+        public string FirstName { get; set; }
 
         [Required]
         [MaxLength(DataConstants.UserLastNameMaxLength)]

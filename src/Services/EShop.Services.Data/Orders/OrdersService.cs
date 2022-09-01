@@ -42,16 +42,17 @@
         {
             var order = new Order
             {
-                TotalPrice = model.OrderItems.Sum(i => i.Price),
                 UserInfo = new UserInfo
                 {
-                    FirsName = model.UserInfo.FirsName,
+                    FirstName = model.UserInfo.FirsName,
                     LastName = model.UserInfo.LastName,
                     City = model.UserInfo.City,
-                    Bullstat = model.UserInfo.Bullstat,
-                    DeliveryAddress = model.UserInfo.DeliveryAddress,
-                    Mall = model.UserInfo.Mall,
                     Phone = model.UserInfo.Phone,
+                    DeliveryAddress = model.UserInfo.DeliveryAddress,
+                    DeliveryAddressType = model.UserInfo.DeliveryAddressType,
+                    Carrier = model.UserInfo.Carrier,
+                    Bullstat = model.UserInfo.Bullstat,
+                    Mall = model.UserInfo.Mall,
                 },
             };
 
