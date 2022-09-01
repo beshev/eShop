@@ -25,8 +25,8 @@
             @this.Model.UserInfo.Mall
         </li>
     }
-    <li>Цена на поръчката <strong>без доставката</strong>: <h6>@this.Model.OrderItems.Sum(x => x.Price)</h6></li>
-    <li>Брой продукти: <h6>@this.Model.OrderItems.Count()</h6></li>
+    <li>Цена на поръчката <strong>без доставката</strong>: <span class="h6">@this.Model.OrderItems.Sum(x => x.Price)</span></li>
+    <li>Брой продукти: <span class="h6">@this.Model.OrderItems.Count()</span></li>
 </ul>
 
 <a class="btn btn-info" asp-area="" asp-controller="@GlobalConstants.HomeController" asp-action="@GlobalConstants.IndexAction">Обратно към сайта</a>

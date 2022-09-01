@@ -46,7 +46,7 @@
                 await this.ordersService.ComplateOrderAsync(orderModel);
                 this.Session.Clear();
 
-                this.TempData[GlobalConstants.ComplatedOrder] = orderModel;
+                this.TempData.Put(GlobalConstants.ComplatedOrder, orderModel);
 
                 return this.RedirectToAction(nameof(this.ComplatedOrder));
             }
@@ -58,7 +58,12 @@
 
         public IActionResult ComplatedOrder()
         {
-            var viewModel = this.TempData[GlobalConstants.ComplatedOrder];
+            var viewModel = this.TempData.Get<OrderInputModel>(GlobalConstants.ComplatedOrder);
+            if (viewModel is null)
+            {
+                return this.NotFound();
+            }
+
             return this.View(viewModel);
         }
     }
