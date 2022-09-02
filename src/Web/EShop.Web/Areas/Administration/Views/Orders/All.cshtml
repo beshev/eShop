@@ -27,10 +27,10 @@
         {
             <tr>
                 <td>
-                    @order.UserInfo.FirsName @order.UserInfo.LastName
+                    @order.UserInfo.FirstName @order.UserInfo.LastName
                 </td>
                 <td>
-                    @order.CreatedOn.ToShortDateString() - @order.CreatedOn.ToShortTimeString()
+                    @order.CreatedOn.ToLocalTime()
                 </td>
                 <td>
                     <strong>@order.TotalPrice</strong>

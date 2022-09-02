@@ -110,6 +110,8 @@
 
         public const string DisplayDeliveryAddress = "Адрес за доставка";
 
+        public const string DisplayDeliveryAddressType = "До";
+
         public const string DisplayCarrier = "Куриер";
 
         public const string DisplayPhone = "Телофон за връзка";

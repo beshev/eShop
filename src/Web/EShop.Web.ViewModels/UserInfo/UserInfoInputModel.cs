@@ -12,7 +12,7 @@
         [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
         [MaxLength(DataConstants.UserFirsNameMaxLength)]
         [Display(Name = GlobalConstants.DisplayFirsName)]
-        public string FirsName { get; set; }
+        public string FirstName { get; set; }
 
         [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
         [MaxLength(DataConstants.UserLastNameMaxLength)]
@@ -32,6 +32,7 @@
         [Display(Name = GlobalConstants.DisplayCarrier)]
         public Carrier Carrier { get; set; }
 
+        [Display(Name = GlobalConstants.DisplayDeliveryAddressType)]
         public AddressType DeliveryAddressType { get; set; }
 
         [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]

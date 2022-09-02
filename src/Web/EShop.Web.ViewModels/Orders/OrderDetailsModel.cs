@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using EShop.Data.Models;
     using EShop.Services.Mapping;
@@ -9,8 +10,7 @@
 
     public class OrderDetailsModel : IMapFrom<Order>
     {
-        // TODO: This can be self calculating
-        public decimal TotalPrice { get; set; }
+        public decimal TotalPrice => this.OrderItems.Sum(x => x.Price);
 
         public UserInfoInputModel UserInfo { get; set; }
 

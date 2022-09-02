@@ -8,7 +8,7 @@
 <h3>Вашиете данни</h3>
 <ul>
     <li>
-        @this.Model.UserInfo.FirsName @this.Model.UserInfo.LastName
+        @this.Model.UserInfo.FirstName @this.Model.UserInfo.LastName
     </li>
     <li>
        гр. @this.Model.UserInfo.City, ул. @this.Model.UserInfo.DeliveryAddress - @this.Model.UserInfo.DeliveryAddressType
@@ -17,7 +17,7 @@
        Куриер: @this.Model.UserInfo.Carrier
     </li>
     <li>
-        @this.Model.UserInfo.Phone
+        Телефон: @this.Model.UserInfo.Phone
     </li>
     @if (!string.IsNullOrWhiteSpace(this.Model.UserInfo.Bullstat))
     {

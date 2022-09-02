@@ -43,7 +43,7 @@
 
             try
             {
-                // await this.ordersService.ComplateOrderAsync(orderModel);
+                await this.ordersService.ComplateOrderAsync(orderModel);
                 this.Session.Clear();
 
                 this.TempData.Put(GlobalConstants.ComplatedOrder, orderModel);
@@ -58,6 +58,7 @@
 
         public IActionResult ComplatedOrder()
         {
+            // TODO: User another view model
             var viewModel = this.TempData.Get<OrderInputModel>(GlobalConstants.ComplatedOrder);
             if (viewModel is null)
             {

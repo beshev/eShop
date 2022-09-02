@@ -2,9 +2,9 @@
 
 <form asp-area="" asp-controller="Orders" asp-action="ComplateOrder" class="col-lg-6 offset-lg-3 text-center">
     <div class="form-grup">
-        <span asp-validation-for="FirsName" class="text-danger"></span>
-        <label asp-for="FirsName"></label>
-        <input asp-for="FirsName" class="form-control" placeholder="Име..." />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" placeholder="Име..." />
     </div>
     <div class="form-grup has-danger">
         <span asp-validation-for="LastName" class="text-danger"></span>
@@ -36,8 +36,8 @@
      <div class="form-grup">
          <label asp-for="DeliveryAddressType"></label>
         <select asp-for="DeliveryAddressType" class="form-select">
-            <option value="@AddressType.Personal">До aдрес</option>
-            <option value="@AddressType.CarrierOffice">До офис</option>
+            <option value="@AddressType.Personal">Адрес</option>
+            <option value="@AddressType.CarrierOffice">Офис на куриера</option>
         </select>
     </div>
     <div class="form-grup" style="margin-top: 2%;">

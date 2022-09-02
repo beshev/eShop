@@ -44,7 +44,7 @@
             {
                 UserInfo = new UserInfo
                 {
-                    FirstName = model.UserInfo.FirsName,
+                    FirstName = model.UserInfo.FirstName,
                     LastName = model.UserInfo.LastName,
                     City = model.UserInfo.City,
                     Phone = model.UserInfo.Phone,
