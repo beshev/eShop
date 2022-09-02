@@ -23,5 +23,6 @@
     price="@this.Model.Price" 
     product-name="@this.Model.Name" 
     has-custom-text="@this.Model.HasCustomText" 
-    images-count="@this.Model.ImagesFixedCount">
+    images-count="@this.Model.ImagesFixedCount"
+    return-url="@this.ViewData[GlobalConstants.ReturnUrlKey]">
 </vc:order-item>

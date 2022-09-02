@@ -62,6 +62,9 @@
         public async Task<IActionResult> Details(int productId)
         {
             var vieModel = await this.productService.GetByIdAsync<ProductDetailsModel>(productId);
+
+            this.ViewData[GlobalConstants.ReturnUrlKey] = this.ReturnUrl;
+
             this.TempData[GlobalConstants.NameOfOrderProductId] = productId;
 
             return this.View(vieModel);

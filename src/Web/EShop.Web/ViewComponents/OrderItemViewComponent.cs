@@ -6,7 +6,7 @@
 
     public class OrderItemViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke(int? templateId, int? productId, decimal price, string productName, int imagesCount, bool hasCustomText)
+        public IViewComponentResult Invoke(int? templateId, int? productId, decimal price, string productName, int imagesCount, bool hasCustomText, string returnUrl)
         {
             this.TempData[GlobalConstants.NameOfOrderPrice] = price.ToString();
             this.TempData[GlobalConstants.NameOfOrderProductName] = productName;
@@ -16,6 +16,7 @@
             var componentModel = new OrderItemViewComponentModel
             {
                 ImagesCount = imagesCount,
+                ReturnUrl = returnUrl,
                 HasCustomText = hasCustomText,
             };
 

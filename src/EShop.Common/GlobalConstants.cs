@@ -3,6 +3,8 @@
     public static class GlobalConstants
     {
         // Common
+        public const string ReturnUrlKey = "ReturnUrl";
+
         public const string SystemName = "EShop";
 
         public const string HomeController = "Home";

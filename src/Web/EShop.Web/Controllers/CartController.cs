@@ -29,7 +29,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddItem(OrderItemInputModel model)
+        public async Task<IActionResult> AddItem(OrderItemInputModel model, string returnUrl)
         {
             try
             {
@@ -43,7 +43,8 @@
                 cartItems.Add(cartItem);
 
                 this.Session.SetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart, cartItems);
-                return this.RedirectToAction(GlobalConstants.AllAction, GlobalConstants.TemplatesController, new { model.ProductId });
+
+                return this.Redirect(returnUrl);
             }
             catch (Exception)
             {

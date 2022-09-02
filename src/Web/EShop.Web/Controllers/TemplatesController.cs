@@ -82,6 +82,9 @@
             {
                 var viewModel = await this.templateService.GetByIdAsync<TemplateViewModel>(templateId);
                 viewModel.ProductId = productId;
+
+                this.ViewData[GlobalConstants.ReturnUrlKey] = this.ReturnUrl;
+
                 return this.View(viewModel);
             }
             catch (Exception)

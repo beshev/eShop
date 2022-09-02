@@ -26,6 +26,7 @@
         [AllowedExtensions]
         public IEnumerable<IFormFile> Images { get; set; }
 
+        // TODO: maybe this is redundant
         [MaxLength(DataConstants.ProductNameMaxLength)]
         public string ProductName { get; set; }
 
