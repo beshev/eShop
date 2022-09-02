@@ -1,0 +1,105 @@
+﻿@using EShop.Web.Infrastructure.Extensions
+@model AllProductsViewModel
+
+<h1 class="text-center">
+  Категориа @this.Model.Products.FirstOrDefault()?.ProductCategoryName
+</h1>
+
+
+@foreach (var product in this.Model.Products)
+{
+    <div class="col-lg-4">
+        <!-- blog post-->
+    <div class="card mb-4">
+            <a asp-area="" asp-controller="@GlobalConstants.ProductsController" asp-action="@GlobalConstants.DetailsAction" asp-route-productId="@product.Id"><img class="card-img-top" src="@product.ImageUrl" alt="..." /></a>
+            <div class="card-body">
+                <div class="small text-muted">@product.Name</div>
+                <h2 class="card-title h4">@product.Price.ToString("F2") лв</h2>
+                <p class="card-text">@product.Description.TrimIfLongerThan(32)</p>
+                <a class="btn btn-primary" asp-area="" asp-controller="@GlobalConstants.ProductsController" asp-action="@GlobalConstants.DetailsAction" asp-route-productId="@product.Id">Детайли →</a>
+            </div>
+        </div>
+    </div>
+}
+
+<nav aria-label="pagination">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @if(Model.HasPreviousPage == false) { <text>disabled</text> }">
+            <a class="page-link" 
+            asp-area=""
+            asp-controller="@Model.ForController" 
+            asp-action="@Model.ForAction" 
+            asp-route-id="@PagingViewModel.FirstPageNumber" 
+            asp-route-categoryId="@this.Model.CategoryId">
+                &laquo;&laquo;
+            </a>
+        </li>
+        <li class="page-item @if(Model.HasPreviousPage == false) {<text>disabled</text>}">
+            <a class="page-link" 
+            asp-area=""
+            asp-controller="@Model.ForController" 
+            asp-action="@Model.ForAction" 
+            asp-route-id="@Model.PreviousPageNumber"
+            asp-route-categoryId="@this.Model.CategoryId">
+                &laquo;
+            </a>
+        </li>
+        @for (int i = Model.PageNumber - 2; i < Model.PageNumber; i++)
+        {
+            if (i > 0)
+            {
+                <li class="page-item">
+                    <a class="page-link" 
+                    asp-area=""
+                    asp-controller="@Model.ForController" 
+                    asp-action="@Model.ForAction" 
+                    asp-route-id="@i"
+                    asp-route-categoryId="@this.Model.CategoryId">
+                        @i
+                    </a>
+                </li>
+            }
+        }
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">
+                @Model.PageNumber
+            </span>
+        </li>
+        @for (int i = Model.PageNumber + 1; i <= Model.PageNumber + 2; i++)
+        {
+            if (i <= Model.PagesCount)
+            {
+                <li class="page-item">
+                    <a class="page-link" 
+                    asp-area=""
+                    asp-controller="@Model.ForController" 
+                    asp-action="@Model.ForAction" 
+                    asp-route-id="@i"
+                    asp-route-categoryId="@this.Model.CategoryId">
+                        @i
+                    </a>
+                </li>
+            }
+        }
+        <li class="page-item @if(Model.HasNextPage == false) { <text>disabled</text> }">
+            <a class="page-link"
+            asp-area=""
+            asp-controller="@Model.ForController" 
+            asp-action="@Model.ForAction" 
+            asp-route-id="@Model.NextPageNumber"
+            asp-route-categoryId="@this.Model.CategoryId">
+                &raquo;
+            </a>
+        </li>
+        <li class="page-item @if(Model.HasNextPage == false) {<text>disabled</text>}">
+            <a class="page-link"
+            asp-area=""
+            asp-controller="@Model.ForController" 
+            asp-action="@Model.ForAction" 
+            asp-route-id="@Model.LastPageNumber"
+            asp-route-categoryId="@this.Model.CategoryId">
+                &raquo;&raquo;
+            </a>
+        </li>
+    </ul>
+</nav>

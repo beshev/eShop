@@ -21,6 +21,8 @@
 
         public Task<IEnumerable<TModel>> GetCategoriesAsync<TModel>();
 
-        Task RemoveCategoryAsync(int categoryId);
+        public Task<int> GetCountAsync(int? categoryId);
+
+        public Task RemoveCategoryAsync(int categoryId);
     }
 }

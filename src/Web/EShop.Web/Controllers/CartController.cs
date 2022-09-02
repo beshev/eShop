@@ -28,6 +28,7 @@
             return this.View(viewModel);
         }
 
+        [HttpPost]
         public async Task<IActionResult> AddItem(OrderItemInputModel model)
         {
             try
@@ -36,11 +37,6 @@
                 model.Price = decimal.Parse(this.TempData[GlobalConstants.NameOfOrderPrice] as string);
                 model.TemplateId = this.TempData[GlobalConstants.NameOfOrderTemplateId] as int?;
                 model.ProductId = this.TempData[GlobalConstants.NameOfOrderProductId] as int?;
-
-                if (model.TemplateId is null || model.ProductId is null)
-                {
-                    return this.NotFound();
-                }
 
                 var cartItems = this.Session.GetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart) ?? new List<ShoppingCartModel>();
                 var cartItem = await this.cartService.MapCartModelAsync(model);

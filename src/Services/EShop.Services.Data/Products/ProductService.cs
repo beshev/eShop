@@ -94,6 +94,19 @@
             .To<TModel>()
             .ToListAsync();
 
+        public async Task<int> GetCountAsync(int? categoryId)
+        {
+            var query = this.productCategoryRepo
+                .AllAsNoTracking();
+
+            if (categoryId.HasValue)
+            {
+                query = query.Where(x => x.Id.Equals(categoryId.Value));
+            }
+
+            return await query.CountAsync();
+        }
+
         public async Task RemoveCategoryAsync(int categoryId)
         {
             var category = await this.productCategoryRepo

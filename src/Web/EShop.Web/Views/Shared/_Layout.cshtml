@@ -28,6 +28,16 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="dropdown nav-item">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Продуки:
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <vc:product-categories></vc:product-categories>
+                            </li>
+                        </ul>
+                    </li>
                     @if (this.User.IsInRole("Administrator"))
                     {
                         <li class="nav-item"><a class="nav-link" asp-area="Administration" asp-controller="Dashboard" asp-action="Index">Admin panel</a></li>

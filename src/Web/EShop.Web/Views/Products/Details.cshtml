@@ -1,0 +1,23 @@
+﻿@model ProductDetailsModel
+
+<div class="col-lg-6">
+    <div class="card mb-4">
+        <img class="card-img-top" src="@this.Model.ImageUrl" alt="..." />
+        <div class="card-body">
+            <div class="small text-muted">@this.Model.Name</div>
+            <h2 class="card-title">@this.Model.Price.ToString("F2") лв</h2>
+            <p class="card-text">
+                @this.Model.Description
+            </p>
+        </div>
+    </div>
+</div>
+
+<vc:order-item
+    template-id="null"
+    product-id="@Model.Id"
+    price="@this.Model.Price" 
+    product-name="@this.Model.Name" 
+    has-custom-text="@this.Model.HasCustomText" 
+    images-count="0">
+</vc:order-item>
