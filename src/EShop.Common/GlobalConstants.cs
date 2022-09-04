@@ -77,6 +77,8 @@
         // Categories
         public const string NameOfCategory = "Категория";
 
+        public const string NameOfSubCategory = "Под категориа";
+
         // Template
         public const string NameOfTemplates = "Темплейти";
 

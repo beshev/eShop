@@ -1,0 +1,11 @@
+﻿@using EShop.Web.ViewModels.Products
+@model IEnumerable<SelectViewModel>
+
+<div class="form-group">
+    <label>Под категории</label>
+    <select name="SubCategoryId"
+            class="form-select"
+            asp-items="@(new SelectList(Model, nameof(SelectViewModel.Id), nameof(SelectViewModel.Name)))">
+            <option value="">Няма</option>
+    </select>
+</div>

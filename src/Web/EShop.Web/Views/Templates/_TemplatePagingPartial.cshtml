@@ -8,7 +8,7 @@
             asp-controller="@Model.ForController" 
             asp-action="@Model.ForAction" 
             asp-route-id="@PagingViewModel.FirstPageNumber" 
-            asp-route-subCategoryId=@null
+            asp-route-subCategoryId=@this.Model.SubCategoryId
             asp-route-categoryId="@this.Model.CategoryId">
                 &laquo;&laquo;
             </a>
@@ -19,7 +19,7 @@
             asp-controller="@Model.ForController" 
             asp-action="@Model.ForAction" 
             asp-route-id="@Model.PreviousPageNumber"
-            asp-route-subCategoryId=@null
+            asp-route-subCategoryId=@this.Model.SubCategoryId
             asp-route-categoryId="@this.Model.CategoryId">
                 &laquo;
             </a>
@@ -34,7 +34,7 @@
                     asp-controller="@Model.ForController" 
                     asp-action="@Model.ForAction" 
                     asp-route-id="@i"
-                    asp-route-subCategoryId=@null 
+                    asp-route-subCategoryId=@this.Model.SubCategoryId 
                     asp-route-categoryId="@this.Model.CategoryId">
                         @i
                     </a>
@@ -56,7 +56,7 @@
                     asp-controller="@Model.ForController" 
                     asp-action="@Model.ForAction" 
                     asp-route-id="@i"
-                    asp-route-subCategoryId=@null 
+                    asp-route-subCategoryId=@this.Model.SubCategoryId 
                     asp-route-categoryId="@this.Model.CategoryId">
                         @i
                     </a>
@@ -69,7 +69,7 @@
             asp-controller="@Model.ForController" 
             asp-action="@Model.ForAction" 
             asp-route-id="@Model.NextPageNumber"
-            asp-route-subCategoryId=@null
+            asp-route-subCategoryId=@this.Model.SubCategoryId
             asp-route-categoryId="@this.Model.CategoryId">
                 &raquo;
             </a>
@@ -80,7 +80,7 @@
             asp-controller="@Model.ForController" 
             asp-action="@Model.ForAction" 
             asp-route-id="@Model.LastPageNumber"
-            asp-route-subCategoryId=@null
+            asp-route-subCategoryId=@this.Model.SubCategoryId
             asp-route-categoryId="@this.Model.CategoryId">
                 &raquo;&raquo;
             </a>

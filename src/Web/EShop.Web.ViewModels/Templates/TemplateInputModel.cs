@@ -37,8 +37,7 @@
         [Display(Name = GlobalConstants.DisplayIsBaseModel)]
         public bool IsBaseModel { get; set; }
 
-        [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
-        public int CategoryId { get; set; }
+        public int? SubCategoryId { get; set; }
 
         [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
         public IEnumerable<int> CategoriesIds { get; set; }

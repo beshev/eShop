@@ -16,22 +16,25 @@
     {
         private readonly IRepository<Template> templateRepo;
         private readonly IRepository<TemplateCategory> templateCategoriesRepo;
+        private readonly IRepository<TemplateSubCategory> templateSubCategoriesRepo;
         private readonly ICloudinaryService cloudinaryService;
 
         public TemplateService(
             IRepository<Template> templateRepo,
             IRepository<TemplateCategory> templateCategoriesRepo,
+            IRepository<TemplateSubCategory> templateSubCategoriesRepo,
             ICloudinaryService cloudinaryService)
         {
             this.templateRepo = templateRepo;
             this.templateCategoriesRepo = templateCategoriesRepo;
+            this.templateSubCategoriesRepo = templateSubCategoriesRepo;
             this.cloudinaryService = cloudinaryService;
         }
 
-        public async Task AddAsync(string name, string description, decimal price, IFormFile image, int imagesFixedCount, bool isBaseModel, bool hasCustomText, int templateCategoryId, IEnumerable<int> categoriesIds)
+        public async Task AddAsync(string name, string description, decimal price, IFormFile image, int imagesFixedCount, bool isBaseModel, bool hasCustomText, int? subCategory, IEnumerable<int> categoriesIds)
         {
             var categories = await (from categoriesTable in this.templateCategoriesRepo.All()
-                                        where categoriesIds.Any(id => categoriesTable.Id.Equals(id))
+                                    where categoriesIds.Any(id => categoriesTable.Id.Equals(id))
                                     select categoriesTable).ToListAsync();
 
             var template = new Template
@@ -40,7 +43,7 @@
                 Description = description,
                 Price = price,
                 ImagesFixedCount = imagesFixedCount,
-                TemplateCategoryId = templateCategoryId,
+                SubCategoryId = subCategory,
                 HasCustomText = hasCustomText,
                 IsBaseModel = isBaseModel,
                 ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.TemplateCloundFolderName, name)),
@@ -62,8 +65,7 @@
 
             if (subCategoryId.HasValue)
             {
-                // TODO: Add subcategory
-                // templates = templates.Where(x => x.TemplateCategories.Id.Equals(categoryId));
+                templates = templates.Where(x => x.SubCategoryId.Equals(subCategoryId));
             }
 
             if (take.HasValue)
@@ -87,7 +89,7 @@
             if (tempalteIds is not null && tempalteIds.Any())
             {
                 templateCategory.Templates = await (from templates in this.templateRepo.All()
-                                                        where tempalteIds.Any(id => templates.Id.Equals(id))
+                                                    where tempalteIds.Any(id => templates.Id.Equals(id))
                                                     select templates).ToListAsync();
             }
 
@@ -146,8 +148,7 @@
 
             if (subCategoryId.HasValue)
             {
-                // TODO: Add subcategory
-                // uery = query.Where(template => template.TemplateCategoryId.Equals(subCategoryId.Value));
+                query = query.Where(template => template.SubCategoryId.Equals(subCategoryId.Value));
             }
 
             return await query.CountAsync();
@@ -159,5 +160,27 @@
             .Where(x => x.Id.Equals(categoryId))
             .To<TModel>()
             .FirstOrDefaultAsync();
+
+        public async Task CreateSubCategoryAsync(string name)
+        {
+            await this.templateSubCategoriesRepo.AddAsync(new TemplateSubCategory { Name = name });
+            await this.templateSubCategoriesRepo.SaveChangesAsync();
+        }
+
+        public async Task RemoveSubCategoryAsync(int categoryId)
+        {
+            var category = await this.templateSubCategoriesRepo
+                  .All()
+                  .FirstOrDefaultAsync(x => x.Id.Equals(categoryId));
+
+            this.templateSubCategoriesRepo.Delete(category);
+            await this.templateSubCategoriesRepo.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<TModel>> GetAllSubCategoriesAsync<TModel>()
+            => await this.templateSubCategoriesRepo
+            .AllAsNoTracking()
+            .To<TModel>()
+            .ToListAsync();
     }
 }

@@ -5,9 +5,7 @@
     using System.Threading.Tasks;
 
     using EShop.Common;
-    using EShop.Services.Data.Products;
     using EShop.Services.Data.Templates;
-    using EShop.Web.ViewModels.Products;
     using EShop.Web.ViewModels.Templates;
     using Microsoft.AspNetCore.Mvc;
 
@@ -49,6 +47,7 @@
                 Category = await this.templateService.GetCategoryAsync<TemplateCategoryViewModel>(categoryId.Value),
                 PageNumber = id,
                 PagesCount = pagesCount,
+                SubCategoryId = subCategoryId,
                 ForAction = nameof(this.All),
                 ForController = this.GetType().Name.Replace(nameof(Controller), string.Empty),
                 Templates = await this.templateService.GetAllAsync<TemplateBaseViewModel>(categoryId, subCategoryId, skip, TemplatesPerPage),

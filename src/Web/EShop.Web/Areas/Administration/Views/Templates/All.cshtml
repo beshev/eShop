@@ -5,9 +5,9 @@
 }
 
 <div class="row mb-2">
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-4 col-sm-12 text-center">
         <h5>Създай категория</h5>
-        <form asp-area="Administration" asp-controller="Templates" asp-action="AddCategory" class="col-md-6">
+        <form asp-area="Administration" asp-controller="Templates" asp-action="AddCategory">
             <span class="text-danger">@this.TempData[GlobalConstants.NameOfCategory]</span>
 
             <div class="form-group">
@@ -27,15 +27,35 @@
         </form>
     </div>
 
-    <div class="col-md-3">
-        <form asp-area="Administration" asp-controller="Templates" asp-action="RemoveCategory" class="col-md-6">
+    <div class="col-md-4 text-center">
+        <form asp-area="Administration" asp-controller="Templates" asp-action="RemoveCategory">
             <div class="form-grup">
                 <label>Категории</label>
                 <select name="categoryId" class="form-select">
                     <vc:categories-select is-for-products="false"></vc:categories-select>
                 </select>
             </div>
-            <input type="submit" value="Премахни" class="btn btn-danger" />
+            <input type="submit" value="Премахни" class="btn btn-danger mt-2" />
+        </form>
+
+        <form asp-area="Administration" asp-controller="Templates" asp-action="RemoveSubCategory">
+            <vc:template-sub-categories category-id=0></vc:template-sub-categories>
+            <input type="submit" value="Премахни" class="btn btn-danger mt-2" />
+        </form>
+    </div>
+
+    <div class="col-md-4 text-center">
+        <h5>Създай под категория</h5>
+        <form asp-area="Administration" asp-controller="Templates" asp-action="AddSubCategory">
+            <span class="text-danger">@this.TempData[GlobalConstants.NameOfSubCategory]</span>
+
+            <div class="form-group">
+                <label class="d-block">Под категория</label>
+                <input name="Name" />
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Създай" />
+            </div>
         </form>
     </div>
 </div>

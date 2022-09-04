@@ -32,7 +32,7 @@
                 return this.View(model);
             }
 
-            await this.templateService.AddAsync(model.Name, model.Description, model.Price, model.Image, model.ImagesFixedCount, model.IsBaseModel, model.HasCustomText, model.CategoryId, model.CategoriesIds);
+            await this.templateService.AddAsync(model.Name, model.Description, model.Price, model.Image, model.ImagesFixedCount, model.IsBaseModel, model.HasCustomText, model.SubCategoryId, model.CategoriesIds);
             return this.RedirectToAction(nameof(this.All));
         }
 
@@ -70,6 +70,23 @@
         public async Task<IActionResult> RemoveCategory(int categoryId)
         {
             await this.templateService.RemoveCategoryAsync(categoryId);
+            return this.RedirectToAction(nameof(this.All));
+        }
+
+        [SetTempDataErrorsAttribute(GlobalConstants.NameOfSubCategory)]
+        public async Task<IActionResult> AddSubCategory(CategoryInputModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                await this.templateService.CreateSubCategoryAsync(model.Name);
+            }
+
+            return this.RedirectToAction(nameof(this.All));
+        }
+
+        public async Task<IActionResult> RemoveSubCategory(int categoryId)
+        {
+            await this.templateService.RemoveSubCategoryAsync(categoryId);
             return this.RedirectToAction(nameof(this.All));
         }
     }

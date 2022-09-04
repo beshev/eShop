@@ -6,6 +6,8 @@
     {
         public TemplateCategoryViewModel Category { get; set; }
 
+        public int? SubCategoryId { get; set; }
+
         public IEnumerable<TemplateBaseViewModel> Templates { get; set; }
     }
 }

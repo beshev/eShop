@@ -9,6 +9,7 @@
     public class SelectViewModel :
         IMapFrom<ProductCategory>,
         IMapFrom<TemplateCategory>,
+        IMapFrom<TemplateSubCategory>,
         IMapFrom<Template>
     {
         public int Id { get; set; }

@@ -32,7 +32,9 @@
 
         public bool IsBaseModel { get; set; }
 
-        public int TemplateCategoryId { get; set; }
+        public int? SubCategoryId { get; set; }
+
+        public TemplateSubCategory SubCategory { get; set; }
 
         public virtual ICollection<TemplateCategory> TemplateCategories { get; set; }
 

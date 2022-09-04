@@ -1,0 +1,13 @@
+﻿@using EShop.Web.ViewModels.Products
+@model IEnumerable<SelectViewModel>
+
+
+@foreach (var item in this.Model)
+{
+    <a asp-area=""
+   asp-controller="@GlobalConstants.TemplatesController"
+   asp-action="@GlobalConstants.AllAction"
+   asp-route-categoryId="@this.ViewData[GlobalConstants.NameOfCategory]"
+   asp-route-subCategoryId="@item.Id"
+   asp-route-id="1">@item.Name</a>
+}
