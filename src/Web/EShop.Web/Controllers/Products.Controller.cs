@@ -33,30 +33,22 @@
             {
                 return this.NotFound();
             }
-
-            try
+            var skip = (id - 1) * ProductsPerPage;
+            var viewModel = new AllProductsViewModel
             {
-                var skip = (id - 1) * ProductsPerPage;
-                var viewModel = new AllProductsViewModel
-                {
-                    PageNumber = id,
-                    PagesCount = pagesCount,
-                    ForAction = nameof(this.All),
-                    ForController = this.GetType().Name.Replace(nameof(Controller), string.Empty),
-                    Products = await this.productService.GetAllAsync<ProductViewModel>(categoryId),
-                };
+                PageNumber = id,
+                PagesCount = pagesCount,
+                ForAction = nameof(this.All),
+                ForController = this.GetType().Name.Replace(nameof(Controller), string.Empty),
+                Products = await this.productService.GetAllAsync<ProductViewModel>(categoryId),
+            };
 
-                if (viewModel.Products.Any() == false)
-                {
-                    return this.NotFound();
-                }
-
-                return this.View(viewModel);
-            }
-            catch (Exception)
+            if (viewModel.Products.Any() == false)
             {
-                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController);
+                return this.NotFound();
             }
+
+            return this.View(viewModel);
         }
 
         public async Task<IActionResult> Details(int productId)

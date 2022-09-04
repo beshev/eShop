@@ -41,19 +41,12 @@
                 OrderItems = this.Session.GetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart),
             };
 
-            try
-            {
-                await this.ordersService.ComplateOrderAsync(orderModel);
-                this.Session.Clear();
+            await this.ordersService.ComplateOrderAsync(orderModel);
+            this.Session.Clear();
 
-                this.TempData.Put(GlobalConstants.ComplatedOrder, orderModel);
+            this.TempData.Put(GlobalConstants.ComplatedOrder, orderModel);
 
-                return this.RedirectToAction(nameof(this.ComplatedOrder));
-            }
-            catch (Exception)
-            {
-                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController);
-            }
+            return this.RedirectToAction(nameof(this.ComplatedOrder));
         }
 
         public IActionResult ComplatedOrder()

@@ -31,42 +31,28 @@
         [HttpPost]
         public async Task<IActionResult> AddItem(OrderItemInputModel model, string returnUrl)
         {
-            try
-            {
-                model.ProductName = this.TempData[GlobalConstants.NameOfOrderProductName] as string;
-                model.Price = decimal.Parse(this.TempData[GlobalConstants.NameOfOrderPrice] as string);
-                model.TemplateId = this.TempData[GlobalConstants.NameOfOrderTemplateId] as int?;
-                model.ProductId = this.TempData[GlobalConstants.NameOfOrderProductId] as int?;
+            model.ProductName = this.TempData[GlobalConstants.NameOfOrderProductName] as string;
+            model.Price = decimal.Parse(this.TempData[GlobalConstants.NameOfOrderPrice] as string);
+            model.TemplateId = this.TempData[GlobalConstants.NameOfOrderTemplateId] as int?;
+            model.ProductId = this.TempData[GlobalConstants.NameOfOrderProductId] as int?;
 
-                var cartItems = this.Session.GetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart) ?? new List<ShoppingCartModel>();
-                var cartItem = await this.cartService.MapCartModelAsync(model);
-                cartItems.Add(cartItem);
+            var cartItems = this.Session.GetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart) ?? new List<ShoppingCartModel>();
+            var cartItem = await this.cartService.MapCartModelAsync(model);
+            cartItems.Add(cartItem);
 
-                this.Session.SetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart, cartItems);
+            this.Session.SetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart, cartItems);
 
-                return this.Redirect(returnUrl);
-            }
-            catch (Exception)
-            {
-                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController);
-            }
+            return this.Redirect(returnUrl);
         }
 
         public IActionResult RemoveItem(string id)
         {
-            try
-            {
-                var cartItems = this.Session.GetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart);
-                cartItems = cartItems.Where(x => x.Id.Equals(id) == false).ToList();
-                this.Session.SetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart, cartItems);
+            var cartItems = this.Session.GetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart);
+            cartItems = cartItems.Where(x => x.Id.Equals(id) == false).ToList();
+            this.Session.SetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart, cartItems);
 
-                // TODO: Use constnas
-                return this.RedirectToAction("Items", "Cart");
-            }
-            catch (Exception)
-            {
-                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController);
-            }
+            // TODO: Use constnas
+            return this.RedirectToAction("Items", "Cart");
         }
     }
 }

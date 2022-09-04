@@ -32,15 +32,8 @@
                 return this.View(model);
             }
 
-            try
-            {
-                await this.templateService.AddAsync(model.Name, model.Description, model.Price, model.Image, model.ImagesFixedCount, model.IsBaseModel, model.HasCustomText, model.CategoryId, model.CategoriesIds);
-                return this.RedirectToAction(nameof(this.All));
-            }
-            catch (Exception)
-            {
-                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController, new { Area = string.Empty });
-            }
+            await this.templateService.AddAsync(model.Name, model.Description, model.Price, model.Image, model.ImagesFixedCount, model.IsBaseModel, model.HasCustomText, model.CategoryId, model.CategoriesIds);
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public async Task<IActionResult> All()
@@ -76,15 +69,8 @@
 
         public async Task<IActionResult> RemoveCategory(int categoryId)
         {
-            try
-            {
-                await this.templateService.RemoveCategoryAsync(categoryId);
-                return this.RedirectToAction(nameof(this.All));
-            }
-            catch (Exception)
-            {
-                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController, new { Area = string.Empty });
-            }
+            await this.templateService.RemoveCategoryAsync(categoryId);
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

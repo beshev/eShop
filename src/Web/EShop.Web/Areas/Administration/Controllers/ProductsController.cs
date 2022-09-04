@@ -39,28 +39,14 @@
                 return this.View(model);
             }
 
-            try
-            {
-                await this.productService.AddAsync(model.Name, model.Price, model.Description, model.CategoryId, model.HasCustomText, model.Image);
-                return this.RedirectToAction(nameof(this.All));
-            }
-            catch (Exception)
-            {
-                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController, new { Area = string.Empty });
-            }
+            await this.productService.AddAsync(model.Name, model.Price, model.Description, model.CategoryId, model.HasCustomText, model.Image);
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                await this.productService.DeleteByIdAsync(id);
-                return this.RedirectToAction(nameof(this.All));
-            }
-            catch (Exception)
-            {
-                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController, new { Area = string.Empty });
-            }
+            await this.productService.DeleteByIdAsync(id);
+            return this.RedirectToAction(nameof(this.All));
         }
 
         [SetTempDataErrorsAttribute(GlobalConstants.NameOfCategory)]
@@ -76,15 +62,8 @@
 
         public async Task<IActionResult> RemoveCategory(int categoryId)
         {
-            try
-            {
-                await this.productService.RemoveCategoryAsync(categoryId);
-                return this.RedirectToAction(nameof(this.All));
-            }
-            catch (Exception)
-            {
-                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController, new { Area = string.Empty });
-            }
+            await this.productService.RemoveCategoryAsync(categoryId);
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

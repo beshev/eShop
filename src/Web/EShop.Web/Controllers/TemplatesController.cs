@@ -42,31 +42,24 @@
                 return this.NotFound();
             }
 
-            try
+            var skip = (id - 1) * TemplatesPerPage;
+            var viewModel = new AllTemplatesViewModel
             {
-                var skip = (id - 1) * TemplatesPerPage;
-                var viewModel = new AllTemplatesViewModel
-                {
-                    CategoryId = categoryId,
-                    Category = await this.templateService.GetCategoryAsync<TemplateCategoryViewModel>(categoryId.Value),
-                    PageNumber = id,
-                    PagesCount = pagesCount,
-                    ForAction = nameof(this.All),
-                    ForController = this.GetType().Name.Replace(nameof(Controller), string.Empty),
-                    Templates = await this.templateService.GetAllAsync<TemplateBaseViewModel>(categoryId, subCategoryId, skip, TemplatesPerPage),
-                };
+                CategoryId = categoryId,
+                Category = await this.templateService.GetCategoryAsync<TemplateCategoryViewModel>(categoryId.Value),
+                PageNumber = id,
+                PagesCount = pagesCount,
+                ForAction = nameof(this.All),
+                ForController = this.GetType().Name.Replace(nameof(Controller), string.Empty),
+                Templates = await this.templateService.GetAllAsync<TemplateBaseViewModel>(categoryId, subCategoryId, skip, TemplatesPerPage),
+            };
 
-                if (viewModel.Templates.Any() == false)
-                {
-                    return this.NotFound();
-                }
-
-                return this.View(viewModel);
-            }
-            catch (Exception)
+            if (viewModel.Templates.Any() == false)
             {
-                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController);
+                return this.NotFound();
             }
+
+            return this.View(viewModel);
         }
 
         public async Task<IActionResult> Details(int templateId, int categoryId)
@@ -76,19 +69,12 @@
                 return this.NotFound();
             }
 
-            try
-            {
-                var viewModel = await this.templateService.GetByIdAsync<TemplateViewModel>(templateId);
-                viewModel.CategoryId = categoryId;
+            var viewModel = await this.templateService.GetByIdAsync<TemplateViewModel>(templateId);
+            viewModel.CategoryId = categoryId;
 
-                this.ViewData[GlobalConstants.ReturnUrlKey] = this.ReturnUrl;
+            this.ViewData[GlobalConstants.ReturnUrlKey] = this.ReturnUrl;
 
-                return this.View(viewModel);
-            }
-            catch (Exception)
-            {
-                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController);
-            }
+            return this.View(viewModel);
         }
     }
 }
