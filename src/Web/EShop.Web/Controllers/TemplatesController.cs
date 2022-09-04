@@ -69,7 +69,10 @@
                 return this.NotFound();
             }
 
-            var viewModel = await this.templateService.GetByIdAsync<TemplateViewModel>(templateId);
+            var viewModel = await this.templateService.GetByIdAsync<TemplateDetailsModel>(templateId);
+            viewModel.Category = await this.templateService.GetCategoryAsync<TemplateCategoryViewModel>(categoryId);
+
+            // TODO - This is for paginaton chek if there is a way to removed it
             viewModel.CategoryId = categoryId;
 
             this.ViewData[GlobalConstants.ReturnUrlKey] = this.ReturnUrl;

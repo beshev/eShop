@@ -76,11 +76,12 @@
                 .ToListAsync();
         }
 
-        public async Task CreateCategoryAsync(string name, IEnumerable<int> tempalteIds)
+        public async Task CreateCategoryAsync(string name, decimal price, IEnumerable<int> tempalteIds)
         {
             var templateCategory = new TemplateCategory
             {
                 Name = name,
+                Price = price,
             };
 
             if (tempalteIds is not null && tempalteIds.Any())

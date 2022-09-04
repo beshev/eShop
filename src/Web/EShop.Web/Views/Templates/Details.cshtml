@@ -1,11 +1,15 @@
-﻿@model TemplateViewModel
+﻿@model TemplateDetailsModel
+
+@{
+    var productName = $"{this.Model.Name} - {this.Model.Category.Name}";
+}
 
 <div class="col-lg-6">
     <div class="card mb-4">
         <img class="card-img-top" src="@this.Model.ImageUrl" alt="..." />
         <div class="card-body">
             <div class="small text-muted">@this.Model.Name</div>
-            <h2 class="card-title">@this.Model.Price.ToString("F2") лв</h2>
+            <h2 class="card-title">@((this.Model.Price + this.Model.Category.Price).ToString("F2")) лв</h2>
            @* <p class="card-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean auctor est in purus consectetur, quis facilisis velit posuere. Pellentesque nec sapien non ligula aliquet scelerisque. Quisque nec tortor ligula. Integer nec pharetra magna, id suscipit purus. Ut nec metus pretium nunc consectetur consectetur ac eu sapien. Nunc sed diam mauris. Vestibulum egestas sem sit amet ligula molestie, non porta nisl tempus. Donec a massa non mauris facilisis congue non vitae lorem. In suscipit, lacus in condimentum pulvinar, turpis velit gravida tortor, vitae tempor nunc lacus a risus. Quisque non nisl a leo rutrum tincidunt. Vestibulum quis nulla dictum, consequat mauris ut, porttitor orci.
                 Phasellus vitae pretium est, sit amet interdum felis. Aliquam vestibulum tortor diam, sit amet iaculis velit sollicitudin nec. Cras ac varius metus, at convallis ipsum. Nulla vel nisi mi. Vivamus quis erat cursus, lobortis enim a, ultricies enim. Sed nulla nisi, venenatis eu blandit condimentum, congue convallis enim. Praesent blandit condimentum venenatis. Suspendisse sed nibh imperdiet, interdum orci sit amet, pellentesque nunc. Donec tincidunt erat non felis vestibulum finibus. Curabitur maximus elit id arcu facilisis sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla volutpat tortor vulputate sagittis consequat.
@@ -19,9 +23,9 @@
 
 <vc:order-item
     template-id="@Model.Id"
-    product-id="@Model.CategoryId"
+    product-id="@null"
     price="@this.Model.Price" 
-    product-name="@this.Model.Name" 
+    product-name="@productName" 
     has-custom-text="@this.Model.HasCustomText" 
     images-count="@this.Model.ImagesFixedCount"
     return-url="@this.ViewData[GlobalConstants.ReturnUrlKey]">

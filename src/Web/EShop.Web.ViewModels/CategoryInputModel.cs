@@ -9,6 +9,8 @@
     {
         public string Name { get; set; }
 
+        public decimal Price { get; set; }
+
         public IEnumerable<int> TemplatesIds { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
