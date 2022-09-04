@@ -1,7 +1,7 @@
 ﻿@model AllTemplatesViewModel
 
 <h1 class="text-center">
-   Темплейти за <a href="@this.Model.Product.ImageUrl" target="_blank">@this.Model.Product.Name</a>
+   Темплейти за TODO !!
 </h1>
 
 
@@ -10,12 +10,12 @@
     <div class="col-lg-4">
         <!-- blog post-->
     <div class="card mb-4">
-            <a asp-area="" asp-controller="Templates" asp-action="Details" asp-route-templateId="@template.Id" asp-route-productId="@Model.Product.Id"><img class="card-img-top" src="@template.ImageUrl" alt="..." /></a>
+            <a asp-area="" asp-controller="Templates" asp-action="Details" asp-route-templateId="@template.Id" asp-route-categoryId="@Model.Category.Id"><img class="card-img-top" src="@template.ImageUrl" alt="..." /></a>
             <div class="card-body">
                 <div class="small text-muted">@template.Name</div>
-                <h2 class="card-title h4">@((template.Price + this.Model.Product.Price).ToString("F2")) лв</h2>
+                <h2 class="card-title h4">@((template.Price + this.Model.Category.Price).ToString("F2")) лв</h2>
                 <p class="card-text">@template.Description</p>
-                <a class="btn btn-primary" asp-area="" asp-controller="Templates" asp-action="Details" asp-route-templateId="@template.Id" asp-route-productId="@Model.Product.Id">Детайли →</a>
+                <a class="btn btn-primary" asp-area="" asp-controller="Templates" asp-action="Details" asp-route-templateId="@template.Id" asp-route-categoryId="@Model.Category.Id">Детайли →</a>
             </div>
         </div>
     </div>

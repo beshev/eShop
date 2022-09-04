@@ -151,5 +151,12 @@
 
             return await query.CountAsync();
         }
+
+        public async Task<TModel> GetCategoryAsync<TModel>(int categoryId)
+            => await this.templateCategoriesRepo
+            .AllAsNoTracking()
+            .Where(x => x.Id.Equals(categoryId))
+            .To<TModel>()
+            .FirstOrDefaultAsync();
     }
 }
