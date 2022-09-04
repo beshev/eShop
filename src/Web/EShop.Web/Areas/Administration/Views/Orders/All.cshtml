@@ -33,7 +33,7 @@
                     @order.CreatedOn.ToLocalTime()
                 </td>
                 <td>
-                    <strong>@order.TotalPrice</strong>
+                    <strong>@order.TotalPrice.ToString("F2") лв</strong>
                 </td>
                 <td>
                     <a asp-area="@GlobalConstants.AdministrationArea"

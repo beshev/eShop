@@ -28,7 +28,7 @@
             @this.Model.UserInfo.Mall
         </li>
     }
-    <li>Цена на поръчката <strong>без доставката</strong>: <span class="h6">@this.Model.OrderItems.Sum(x => x.Price)</span></li>
+    <li>Цена на поръчката <strong>без доставката</strong>: <span class="h6">@this.Model.OrderItems.Sum(x => x.Price * x.Quantity)</span></li>
     <li>Брой продукти: <span class="h6">@this.Model.OrderItems.Count()</span></li>
 </ul>
 

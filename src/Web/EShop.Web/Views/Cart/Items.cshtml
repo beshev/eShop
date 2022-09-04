@@ -24,9 +24,6 @@
             <th>
                 Брой снимки
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -38,7 +35,7 @@
                     @Html.DisplayFor(modelItem => item.ProductName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Price)
+                    @item.Price x @item.Quantity = @((item.Price * item.Quantity).ToString("F2"))
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
@@ -50,9 +47,6 @@
                     @item.Images.Count()
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
                     <a asp-area="" asp-action="RemoveItem" asp-controller="Cart" asp-route-id="@item.Id">Премахни</a>
                 </td>
             </tr>
@@ -61,7 +55,7 @@
 </table>
 
 <h5>
-    Total price: @this.Model.Sum(x => x.Price)
+    Общо: @this.Model.Sum(x => x.Price * x.Quantity) лв
 </h5>
 <strong class="text-danger">Внимание! Доставката не е вкючена в крайната цена!</strong>
 

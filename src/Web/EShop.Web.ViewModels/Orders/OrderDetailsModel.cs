@@ -10,7 +10,7 @@
 
     public class OrderDetailsModel : IMapFrom<Order>
     {
-        public decimal TotalPrice => this.OrderItems.Sum(x => x.Price);
+        public decimal TotalPrice => this.OrderItems.Sum(x => x.Price * x.Quantity);
 
         public UserInfoInputModel UserInfo { get; set; }
 

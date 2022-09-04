@@ -19,7 +19,7 @@
             this.productService = productService;
         }
 
-        public async Task<IActionResult> All(int categoryId, int id = 1)
+        public async Task<IActionResult> All(int? categoryId, int id = 1)
         {
             if (id < 0)
             {
@@ -33,6 +33,7 @@
             {
                 return this.NotFound();
             }
+
             var skip = (id - 1) * ProductsPerPage;
             var viewModel = new AllProductsViewModel
             {

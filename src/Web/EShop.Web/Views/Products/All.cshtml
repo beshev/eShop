@@ -15,7 +15,7 @@
             <div class="card-body">
                 <div class="small text-muted">@product.Name</div>
                 <h2 class="card-title h4">@product.Price.ToString("F2") лв</h2>
-                <p class="card-text">@product.Description.TrimIfLongerThan(32)</p>
+                <p class="card-text">@product.Description.TrimIfLongerThan(32)...</p>
                 <a class="btn btn-primary" asp-area="" asp-controller="@GlobalConstants.ProductsController" asp-action="@GlobalConstants.DetailsAction" asp-route-productId="@product.Id">Детайли →</a>
             </div>
         </div>

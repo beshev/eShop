@@ -21,7 +21,7 @@
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Order, OrderViewModel>()
-                .ForMember(x => x.TotalPrice, src => src.MapFrom(x => x.OrderItems.Sum(x => x.Price)));
+                .ForMember(x => x.TotalPrice, src => src.MapFrom(x => x.OrderItems.Sum(x => x.Price * x.Quantity)));
         }
     }
 }

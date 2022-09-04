@@ -14,7 +14,7 @@
             @Html.DisplayNameFor(model => model.TotalPrice)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TotalPrice)
+            <h6>@Html.DisplayFor(model => model.TotalPrice) лв</h6>
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CreatedOn)
@@ -91,7 +91,7 @@
                 Price
             </dt>
             <dd class="col-sm-10">
-                @item.Price
+                @item.Price x @item.Quantity = @((item.Price * @item.Quantity).ToString("F2")) лв
             </dd>
             <dt class="col-sm-2">
                 Description
