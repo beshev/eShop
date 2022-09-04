@@ -41,6 +41,6 @@
         public int CategoryId { get; set; }
 
         [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
-        public IEnumerable<int> ProductsIds { get; set; }
+        public IEnumerable<int> CategoriesIds { get; set; }
     }
 }

@@ -34,7 +34,7 @@
 
             try
             {
-                await this.templateService.AddAsync(model.Name, model.Description, model.Price, model.Image, model.ImagesFixedCount, model.IsBaseModel, model.HasCustomText, model.CategoryId, model.ProductsIds);
+                await this.templateService.AddAsync(model.Name, model.Description, model.Price, model.Image, model.ImagesFixedCount, model.IsBaseModel, model.HasCustomText, model.CategoryId, model.CategoriesIds);
                 return this.RedirectToAction(nameof(this.All));
             }
             catch (Exception)
@@ -68,7 +68,7 @@
         {
             if (this.ModelState.IsValid)
             {
-                await this.templateService.CreateCategoryAsync(model.CategoryName);
+                await this.templateService.CreateCategoryAsync(model.Name, model.TemplatesIds);
             }
 
             return this.RedirectToAction(nameof(this.All));

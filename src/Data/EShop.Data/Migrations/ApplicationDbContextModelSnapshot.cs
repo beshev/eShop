@@ -284,35 +284,6 @@ namespace EShop.Data.Migrations
                     b.ToTable("ProductsCategories");
                 });
 
-            modelBuilder.Entity("EShop.Data.Models.ProductTemplate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TemplateId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("TemplateId");
-
-                    b.ToTable("ProductsTemplates");
-                });
-
             modelBuilder.Entity("EShop.Data.Models.Template", b =>
                 {
                     b.Property<int>("Id")
@@ -357,8 +328,6 @@ namespace EShop.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TemplateCategoryId");
-
                     b.ToTable("Templates");
                 });
 
@@ -380,6 +349,9 @@ namespace EShop.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -563,6 +535,21 @@ namespace EShop.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("TemplateTemplateCategory", b =>
+                {
+                    b.Property<int>("TemplateCategoriesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TemplatesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TemplateCategoriesId", "TemplatesId");
+
+                    b.HasIndex("TemplatesId");
+
+                    b.ToTable("TemplateTemplateCategory");
+                });
+
             modelBuilder.Entity("EShop.Data.Models.OrderItem", b =>
                 {
                     b.HasOne("EShop.Data.Models.Order", "Order")
@@ -595,36 +582,6 @@ namespace EShop.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("ProductCategory");
-                });
-
-            modelBuilder.Entity("EShop.Data.Models.ProductTemplate", b =>
-                {
-                    b.HasOne("EShop.Data.Models.Product", "Prodcut")
-                        .WithMany("ProductTemplates")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EShop.Data.Models.Template", "Template")
-                        .WithMany("TemplateProducts")
-                        .HasForeignKey("TemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Prodcut");
-
-                    b.Navigation("Template");
-                });
-
-            modelBuilder.Entity("EShop.Data.Models.Template", b =>
-                {
-                    b.HasOne("EShop.Data.Models.TemplateCategory", "TemplateCategory")
-                        .WithMany("Templates")
-                        .HasForeignKey("TemplateCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TemplateCategory");
                 });
 
             modelBuilder.Entity("EShop.Data.Models.UserInfo", b =>
@@ -689,6 +646,21 @@ namespace EShop.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TemplateTemplateCategory", b =>
+                {
+                    b.HasOne("EShop.Data.Models.TemplateCategory", null)
+                        .WithMany()
+                        .HasForeignKey("TemplateCategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EShop.Data.Models.Template", null)
+                        .WithMany()
+                        .HasForeignKey("TemplatesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("EShop.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Claims");
@@ -708,8 +680,6 @@ namespace EShop.Data.Migrations
             modelBuilder.Entity("EShop.Data.Models.Product", b =>
                 {
                     b.Navigation("ProductOrders");
-
-                    b.Navigation("ProductTemplates");
                 });
 
             modelBuilder.Entity("EShop.Data.Models.ProductCategory", b =>
@@ -720,13 +690,6 @@ namespace EShop.Data.Migrations
             modelBuilder.Entity("EShop.Data.Models.Template", b =>
                 {
                     b.Navigation("TemplateOrders");
-
-                    b.Navigation("TemplateProducts");
-                });
-
-            modelBuilder.Entity("EShop.Data.Models.TemplateCategory", b =>
-                {
-                    b.Navigation("Templates");
                 });
 #pragma warning restore 612, 618
         }

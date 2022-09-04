@@ -36,9 +36,12 @@
             <input asp-for="HasCustomText" type="checkbox" />
         </div>
 
-        <vc:categories-select is-for-products="true"></vc:categories-select>
-
-        <vc:template-select></vc:template-select>
+        <div class="form-grup">
+            <label>Категория</label>
+            <select name="CategoryId" class="form-select">
+                <vc:categories-select is-for-products="true"></vc:categories-select>
+            </select>
+        </div>
 
         <div class="form-grup" style="margin-top: 2%;">
             <input type="submit" class="btn btn-outline-dark" value="Add" />

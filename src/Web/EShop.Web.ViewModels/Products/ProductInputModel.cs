@@ -31,7 +31,5 @@
 
         [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
         public int CategoryId { get; set; }
-
-        public IEnumerable<int> TemplatesIds { get; set; }
     }
 }

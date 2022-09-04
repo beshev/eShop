@@ -10,7 +10,6 @@
     {
         public Product()
         {
-            this.ProductTemplates = new HashSet<ProductTemplate>();
             this.ProductOrders = new HashSet<OrderItem>();
         }
 
@@ -30,8 +29,6 @@
         public int ProductCategoryId { get; set; }
 
         public ProductCategory ProductCategory { get; set; }
-
-        public virtual IEnumerable<ProductTemplate> ProductTemplates { get; set; }
 
         public virtual IEnumerable<OrderItem> ProductOrders { get; set; }
     }

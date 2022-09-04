@@ -15,24 +15,25 @@
     public class TemplateService : ITemplateService
     {
         private readonly IRepository<Template> templateRepo;
-        private readonly IRepository<TemplateCategory> templateCategoryRepo;
-        private readonly IRepository<ProductTemplate> productTemplateRepo;
+        private readonly IRepository<TemplateCategory> templateCategoriesRepo;
         private readonly ICloudinaryService cloudinaryService;
 
         public TemplateService(
             IRepository<Template> templateRepo,
-            IRepository<TemplateCategory> templateCategoryRepo,
-            IRepository<ProductTemplate> productTemplateRepo,
+            IRepository<TemplateCategory> templateCategoriesRepo,
             ICloudinaryService cloudinaryService)
         {
             this.templateRepo = templateRepo;
-            this.templateCategoryRepo = templateCategoryRepo;
-            this.productTemplateRepo = productTemplateRepo;
+            this.templateCategoriesRepo = templateCategoriesRepo;
             this.cloudinaryService = cloudinaryService;
         }
 
-        public async Task AddAsync(string name, string description, decimal price, IFormFile image, int imagesFixedCount, bool isBaseModel, bool hasCustomText, int templateCategoryId, IEnumerable<int> productsIds)
+        public async Task AddAsync(string name, string description, decimal price, IFormFile image, int imagesFixedCount, bool isBaseModel, bool hasCustomText, int templateCategoryId, IEnumerable<int> categoriesIds)
         {
+            var categories = await (from categoriesTable in this.templateCategoriesRepo.All()
+                                        where categoriesIds.Any(id => categoriesTable.Id.Equals(id))
+                                    select categoriesTable).ToListAsync();
+
             var template = new Template
             {
                 Name = name,
@@ -43,28 +44,26 @@
                 HasCustomText = hasCustomText,
                 IsBaseModel = isBaseModel,
                 ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.TemplateCloundFolderName, name)),
-                TemplateProducts = productsIds.Select(productId => new ProductTemplate
-                {
-                    ProductId = productId,
-                }).ToList(),
+                TemplateCategories = categories,
             };
 
             await this.templateRepo.AddAsync(template);
             await this.templateRepo.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(int? productId = null, int? categoryId = null, int skip = 0, int? take = null)
+        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(int? categoryId = null, int? subCategoryId = null, int skip = 0, int? take = null)
         {
             var templates = this.templateRepo.AllAsNoTracking();
 
-            if (productId.HasValue)
-            {
-                templates = templates.Where(t => t.TemplateProducts.Any(tp => tp.ProductId.Equals(productId)));
-            }
-
             if (categoryId.HasValue)
             {
-                templates = templates.Where(x => x.TemplateCategory.Id.Equals(categoryId));
+                templates = templates.Where(t => t.TemplateCategories.Any(tp => tp.Id.Equals(categoryId)));
+            }
+
+            if (subCategoryId.HasValue)
+            {
+                // TODO: Add subcategory
+                // templates = templates.Where(x => x.TemplateCategories.Id.Equals(categoryId));
             }
 
             if (take.HasValue)
@@ -77,24 +76,36 @@
                 .ToListAsync();
         }
 
-        public async Task CreateCategoryAsync(string name)
+        public async Task CreateCategoryAsync(string name, IEnumerable<int> tempalteIds)
         {
-            await this.templateCategoryRepo.AddAsync(new TemplateCategory { Name = name });
-            await this.templateCategoryRepo.SaveChangesAsync();
+            var templateCategory = new TemplateCategory
+            {
+                Name = name,
+            };
+
+            if (tempalteIds is not null && tempalteIds.Any())
+            {
+                templateCategory.Templates = await (from templates in this.templateRepo.All()
+                                                        where tempalteIds.Any(id => templates.Id.Equals(id))
+                                                    select templates).ToListAsync();
+            }
+
+            await this.templateCategoriesRepo.AddAsync(templateCategory);
+            await this.templateCategoriesRepo.SaveChangesAsync();
         }
 
         public async Task RemoveCategoryAsync(int categoryId)
         {
-            var category = await this.templateCategoryRepo
+            var category = await this.templateCategoriesRepo
                 .All()
                 .FirstOrDefaultAsync(x => x.Id.Equals(categoryId));
 
-            this.templateCategoryRepo.Delete(category);
-            await this.templateCategoryRepo.SaveChangesAsync();
+            this.templateCategoriesRepo.Delete(category);
+            await this.templateCategoriesRepo.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<TModel>> GetCategoriesAsync<TModel>()
-         => await this.templateCategoryRepo
+         => await this.templateCategoriesRepo
             .AllAsNoTracking()
             .To<TModel>()
             .ToListAsync();
@@ -117,24 +128,25 @@
             await this.templateRepo.SaveChangesAsync();
         }
 
-        public async Task<bool> IsCompatibleWithProductAsync(int templateId, int productId)
-            => await this.productTemplateRepo
+        public async Task<bool> IsCompatibleWithProductAsync(int templateId, int categoryId)
+            => await this.templateCategoriesRepo
             .AllAsNoTracking()
-            .AnyAsync(x => x.ProductId.Equals(productId) && x.TemplateId.Equals(templateId));
+            .AnyAsync(c => c.Id.Equals(categoryId) && c.Templates.Any(t => t.Id.Equals(templateId)));
 
-        public async Task<int> GetCountAsync(int? productId = null, int? categoryId = null)
+        public async Task<int> GetCountAsync(int? categoryId = null, int? subCategoryId = null)
         {
             var query = this.templateRepo
             .AllAsNoTracking();
 
-            if (productId.HasValue)
-            {
-                query = query.Where(template => template.TemplateProducts.Any(x => x.ProductId.Equals(productId.Value)));
-            }
-
             if (categoryId.HasValue)
             {
-                query = query.Where(template => template.TemplateCategoryId.Equals(categoryId.Value));
+                query = query.Where(template => template.TemplateCategories.Any(x => x.Id.Equals(categoryId.Value)));
+            }
+
+            if (subCategoryId.HasValue)
+            {
+                // TODO: Add subcategory
+                // uery = query.Where(template => template.TemplateCategoryId.Equals(subCategoryId.Value));
             }
 
             return await query.CountAsync();

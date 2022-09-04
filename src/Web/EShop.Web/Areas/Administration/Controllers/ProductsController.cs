@@ -41,7 +41,7 @@
 
             try
             {
-                await this.productService.AddAsync(model.Name, model.Price, model.Description, model.CategoryId, model.HasCustomText, model.Image, model.TemplatesIds);
+                await this.productService.AddAsync(model.Name, model.Price, model.Description, model.CategoryId, model.HasCustomText, model.Image);
                 return this.RedirectToAction(nameof(this.All));
             }
             catch (Exception)
@@ -68,7 +68,7 @@
         {
             if (this.ModelState.IsValid)
             {
-                await this.productService.CreateCategoryAsync(model.CategoryName);
+                await this.productService.CreateCategoryAsync(model.Name);
             }
 
             return this.RedirectToAction(nameof(this.All));

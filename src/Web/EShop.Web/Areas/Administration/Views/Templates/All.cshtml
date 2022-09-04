@@ -4,45 +4,70 @@
     this.ViewData["Title"] = "Темплейти";
 }
 
-<a asp-area="Administration" asp-controller="Templates" asp-action="Add" class="btn btn-primary mb-2">Добави темплейт</a>
-<form asp-area="Administration" asp-controller="Templates" asp-action="AddCategory">
-    <span class="text-danger">@this.TempData[GlobalConstants.NameOfCategory]</span>
+<div class="row mb-2">
+    <div class="col-md-4 col-sm-12">
+        <h5>Създай категория</h5>
+        <form asp-area="Administration" asp-controller="Templates" asp-action="AddCategory" class="col-md-6">
+            <span class="text-danger">@this.TempData[GlobalConstants.NameOfCategory]</span>
 
-    <div class="form-group">
-        <label>Създай категория</label>
-        <input name="CategoryName" />
+            <div class="form-group">
+                <label class="d-block">Kатегория</label>
+                <input name="Name" />
+            </div>
+            <div class="form-grup">
+                <label class="d-block">Цена</label>
+                <input type="number" name="Price" />
+            </div>
+
+            <vc:template-select></vc:template-select>
+
+            <div class="form-group">
+                <input type="submit" value="Създай" />
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <input type="submit" value="Създай" />
+
+    <div class="col-md-3">
+        <form asp-area="Administration" asp-controller="Templates" asp-action="RemoveCategory" class="col-md-6">
+            <div class="form-grup">
+                <label>Категории</label>
+                <select name="categoryId" class="form-select">
+                    <vc:categories-select is-for-products="false"></vc:categories-select>
+                </select>
+            </div>
+            <input type="submit" value="Премахни" class="btn btn-danger" />
+        </form>
     </div>
-</form>
-
-<form asp-area="Administration" asp-controller="Templates" asp-action="RemoveCategory">
-    <vc:categories-select is-for-products="false"></vc:categories-select>
-    <input type="submit" value="Премахни" class="btn btn-danger"/>
-</form>
-
-<table class="table table-bordered table-hover text-center mt-2">
-    <thead>
-        <tr>
-            <th>@GlobalConstants.TemplateDisplayName</th>
-            <th>@GlobalConstants.TemplateDisplayPrice</th>
-            <th>@GlobalConstants.TemplateDisplayDescription</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var template in this.Model)
-        {
-            <tr>
-                <td>@template.Name</td>
-                <td>@template.Price.ToString("F2") лв.</td>
-                <td>@template.Description</td>
-                <td><a href="@template.ImageUrl" target="_blank">Снимка</a></td>
-                <td>
-                    <a asp-area="Administration" asp-controller="Templates" asp-action="Delete" asp-route-id="@template.Id">Изтриване</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-3">
+        <a asp-area="Administration" asp-controller="Templates" asp-action="Add" class="btn btn-primary mb-2">Добави темплейт</a>
+    </div>
+    <div class="row">
+        <table class="table table-bordered table-hover text-center mt-2">
+            <thead>
+                <tr>
+                    <th>@GlobalConstants.TemplateDisplayName</th>
+                    <th>@GlobalConstants.TemplateDisplayPrice</th>
+                    <th>@GlobalConstants.TemplateDisplayDescription</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var template in this.Model)
+                {
+                    <tr>
+                        <td>@template.Name</td>
+                        <td>@template.Price.ToString("F2") лв.</td>
+                        <td>@template.Description</td>
+                        <td><a href="@template.ImageUrl" target="_blank">Снимка</a></td>
+                        <td>
+                            <a asp-area="Administration" asp-controller="Templates" asp-action="Delete" asp-route-id="@template.Id">Изтриване</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

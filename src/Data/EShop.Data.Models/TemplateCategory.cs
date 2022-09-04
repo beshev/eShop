@@ -17,6 +17,8 @@
         [MaxLength(DataConstants.CategoryNameMaxLength)]
         public string Name { get; set; }
 
-        public virtual IEnumerable<Template> Templates { get; set; }
+        public decimal Price { get; set; }
+
+        public virtual ICollection<Template> Templates { get; set; }
     }
 }

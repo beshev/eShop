@@ -10,7 +10,7 @@
     {
         public Template()
         {
-            this.TemplateProducts = new HashSet<ProductTemplate>();
+            this.TemplateCategories = new HashSet<TemplateCategory>();
             this.TemplateOrders = new HashSet<OrderItem>();
         }
 
@@ -34,10 +34,8 @@
 
         public int TemplateCategoryId { get; set; }
 
-        public virtual TemplateCategory TemplateCategory { get; set; }
+        public virtual ICollection<TemplateCategory> TemplateCategories { get; set; }
 
-        public virtual IEnumerable<ProductTemplate> TemplateProducts { get; set; }
-
-        public virtual IEnumerable<OrderItem> TemplateOrders { get; set; }
+        public virtual ICollection<OrderItem> TemplateOrders { get; set; }
     }
 }

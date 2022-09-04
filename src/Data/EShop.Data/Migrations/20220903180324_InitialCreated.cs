@@ -62,7 +62,6 @@ namespace EShop.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -94,12 +93,35 @@ namespace EShop.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TemplateCategories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Templates",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImagesFixedCount = table.Column<int>(type: "int", nullable: false),
+                    HasCustomText = table.Column<bool>(type: "bit", nullable: false),
+                    IsBaseModel = table.Column<bool>(type: "bit", nullable: false),
+                    TemplateCategoryId = table.Column<int>(type: "int", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Templates", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -214,13 +236,17 @@ namespace EShop.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirsName = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     City = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     DeliveryAddress = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    DeliveryAddressType = table.Column<int>(type: "int", nullable: false),
+                    Carrier = table.Column<int>(type: "int", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Bullstat = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
                     Mall = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    CompanyAddress = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    IsRegisteredByVAT = table.Column<bool>(type: "bit", nullable: false),
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -263,29 +289,25 @@ namespace EShop.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Templates",
+                name: "TemplateTemplateCategory",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImagesFixedCount = table.Column<int>(type: "int", nullable: false),
-                    HasCustomText = table.Column<bool>(type: "bit", nullable: false),
-                    IsBaseModel = table.Column<bool>(type: "bit", nullable: false),
-                    TemplateCategoryId = table.Column<int>(type: "int", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    TemplateCategoriesId = table.Column<int>(type: "int", nullable: false),
+                    TemplatesId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Templates", x => x.Id);
+                    table.PrimaryKey("PK_TemplateTemplateCategory", x => new { x.TemplateCategoriesId, x.TemplatesId });
                     table.ForeignKey(
-                        name: "FK_Templates_TemplateCategories_TemplateCategoryId",
-                        column: x => x.TemplateCategoryId,
+                        name: "FK_TemplateTemplateCategory_TemplateCategories_TemplateCategoriesId",
+                        column: x => x.TemplateCategoriesId,
                         principalTable: "TemplateCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TemplateTemplateCategory_Templates_TemplatesId",
+                        column: x => x.TemplatesId,
+                        principalTable: "Templates",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -327,34 +349,6 @@ namespace EShop.Data.Migrations
                         column: x => x.TemplateId,
                         principalTable: "Templates",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductsTemplates",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    TemplateId = table.Column<int>(type: "int", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductsTemplates", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProductsTemplates_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductsTemplates_Templates_TemplateId",
-                        column: x => x.TemplateId,
-                        principalTable: "Templates",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -427,19 +421,9 @@ namespace EShop.Data.Migrations
                 column: "ProductCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductsTemplates_ProductId",
-                table: "ProductsTemplates",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductsTemplates_TemplateId",
-                table: "ProductsTemplates",
-                column: "TemplateId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Templates_TemplateCategoryId",
-                table: "Templates",
-                column: "TemplateCategoryId");
+                name: "IX_TemplateTemplateCategory_TemplatesId",
+                table: "TemplateTemplateCategory",
+                column: "TemplatesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UsersInfo_OrderId",
@@ -469,7 +453,7 @@ namespace EShop.Data.Migrations
                 name: "OrderItems");
 
             migrationBuilder.DropTable(
-                name: "ProductsTemplates");
+                name: "TemplateTemplateCategory");
 
             migrationBuilder.DropTable(
                 name: "UsersInfo");
@@ -484,6 +468,9 @@ namespace EShop.Data.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
+                name: "TemplateCategories");
+
+            migrationBuilder.DropTable(
                 name: "Templates");
 
             migrationBuilder.DropTable(
@@ -491,9 +478,6 @@ namespace EShop.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProductsCategories");
-
-            migrationBuilder.DropTable(
-                name: "TemplateCategories");
         }
     }
 }

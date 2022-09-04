@@ -7,7 +7,7 @@
 
     public interface IProductService
     {
-        public Task AddAsync(string name, decimal price, string description, int categoryId, bool hasCustomText, IFormFile image, IEnumerable<int> templatesIds);
+        public Task AddAsync(string name, decimal price, string description, int categoryId, bool hasCustomText, IFormFile image);
 
         public Task DeleteByIdAsync(int id);
 
@@ -16,8 +16,6 @@
         public Task<TModel> GetByIdAsync<TModel>(int id);
 
         public Task CreateCategoryAsync(string name);
-
-        public Task<IEnumerable<TModel>> GetAllWithTemplatesAsync<TModel>();
 
         public Task<IEnumerable<TModel>> GetCategoriesAsync<TModel>();
 

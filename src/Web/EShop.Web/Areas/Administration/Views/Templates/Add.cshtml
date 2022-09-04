@@ -25,7 +25,7 @@
             <span asp-validation-for="Price" class="text-danger"></span>
             <input asp-for="Price" class="form-control" placeholder="Цена на темплейта..." />
         </div>
-         <div class="form-grup">
+        <div class="form-grup">
             <label asp-for="Image"></label>
             <span asp-validation-for="Image" class="text-danger"></span>
             <input asp-for="Image" class="form-control" placeholder="Снимка на темплейта..." />
@@ -45,10 +45,13 @@
             <span asp-validation-for="IsBaseModel" class="text-danger"></span>
             <input type="checkbox" asp-for="IsBaseModel" type="checkbox" />
         </div>
-       
-        <vc:categories-select is-for-products="false"></vc:categories-select>
 
-        <vc:product-select></vc:product-select>
+        <div class="form-grup">
+            <label>Категории</label>
+            <select name="CategoriesIds" class="form-select" multiple>
+                <vc:categories-select is-for-products="false"></vc:categories-select>
+            </select>
+        </div>
 
         <div class="form-grup" style="margin-top: 2%;">
             <input type="submit" class="btn btn-outline-dark" value="Add" />

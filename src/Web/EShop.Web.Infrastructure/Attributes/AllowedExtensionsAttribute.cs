@@ -8,7 +8,7 @@
 
     public class AllowedExtensionsAttribute : ValidationAttribute
     {
-        private readonly string[] extensions = new string[] { ".png", ".jpeg" };
+        private readonly string[] extensions = new string[] { ".png", ".jpeg", ".jpg" };
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {

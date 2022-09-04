@@ -7,11 +7,13 @@
 
     public class CategoryInputModel : IValidatableObject
     {
-        public string CategoryName { get; set; }
+        public string Name { get; set; }
+
+        public IEnumerable<int> TemplatesIds { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (string.IsNullOrEmpty(this.CategoryName) || this.CategoryName.Length > DataConstants.CategoryNameMaxLength)
+            if (string.IsNullOrEmpty(this.Name) || this.Name.Length > DataConstants.CategoryNameMaxLength)
             {
                 yield return new ValidationResult(string.Format(ErrorMessagesConstants.CategoryErrorMessage, DataConstants.CategoryNameMaxLength));
             }
