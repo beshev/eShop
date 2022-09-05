@@ -26,7 +26,7 @@
         [Required]
         public string ImageUrl { get; set; }
 
-        public int ImagesFixedCount { get; set; }
+        public int ImagesCount { get; set; }
 
         public bool HasCustomText { get; set; }
 

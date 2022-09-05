@@ -31,9 +31,19 @@
             <input asp-for="Image" class="form-control" placeholder="Снимка на темплейта..." />
         </div>
         <div class="form-grup">
+            <span asp-validation-for="ImagesCount" class="text-danger"></span>
+            <label asp-for="ImagesCount"></label>
+            <input asp-for="ImagesCount" class="form-control" type="number" />
+        </div>
+        <div class="form-grup">
             <span asp-validation-for="HasCustomText" class="text-danger"></span>
             <label asp-for="HasCustomText"></label>
             <input asp-for="HasCustomText" type="checkbox" />
+        </div>
+        <div class="form-grup">
+            <span asp-validation-for="HasFontStyle" class="text-danger"></span>
+            <label asp-for="HasFontStyle"></label>
+            <input asp-for="HasFontStyle" type="checkbox" />
         </div>
 
         <div class="form-grup">

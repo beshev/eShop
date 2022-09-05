@@ -7,7 +7,7 @@
 
     public interface IProductService
     {
-        public Task AddAsync(string name, decimal price, string description, int categoryId, bool hasCustomText, IFormFile image);
+        public Task AddAsync(string name, decimal price, string description, int categoryId, bool hasCustomText, bool hasFontStyle, IFormFile image, int imagesCount);
 
         public Task DeleteByIdAsync(int id);
 

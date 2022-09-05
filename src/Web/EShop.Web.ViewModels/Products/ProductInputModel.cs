@@ -24,6 +24,12 @@
         [Display(Name = GlobalConstants.NameOfHasCustomText)]
         public bool HasCustomText { get; set; }
 
+        [Display(Name = GlobalConstants.DisplayHasFontStyle)]
+        public bool HasFontStyle { get; set; }
+
+        [Display(Name = GlobalConstants.DisplayImagesCount)]
+        public int ImagesCount { get; set; }
+
         [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
         [Display(Name = GlobalConstants.NameOfImage)]
         [AllowedExtensionsAttribute]

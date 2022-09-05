@@ -7,7 +7,7 @@
 
     <form asp-area="" asp-controller="Cart" asp-action="AddItem" enctype="multipart/form-data">
         <div asp-validation-summary="All" class="text-danger"></div>
-        <input type="hidden" name="returnUrl" value="@this.Model.ReturnUrl"/>
+        <input type="hidden" name="returnUrl" value="@this.Model.ReturnUrl" />
 
         @if (this.Model.HasCustomText)
         {
@@ -16,12 +16,16 @@
                 <textarea asp-for="OrderInfo.Description" class="form-control" name="Description" placeholder="Вашият текст тук..." rows="5" cols="5"></textarea>
                 <span asp-validation-for="OrderInfo.Description" class="text-danger"></span>
             </div>
-            <div class="form-grup mt-2">
-                <label asp-for="OrderInfo.FontStyle"></label>
-                <label asp-for="OrderInfo.FontStyle"> - <a href="https://res.cloudinary.com/beshev/image/upload/v1662290459/E-shop/templates/301015808_768770797700753_2492550915792899201_n_m0jlmu.jpg" target="_blank">избетере от тук</a></label>
-                <input asp-for="OrderInfo.FontStyle" class="form-control" name="FontStyle" type="number" />
-                <span asp-validation-for="OrderInfo.FontStyle" class="text-danger"></span>
-            </div>
+
+            @if (this.Model.HasFontStyle)
+            {
+                <div class="form-grup mt-2">
+                    <label asp-for="OrderInfo.FontStyle"></label>
+                    <label asp-for="OrderInfo.FontStyle"> - <a href="https://res.cloudinary.com/beshev/image/upload/v1662290459/E-shop/templates/301015808_768770797700753_2492550915792899201_n_m0jlmu.jpg" target="_blank">избетере от тук</a></label>
+                    <input asp-for="OrderInfo.FontStyle" class="form-control" name="FontStyle" type="number" />
+                    <span asp-validation-for="OrderInfo.FontStyle" class="text-danger"></span>
+                </div>
+            }
         }
 
         @for (var i = 0; i < Model.ImagesCount; i++)

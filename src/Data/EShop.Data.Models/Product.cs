@@ -23,6 +23,10 @@
 
         public bool HasCustomText { get; set; }
 
+        public bool HasFontStyle { get; set; }
+
+        public int ImagesCount { get; set; }
+
         [Required]
         public string ImageUrl { get; set; }
 

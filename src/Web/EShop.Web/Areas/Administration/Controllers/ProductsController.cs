@@ -39,7 +39,7 @@
                 return this.View(model);
             }
 
-            await this.productService.AddAsync(model.Name, model.Price, model.Description, model.CategoryId, model.HasCustomText, model.Image);
+            await this.productService.AddAsync(model.Name, model.Price, model.Description, model.CategoryId, model.HasCustomText, model.HasFontStyle, model.Image, model.ImagesCount);
             return this.RedirectToAction(nameof(this.All));
         }
 

@@ -9,5 +9,7 @@
         public string ReturnUrl { get; set; }
 
         public bool HasCustomText { get; set; }
+
+        public bool HasFontStyle { get; set; }
     }
 }

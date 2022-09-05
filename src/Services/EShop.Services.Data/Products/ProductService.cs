@@ -28,7 +28,7 @@
             this.cloudinaryService = cloudinaryService;
         }
 
-        public async Task AddAsync(string name, decimal price, string description, int categoryId, bool hasCustomText, IFormFile image)
+        public async Task AddAsync(string name, decimal price, string description, int categoryId, bool hasCustomText, bool hasFontStyle, IFormFile image, int imagesCount)
         {
             var prodcut = new Product
             {
@@ -36,6 +36,8 @@
                 Price = price,
                 Description = description,
                 HasCustomText = hasCustomText,
+                HasFontStyle = hasFontStyle,
+                ImagesCount = imagesCount,
                 ProductCategoryId = categoryId,
                 ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.ProductCloundFolderName, name)),
             };

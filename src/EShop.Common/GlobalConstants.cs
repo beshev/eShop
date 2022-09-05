@@ -45,9 +45,13 @@
 
         public const string NameOfHasCustomText = "Има тект по избор";
 
+        public const string DisplayHasFontStyle = "Има шрифт по избор";
+
         public const string DisplayHasCustomText = "Има ли текст?";
 
         public const string DisplayIsBaseModel = "Базов модел ли е?";
+
+        public const string DisplayImagesCount = "Брой на снимките";
 
         public const string ComplatedOrder = "ComplatedOrder";
 
@@ -88,7 +92,6 @@
 
         public const string TemplateDisplayImage = "Снимка на темплейта";
 
-        public const string TemplateDisplayImagesCount = "Брой на снимки за темплейта";
 
         public const string TemplateDisplayDescription = "Описание на темплейта";
 

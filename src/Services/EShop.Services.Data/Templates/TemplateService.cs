@@ -42,7 +42,7 @@
                 Name = name,
                 Description = description,
                 Price = price,
-                ImagesFixedCount = imagesFixedCount,
+                ImagesCount = imagesFixedCount,
                 SubCategoryId = subCategory,
                 HasCustomText = hasCustomText,
                 IsBaseModel = isBaseModel,

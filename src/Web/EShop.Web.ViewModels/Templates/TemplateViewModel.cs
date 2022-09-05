@@ -2,7 +2,7 @@
 {
     public class TemplateViewModel : TemplateBaseViewModel
     {
-        public int ImagesFixedCount { get; set; }
+        public int ImagesCount { get; set; }
 
         public bool HasCustomText { get; set; }
 

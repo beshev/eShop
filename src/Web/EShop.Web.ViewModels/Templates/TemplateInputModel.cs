@@ -28,7 +28,7 @@
         public IFormFile Image { get; set; }
 
         [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
-        [Display(Name = GlobalConstants.TemplateDisplayImagesCount)]
+        [Display(Name = GlobalConstants.DisplayImagesCount)]
         public int ImagesFixedCount { get; set; }
 
         [Display(Name = GlobalConstants.DisplayHasCustomText)]
