@@ -1,6 +1,5 @@
 ﻿namespace EShop.Web.ViewModels.Products
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using EShop.Common;
