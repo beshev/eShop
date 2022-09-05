@@ -53,11 +53,6 @@
                 Templates = await this.templateService.GetAllAsync<TemplateBaseViewModel>(categoryId, subCategoryId, skip, TemplatesPerPage),
             };
 
-            if (viewModel.Templates.Any() == false)
-            {
-                return this.NotFound();
-            }
-
             return this.View(viewModel);
         }
 

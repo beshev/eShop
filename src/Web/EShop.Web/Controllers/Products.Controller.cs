@@ -44,11 +44,6 @@
                 Products = await this.productService.GetAllAsync<ProductViewModel>(categoryId),
             };
 
-            if (viewModel.Products.Any() == false)
-            {
-                return this.NotFound();
-            }
-
             return this.View(viewModel);
         }
 
