@@ -1,3 +1,43 @@
-﻿ a {
-     text-decoration: none;
- }
+﻿a {
+    text-decoration: none;
+}
+
+.category-style {
+    font-size: 15px;
+}
+
+    .category-style:hover {
+        --bs-bg-opacity: 100;
+        color: rgba(var(--bs-dark-rgb))
+    }
+
+
+.cardHover:hover {
+    background-color: darkorange;
+}
+
+.cardHoverDetails:hover {
+    background-color: purple;
+}
+
+.inputHover:hover {
+    background-color: white;
+    color: black;
+}
+
+.btnHover:hover {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #41d7a7;
+    --bs-btn-border-color: #41d7a7;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #37b78e;
+    --bs-btn-hover-border-color: #34ac86;
+    --bs-btn-focus-shadow-rgb: 94,221,180;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #34ac86;
+    --bs-btn-active-border-color: #31a17d;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #41d7a7;
+    --bs-btn-disabled-border-color: #41d7a7
+}
