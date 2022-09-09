@@ -1,10 +1,38 @@
 ﻿@model EShop.Web.ViewModels.Administration.Dashboard.IndexViewModel
 @{
-    this.ViewData["Title"] = "Admin dashboard";
+    this.ViewData["Title"] = "Администрация";
 }
 
-<ul>
-    <li><a asp-area="Administration" asp-controller="Templates" asp-action="All">Templates</a></li>
-    <li><a asp-area="Administration" asp-controller="Products" asp-action="All">Products</a></li>
-    <li><a asp-area="Administration" asp-controller="Orders" asp-action="All">Orders</a></li>
-</ul>
+<h1 class="text-center">@this.ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-4">
+            <a asp-controller="@GlobalConstants.TemplatesController" asp-action="@GlobalConstants.AllAction">
+                <div class="counter-box rounded cardHoverAdmin">
+                    <i class="fa-regular fa-images"></i>
+                    <span class="counter">10</span>
+                    <p>Темплейти</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-4">
+            <a asp-controller="@GlobalConstants.ProductsController" asp-action="@GlobalConstants.AllAction">
+                <div class="counter-box rounded cardHoverAdmin">
+                    <i class="fa-solid fa-gifts"></i>
+                    <span class="counter">10</span>
+                    <p>Продукти</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-4">
+            <a asp-controller="@GlobalConstants.OrdersController" asp-action="@GlobalConstants.AllAction">
+                <div class="counter-box rounded cardHoverAdmin">
+                    <i class="fa-solid fa-champagne-glasses"></i>
+                    <span class="counter">10</span>
+                    <p>Поръчки</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

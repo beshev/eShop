@@ -6,6 +6,7 @@
     {
         public IActionResult Index()
         {
+            // TODO: Take items count
             return this.View();
         }
     }
