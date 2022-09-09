@@ -5,12 +5,15 @@
 }
 
 <div class="col-lg-6">
-    <div class="card mb-4 p-2 cardHoverDetails">
-        <img class="card-img-top" src="@this.Model.ImageUrl" alt="..." />
+    <div class="card mb-4 p-1 cardHoverDetails">
+        <svg class="card-img-top" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+            <rect width="100%" height="100%" fill="#FFFFFF"></rect>
+            <image href="@this.Model.ImageUrl" height="100%" width="100%"></image>
+        </svg>
         <div class="card-body">
             <div class="small text-muted">@this.Model.Name</div>
             <h2 class="card-title">@((this.Model.Price + this.Model.Category.Price).ToString("F2")) лв</h2>
-            <p class="card-text">
+            <p class="card-text details-desc-size">
                 @this.Model.Description
             </p>
         </div>

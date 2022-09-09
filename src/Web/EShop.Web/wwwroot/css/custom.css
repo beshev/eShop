@@ -11,6 +11,22 @@
         color: rgba(var(--bs-dark-rgb))
     }
 
+input[type="number"] {
+    width: 70px;
+    height: 40px;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+}
+
+.center-element {
+    display: flex;
+    justify-content: center;
+}
+
+.details-desc-size {
+    font-size: 18px;
+}
 
 .cardHover:hover {
     background-color: darkorange;
