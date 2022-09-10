@@ -16,6 +16,8 @@
 
         public Task DeleteByIdAsync(int id);
 
+        public Task<int> GetCountAsync();
+
         public Task ChangeStatus(int id, OrderStatus orderStatus);
     }
 }

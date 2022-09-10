@@ -11,7 +11,7 @@
             <a asp-controller="@GlobalConstants.TemplatesController" asp-action="@GlobalConstants.AllAction">
                 <div class="counter-box rounded cardHoverAdmin">
                     <i class="fa-regular fa-images"></i>
-                    <span class="counter">10</span>
+                    <span class="counter">@this.Model.TemplatesCount</span>
                     <p>Темплейти</p>
                 </div>
             </a>
@@ -20,7 +20,7 @@
             <a asp-controller="@GlobalConstants.ProductsController" asp-action="@GlobalConstants.AllAction">
                 <div class="counter-box rounded cardHoverAdmin">
                     <i class="fa-solid fa-gifts"></i>
-                    <span class="counter">10</span>
+                    <span class="counter">@this.Model.ProductsCount</span>
                     <p>Продукти</p>
                 </div>
             </a>
@@ -29,7 +29,7 @@
             <a asp-controller="@GlobalConstants.OrdersController" asp-action="@GlobalConstants.AllAction">
                 <div class="counter-box rounded cardHoverAdmin">
                     <i class="fa-solid fa-champagne-glasses"></i>
-                    <span class="counter">10</span>
+                    <span class="counter">@this.Model.OrdersCount</span>
                     <p>Поръчки</p>
                 </div>
             </a>

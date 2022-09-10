@@ -4,59 +4,38 @@
     ViewData["Title"] = "Количка";
 }
 
-<h1 class="text-center">@this.ViewData["Title"]</h1>
+<h1 class="text-center mb-5 mt-3"><i class="fa-solid fa-cart-shopping fa-2xl"></i></h1>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FontStyle)
-            </th>
-            <th>
-                Брой снимки
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in this.Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                <td>
-                    @item.Price x @item.Quantity бр. = @((item.Price * item.Quantity).ToString("F2")) лв
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FontStyle)
-                </td>
-                <td>
-                    @item.Images.Count()
-                </td>
-                <td>
-                    <a asp-area="" asp-action="RemoveItem" asp-controller="Cart" asp-route-id="@item.Id">Премахни</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+@foreach (var item in this.Model)
+{
+    <div class="mb-2 col-lg-3 col-sm-12 col-12">
+        <div class="card p-1 cardHoverAdmin">
+            <svg xmlns="http://www.w3.org/2000/svg" class="" width="100%" height="100%" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+                <rect width="100%" height="100%" fill="#FFFFFF"></rect>
+                <image href="@item.ProductImageUrl" height="100%" width="100%"></image>
+            </svg>
+            <div class="card-body p-1">
+                <p><strong>Продукт - </strong> @item.ProductName</p>
+                <p><strong>Прикачени снимки - </strong> @item.Images.Count бр.</p>
+                @if (item.FontStyle.HasValue)
+                {
+                    <p><strong><a style="text-decoration: underline" href="https://res.cloudinary.com/beshev/image/upload/v1662290459/E-shop/templates/301015808_768770797700753_2492550915792899201_n_m0jlmu.jpg" target="_blank">Шрифт номер</a> - </strong> @item.FontStyle</p>
+                }
+                <p><strong>Вешето описание: </strong> @item.Description</p>
+                <h5>@item.Quantity бр. x @item.Price = @((item.Quantity * item.Price).ToString()) лв</h5>
+                <div class="center-element">
+                    <a asp-area="" asp-action="RemoveItem" asp-controller="Cart" asp-route-id="@item.Id"><i class="fa-regular fa-circle-xmark fa-2xl text-danger"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 
-<h5>
+<strong class="text-warning right">Доставката не е вкючена в крайната цена.</strong>
+<h5 class="right">
     Общо: @this.Model.Sum(x => x.Price * x.Quantity) лв
 </h5>
-<strong class="text-danger">Внимание! Доставката не е вкючена в крайната цена!</strong>
 
-<a asp-area="" asp-controller="Orders" asp-action="ComplateOrder" class="btn btn-info @if(!this.Model.Any()){ <text>disabled</text> }" >Поръчай</a>
+<div class="form-grup mt-3 text-center">
+    <a asp-area="" asp-controller="Orders" asp-action="ComplateOrder" class="btn btn-success @if(!this.Model.Any()){<text>disabled</text>}">Поръчай</a>
+</div>

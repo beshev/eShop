@@ -1,4 +1,6 @@
 ﻿@using EShop.Common
+@using EShop.Web.ViewModels.ShoppingCarts
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +34,7 @@
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="themes">Темплейти за:</a>
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="themes">Модели за:</a>
                         <div class="dropdown-menu" aria-labelledby="themes">
                             <vc:template-categories></vc:template-categories>
                         </div>
@@ -41,7 +43,7 @@
                         <a class="nav-link" asp-area="" asp-controller="@GlobalConstants.ProductsController" asp-action="@GlobalConstants.AllAction">Продукти</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" asp-area="" asp-controller="Cart" asp-action="Items"><i class="fa-solid fa-cart-arrow-down"></i>Количка(1)</a>
+                        <a class="nav-link active" asp-area="" asp-controller="Cart" asp-action="Items"><i class="fa-solid fa-cart-arrow-down"></i>Количка(@(this.Context.Session.GetCollectionCount<ShoppingCartModel>(GlobalConstants.NameOfCart)))</a>
                     </li>
                     @if (this.User.IsInRole(@GlobalConstants.AdministratorRoleName))
                     {

@@ -22,13 +22,14 @@
         [Display(Name = GlobalConstants.NameOfFontStyle)]
         public int? FontStyle { get; set; }
 
-        // Find way to display this validaion to user
+        // TODO: Find way to display this validaion to user
         [AllowedExtensions]
         public IEnumerable<IFormFile> Images { get; set; }
 
-        // TODO: maybe this is redundant
         [MaxLength(DataConstants.ProductNameMaxLength)]
         public string ProductName { get; set; }
+
+        public string ProductImageUrl { get; set; }
 
         public int? TemplateId { get; set; }
 

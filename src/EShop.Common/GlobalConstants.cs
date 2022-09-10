@@ -43,7 +43,7 @@
 
         public const string NameOfQuantity = "Количество";
 
-        public const string NameOfFontStyle = "Номер на шрифта";
+        public const string NameOfFontStyle = "Шрифт Nº";
 
         public const string NameOfHasCustomText = "Има тект по избор";
 

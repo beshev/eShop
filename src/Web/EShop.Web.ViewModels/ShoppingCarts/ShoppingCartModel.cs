@@ -35,6 +35,8 @@
         [Display(Name = GlobalConstants.NameOfProducts)]
         public string ProductName { get; set; }
 
+        public string ProductImageUrl { get; set; }
+
         public int? TemplateId { get; set; }
 
         public int? ProductId { get; set; }

@@ -90,7 +90,7 @@
 
         public async Task<int> GetCountAsync(int? categoryId)
         {
-            var query = this.productCategoryRepo
+            var query = this.productRepo
                 .AllAsNoTracking();
 
             if (categoryId.HasValue)

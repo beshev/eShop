@@ -123,5 +123,10 @@
             .Where(x => x.Id.Equals(orderId))
             .To<TModel>()
             .FirstOrDefaultAsync();
+
+        public Task<int> GetCountAsync()
+            => this.orderRepo
+            .AllAsNoTracking()
+            .CountAsync();
     }
 }

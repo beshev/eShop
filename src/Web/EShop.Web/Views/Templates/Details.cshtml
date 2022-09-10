@@ -1,7 +1,7 @@
 ﻿@model TemplateDetailsModel
 
 @{
-    var productName = $"{this.Model.Name} - {this.Model.Category.Name}";
+    var productName = $"{this.Model.Name} за {this.Model.Category.Name}";
 }
 
 <div class="col-lg-6">
@@ -27,5 +27,6 @@
     product-name="@productName" 
     has-custom-text="@this.Model.HasCustomText" 
     images-count="@this.Model.ImagesCount"
+    product-image-url="@this.Model.ImageUrl"
     return-url="@this.ViewData[GlobalConstants.ReturnUrlKey]">
 </vc:order-item>

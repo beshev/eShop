@@ -2,6 +2,10 @@
 {
     public class IndexViewModel
     {
-        public int SettingsCount { get; set; }
+        public int TemplatesCount { get; set; }
+
+        public int ProductsCount { get; set; }
+
+        public int OrdersCount { get; set; }
     }
 }
