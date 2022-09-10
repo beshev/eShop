@@ -14,8 +14,8 @@
         [Display(Name = ErrorMessagesConstants.DisplayItemDescription)]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = ErrorMessagesConstants.QuantityField)]
         [Display(Name = GlobalConstants.NameOfQuantity)]
+        [Range(1, int.MaxValue, ErrorMessage = ErrorMessagesConstants.QuantityField)]
         public int Quantity { get; set; }
 
         [Required(ErrorMessage = ErrorMessagesConstants.DisplayItemFontStyle)]

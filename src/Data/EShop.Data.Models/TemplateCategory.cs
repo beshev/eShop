@@ -6,6 +6,7 @@
     using EShop.Common;
     using EShop.Data.Common.Models;
 
+    // TODO: Add category image
     public class TemplateCategory : BaseModel<int>
     {
         public TemplateCategory()

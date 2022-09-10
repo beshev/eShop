@@ -4,7 +4,8 @@
 <div class="form-group">
     <label asp-for="@Model.FirstOrDefault().Name"></label>
     <select name="TemplatesIds"
-            class="form-select"
+            class="form-select inputHover"
+            style="height: 20rem"
             multiple
             asp-items="@(new SelectList(Model, nameof(TemplateSelectModel.Id), nameof(TemplateSelectModel.Name)))">
     </select>

@@ -12321,7 +12321,7 @@ body {
 .dropdown-menu {
     border: none;
     box-shadow: inset 1px 1px rgba(255,255,255,.2),inset -1px -1px rgba(255,255,255,.1),1px 3px 24px -1px rgba(0,0,0,.15);
-    background-color: transparent;
+    background-color: midnightblue;
     background-image: linear-gradient(125deg,rgba(255,255,255,.3),rgba(255,255,255,.2) 70%);
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px)

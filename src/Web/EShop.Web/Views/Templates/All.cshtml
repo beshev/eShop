@@ -4,9 +4,6 @@
 {
     <div class="row mb-1 text-center">
         <div class="col-12 col-lg-12">
-            <h3>
-                Темплейти за @this.Model.Category.Name
-            </h3>
             <svg width="100%" height="440px">
                 <defs>
                     <pattern id="image" x="0%" y="0%" height="100%" width="100%" viewBox="0 0 512 512">
@@ -30,7 +27,7 @@
                                 <image href="@template.ImageUrl" height="100%" width="100%"></image>
                             </svg>
                             <div class="card-body p-1">
-                                <p>@template.Description.TrimIfLongerThan(17)...</p>
+                                <p>@template.Description.TrimIfLongerThan(17)</p>
                                 <h5 style="text-align: right">@template.Price лв</h5>
                             </div>
                         </a>

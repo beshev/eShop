@@ -5,29 +5,7 @@
 }
 
 <div class="row mb-2">
-    <div class="col-md-4 col-sm-12 text-center">
-        <h5>Създай категория</h5>
-        <form asp-area="Administration" asp-controller="Templates" asp-action="AddCategory">
-            <span class="text-danger">@this.TempData[GlobalConstants.NameOfCategory]</span>
-
-            <div class="form-group">
-                <label class="d-block">Kатегория</label>
-                <input name="Name" />
-            </div>
-            <div class="form-grup">
-                <label class="d-block">Цена</label>
-                <input type="number" name="Price" />
-            </div>
-
-            <vc:template-select></vc:template-select>
-
-            <div class="form-group">
-                <input type="submit" value="Създай" />
-            </div>
-        </form>
-    </div>
-
-    <div class="col-md-4 text-center">
+    <div class="col-md-3 offset-1 text-center">
         <form asp-area="Administration" asp-controller="Templates" asp-action="RemoveCategory">
             <div class="form-grup">
                 <label>Категории</label>
@@ -38,56 +16,79 @@
             <input type="submit" value="Премахни" class="btn btn-danger mt-2" />
         </form>
 
-        <form asp-area="Administration" asp-controller="Templates" asp-action="RemoveSubCategory">
+        <form asp-area="Administration" asp-controller="Templates" asp-action="RemoveSubCategory" class="mt-3">
             <vc:template-sub-categories category-id=0></vc:template-sub-categories>
             <input type="submit" value="Премахни" class="btn btn-danger mt-2" />
         </form>
     </div>
 
-    <div class="col-md-4 text-center">
+    <span class="vr m-3"></span>
+
+    <div class="col-md-3 col-sm-12 text-center">
+        <h5>Създай категория</h5>
+        <form asp-area="Administration" asp-controller="Templates" asp-action="AddCategory">
+            <span class="text-danger">@this.TempData[GlobalConstants.NameOfCategory]</span>
+
+            <div class="form-group">
+                <label class="d-block">Kатегория</label>
+                <input name="Name" class="form-control inputHover" />
+            </div>
+
+            <vc:template-select></vc:template-select>
+
+            <div class="form-grup">
+                <label class="d-block">Цена</label>
+                <div class="center-element">
+                    <input class="rounded border-warning border-5" type="number" name="Price" />
+                </div>
+            </div>
+
+            <div class="form-group mt-2">
+                <input class="btn btn-success btn-sm" type="submit" value="Създай" />
+            </div>
+        </form>
+    </div>
+    <span class="vr m-3"></span>
+    <div class="col-md-3 text-center">
         <h5>Създай под категория</h5>
         <form asp-area="Administration" asp-controller="Templates" asp-action="AddSubCategory">
             <span class="text-danger">@this.TempData[GlobalConstants.NameOfSubCategory]</span>
 
             <div class="form-group">
                 <label class="d-block">Под категория</label>
-                <input name="Name" />
+                <input name="Name" class="form-control inputHover" />
             </div>
             <div class="form-group mt-2">
-                <input type="submit" value="Създай" />
+                <input class="btn btn-success btn-sm" type="submit" value="Създай" />
             </div>
         </form>
     </div>
 </div>
 <hr />
 <div class="row">
-    <div class="col-md-3">
-        <a asp-area="Administration" asp-controller="Templates" asp-action="Add" class="btn btn-primary mb-2">Добави темплейт</a>
-    </div>
-    <div class="row">
-        <table class="table table-bordered table-hover text-center mt-2">
-            <thead>
+    <table class="table table-bordered table-hover text-center mt-2">
+        <thead>
+            <tr>
+                <th>@GlobalConstants.TemplateDisplayName</th>
+                <th>@GlobalConstants.TemplateDisplayPrice</th>
+                <th>@GlobalConstants.TemplateDisplayDescription</th>
+                <th><a asp-area="Administration" asp-controller="Templates" asp-action="Add" class="btn btn-success btn-sm">Добави темплейт</a></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var template in this.Model)
+            {
                 <tr>
-                    <th>@GlobalConstants.TemplateDisplayName</th>
-                    <th>@GlobalConstants.TemplateDisplayPrice</th>
-                    <th>@GlobalConstants.TemplateDisplayDescription</th>
-                    <th></th>
+                    <td>@template.Name</td>
+                    <td>@template.Price.ToString("F2") лв.</td>
+                    <td>@template.Description.TrimIfLongerThan(50)</td>
+                    <td><a href="@template.ImageUrl" class="text-warning" target="_blank">Снимка</a></td>
+                    <td>
+                        <a asp-area="Administration" asp-controller="Templates" asp-action="Delete" asp-route-id="@template.Id" class="btn btn-sm btn-danger">Изтриване</a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var template in this.Model)
-                {
-                    <tr>
-                        <td>@template.Name</td>
-                        <td>@template.Price.ToString("F2") лв.</td>
-                        <td>@template.Description</td>
-                        <td><a href="@template.ImageUrl" target="_blank">Снимка</a></td>
-                        <td>
-                            <a asp-area="Administration" asp-controller="Templates" asp-action="Delete" asp-route-id="@template.Id">Изтриване</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
 </div>

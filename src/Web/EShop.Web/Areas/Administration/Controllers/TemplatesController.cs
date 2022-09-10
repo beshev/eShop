@@ -27,6 +27,7 @@
         [HttpPost]
         public async Task<IActionResult> Add(TemplateInputModel model)
         {
+            // TODO: Add pagination
             if (this.ModelState.IsValid == false)
             {
                 return this.View(model);
