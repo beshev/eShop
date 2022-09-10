@@ -3,6 +3,8 @@
     public static class GlobalConstants
     {
         // Common
+        public const string Title = "Title";
+
         public const string ReturnUrlKey = "ReturnUrl";
 
         public const string SystemName = "EShop";
@@ -92,7 +94,6 @@
 
         public const string TemplateDisplayImage = "Снимка на темплейта";
 
-
         public const string TemplateDisplayDescription = "Описание на темплейта";
 
         public const string TemplateCloundFolderName = "templates/{0}";
@@ -109,6 +110,12 @@
         public const string NameOfOrderProductId = "OrderProductId";
 
         public const string NameOfOrderTemplateId = "OrderTemplateId";
+
+        public const string DisplayStatusActive = "Активни";
+
+        public const string DisplayStatusInfo = "Изчакващи";
+
+        public const string DisplayStatusCompleted = "Готови";
 
         // User info
         public const string DisplayFirsName = "Име";

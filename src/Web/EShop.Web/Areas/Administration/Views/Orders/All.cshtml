@@ -1,15 +1,17 @@
 ﻿@using EShop.Data.Models.Enums
 @model AllOrdersViewModel
 
-<h1 class="text-center">Поръчки</h1>
-
-<a asp-area="Administration" asp-controller="Orders" asp-action="All" asp-route-orderStatus="@OrderStatus.Active">@OrderStatus.Active</a>
-<a asp-area="Administration" asp-controller="Orders" asp-action="All" asp-route-orderStatus="@OrderStatus.Completed">@OrderStatus.Completed</a>
-<a asp-area="Administration" asp-controller="Orders" asp-action="All" asp-route-orderStatus="@OrderStatus.Info">@OrderStatus.Info</a>
-
-<h2 class="text-info text-center">@this.Model.Status</h2>
-<table class="table table-sm table-bordered table-striped">
-    <thead>
+@{
+    this.ViewData[GlobalConstants.Title] = "Поръчки";
+    var status = this.Model.Status.Equals(OrderStatus.Active)
+    ? GlobalConstants.DisplayStatusActive
+    : this.Model.Status.Equals(OrderStatus.Info)
+        ? GlobalConstants.DisplayStatusInfo
+        : GlobalConstants.DisplayStatusCompleted;
+}
+<h2 class="text-center mt-3">@status</h2>
+<table class="table table-sm table-bordered">
+    <thead class="text-center">
         <tr>
             <th>
                 Име
@@ -19,6 +21,14 @@
             </th>
             <th>
                 Цена
+            </th>
+            <th>
+                <select name="dropDown" id="dropDown">
+                    <option value="">Вид</option>
+                    <option value="/Administration/Orders/All?orderStatus=Active">@GlobalConstants.DisplayStatusActive</option>
+                    <option value="/Administration/Orders/All?orderStatus=Completed">@GlobalConstants.DisplayStatusCompleted</option>
+                    <option value="/Administration/Orders/All?orderStatus=Info">@GlobalConstants.DisplayStatusInfo</option>
+                </select>
             </th>
         </tr>
     </thead>
@@ -37,28 +47,31 @@
                 </td>
                 <td>
                     <a asp-area="@GlobalConstants.AdministrationArea"
-                   asp-action="@GlobalConstants.DetailsAction"
-                   asp-controller="@GlobalConstants.OrdersController"
-                   asp-route-id="@order.Id">
+                       asp-action="@GlobalConstants.DetailsAction"
+                       asp-controller="@GlobalConstants.OrdersController"
+                       asp-route-id="@order.Id"
+                       class="btn btn-sm">
                         Детайли
                     </a>
                     /
                     @if (this.Model.Status.Equals(OrderStatus.Completed))
                     {
-                          <a asp-area="@GlobalConstants.AdministrationArea"
+                        <a asp-area="@GlobalConstants.AdministrationArea"
                            asp-action="@GlobalConstants.RemoveAction"
                            asp-controller="@GlobalConstants.OrdersController"
-                           asp-route-id="@order.Id">
+                           asp-route-id="@order.Id"
+                           class="btn btn-sm">
                             Изтриване
                         </a>
                     }
-                    else if(this.Model.Status.Equals(OrderStatus.Active))
+                    else if (this.Model.Status.Equals(OrderStatus.Active))
                     {
                         <a asp-area="@GlobalConstants.AdministrationArea"
                            asp-action="@GlobalConstants.ChangeStatusAction"
                            asp-controller="@GlobalConstants.OrdersController"
                            asp-route-id="@order.Id"
-                           asp-route-orderStatus="@OrderStatus.Completed">
+                           asp-route-orderStatus="@OrderStatus.Completed"
+                           class="btn btn-sm">
                             Завърши
                         </a>
                         <text>/</text>
@@ -66,7 +79,8 @@
                            asp-action="@GlobalConstants.ChangeStatusAction"
                            asp-controller="@GlobalConstants.OrdersController"
                            asp-route-id="@order.Id"
-                           asp-route-orderStatus="@OrderStatus.Info">
+                           asp-route-orderStatus="@OrderStatus.Info"
+                           class="btn btn-sm">
                             Изчакване
                         </a>
                     }
@@ -76,7 +90,8 @@
                            asp-action="@GlobalConstants.ChangeStatusAction"
                            asp-controller="@GlobalConstants.OrdersController"
                            asp-route-id="@order.Id"
-                           asp-route-orderStatus="@OrderStatus.Completed">
+                           asp-route-orderStatus="@OrderStatus.Completed"
+                           class="btn btn-sm">
                             Завърши
                         </a>
                     }
@@ -85,3 +100,14 @@
         }
     </tbody>
 </table>
+
+
+<script>
+    let dropDownValue = document.getElementById("dropDown");
+
+    dropDownValue.onchange = function() {
+      if (this.selectedIndex !== 0) {
+        window.location.href = this.value;
+      }
+    };
+</script>
