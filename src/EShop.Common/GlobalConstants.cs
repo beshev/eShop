@@ -135,5 +135,9 @@
         public const string DisplayBullstat = "Булстат";
 
         public const string DisplayMall = "МОЛ";
+
+        public const string DisplayCompanyAddress = "Адрес на компанията";
+
+        public const string DisplayIsRegisteredByVAT = "Регистрирана ли е по ДДС";
     }
 }

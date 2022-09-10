@@ -47,5 +47,12 @@
         [MaxLength(DataConstants.MallMaxLength)]
         [Display(Name = GlobalConstants.DisplayMall)]
         public string Mall { get; set; }
+
+        [Display(Name = GlobalConstants.DisplayCompanyAddress)]
+        [MaxLength(DataConstants.CompanyAddressMaxLength)]
+        public string CompanyAddress { get; set; }
+
+        [Display(Name = GlobalConstants.DisplayIsRegisteredByVAT)]
+        public bool IsRegisteredByVAT { get; set; }
     }
 }

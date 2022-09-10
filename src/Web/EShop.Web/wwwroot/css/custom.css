@@ -19,9 +19,22 @@ input[type="number"] {
     margin-top: 10px;
 }
 
+.right {
+    text-align: right;
+}
+
+.left {
+    text-align: left;
+}
+
 .center-element {
     display: flex;
     justify-content: center;
+}
+
+.right-element {
+    display: flex;
+    justify-content: right;
 }
 
 .details-desc-size {

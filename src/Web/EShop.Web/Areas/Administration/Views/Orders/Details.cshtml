@@ -1,126 +1,89 @@
 ﻿@model OrderDetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    this.ViewData["Title"] = "Поръчка детайли";
+    var deliveryAddressType = this.Model.UserInfo.DeliveryAddressType.Equals(AddressType.CarrierOffice)
+        ? "Офис"
+        : "Адрес";
+    var IsRegisteredByVATAsString = this.Model.UserInfo.IsRegisteredByVAT
+        ? "<i class=\"fa-solid fa-check text-success fa-xl\"></i>"
+        : "<i class=\"fa-solid fa-circle-xmark text-danger fa-xl\"></i>";
 }
 
-<h1>Details</h1>
+<h1 class="text-center">@this.ViewData["Title"]</h1>
 
-<div>
-    <h4>OrderDetailsModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalPrice)
-        </dt>
-        <dd class="col-sm-10">
-            <h6>@Html.DisplayFor(model => model.TotalPrice) лв</h6>
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </dt>
-        <dd class="col-sm-10">
-            @this.Model.CreatedOn.ToLocalTime()
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserInfo.FirstName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserInfo.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserInfo.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserInfo.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserInfo.DeliveryAddress)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserInfo.DeliveryAddress)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserInfo.Carrier)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserInfo.Carrier)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserInfo.DeliveryAddressType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserInfo.DeliveryAddressType)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserInfo.Phone)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserInfo.Phone)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserInfo.City)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserInfo.City)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserInfo.Bullstat)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserInfo.Bullstat)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserInfo.Mall)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserInfo.Mall)
-        </dd>
-    </dl>
-    <hr />
-    <dl class="row">
-        @foreach (var item in this.Model.OrderItems)
-        {
-            <dt class="col-sm-2">
-                ProductName
-            </dt>
-            <dd class="col-sm-10">
-                @item.ProductName
-            </dd>
-            <dt class="col-sm-2">
-                Price
-            </dt>
-            <dd class="col-sm-10">
-                @item.Price x @item.Quantity = @((item.Price * @item.Quantity).ToString("F2")) лв
-            </dd>
-            <dt class="col-sm-2">
-                Description
-            </dt>
-            <dd class="col-sm-10">
-                @item.Description
-            </dd>
-            <dt class="col-sm-2">
-                FontStyle
-            </dt>
-            <dd class="col-sm-10">
-                @item.FontStyle
-            </dd>
-            <dt class="col-sm-2">
-                Quantity
-            </dt>
-            <dd class="col-sm-10">
-                @item.Quantity
-            </dd>
-            @foreach (var imageUrl in item.Images)
-            {
-                <dt class="col-sm-2">
-                    Image
-                </dt>
-                <dd class="col-sm-10">
-                    <a href="@imageUrl" target="_blank">Snimka</a>
-                </dd>
-            }
-            <hr />
-        }
-    </dl>
+<div class="col-lg-6">
+    <div class="m-1">
+        <strong>@Html.DisplayNameFor(x => x.UserInfo.FirstName):</strong> @this.Model.UserInfo.FirstName @this.Model.UserInfo.LastName
+    </div>
+    <div class="m-1">
+        <strong>@Html.DisplayNameFor(x => x.UserInfo.Carrier):</strong> @this.Model.UserInfo.Carrier
+    </div>
+    <div class="m-1">
+        <strong>@Html.DisplayNameFor(x => x.UserInfo.DeliveryAddressType):</strong> @deliveryAddressType
+    </div>
+    <div class="m-1">
+        <strong>@Html.DisplayNameFor(x => x.UserInfo.DeliveryAddress):</strong> @this.Model.UserInfo.DeliveryAddress
+    </div>
+    <div class="m-1">
+        <strong>@Html.DisplayNameFor(x => x.UserInfo.City):</strong> @this.Model.UserInfo.City
+    </div>
+    <div class="m-1">
+        <strong>@Html.DisplayNameFor(x => x.UserInfo.Phone):</strong> @this.Model.UserInfo.Phone
+    </div>
+    <div class="m-1">
+        <strong>Създадена на:</strong> @this.Model.CreatedOn.ToLocalTime()
+    </div>
+</div>
+<div class="col-lg-6">
+    <div class="m-1">
+        <strong>@Html.DisplayNameFor(model => model.UserInfo.Bullstat):</strong> @this.Model.UserInfo.Bullstat
+    </div>
+    <div class="m-1">
+        <strong>@Html.DisplayNameFor(model => model.UserInfo.Mall):</strong> @this.Model.UserInfo.Mall
+    </div>
+    <div class="m-1">
+        <strong>@Html.DisplayNameFor(model => model.UserInfo.CompanyAddress):</strong> @this.Model.UserInfo.CompanyAddress
+    </div>
+    <div class="m-1">
+        <strong style="margin-right: 10px">@Html.DisplayNameFor(model => model.UserInfo.IsRegisteredByVAT):</strong> @Html.Raw(IsRegisteredByVATAsString)
+    </div>
+    <div class="h4 mt-3">
+        Крайна цена - @this.Model.TotalPrice.ToString("F2") лв
+    </div>
+</div>
+<hr />
+<h2 class="text-center">Продукти</h2>
+<div class="row">
+    @foreach (var item in this.Model.OrderItems)
+    {
+        <div class="col-lg-5 border-1 border border-light m-4">
+            <div class="mt-2 right-element">
+                <i class="fa-solid fa-sack-dollar fa-xl text-success"></i>
+            </div>
+            <div>
+                <strong>Име:</strong> @item.ProductName
+            </div>
+            <div>
+                <strong>Цена:</strong> @item.Price x @item.Quantity = @((item.Price * @item.Quantity).ToString("F2")) лв
+            </div>
+            <div>
+                <strong>Описание:</strong> @item.Description
+            </div>
+            <div>
+                <strong>Шрифт номер:</strong> @item.FontStyle
+            </div>
+            <div>
+                <strong>Количество:</strong> @item.Quantity
+            </div>
+            <div class="row text-center">
+                @foreach (var imageUrl in item.Images)
+                {
+                    <div class="col-lg-2 m-1">
+                        <a href="@imageUrl" class="btn btn-sm btn-warning" target="_blank">Снимка</a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
 </div>
