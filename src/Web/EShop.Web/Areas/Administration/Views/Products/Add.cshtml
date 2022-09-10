@@ -1,7 +1,7 @@
 ﻿@model ProductInputModel
 
 @{
-    this.ViewData["Title"] = "Add Product";
+    this.ViewData["Title"] = "Добави продукт";
 }
 
 <div class="text-center">
@@ -13,17 +13,17 @@
         <div class="form-grup m-1">
             <span asp-validation-for="Name" class="text-danger"></span>
             <label asp-for="Name"></label>
-            <input asp-for="Name" class="form-control inputHover" placeholder="Име на темплейта..." />
+            <input asp-for="Name" class="form-control inputHover" placeholder="Име на продукта..." />
         </div>
         <div class="form-grup m-1">
             <span asp-validation-for="Description" class="text-danger"></span>
             <label asp-for="Description"></label>
-            <textarea asp-for="Description" class="form-control inputHover" placeholder="Описание на темплейта..."></textarea>
+            <textarea asp-for="Description" class="form-control inputHover" placeholder="Описание на продукта..."></textarea>
         </div>
         <div class="form-grup m-1">
             <span asp-validation-for="Image" class="text-danger"></span>
             <label asp-for="Image"></label>
-            <input asp-for="Image" class="form-control" placeholder="Снимка на темплейта..." />
+            <input asp-for="Image" class="form-control" placeholder="Снимка на продукта..." />
         </div>
         <div class="form-grup d-inline-block m-1">
             <span asp-validation-for="HasCustomText" class="text-danger"></span>
