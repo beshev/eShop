@@ -4,7 +4,7 @@
 <div class="form-group">
     <label>Под категории</label>
     <select name="SubCategoryId"
-            class="form-select"
+            class="form-select m-1"
             asp-items="@(new SelectList(Model, nameof(SelectViewModel.Id), nameof(SelectViewModel.Name)))">
             <option value="">Няма</option>
     </select>

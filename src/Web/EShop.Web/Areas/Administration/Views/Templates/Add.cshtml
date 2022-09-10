@@ -10,37 +10,39 @@
     </h1>
 
     <form asp-area="Administration" asp-controller="Templates" asp-action="Add" enctype="multipart/form-data" class="col-lg-6 offset-lg-3">
-        <div class="form-grup">
+        <div class="form-grup m-1">
             <label asp-for="Name"></label>
             <span asp-validation-for="Name" class="text-danger"></span>
-            <input asp-for="Name" class="form-control" placeholder="Имен на темплейта..." />
+            <input asp-for="Name" class="form-control inputHover" placeholder="Имен на темплейта..." />
         </div>
-        <div class="form-grup has-danger">
+        <div class="form-grup has-danger m-1">
             <label asp-for="Description"></label>
             <span asp-validation-for="Description" class="text-danger"></span>
-            <textarea asp-for="Description" class="form-control" placeholder="Описание на темплейта..."></textarea>
+            <textarea asp-for="Description" class="form-control inputHover" placeholder="Описание на темплейта..."></textarea>
         </div>
-        <div class="form-grup">
+        <div class="form-grup m-1">
             <label asp-for="Price"></label>
             <span asp-validation-for="Price" class="text-danger"></span>
-            <input asp-for="Price" class="form-control" placeholder="Цена на темплейта..." />
+            <input asp-for="Price" class="form-control inputHover" placeholder="Цена на темплейта..." />
         </div>
-        <div class="form-grup">
+        <div class="form-grup m-1">
             <label asp-for="Image"></label>
             <span asp-validation-for="Image" class="text-danger"></span>
             <input asp-for="Image" class="form-control" placeholder="Снимка на темплейта..." />
         </div>
-        <div class="form-grup">
+        <div class="form-grup m-1">
             <label asp-for="ImagesFixedCount"></label>
             <span asp-validation-for="ImagesFixedCount" class="text-danger"></span>
-            <input asp-for="ImagesFixedCount" class="form-control" placeholder="Борй на снимки за темплейта..." />
+            <div class="center-element">
+                <input asp-for="ImagesFixedCount" class="rounded border-warning border-5" min="0" />
+            </div>
         </div>
-        <div class="form-grup">
+        <div class="form-grup m-1 d-inline-block">
             <label asp-for="HasCustomText"></label>
             <span asp-validation-for="HasCustomText" class="text-danger"></span>
             <input asp-for="HasCustomText" type="checkbox" />
         </div>
-        <div class="form-grup">
+        <div class="form-grup m-1 d-inline-block">
             <label asp-for="IsBaseModel"></label>
             <span asp-validation-for="IsBaseModel" class="text-danger"></span>
             <input type="checkbox" asp-for="IsBaseModel" type="checkbox" />
@@ -48,15 +50,15 @@
 
         <vc:template-sub-categories category-id="0"></vc:template-sub-categories>
 
-        <div class="form-grup">
+        <div class="form-grup m-1">
             <label>Категории</label>
-            <select name="CategoriesIds" class="form-select" multiple>
+            <select name="CategoriesIds" class="form-select inputHover" multiple>
                 <vc:categories-select is-for-products="false"></vc:categories-select>
             </select>
         </div>
 
         <div class="form-grup" style="margin-top: 2%;">
-            <input type="submit" class="btn btn-outline-dark" value="Add" />
+            <input type="submit" class="btn btn-danger" value="Добави" />
         </div>
     </form>
 </div>
