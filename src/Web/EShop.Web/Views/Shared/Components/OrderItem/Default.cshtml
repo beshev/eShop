@@ -23,7 +23,7 @@
                     <label asp-for="OrderInfo.FontStyle"></label>
                     <label asp-for="OrderInfo.FontStyle"> - <a style="text-decoration: underline" href="https://res.cloudinary.com/beshev/image/upload/v1662290459/E-shop/templates/301015808_768770797700753_2492550915792899201_n_m0jlmu.jpg" target="_blank">избетере от тук</a></label>
                     <div class="center-element">
-                        <input asp-for="OrderInfo.FontStyle" class="rounded border-warning border-5" value="1" min="1" name="FontStyle" type="number" />
+                        <input asp-for="OrderInfo.FontStyle" class="rounded border-warning border-5 validator" value="1" min="1" name="FontStyle" type="number" />
                     </div>
                     <span asp-validation-for="OrderInfo.FontStyle" class="text-danger"></span>
                 </div>
@@ -38,7 +38,7 @@
         <div class="mt-2 form-grup child">
             <label asp-for="OrderInfo.Quantity"></label>
             <div class="center-element">
-                <input asp-for="OrderInfo.Quantity" class="rounded border-warning border-5" min="1" value="1" name="Quantity" type="number" />
+                <input asp-for="OrderInfo.Quantity" class="rounded border-warning border-5 validator" min="1" name="Quantity" type="number" />
             </div>
             <span asp-validation-for="OrderInfo.Quantity" class="text-danger"></span>
         </div>

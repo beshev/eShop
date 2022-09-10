@@ -21,21 +21,9 @@
             <textarea asp-for="Description" class="form-control inputHover" placeholder="Описание на темплейта..."></textarea>
         </div>
         <div class="form-grup m-1">
-            <label asp-for="Price"></label>
-            <span asp-validation-for="Price" class="text-danger"></span>
-            <input asp-for="Price" class="form-control inputHover" placeholder="Цена на темплейта..." />
-        </div>
-        <div class="form-grup m-1">
             <label asp-for="Image"></label>
             <span asp-validation-for="Image" class="text-danger"></span>
             <input asp-for="Image" class="form-control" placeholder="Снимка на темплейта..." />
-        </div>
-        <div class="form-grup m-1">
-            <label asp-for="ImagesFixedCount"></label>
-            <span asp-validation-for="ImagesFixedCount" class="text-danger"></span>
-            <div class="center-element">
-                <input asp-for="ImagesFixedCount" class="rounded border-warning border-5" min="0" />
-            </div>
         </div>
         <div class="form-grup m-1 d-inline-block">
             <label asp-for="HasCustomText"></label>
@@ -47,7 +35,21 @@
             <span asp-validation-for="IsBaseModel" class="text-danger"></span>
             <input type="checkbox" asp-for="IsBaseModel" type="checkbox" />
         </div>
-
+         <div class="form-grup m-1">
+            <label asp-for="ImagesFixedCount"></label>
+            <span asp-validation-for="ImagesFixedCount" class="text-danger"></span>
+            <div class="center-element">
+                <input asp-for="ImagesFixedCount" class="rounded border-warning border-5" min="0" />
+            </div>
+        </div>
+        <div class="form-grup m-1">
+            <label asp-for="Price"></label>
+            <span asp-validation-for="Price" class="text-danger"></span>
+            <div class="center-element">
+                <input asp-for="Price" class="rounded border-warning border-5" type="number" min="0" />
+            </div>
+        </div>
+       
         <vc:template-sub-categories category-id="0"></vc:template-sub-categories>
 
         <div class="form-grup m-1">
@@ -57,7 +59,7 @@
             </select>
         </div>
 
-        <div class="form-grup" style="margin-top: 2%;">
+        <div class="form-grup m-1">
             <input type="submit" class="btn btn-danger" value="Добави" />
         </div>
     </form>

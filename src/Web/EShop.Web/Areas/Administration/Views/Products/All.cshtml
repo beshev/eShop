@@ -3,37 +3,36 @@
 @{
     this.ViewData["Title"] = "Продукти";
 }
+<div class="col-lg-3 offset-9 text-center">
+    <form asp-area="Administration" asp-controller="Products" asp-action="AddCategory" class="m-2">
+        <span class="text-danger">@this.TempData[GlobalConstants.NameOfCategory]</span>
 
-<a asp-area="Administration" asp-controller="Products" asp-action="Add" class="btn btn-primary mb-2">Добави продукт</a>
-<form asp-area="Administration" asp-controller="Products" asp-action="AddCategory">
-    <span class="text-danger">@this.TempData[GlobalConstants.NameOfCategory]</span>
+        <div class="form-group">
+            <label>Създай категория</label>
+            <input name="Name" class="form-control inputHover" placeholder="Създай категория..." />
+        </div>
+        <div class="form-group">
+            <input class="btn btn-success btn-sm m-1" type="submit" value="Създай" />
+        </div>
+    </form>
 
-    <div class="form-group">
-        <label>Създай категория</label>
-        <input name="Name" />
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Създай" />
-    </div>
-</form>
-
-<form asp-area="Administration" asp-controller="Products" asp-action="RemoveCategory">
-    <div class="form-grup">
-        <label>Категория</label>
-        <select name="CategoryId" class="form-select">
-            <vc:categories-select is-for-products="true"></vc:categories-select>
-        </select>
-    </div>
-    <input type="submit" value="Премахни" class="btn btn-danger" />
-</form>
-
+    <form asp-area="Administration" asp-controller="Products" asp-action="RemoveCategory" class="m-2">
+        <div class="form-grup">
+            <label>Категория</label>
+            <select name="CategoryId" class="form-select">
+                <vc:categories-select is-for-products="true"></vc:categories-select>
+            </select>
+        </div>
+        <input type="submit" value="Премахни" class="btn btn-danger m-2" />
+    </form>
+</div>
 <table class="table table-bordered table-hover text-center mt-2">
     <thead>
         <tr>
             <th>@GlobalConstants.ProductDisplayName</th>
             <th>@GlobalConstants.ProductDisplayPrice</th>
             <th>@GlobalConstants.ProductDisplayDescription</th>
-            <th>@GlobalConstants.ProductImageUrl</th>
+            <th><a asp-area="Administration" asp-controller="Products" asp-action="Add" class="btn btn-success btn-sm">Добави продукт</a></th>
             <th></th>
         </tr>
     </thead>
@@ -43,10 +42,10 @@
             <tr>
                 <td>@product.Name</td>
                 <td>@product.Price.ToString("F2") лв.</td>
-                <td>@product.Description</td>
-                <td><a href="@product.ImageUrl" target="_blank">Снимка</a></td>
+                <td>@product.Description.TrimIfLongerThan(50)</td>
+                <td><a href="@product.ImageUrl" class="text-warning" target="_blank">Снимка</a></td>
                 <td>
-                    <a asp-area="Administration" asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id">Изтриване</a>
+                    <a asp-area="Administration" asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-sm btn-danger">Изтриване</a>
                 </td>
             </tr>
         }

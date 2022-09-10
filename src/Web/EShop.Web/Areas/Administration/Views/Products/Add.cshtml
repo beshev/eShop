@@ -10,51 +10,54 @@
     </h1>
 
     <form asp-area="Administration" asp-controller="Products" asp-action="Add" enctype="multipart/form-data" class="col-lg-6 offset-lg-3">
-        <div class="form-grup">
+        <div class="form-grup m-1">
             <span asp-validation-for="Name" class="text-danger"></span>
             <label asp-for="Name"></label>
-            <input asp-for="Name" class="form-control" placeholder="Име на темплейта..." />
+            <input asp-for="Name" class="form-control inputHover" placeholder="Име на темплейта..." />
         </div>
-        <div class="form-grup has-danger">
+        <div class="form-grup m-1">
             <span asp-validation-for="Description" class="text-danger"></span>
             <label asp-for="Description"></label>
-            <textarea asp-for="Description" class="form-control" placeholder="Описание на темплейта..."></textarea>
+            <textarea asp-for="Description" class="form-control inputHover" placeholder="Описание на темплейта..."></textarea>
         </div>
-        <div class="form-grup">
-            <span asp-validation-for="Price" class="text-danger"></span>
-            <label asp-for="Price"></label>
-            <input asp-for="Price" class="form-control" type="number" placeholder="Цена на темплейта..." />
-        </div>
-        <div class="form-grup">
+        <div class="form-grup m-1">
             <span asp-validation-for="Image" class="text-danger"></span>
             <label asp-for="Image"></label>
             <input asp-for="Image" class="form-control" placeholder="Снимка на темплейта..." />
         </div>
-        <div class="form-grup">
-            <span asp-validation-for="ImagesCount" class="text-danger"></span>
-            <label asp-for="ImagesCount"></label>
-            <input asp-for="ImagesCount" class="form-control" type="number" />
-        </div>
-        <div class="form-grup">
+        <div class="form-grup d-inline-block m-1">
             <span asp-validation-for="HasCustomText" class="text-danger"></span>
             <label asp-for="HasCustomText"></label>
             <input asp-for="HasCustomText" type="checkbox" />
         </div>
-        <div class="form-grup">
+        <div class="form-grup d-inline-block m-1">
             <span asp-validation-for="HasFontStyle" class="text-danger"></span>
             <label asp-for="HasFontStyle"></label>
             <input asp-for="HasFontStyle" type="checkbox" />
         </div>
-
-        <div class="form-grup">
+        <div class="form-grup m-1">
+            <span asp-validation-for="ImagesCount" class="text-danger"></span>
+            <label asp-for="ImagesCount"></label>
+            <div class="center-element">
+                <input asp-for="ImagesCount" class="rounded border-warning border-5" type="number" />
+            </div>
+        </div>
+        <div class="form-grup m-1">
+            <span asp-validation-for="Price" class="text-danger"></span>
+            <label asp-for="Price"></label>
+            <div class="center-element">
+                <input asp-for="Price" class="rounded border-warning border-5" type="number" />
+            </div>
+        </div>
+        <div class="form-grup m-1">
             <label>Категория</label>
             <select name="CategoryId" class="form-select">
                 <vc:categories-select is-for-products="true"></vc:categories-select>
             </select>
         </div>
 
-        <div class="form-grup" style="margin-top: 2%;">
-            <input type="submit" class="btn btn-outline-dark" value="Add" />
+        <div class="form-grup m-1">
+            <input type="submit" class="btn btn-danger" value="Добави" />
         </div>
     </form>
 </div>

@@ -6,13 +6,10 @@
 
 dashboardCounter();
 
-var currentTab = 0; // Current tab is set to be the first tab (0)
-showTab(currentTab); // Display the current tab
-
-
 function isValid() {
-    let inputElemets = [...document.querySelectorAll("form input")];
-    let isNotValid = inputElemets.some(x => x.value === '')
+    let inputElemets = [...document.querySelectorAll("form input.validator")];
+
+    let isNotValid = inputElemets.some(x => x.value === '');
 
     var button = document.getElementById("submitButton");
 
