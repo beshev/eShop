@@ -32,7 +32,7 @@
         public static int GetCollectionCount<T>(this ISession session, string key)
         {
             var value = session.GetString(key);
-            return value == null ? default(int) : JsonConvert.DeserializeObject<ICollection<T>>(value).Count;
+            return value == null ? default : JsonConvert.DeserializeObject<ICollection<T>>(value).Count;
         }
     }
 }

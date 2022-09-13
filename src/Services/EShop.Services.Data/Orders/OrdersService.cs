@@ -53,6 +53,8 @@
                     Carrier = model.UserInfo.Carrier,
                     Bullstat = model.UserInfo.Bullstat,
                     Mall = model.UserInfo.Mall,
+                    CompanyAddress = model.UserInfo.CompanyAddress,
+                    IsRegisteredByVAT = model.UserInfo.IsRegisteredByVAT,
                 },
             };
 

@@ -17,3 +17,17 @@ function isValid() {
         button.removeAttribute('disabled');
     }
 }
+
+function myFunction() {
+    var x = document.getElementById("togle");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+        removeValueFromInputs(x)
+    }
+}
+
+function removeValueFromInputs(element) {
+    [...element.querySelectorAll('input')].forEach(i => i.value = '');
+}

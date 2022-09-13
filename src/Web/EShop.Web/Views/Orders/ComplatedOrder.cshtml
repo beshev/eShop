@@ -1,35 +1,60 @@
 ﻿@model OrderInputModel
+
+@{
+    this.ViewData[GlobalConstants.Title] = "Завършена поръчка";
+    var addresTypeAsString = this.Model.UserInfo.DeliveryAddressType.Equals(AddressType.Personal)
+    ? "Дo aдрес"
+    : "До офис";
+}
+
 <div class="text-center">
     <h1>Вашата поръчка беше направена успешно</h1>
     <h2>Ще се връжем с вас за потвърждение</h2>
-
+    <h3>Благодарим ви, че пазарувате от нас!</h3>
 </div>
 
-<h3>Вашиете данни</h3>
-<ul>
-    <li>
-        @this.Model.UserInfo.FirstName @this.Model.UserInfo.LastName
-    </li>
-    <li>
-       гр. @this.Model.UserInfo.City, ул. @this.Model.UserInfo.DeliveryAddress - @this.Model.UserInfo.DeliveryAddressType
-    </li>
-    <li>
-       Куриер: @this.Model.UserInfo.Carrier
-    </li>
-    <li>
-        Телефон: @this.Model.UserInfo.Phone
-    </li>
-    @if (!string.IsNullOrWhiteSpace(this.Model.UserInfo.Bullstat))
-    {
+<div class="col-lg-6 col-12 col-sm-12 col-md-6">
+    <h6>Вашиете данни:</h6>
+    <ul>
         <li>
-            @this.Model.UserInfo.Bullstat
+            @this.Model.UserInfo.FirstName @this.Model.UserInfo.LastName
         </li>
         <li>
-            @this.Model.UserInfo.Mall
+            гр. @this.Model.UserInfo.City, ул. @this.Model.UserInfo.DeliveryAddress - @addresTypeAsString
         </li>
-    }
-    <li>Цена на поръчката <strong>без доставката</strong>: <span class="h6">@this.Model.OrderItems.Sum(x => x.Price * x.Quantity)</span></li>
-    <li>Брой продукти: <span class="h6">@this.Model.OrderItems.Count()</span></li>
-</ul>
+        <li>
+            Куриер: @this.Model.UserInfo.Carrier
+        </li>
+        <li>
+            Телефон: @this.Model.UserInfo.Phone
+        </li>
+    </ul>
+</div>
 
-<a class="btn btn-info" asp-area="" asp-controller="@GlobalConstants.HomeController" asp-action="@GlobalConstants.IndexAction">Обратно към сайта</a>
+@if (!string.IsNullOrWhiteSpace(this.Model.UserInfo.Bullstat))
+{
+    <div class="col-lg-6 col-12 col-sm-12 col-md-6">
+        <text class="h6">Данни на фирмата:</text>
+        <ul>
+            <li>
+                @this.Model.UserInfo.Bullstat
+            </li>
+            <li>
+                @this.Model.UserInfo.Mall
+            </li>
+            <li>
+                @this.Model.UserInfo.CompanyAddress
+            </li>
+            <li>
+                @this.Model.UserInfo.IsRegisteredByVAT
+            </li>
+        </ul>
+    </div>
+}
+<div class="right">
+    <span class="d-block">Закупени продукта: <span class="h6">@this.Model.OrderItems.Count() бр.</span></span>
+    <span>Цена на поръчката <strong>без доставката</strong>: <span class="h6">@this.Model.OrderItems.Sum(x => x.Price * x.Quantity) лв.</span></span>
+</div>
+<div class="col-lg-12 col-12 col-sm-12 col-md-12 m-2 right">
+    <a class="btn btn-info" asp-area="" asp-controller="@GlobalConstants.HomeController" asp-action="@GlobalConstants.IndexAction">Обратно към сайта</a>
+</div>

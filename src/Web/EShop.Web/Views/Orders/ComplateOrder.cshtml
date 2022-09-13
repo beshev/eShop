@@ -1,46 +1,101 @@
 ﻿@model UserInfoInputModel
+@{
+    this.ViewData[GlobalConstants.Title] = "Поръчка";
+}
+
+<h1 class="text-center">
+    @this.ViewData[GlobalConstants.Title]
+</h1>
 
 <form asp-area="" asp-controller="Orders" asp-action="ComplateOrder" class="col-lg-6 offset-lg-3 text-center">
-    <div class="form-grup">
-        <span asp-validation-for="FirstName" class="text-danger"></span>
-        <label asp-for="FirstName"></label>
-        <input asp-for="FirstName" class="form-control" placeholder="Име..." />
+    <div class="row">
+        <div class="col-lg-6 col-12 col-sm-12 col-md-6">
+            <div class="form-grup">
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control inputHover" placeholder="Име..." />
+            </div>
+        </div>
+        <div class="col-lg-6 col-12 col-sm-12 col-md-6">
+            <div class="form-grup has-danger">
+                <span asp-validation-for="LastName" class="text-danger"></span>
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control inputHover" placeholder="Фамилия..." />
+            </div>
+        </div>
     </div>
-    <div class="form-grup has-danger">
-        <span asp-validation-for="LastName" class="text-danger"></span>
-        <label asp-for="LastName"></label>
-        <input asp-for="LastName" class="form-control" placeholder="Фамилия..." />
+    <div class="row">
+        <div class="col-lg-6 col-12 col-sm-12 col-md-6">
+            <div class="form-grup">
+                <span asp-validation-for="Phone" class="text-danger"></span>
+                <label asp-for="Phone"></label>
+                <input asp-for="Phone" class="form-control" placeholder="Телефон за връзка..." />
+            </div>
+        </div>
+        <div class="col-lg-6 col-12 col-sm-12 col-md-6">
+            <div class="form-grup">
+                <span asp-validation-for="City" class="text-danger"></span>
+                <label asp-for="City"></label>
+                <input asp-for="City" class="form-control inputHover" placeholder="Град..." />
+            </div>
+        </div>
     </div>
-    <div class="form-grup">
-        <span asp-validation-for="Phone" class="text-danger"></span>
-        <label asp-for="Phone"></label>
-        <input asp-for="Phone" class="form-control" type="number" placeholder="Телефон..." />
+    <div class="row">
+        <div class="col-lg-6 col-12 col-sm-12 col-md-6">
+            <div class="form-grup">
+                <label asp-for="Carrier"></label>
+                <select asp-for="Carrier" class="form-select inputHover">
+                    <option value="@Carrier.Econt">@Carrier.Econt</option>
+                    <option value="@Carrier.Speedy">@Carrier.Speedy</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-6 col-12 col-sm-12 col-md-6">
+            <div class="form-grup">
+                <label asp-for="DeliveryAddressType"></label>
+                <select asp-for="DeliveryAddressType" class="form-select inputHover">
+                    <option value="@AddressType.Personal">Адрес</option>
+                    <option value="@AddressType.CarrierOffice">Офис на куриера</option>
+                </select>
+            </div>
+        </div>
     </div>
-    <div class="form-grup">
-        <span asp-validation-for="City" class="text-danger"></span>
-        <label asp-for="City"></label>
-        <input asp-for="City" class="form-control" placeholder="Град..." />
+    <div class="row">
+        <div class="form-grup">
+            <span asp-validation-for="DeliveryAddress" class="text-danger"></span>
+            <label asp-for="DeliveryAddress"></label>
+            <input asp-for="DeliveryAddress" class="form-control inputHover" placeholder="Адрес за доставка..." />
+        </div>
     </div>
-    <div class="form-grup">
-        <span asp-validation-for="DeliveryAddress" class="text-danger"></span>
-        <label asp-for="DeliveryAddress"></label>
-        <input asp-for="DeliveryAddress"  class="form-control"  placeholder="Адрес..."/>
+    <div class="row m-1">
+        <div class="form-check form-switch left" onclick="myFunction(this)">
+            <label class="form-check-label" for="flexSwitchCheckDefault">През фирма?</label>
+            <input class="form-check-input" type="checkbox">
+        </div>
     </div>
-    <div class="form-grup">
-         <label asp-for="Carrier"></label>
-        <select asp-for="Carrier" class="form-select">
-            <option value="@Carrier.Econt">@Carrier.Econt</option>
-            <option value="@Carrier.Speedy">@Carrier.Speedy</option>
-        </select>
+    <div class="row" id="togle" style="display: none">
+        <div class="form-grup">
+            <span asp-validation-for="Bullstat" class="text-danger"></span>
+            <label asp-for="Bullstat"></label>
+            <input asp-for="Bullstat" class="form-control inputHover" placeholder="Булстат..." />
+        </div>
+        <div class="form-grup">
+            <span asp-validation-for="Mall" class="text-danger"></span>
+            <label asp-for="Mall"></label>
+            <input asp-for="Mall" class="form-control inputHover" placeholder="МОЛ..." />
+        </div>
+        <div class="form-grup">
+            <span asp-validation-for="CompanyAddress" class="text-danger"></span>
+            <label asp-for="CompanyAddress"></label>
+            <input asp-for="CompanyAddress" class="form-control inputHover" placeholder="Адрес на фирмата..." />
+        </div>
+        <div class="form-grup m-2">
+            <span asp-validation-for="IsRegisteredByVAT" class="text-danger"></span>
+            <label asp-for="IsRegisteredByVAT"></label>
+            <input asp-for="IsRegisteredByVAT" class="inputHover" type="checkbox" placeholder="Име..." />
+        </div>
     </div>
-     <div class="form-grup">
-         <label asp-for="DeliveryAddressType"></label>
-        <select asp-for="DeliveryAddressType" class="form-select">
-            <option value="@AddressType.Personal">Адрес</option>
-            <option value="@AddressType.CarrierOffice">Офис на куриера</option>
-        </select>
-    </div>
-    <div class="form-grup" style="margin-top: 2%;">
-        <input type="submit" class="btn btn-outline-dark" value="Поръчай !" />
+    <div class="form-grup m-2">
+        <input type="submit" class="btn btn-danger" value="Поръчай !" />
     </div>
 </form>

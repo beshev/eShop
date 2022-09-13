@@ -3,12 +3,15 @@
 @{
     ViewData["Title"] = "Количка";
 }
-
-<h1 class="text-center mb-5 mt-3"><i class="fa-solid fa-cart-shopping fa-2xl"></i></h1>
+<div class="row">
+    <div class="col-md-12 col-12 col-sm-12 col-lg-12">
+        <h1 class="text-center mb-5 mt-3"><i class="fa-solid fa-cart-shopping fa-2xl"></i></h1>
+    </div>
+</div>
 
 @foreach (var item in this.Model)
 {
-    <div class="mb-2 col-lg-3 col-sm-12 col-12">
+    <div class="mb-2 col-lg-3 col-sm-12 col-12 col-md-6">
         <div class="card p-1 cardHoverAdmin">
             <svg xmlns="http://www.w3.org/2000/svg" class="" width="100%" height="100%" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
                 <rect width="100%" height="100%" fill="#FFFFFF"></rect>
@@ -21,7 +24,7 @@
                 {
                     <p><strong><a style="text-decoration: underline" href="https://res.cloudinary.com/beshev/image/upload/v1662290459/E-shop/templates/301015808_768770797700753_2492550915792899201_n_m0jlmu.jpg" target="_blank">Шрифт номер</a> - </strong> @item.FontStyle</p>
                 }
-                <p><strong>Вешето описание: </strong> @item.Description</p>
+                <p><strong>Вешето описание: </strong> @(item.Description ?? "няма")</p>
                 <h5>@item.Quantity бр. x @item.Price = @((item.Quantity * item.Price).ToString()) лв</h5>
                 <div class="center-element">
                     <a asp-area="" asp-action="RemoveItem" asp-controller="Cart" asp-route-id="@item.Id"><i class="fa-regular fa-circle-xmark fa-2xl text-danger"></i></a>
@@ -30,12 +33,17 @@
         </div>
     </div>
 }
+<div class="row">
+    <strong class="text-warning right">Доставката не е вкючена в крайната цена.</strong>
+    <h5 class="right">
+        Общо: @this.Model.Sum(x => x.Price * x.Quantity) лв
+    </h5>
+</div>
 
-<strong class="text-warning right">Доставката не е вкючена в крайната цена.</strong>
-<h5 class="right">
-    Общо: @this.Model.Sum(x => x.Price * x.Quantity) лв
-</h5>
-
-<div class="form-grup mt-3 text-center">
-    <a asp-area="" asp-controller="Orders" asp-action="ComplateOrder" class="btn btn-success @if(!this.Model.Any()){<text>disabled</text>}">Поръчай</a>
+<div class="row">
+    <div class="mb-3 right">
+        <a asp-area="" asp-controller="Orders" asp-action="ComplateOrder" class="btn btn-success @if(!this.Model.Any()){
+        <text>disabled</text>
+}">Поръчай</a>
+    </div>
 </div>
