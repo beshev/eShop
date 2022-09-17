@@ -52,7 +52,9 @@
         public IActionResult ComplatedOrder()
         {
             // TODO: User another view model
+            // TODO: Put model as a parameter in action
             var viewModel = this.TempData.Get<OrderInputModel>(GlobalConstants.ComplatedOrder);
+            this.TempData.Put(GlobalConstants.ComplatedOrder, viewModel);
             if (viewModel is null)
             {
                 return this.NotFound();

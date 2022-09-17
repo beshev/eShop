@@ -7,7 +7,11 @@
 
     public interface ITemplateService
     {
-        public Task<IEnumerable<TModel>> GetAllAsync<TModel>(int? productId = null, int? category = null, int skip = 0, int? take = null);
+        public Task<IEnumerable<TModel>> GetAllAsync<TModel>(int? categoryId = null, int? subCategory = null, int skip = 0, int? take = null);
+
+        public Task<IEnumerable<TModel>> GetRandomAsync<TModel>(int take, int categoryId);
+
+        public Task<int> GetRandomCategoryIdAsync();
 
         public Task<IEnumerable<TModel>> GetAllSubCategoriesAsync<TModel>();
 

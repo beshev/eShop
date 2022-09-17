@@ -1,5 +1,6 @@
 ﻿namespace EShop.Services.Data.Templates
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -182,5 +183,21 @@
             .AllAsNoTracking()
             .To<TModel>()
             .ToListAsync();
+
+        public async Task<IEnumerable<TModel>> GetRandomAsync<TModel>(int take, int categoryId)
+            => await this.templateRepo
+            .AllAsNoTracking()
+            .Where(x => x.TemplateCategories.Any(c => c.Id.Equals(categoryId)))
+            .OrderBy(x => Guid.NewGuid())
+            .Take(take)
+            .To<TModel>()
+            .ToListAsync();
+
+        public async Task<int> GetRandomCategoryIdAsync()
+            => await this.templateCategoriesRepo
+            .AllAsNoTracking()
+            .OrderBy(x => Guid.NewGuid())
+            .Select(x => x.Id)
+            .FirstOrDefaultAsync();
     }
 }
