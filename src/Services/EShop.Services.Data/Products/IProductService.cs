@@ -13,6 +13,8 @@
 
         public Task<IEnumerable<TModel>> GetAllAsync<TModel>(int? categoryId = null);
 
+        public Task<IEnumerable<TModel>> GetRandomAsync<TModel>(int count);
+
         public Task<TModel> GetByIdAsync<TModel>(int id);
 
         public Task CreateCategoryAsync(string name);

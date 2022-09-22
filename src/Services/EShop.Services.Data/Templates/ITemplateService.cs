@@ -11,7 +11,7 @@
 
         public Task<IEnumerable<TModel>> GetRandomAsync<TModel>(int take, int categoryId);
 
-        public Task<int> GetRandomCategoryIdAsync();
+        public Task<TModel> GetRandomCategoryAsync<TModel>();
 
         public Task<IEnumerable<TModel>> GetAllSubCategoriesAsync<TModel>();
 

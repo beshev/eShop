@@ -193,11 +193,11 @@
             .To<TModel>()
             .ToListAsync();
 
-        public async Task<int> GetRandomCategoryIdAsync()
+        public async Task<TModel> GetRandomCategoryAsync<TModel>()
             => await this.templateCategoriesRepo
             .AllAsNoTracking()
             .OrderBy(x => Guid.NewGuid())
-            .Select(x => x.Id)
+            .To<TModel>()
             .FirstOrDefaultAsync();
     }
 }

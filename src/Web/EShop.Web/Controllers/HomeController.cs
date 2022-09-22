@@ -3,28 +3,36 @@
     using System.Diagnostics;
     using System.Threading.Tasks;
 
+    using EShop.Services.Data.Products;
     using EShop.Services.Data.Templates;
     using EShop.Web.ViewModels;
     using EShop.Web.ViewModels.Home;
+    using EShop.Web.ViewModels.Products;
     using EShop.Web.ViewModels.Templates;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
         private readonly ITemplateService templateService;
+        private readonly IProductService productService;
 
-        public HomeController(ITemplateService templateService)
+        public HomeController(
+            ITemplateService templateService,
+            IProductService productService)
         {
             this.templateService = templateService;
+            this.productService = productService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var templateCategoryId = await this.templateService.GetRandomCategoryIdAsync();
+            var templateCategorySelectModel = await this.templateService.GetRandomCategoryAsync<SelectViewModel>();
             var viewModel = new IndexViewModel
             {
-                TemplateCategoryId = templateCategoryId,
-                Templates = await this.templateService.GetRandomAsync<TemplateBaseViewModel>(6, templateCategoryId),
+                TemplateCategoryName = templateCategorySelectModel.Name,
+                TemplateCategoryId = templateCategorySelectModel.Id,
+                Templates = await this.templateService.GetRandomAsync<TemplateBaseViewModel>(6, templateCategorySelectModel.Id),
+                Products = await this.productService.GetRandomAsync<ProductViewModel>(6),
             };
 
             return this.View(viewModel);

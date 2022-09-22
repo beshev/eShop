@@ -1,5 +1,6 @@
 ﻿namespace EShop.Services.Data.Products
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -100,6 +101,14 @@
 
             return await query.CountAsync();
         }
+
+        public async Task<IEnumerable<TModel>> GetRandomAsync<TModel>(int count)
+            => await this.productRepo
+            .AllAsNoTracking()
+            .OrderBy(x => Guid.NewGuid())
+            .Take(count)
+            .To<TModel>()
+            .ToListAsync();
 
         public async Task RemoveCategoryAsync(int categoryId)
         {
