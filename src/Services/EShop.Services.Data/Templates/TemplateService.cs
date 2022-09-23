@@ -79,12 +79,13 @@
                 .ToListAsync();
         }
 
-        public async Task CreateCategoryAsync(string name, decimal price, IEnumerable<int> tempalteIds)
+        public async Task CreateCategoryAsync(string name, decimal price, IFormFile imageUrl, IEnumerable<int> tempalteIds)
         {
             var templateCategory = new TemplateCategory
             {
                 Name = name,
                 Price = price,
+                ImageUrl = await this.cloudinaryService.UploadAsync(imageUrl, string.Format(GlobalConstants.TemplateCloundFolderName, name)),
             };
 
             if (tempalteIds is not null && tempalteIds.Any())

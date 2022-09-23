@@ -4,12 +4,15 @@
     using System.ComponentModel.DataAnnotations;
 
     using EShop.Common;
+    using Microsoft.AspNetCore.Http;
 
     public class CategoryInputModel : IValidatableObject
     {
         public string Name { get; set; }
 
         public decimal Price { get; set; }
+
+        public IFormFile Image { get; set; }
 
         public IEnumerable<int> TemplatesIds { get; set; }
 

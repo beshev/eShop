@@ -62,7 +62,7 @@
         {
             if (this.ModelState.IsValid)
             {
-                await this.templateService.CreateCategoryAsync(model.Name, model.Price, model.TemplatesIds);
+                await this.templateService.CreateCategoryAsync(model.Name, model.Price, model.Image, model.TemplatesIds);
             }
 
             return this.RedirectToAction(nameof(this.All));

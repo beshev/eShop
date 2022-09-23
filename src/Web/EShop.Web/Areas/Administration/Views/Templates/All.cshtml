@@ -26,7 +26,7 @@
 
     <div class="col-md-3 col-sm-12 text-center">
         <h5>Създай категория</h5>
-        <form asp-area="Administration" asp-controller="Templates" asp-action="AddCategory">
+        <form asp-area="Administration" asp-controller="Templates" asp-action="AddCategory" enctype="multipart/form-data">
             <span class="text-danger">@this.TempData[GlobalConstants.NameOfCategory]</span>
 
             <div class="form-group">
@@ -36,7 +36,14 @@
 
             <vc:template-select></vc:template-select>
 
-            <div class="form-grup">
+            <div class="form-grup mt-1">
+                <label class="d-block">Снимка</label>
+                <div class="center-element">
+                    <input type="file" name="Image" />
+                </div>
+            </div>
+
+            <div class="form-grup mt-1">
                 <label class="d-block">Цена</label>
                 <div class="center-element">
                     <input class="rounded border-warning border-5" type="number" name="Price" />

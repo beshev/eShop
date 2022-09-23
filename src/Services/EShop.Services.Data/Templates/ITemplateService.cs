@@ -21,7 +21,7 @@
 
         public Task<IEnumerable<TModel>> GetCategoriesAsync<TModel>();
 
-        public Task CreateCategoryAsync(string name, decimal price, IEnumerable<int> tempalteIds);
+        public Task CreateCategoryAsync(string name, decimal price, IFormFile imageUrl, IEnumerable<int> tempalteIds);
 
         public Task RemoveCategoryAsync(int categoryId);
 
