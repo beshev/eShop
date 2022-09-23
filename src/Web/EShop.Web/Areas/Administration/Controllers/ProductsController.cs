@@ -49,6 +49,12 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
+        public async Task<IActionResult> ChangeStatus(int id)
+        {
+            await this.productService.ChangeStatus(id);
+            return this.RedirectToAction(nameof(this.All));
+        }
+
         [SetTempDataErrorsAttribute(GlobalConstants.NameOfCategory)]
         public async Task<IActionResult> AddCategory(CategoryInputModel model)
         {

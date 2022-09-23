@@ -6,7 +6,6 @@
     using EShop.Common;
     using EShop.Data.Common.Models;
 
-    // TODO: Add category image
     public class TemplateCategory : BaseModel<int>
     {
         public TemplateCategory()
@@ -19,6 +18,8 @@
         public string Name { get; set; }
 
         public decimal Price { get; set; }
+
+        public string ImageUrl { get; set; }
 
         public virtual ICollection<Template> Templates { get; set; }
     }

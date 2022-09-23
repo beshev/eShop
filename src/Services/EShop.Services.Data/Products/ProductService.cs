@@ -47,6 +47,17 @@
             await this.productRepo.SaveChangesAsync();
         }
 
+        public async Task ChangeStatus(int id)
+        {
+            var product = await this.productRepo
+                .All()
+                .FirstOrDefaultAsync(x => x.Id.Equals(id));
+
+            product.IsOutOfStock = !product.IsOutOfStock;
+
+            await this.productRepo.SaveChangesAsync();
+        }
+
         public async Task CreateCategoryAsync(string name)
         {
             await this.productCategoryRepo.AddAsync(new ProductCategory { Name = name });

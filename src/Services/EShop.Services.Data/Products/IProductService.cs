@@ -11,6 +11,8 @@
 
         public Task DeleteByIdAsync(int id);
 
+        public Task ChangeStatus(int id);
+
         public Task<IEnumerable<TModel>> GetAllAsync<TModel>(int? categoryId = null);
 
         public Task<IEnumerable<TModel>> GetRandomAsync<TModel>(int count);

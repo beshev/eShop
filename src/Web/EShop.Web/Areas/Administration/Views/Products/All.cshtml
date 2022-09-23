@@ -34,6 +34,7 @@
             <th>@GlobalConstants.ProductDisplayDescription</th>
             <th><a asp-area="Administration" asp-controller="Products" asp-action="Add" class="btn btn-success btn-sm">Добави продукт</a></th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -46,6 +47,16 @@
                 <td><a href="@product.ImageUrl" class="text-warning" target="_blank">Снимка</a></td>
                 <td>
                     <a asp-area="Administration" asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-sm btn-danger">Изтриване</a>
+                </td>
+                <td>
+                    @if (product.IsOutOfStock)
+                    {
+                        <a asp-area="Administration" asp-controller="Products" asp-action="ChangeStatus" asp-route-id="@product.Id" class="btn btn-sm btn-light">Не е наличен</a>
+                    }
+                    else
+                    {
+                        <a asp-area="Administration" asp-controller="Products" asp-action="ChangeStatus" asp-route-id="@product.Id" class="btn btn-sm btn-success">В наличност</a>
+                    }
                 </td>
             </tr>
         }

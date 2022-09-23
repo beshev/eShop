@@ -23,6 +23,8 @@
 
         public bool HasCustomText { get; set; }
 
+        public bool IsOutOfStock { get; set; }
+
         public bool HasFontStyle { get; set; }
 
         public int ImagesCount { get; set; }
