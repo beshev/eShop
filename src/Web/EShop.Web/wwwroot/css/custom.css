@@ -149,6 +149,10 @@ button.accept-policy {
     line-height: inherit;
 }
 
+.icon-size {
+    font-size: 500%;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
