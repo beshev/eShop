@@ -57,6 +57,8 @@
 
         public const string ComplatedOrder = "ComplatedOrder";
 
+        public const string NameOfGallery = "Gallery";
+
         public const char Space = ' ';
 
         public const char Comma = '.';

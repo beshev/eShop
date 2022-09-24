@@ -28,6 +28,8 @@
 
         public DbSet<Template> Templates { get; set; }
 
+        public DbSet<Photo> Photos { get; set; }
+
         public DbSet<TemplateCategory> TemplateCategories { get; set; }
 
         public DbSet<TemplateSubCategory> TemplateSubCategories { get; set; }

@@ -19,7 +19,7 @@
                 var extension = Path.GetExtension(file.FileName);
                 if (this.extensions.Contains(extension.ToLower()) == false)
                 {
-                    this.ErrorMessage = $"Allowed extensions: {string.Join(' ', this.extensions)}";
+                    this.ErrorMessage = $"Разрешени формати: {string.Join(' ', this.extensions)}";
 
                     return new ValidationResult(this.ErrorMessage);
                 }

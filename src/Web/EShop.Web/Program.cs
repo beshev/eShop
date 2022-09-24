@@ -19,6 +19,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using EShop.Services.Data.Photos;
 
     public class Program
     {
@@ -94,6 +95,7 @@
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ICartService, CartService>();
             services.AddTransient<IOrdersService, OrdersService>();
+            services.AddTransient<IPhotoService, PhotoService>();
 
             services.AddSession(options =>
             {

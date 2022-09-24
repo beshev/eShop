@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="~/css/site.min.css" />
     <link rel="stylesheet" href="~/css/_variables.scss" />
     <link rel="stylesheet" href="~/css/custom.css" />
+    @await this.RenderSectionAsync("Css", required: false)
 </head>
 <body>
     <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
@@ -45,6 +46,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" asp-area="" asp-controller="Cart" asp-action="Items"><i class="fa-solid fa-cart-arrow-down"></i>Количка(@(this.Context.Session.GetCollectionCount<ShoppingCartModel>(GlobalConstants.NameOfCart)))</a>
                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="@GlobalConstants.NameOfGallery" asp-action="@GlobalConstants.NameOfGallery">Галерия</a>
+                    </li>
                     @if (this.User.IsInRole(@GlobalConstants.AdministratorRoleName))
                     {
                         <li class="nav-item">
@@ -63,7 +67,7 @@
         </div>
     </div>
 
-    <footer class="py-3 bg-dark footer">
+    <footer class="py-3 bg-dark">
         <div class="container">
             <div class="row text-center">
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4">

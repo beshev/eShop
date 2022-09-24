@@ -39,7 +39,6 @@ function Scroll(nextCarouselSelector, prevCarouselSelector, carouselInner) {
     });
 }
 
-
 function isValid() {
     let inputElemets = [...document.querySelectorAll("form input.validator")];
 

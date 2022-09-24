@@ -1,0 +1,45 @@
+﻿@using EShop.Web.ViewModels.Gallery
+@model IEnumerable<PhotoViewModel>
+
+@{
+    this.ViewData[GlobalConstants.Title] = "Галерия";
+}
+
+@if (this.User.IsInRole(@GlobalConstants.AdministratorRoleName))
+{
+    <div class="row">
+        <form asp-area="@GlobalConstants.AdministrationArea"
+          asp-action="AddPhoto"
+          asp-controller="@GlobalConstants.NameOfGallery" enctype="multipart/form-data"
+          class="col-lg-3 col-md-3 col-sm-12 col-12 offset-md-9 offset-lg-9 text-center">
+            <div class="m-2">
+                <span class="text-warning">@this.TempData[GlobalConstants.NameOfGallery]</span>
+                <label>Снимка</label>
+                <input type="file" name="photo" class="form-control" />
+            </div>
+            <div class="m-2">
+                <input type="submit" name="photo" value="Добави" class="form-control btn btn-outline-light" />
+            </div>
+        </form>
+    </div>
+}
+
+<h1 class="text-center">@this.ViewData[GlobalConstants.Title]</h1>
+<div class="main">
+    <div class="gallery">
+        @foreach (var photo in this.Model)
+        {
+            <div class="gallery__item">
+                <img src="@photo.ImageUrl" />
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts{
+<script src="~/js/gallery.js"></script>
+}
+
+@section Css{
+<link rel="stylesheet" href="~/css/galeryCss.css" />
+}
