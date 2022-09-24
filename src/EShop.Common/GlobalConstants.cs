@@ -57,8 +57,6 @@
 
         public const string ComplatedOrder = "ComplatedOrder";
 
-        public const string NameOfGallery = "Gallery";
-
         public const char Space = ' ';
 
         public const char Comma = '.';
@@ -141,5 +139,10 @@
         public const string DisplayCompanyAddress = "Адрес на компанията";
 
         public const string DisplayIsRegisteredByVAT = "Регистрирана ли е по ДДС";
+
+        // Gallery
+        public const string NameOfGallery = "Gallery";
+
+        public const string GalleryCloudFolder = "Gallery/{0}";
     }
 }

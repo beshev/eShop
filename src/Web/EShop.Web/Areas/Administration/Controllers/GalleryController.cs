@@ -30,7 +30,6 @@
             return this.RedirectToAction(GlobalConstants.NameOfGallery, new { Area = string.Empty });
         }
 
-        [HttpPost]
         public async Task<IActionResult> DeletePhoto(int id)
         {
             await this.photoService.DeletePhotoAsync(id);

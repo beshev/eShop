@@ -3,9 +3,10 @@
 
 @{
     this.ViewData[GlobalConstants.Title] = "Галерия";
+    var isAdmin = this.User.IsInRole(@GlobalConstants.AdministratorRoleName);
 }
 
-@if (this.User.IsInRole(@GlobalConstants.AdministratorRoleName))
+@if (isAdmin)
 {
     <div class="row">
         <form asp-area="@GlobalConstants.AdministrationArea"
@@ -29,7 +30,7 @@
     <div class="gallery">
         @foreach (var photo in this.Model)
         {
-            <div class="gallery__item">
+            <div class="gallery__item rounded-5">
                 <img src="@photo.ImageUrl" />
             </div>
         }

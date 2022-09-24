@@ -6,6 +6,8 @@
 
     public class Photo : BaseModel<int>
     {
+        public string Name { get; set; }
+
         [Required]
         public string ImageUrl { get; set; }
     }

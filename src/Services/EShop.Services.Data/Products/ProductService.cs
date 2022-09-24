@@ -75,6 +75,7 @@
             await this.productRepo.SaveChangesAsync();
         }
 
+        // TODO: Filter out of stock products
         public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(int? categoryId = null)
         {
             var products = this.productRepo.AllAsNoTracking();

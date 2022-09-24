@@ -29,7 +29,8 @@
         {
             var image = new Photo
             {
-                ImageUrl = await this.cloudinaryService.UploadAsync(photo, GlobalConstants.NameOfGallery),
+                Name = photo.FileName,
+                ImageUrl = await this.cloudinaryService.UploadAsync(photo, string.Format(GlobalConstants.GalleryCloudFolder, photo.FileName)),
             };
 
             await this.photoRepo.AddAsync(image);
@@ -49,6 +50,7 @@
                 .All()
                 .FirstOrDefaultAsync(x => x.Id.Equals(id));
 
+            await this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.GalleryCloudFolder, photo.Name));
             this.photoRepo.Delete(photo);
             await this.photoRepo.SaveChangesAsync();
         }
