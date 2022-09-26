@@ -11,6 +11,10 @@
 
         public decimal Price { get; set; }
 
+        public int ImagesCount { get; set; }
+
+        public bool HasCustomText { get; set; }
+
         public bool IsOutOfStock { get; set; }
 
         public string Description { get; set; }

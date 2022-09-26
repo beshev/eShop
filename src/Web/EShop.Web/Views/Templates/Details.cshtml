@@ -1,4 +1,5 @@
 ﻿@model TemplateDetailsModel
+@inject IHtmlSanitizer sanitizer
 
 @{
     var productName = $"{this.Model.Name} за {this.Model.Category.Name}";
@@ -14,7 +15,7 @@
             <div class="small text-muted">@this.Model.Name</div>
             <h2 class="card-title">@((this.Model.Price + this.Model.Category.Price).ToString("F2")) лв</h2>
             <p class="card-text details-desc-size">
-                @this.Model.Description
+                @(Html.Raw(sanitizer.Sanitize(this.Model.Description)))
             </p>
         </div>
     </div>

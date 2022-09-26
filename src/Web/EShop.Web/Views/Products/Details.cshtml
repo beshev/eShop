@@ -1,4 +1,6 @@
 ﻿@model ProductDetailsModel
+@inject IHtmlSanitizer sanitizer
+
 @{
     this.ViewData["Title"] = "Поръчка";
 }
@@ -13,7 +15,7 @@
             <div class="small text-muted">@this.Model.Name</div>
             <h2 class="card-title">@this.Model.Price.ToString("F2") лв</h2>
             <p class="card-text details-desc-size">
-                @this.Model.Description
+                @(Html.Raw(sanitizer.Sanitize(this.Model.Description)))
             </p>
         </div>
     </div>

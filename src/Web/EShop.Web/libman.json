@@ -40,6 +40,11 @@
       "provider": "cdnjs",
       "library": "font-awesome@6.2.0",
       "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "tinymce@6.2.0",
+      "destination": "wwwroot/lib/tinymce/"
     }
   ]
 }

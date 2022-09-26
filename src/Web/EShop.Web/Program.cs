@@ -20,6 +20,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using EShop.Services.Data.Photos;
+    using Ganss.XSS;
 
     public class Program
     {
@@ -96,6 +97,7 @@
             services.AddTransient<ICartService, CartService>();
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IPhotoService, PhotoService>();
+            services.AddTransient<IHtmlSanitizer, HtmlSanitizer>();
 
             services.AddSession(options =>
             {

@@ -14,5 +14,9 @@
         public string Description { get; set; }
 
         public string ImageUrl { get; set; }
+
+        public int ImagesCount { get; set; }
+
+        public bool HasCustomText { get; set; }
     }
 }

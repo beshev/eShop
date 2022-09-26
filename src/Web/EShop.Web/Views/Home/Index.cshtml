@@ -3,6 +3,11 @@
 @{
     this.ViewData["Title"] = "Начално";
 }
+<div style="font-size: 200px" class="text-center">
+    <h1>Добре дошли</h1>
+    <h3>При нас откриете перфектния подарък</h3>
+    <i class="fa-solid fa-gift text-danger"></i>
+</div>
 
 <svg xmlns="http://www.w3.org/2000/svg" class="" width="100%" height="100%" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
     <rect width="100%" height="80%" fill="#FFFFFF"></rect>
@@ -22,7 +27,27 @@
                             <image href="@template.ImageUrl" height="100%" width="100%"></image>
                         </svg>
                         <div class="card-body p-1">
-                            <p>@template.Description.TrimIfLongerThan(17)</p>
+                            <p>
+                                @if (template.ImagesCount > 0 && template.HasCustomText)
+                                {
+                                    <text>Към този темплейт може да добавите сника(ки) и собствен текст</text>
+                                }
+                                else if (template.ImagesCount == 0 && template.HasCustomText)
+                                {
+                                    <text>Към този темплейт може да добавите собствен текст</text>
+                                <p class="show-card-pading-template"></p>
+                                }
+                                else if (template.ImagesCount > 0 && template.HasCustomText == false)
+                                {
+                                    <text>Към този темплейт може да добавите сника(ки)</text>
+                                <p class="show-card-pading"></p>
+                                }
+                                else
+                                {
+                                    <text>Този темплей те направен от нас за вас</text>
+                                <p class="show-card-pading"></p>
+                                }
+                            </p>
                             <h5 style="text-align: right">@template.Price лв</h5>
                         </div>
                     </a>
@@ -53,7 +78,30 @@
                             <image href="@product.ImageUrl" height="100%" width="100%"></image>
                         </svg>
                         <div class="card-body p-1">
-                            <p>@product.Description.TrimIfLongerThan(17)</p>
+                            <p>
+                                @if (product.ImagesCount > 0 && product.HasCustomText)
+                                {
+                                    <text>Към този продукт може да добавите сника(ки) и собствен текст</text>
+                                <p class="show-card-pading"></p>
+                                }
+                                else if (product.ImagesCount == 0 && product.HasCustomText)
+                                {
+                                    <text>Към този продукт може да добавите собствен текст</text>
+                                <p class="show-card-pading show-card-pading-onsmall"></p>
+                                }
+                                else if (product.ImagesCount > 0 && product.HasCustomText == false)
+                                {
+                                    <text>Към този продукт може да добавите сника(ки)</text>
+                                <p class="show-card-pading"></p>
+                                <p class="show-card-pading"></p>
+                                }
+                                else
+                                {
+                                    <text>Този продукт те направен от нас за вас</text>
+                                <p class="show-card-pading"></p>
+                                <p class="show-card-pading"></p>
+                                }
+                            </p>
                             <h5 style="text-align: right">@product.Price лв</h5>
                         </div>
                     </a>
@@ -75,7 +123,7 @@
     <div class="col-12 col-sm-12 col-md-4 col-lg-4 mt-5">
         <i class="fa-solid fa-truck icon-size text-success"></i>
         <h5 class="ap-icon-text-title"> Бърза Доставка до 2 работни дни.</h5>
-        <div class="ap-icon-text-content"> Бърза доставка до 2 работни дни с куриерска фирма "Еконт Експрес".</div>
+        <div class="ap-icon-text-content"> Бърза доставка до 2 работни дни с куриерска фирма.</div>
     </div>
     <div class="col-12 col-sm-12 col-md-4 col-lg-4 mt-5">
         <i class="fa-solid fa-lock icon-size text-success"></i>

@@ -7,6 +7,20 @@ h1 {
     font-style: italic;
 }
 
+.show-card-pading {
+    padding: 4px;
+}
+
+@media (max-width: 520px) {
+    .show-card-pading-onsmall {
+        padding: 15px;
+    }
+
+    .show-card-pading-template {
+        padding: 4px;
+    }
+}
+
 .category-style {
     font-size: 15px;
 }
@@ -172,7 +186,6 @@ body {
 
 .footer {
     position: absolute;
-    bottom: 0;
     width: 100%;
     white-space: nowrap;
     line-height: 27px; /* Vertically center the text there */

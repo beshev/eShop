@@ -1,4 +1,9 @@
 ﻿@model AllTemplatesViewModel
+@inject IHtmlSanitizer sanitizer
+
+@{
+    this.ViewData[GlobalConstants.Title] = "Темплейти";
+}
 
 @if (this.Model.Templates.Any())
 {
@@ -26,7 +31,28 @@
                                 <image href="@template.ImageUrl" height="100%" width="100%"></image>
                             </svg>
                             <div class="card-body p-1">
-                                <p>@template.Description.TrimIfLongerThan(17)</p>
+                                <p>
+                                    @if (template.ImagesCount > 0 && template.HasCustomText)
+                                    {
+                                        <text>Към този темплейт може да добавите сника(ки) и собствен текст</text>
+                                        <p class="show-card-pading-template"></p>
+                                    }
+                                    else if (template.ImagesCount == 0 && template.HasCustomText)
+                                    {
+                                        <text>Към този темплейт може да добавите собствен текст</text>
+                                        <p class="show-card-pading"></p>
+                                    }
+                                    else if (template.ImagesCount > 0 && template.HasCustomText == false)
+                                    {
+                                        <text>Към този темплейт може да добавите сника(ки)</text>
+                                        <p class="show-card-pading"></p>
+                                    }
+                                    else
+                                    {
+                                        <text>Този темплей е направен от нас за вас</text>
+                                        <p class="show-card-pading"></p>
+                                    }
+                                </p>
                                 <h5 style="text-align: right">@template.Price лв</h5>
                             </div>
                         </a>
