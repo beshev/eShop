@@ -5,6 +5,8 @@
         // Common
         public const string Title = "Title";
 
+        public const string SuccessKey = "Success";
+
         public const string ReturnUrlKey = "ReturnUrl";
 
         public const string SystemName = "EShop";

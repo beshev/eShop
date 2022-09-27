@@ -3,6 +3,17 @@
 
 @{
     var productName = $"{this.Model.Name} за {this.Model.Category.Name}";
+    var isItemSuccessfullyAdded = this.TempData[GlobalConstants.SuccessKey] is not null;
+}
+
+@if (isItemSuccessfullyAdded)
+{
+    <div class="col-12 col-sm-12 col-md-12 col-lg-4 offset-lg-7">
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            Успешно добавихте този продукт в количката.
+        </div>
+    </div>
 }
 
 <div class="col-lg-6">

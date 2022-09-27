@@ -41,6 +41,7 @@
             cartItems.Add(cartItem);
 
             this.Session.SetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart, cartItems);
+            this.TempData[GlobalConstants.SuccessKey] = true;
 
             return this.Redirect(returnUrl);
         }

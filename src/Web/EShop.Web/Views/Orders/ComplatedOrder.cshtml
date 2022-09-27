@@ -51,10 +51,10 @@
         </ul>
     </div>
 }
-<div class="right">
+<div class="col-lg-12 col-12 col-sm-12 col-md-12 right">
     <span class="d-block">Закупени продукта: <span class="h6">@this.Model.OrderItems.Count() бр.</span></span>
     <span>Цена на поръчката <strong>без доставката</strong>: <span class="h6">@this.Model.OrderItems.Sum(x => x.Price * x.Quantity) лв.</span></span>
 </div>
-<div class="col-lg-12 col-12 col-sm-12 col-md-12 m-2 right">
+<div class="col-lg-12 col-12 col-sm-12 col-md-12 mt-2 right">
     <a class="btn btn-info" asp-area="" asp-controller="@GlobalConstants.HomeController" asp-action="@GlobalConstants.IndexAction">Обратно към сайта</a>
 </div>
