@@ -13,7 +13,7 @@
 
         public Task ChangeStatus(int id);
 
-        public Task<IEnumerable<TModel>> GetAllAsync<TModel>(int? categoryId = null);
+        public Task<IEnumerable<TModel>> GetAllAsync<TModel>(int skip = 0, int? take = null, int? categoryId = null);
 
         public Task<IEnumerable<TModel>> GetRandomAsync<TModel>(int count, bool outOfStockFilter = false);
 
@@ -23,7 +23,7 @@
 
         public Task<IEnumerable<TModel>> GetCategoriesAsync<TModel>();
 
-        public Task<int> GetCountAsync(int? categoryId);
+        public Task<int> GetCountAsync(int? categoryId = null);
 
         public Task RemoveCategoryAsync(int categoryId);
     }
