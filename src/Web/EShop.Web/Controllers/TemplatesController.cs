@@ -1,7 +1,6 @@
 ﻿namespace EShop.Web.Controllers
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using EShop.Common;
@@ -60,14 +59,11 @@
         {
             if (await this.templateService.IsCompatibleWithProductAsync(templateId, categoryId) == false)
             {
-                return this.NotFound();
+                return this.BadRequest();
             }
 
             var viewModel = await this.templateService.GetByIdAsync<TemplateDetailsModel>(templateId);
             viewModel.Category = await this.templateService.GetCategoryAsync<TemplateCategoryViewModel>(categoryId);
-
-            // TODO - This is for paginaton chek if there is a way to removed it
-            viewModel.CategoryId = categoryId;
 
             this.ViewData[GlobalConstants.ReturnUrlKey] = this.ReturnUrl;
 
