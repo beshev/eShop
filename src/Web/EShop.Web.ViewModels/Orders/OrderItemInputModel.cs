@@ -18,11 +18,9 @@
         [Range(1, int.MaxValue, ErrorMessage = ErrorMessagesConstants.QuantityField)]
         public int Quantity { get; set; }
 
-        [Required(ErrorMessage = ErrorMessagesConstants.DisplayItemFontStyle)]
         [Display(Name = GlobalConstants.NameOfFontStyle)]
-        public int? FontStyle { get; set; }
+        public int FontStyle { get; set; }
 
-        // TODO: Find way to display this validaion to user
         [AllowedExtensions]
         public IEnumerable<IFormFile> Images { get; set; }
 

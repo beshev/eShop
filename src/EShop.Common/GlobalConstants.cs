@@ -65,6 +65,9 @@
 
         public const char Slash = '/';
 
+        // Keys
+        public const string ModelStateErrorsKey = "ModelStateErrors";
+
         // Products
         public const string ProductDisplayName = "Име на продукта";
 

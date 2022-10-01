@@ -7,6 +7,7 @@
 
     <form asp-area="" asp-controller="Cart" asp-action="AddItem" class="tab" enctype="multipart/form-data" oninput="isValid()">
         <div asp-validation-summary="All" class="text-danger"></div>
+        <span class="text-danger">@this.TempData[GlobalConstants.ModelStateErrorsKey]</span>
         <input type="hidden" name="returnUrl" value="@this.Model.ReturnUrl" />
         <input type="hidden" name="ProductImageUrl" value="@this.Model.OrderInfo.ProductImageUrl" />
 

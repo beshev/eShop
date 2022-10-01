@@ -1,12 +1,12 @@
 ﻿namespace EShop.Web.Controllers
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using EShop.Common;
     using EShop.Services;
+    using EShop.Web.Infrastructure.Attributes;
     using EShop.Web.Infrastructure.Extensions;
     using EShop.Web.ViewModels.Orders;
     using EShop.Web.ViewModels.ShoppingCarts;
@@ -29,6 +29,7 @@
         }
 
         [HttpPost]
+        [SetTempDataErrors(GlobalConstants.ModelStateErrorsKey)]
         public async Task<IActionResult> AddItem(OrderItemInputModel model, string returnUrl)
         {
             model.ProductName = this.TempData[GlobalConstants.NameOfOrderProductName] as string;
@@ -36,12 +37,15 @@
             model.TemplateId = this.TempData[GlobalConstants.NameOfOrderTemplateId] as int?;
             model.ProductId = this.TempData[GlobalConstants.NameOfOrderProductId] as int?;
 
-            var cartItems = this.Session.GetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart) ?? new List<ShoppingCartModel>();
-            var cartItem = await this.cartService.MapCartModelAsync(model);
-            cartItems.Add(cartItem);
+            if (this.ModelState.IsValid)
+            {
+                var cartItems = this.Session.GetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart) ?? new List<ShoppingCartModel>();
+                var cartItem = await this.cartService.MapCartModelAsync(model);
+                cartItems.Add(cartItem);
 
-            this.Session.SetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart, cartItems);
-            this.TempData[GlobalConstants.SuccessKey] = true;
+                this.Session.SetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart, cartItems);
+                this.TempData[GlobalConstants.SuccessKey] = true;
+            }
 
             return this.Redirect(returnUrl);
         }

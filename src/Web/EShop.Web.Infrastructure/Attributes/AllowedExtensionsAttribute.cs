@@ -1,5 +1,6 @@
 ﻿namespace EShop.Web.Infrastructure.Attributes
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.IO;
     using System.Linq;
@@ -12,17 +13,44 @@
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var file = value as IFormFile;
+            var formFile = value as IFormFile;
+            var files = value as IEnumerable<IFormFile>;
 
-            if (file != null)
+            var result = default(ValidationResult);
+            if (formFile != null)
             {
-                var extension = Path.GetExtension(file.FileName);
-                if (this.extensions.Contains(extension.ToLower()) == false)
-                {
-                    this.ErrorMessage = $"Разрешени формати: {string.Join(' ', this.extensions)}";
+                result = this.Validate(formFile);
+            }
+            else if (files != null)
+            {
+                result = this.Validate(files);
+            }
 
-                    return new ValidationResult(this.ErrorMessage);
+            return result;
+        }
+
+        private ValidationResult Validate(IEnumerable<IFormFile> files)
+        {
+            foreach (var file in files)
+            {
+                var result = this.Validate(file);
+                if (result is not null)
+                {
+                    return result;
                 }
+            }
+
+            return ValidationResult.Success;
+        }
+
+        private ValidationResult Validate(IFormFile file)
+        {
+            var extension = Path.GetExtension(file.FileName);
+            if (this.extensions.Contains(extension.ToLower()) == false)
+            {
+                this.ErrorMessage = $"Разрешени формати: {string.Join(' ', this.extensions)}";
+
+                return new ValidationResult(this.ErrorMessage);
             }
 
             return ValidationResult.Success;

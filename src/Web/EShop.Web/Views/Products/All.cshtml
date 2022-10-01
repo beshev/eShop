@@ -24,7 +24,31 @@
                                 <image href="@product.ImageUrl" height="100%" width="100%"></image>
                             </svg>
                             <div class="card-body p-1">
-                                <p>@(Html.Raw(sanitizer.Sanitize(product.Description).TrimIfLongerThan(17)))</p>
+                                <p>
+                                        @if (product.ImagesCount > 0 && product.HasCustomText)
+                                        {
+                                            <text>Към този продукт може да добавите сника(ки) и собствен текст</text>
+                                            <p class="show-card-pading"></p>
+                                        }
+                                        else if (product.ImagesCount == 0 && product.HasCustomText)
+                                        {
+                                            <text>Към този продукт може да добавите собствен текст</text>
+                                            <p class="show-card-pading"></p>
+                                            <p class="show-card-pading"></p>
+                                        }
+                                        else if (product.ImagesCount > 0 && product.HasCustomText == false)
+                                        {
+                                            <text>Към този продукт може да добавите сника(ки)</text>
+                                            <p class="show-card-pading"></p>
+                                            <p class="show-card-pading"></p>
+                                        }
+                                        else
+                                        {
+                                            <text>Този продукт те направен от нас за вас</text>
+                                            <p class="show-card-pading"></p>
+                                            <p class="show-card-pading"></p>
+                                        }
+                                    </p>
                                 <h6 class="text-info text-dark text-center">Изчерпано количество</h6>
                             </div>
                         </div>

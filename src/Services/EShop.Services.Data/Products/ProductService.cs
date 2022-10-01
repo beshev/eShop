@@ -75,7 +75,6 @@
             await this.productRepo.SaveChangesAsync();
         }
 
-        // TODO: Filter out of stock products
         public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(int? categoryId = null)
         {
             var products = this.productRepo.AllAsNoTracking();
@@ -114,13 +113,22 @@
             return await query.CountAsync();
         }
 
-        public async Task<IEnumerable<TModel>> GetRandomAsync<TModel>(int count)
-            => await this.productRepo
-            .AllAsNoTracking()
-            .OrderBy(x => Guid.NewGuid())
-            .Take(count)
-            .To<TModel>()
-            .ToListAsync();
+        public async Task<IEnumerable<TModel>> GetRandomAsync<TModel>(int count, bool outOfStockFilter = false)
+        {
+            var products = this.productRepo
+                .AllAsNoTracking();
+
+            if (outOfStockFilter)
+            {
+                products = products.Where(x => x.IsOutOfStock == false);
+            }
+
+            return await products
+                .OrderBy(x => Guid.NewGuid())
+                .Take(count)
+                .To<TModel>()
+                .ToListAsync();
+        }
 
         public async Task RemoveCategoryAsync(int categoryId)
         {

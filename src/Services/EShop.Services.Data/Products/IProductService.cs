@@ -15,7 +15,7 @@
 
         public Task<IEnumerable<TModel>> GetAllAsync<TModel>(int? categoryId = null);
 
-        public Task<IEnumerable<TModel>> GetRandomAsync<TModel>(int count);
+        public Task<IEnumerable<TModel>> GetRandomAsync<TModel>(int count, bool outOfStockFilter = false);
 
         public Task<TModel> GetByIdAsync<TModel>(int id);
 
