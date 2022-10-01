@@ -23,8 +23,7 @@
 
         public IActionResult Items()
         {
-            // TODO: Put if statment in VIEW
-            var viewModel = this.Session.GetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart) ?? new List<ShoppingCartModel>();
+            var viewModel = this.Session.GetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart) ?? Enumerable.Empty<ShoppingCartModel>();
             return this.View(viewModel);
         }
 
