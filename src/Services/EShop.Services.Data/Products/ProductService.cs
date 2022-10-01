@@ -75,13 +75,18 @@
             await this.productRepo.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(int? categoryId = null)
+        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(int skip = 0, int? take = null, int? categoryId = null)
         {
             var products = this.productRepo.AllAsNoTracking();
 
             if (categoryId.HasValue)
             {
                 products = products.Where(x => x.ProductCategoryId.Equals(categoryId));
+            }
+
+            if (take.HasValue)
+            {
+                products = products.Skip(skip).Take(take.Value);
             }
 
             return await products.To<TModel>().ToListAsync();
@@ -100,7 +105,7 @@
             .To<TModel>()
             .ToListAsync();
 
-        public async Task<int> GetCountAsync(int? categoryId)
+        public async Task<int> GetCountAsync(int? categoryId = null)
         {
             var query = this.productRepo
                 .AllAsNoTracking();

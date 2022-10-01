@@ -12,6 +12,8 @@
 
     public class ProductsController : AdministrationController
     {
+        private const int ProductsPerPage = 12;
+
         private readonly IProductService productService;
 
         public ProductsController(IProductService productService)
@@ -19,11 +21,23 @@
             this.productService = productService;
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int id = 1)
         {
-            var model = await this.productService.GetAllAsync<ProductViewModel>();
+            int count = await this.productService.GetCountAsync();
+            int pagesCount = (int)Math.Ceiling((double)count / ProductsPerPage);
 
-            return this.View(model);
+            var skip = (id - 1) * ProductsPerPage;
+            var viewModel = new AllProductsViewModel
+            {
+                Area = GlobalConstants.AdministrationArea,
+                PageNumber = id,
+                PagesCount = pagesCount,
+                ForAction = nameof(this.All),
+                ForController = this.GetType().Name.Replace(nameof(Controller), string.Empty),
+                Products = await this.productService.GetAllAsync<ProductViewModel>(skip, ProductsPerPage),
+            };
+
+            return this.View(viewModel);
         }
 
         public IActionResult Add()

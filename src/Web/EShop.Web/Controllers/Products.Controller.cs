@@ -40,7 +40,7 @@
                 PagesCount = pagesCount,
                 ForAction = nameof(this.All),
                 ForController = this.GetType().Name.Replace(nameof(Controller), string.Empty),
-                Products = await this.productService.GetAllAsync<ProductViewModel>(categoryId),
+                Products = await this.productService.GetAllAsync<ProductViewModel>(skip, ProductsPerPage, categoryId),
             };
 
             return this.View(viewModel);

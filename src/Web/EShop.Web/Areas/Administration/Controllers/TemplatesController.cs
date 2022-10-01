@@ -12,6 +12,8 @@
 
     public class TemplatesController : AdministrationController
     {
+        private const int TemplatesPerPage = 12;
+
         private readonly ITemplateService templateService;
 
         public TemplatesController(ITemplateService templateService)
@@ -27,7 +29,6 @@
         [HttpPost]
         public async Task<IActionResult> Add(TemplateInputModel model)
         {
-            // TODO: Add pagination
             if (this.ModelState.IsValid == false)
             {
                 return this.View(model);
@@ -37,9 +38,21 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int id = 1)
         {
-            var viewModel = await this.templateService.GetAllAsync<TemplateBaseViewModel>();
+            int count = await this.templateService.GetCountAsync();
+            int pagesCount = (int)Math.Ceiling((double)count / TemplatesPerPage);
+
+            var skip = (id - 1) * TemplatesPerPage;
+            var viewModel = new AllTemplatesViewModel
+            {
+                Area = GlobalConstants.AdministrationArea,
+                PageNumber = id,
+                PagesCount = pagesCount,
+                ForAction = nameof(this.All),
+                ForController = this.GetType().Name.Replace(nameof(Controller), string.Empty),
+                Templates = await this.templateService.GetAllAsync<TemplateBaseViewModel>(null, null, skip, TemplatesPerPage),
+            };
 
             return this.View(viewModel);
         }

@@ -23,5 +23,7 @@
         public string ForAction { get; init; }
 
         public string ForController { get; init; }
+
+        public string Area { get; set; }
     }
 }

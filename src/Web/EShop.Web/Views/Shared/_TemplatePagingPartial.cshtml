@@ -4,7 +4,7 @@
     <ul class="pagination justify-content-center">
         <li class="page-item @if(Model.HasPreviousPage == false) { <text>disabled</text> }">
             <a class="page-link" 
-            asp-area=""
+            asp-area="@Model.Area"
             asp-controller="@Model.ForController" 
             asp-action="@Model.ForAction" 
             asp-route-id="@PagingViewModel.FirstPageNumber" 
@@ -15,7 +15,7 @@
         </li>
         <li class="page-item @if(Model.HasPreviousPage == false) {<text>disabled</text>}">
             <a class="page-link" 
-            asp-area=""
+            asp-area="@Model.Area"
             asp-controller="@Model.ForController" 
             asp-action="@Model.ForAction" 
             asp-route-id="@Model.PreviousPageNumber"
@@ -30,7 +30,7 @@
             {
                 <li class="page-item">
                     <a class="page-link" 
-                    asp-area=""
+                    asp-area="@Model.Area"
                     asp-controller="@Model.ForController" 
                     asp-action="@Model.ForAction" 
                     asp-route-id="@i"
@@ -52,7 +52,7 @@
             {
                 <li class="page-item">
                     <a class="page-link" 
-                    asp-area=""
+                    asp-area="@Model.Area"
                     asp-controller="@Model.ForController" 
                     asp-action="@Model.ForAction" 
                     asp-route-id="@i"
@@ -65,7 +65,7 @@
         }
         <li class="page-item @if(Model.HasNextPage == false) { <text>disabled</text> }">
             <a class="page-link"
-            asp-area=""
+            asp-area="@Model.Area"
             asp-controller="@Model.ForController" 
             asp-action="@Model.ForAction" 
             asp-route-id="@Model.NextPageNumber"
@@ -76,7 +76,7 @@
         </li>
         <li class="page-item @if(Model.HasNextPage == false) {<text>disabled</text>}">
             <a class="page-link"
-            asp-area=""
+            asp-area="@Model.Area"
             asp-controller="@Model.ForController" 
             asp-action="@Model.ForAction" 
             asp-route-id="@Model.LastPageNumber"
