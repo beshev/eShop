@@ -41,11 +41,9 @@
                 OrderItems = this.Session.GetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart),
             };
 
-            // Change order Id to be GUID !!
             await this.ordersService.ComplateOrderAsync(orderModel);
             this.Session.Clear();
 
-            // Send order Id and remove this
             this.TempData.Put(GlobalConstants.ComplatedOrder, orderModel);
 
             return this.RedirectToAction(nameof(this.ComplatedOrder));
@@ -53,8 +51,6 @@
 
         public IActionResult ComplatedOrder()
         {
-            // TODO: User another view model
-            // TODO: Take the order details from the database via order id passed to action
             var viewModel = this.TempData.Get<OrderInputModel>(GlobalConstants.ComplatedOrder);
             this.TempData.Put(GlobalConstants.ComplatedOrder, viewModel);
             if (viewModel is null)
