@@ -13,9 +13,13 @@
 
         public const string HomeController = "Home";
 
+        public const string CartController = "Cart";
+
         public const string OrdersController = "Orders";
 
         public const string IndexAction = "Index";
+
+        public const string ItemsAction = "Items";
 
         public const string ChangeStatusAction = "ChangeStatus";
 
