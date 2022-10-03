@@ -1,6 +1,6 @@
 ﻿@model OrderItemViewComponentModel
 
-<div class="col-lg-5 col-12 col-sm-12 col-md-12 text-center">
+<div class="col-lg-5 col-12 col-sm-12 col-md-12 text-center main-font">
     <h4>
         Моля, попълнете всички полета
     </h4>
@@ -23,7 +23,12 @@
             {
                 <div class="form-grup mt-2">
                     <label asp-for="OrderInfo.FontStyle"></label>
-                    <label asp-for="OrderInfo.FontStyle"> - <a style="text-decoration: underline" href="https://res.cloudinary.com/beshev/image/upload/v1662290459/E-shop/templates/301015808_768770797700753_2492550915792899201_n_m0jlmu.jpg" target="_blank">избетере от тук</a></label>
+                    <label asp-for="OrderInfo.FontStyle">
+                        -
+                        <a class="image-modal" style="text-decoration: underline" href="javascript:void(0)" src="https://res.cloudinary.com/beshev/image/upload/v1664627169/E-shop/301015808_768770797700753_2492550915792899201_n_pcztqe.jpg">
+                            избетере от тук
+                        </a>
+                    </label>
                     <div class="center-element">
                         <input asp-for="OrderInfo.FontStyle" class="rounded border-warning border-5 validator" value="1" min="1" name="FontStyle" type="number" />
                     </div>
