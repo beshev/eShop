@@ -9,18 +9,18 @@
     using EShop.Services;
     using Eshop.Services.Cloudinary;
     using EShop.Services.Data.Orders;
+    using EShop.Services.Data.Photos;
     using EShop.Services.Data.Products;
     using EShop.Services.Data.Templates;
     using EShop.Services.Mapping;
     using EShop.Web.Infrastructure.Extensions;
     using EShop.Web.ViewModels;
+    using Ganss.XSS;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using EShop.Services.Data.Photos;
-    using Ganss.XSS;
 
     public class Program
     {
@@ -73,6 +73,7 @@
             }
 
             app.UseHttpsRedirection();
+            app.UseHsts();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

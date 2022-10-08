@@ -33,6 +33,8 @@
 
         public const string NameOfCart = "Cart";
 
+        public const string NameOfComplatedOrder = "ComplatedOrder";
+
         public const string AdministratorRoleName = "Administrator";
 
         public const string AdministrationArea = "Administration";

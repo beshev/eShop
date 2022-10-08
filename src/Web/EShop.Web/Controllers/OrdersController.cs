@@ -1,6 +1,5 @@
 ﻿namespace EShop.Web.Controllers
 {
-    using System;
     using System.Threading.Tasks;
 
     using EShop.Common;
@@ -41,24 +40,15 @@
                 OrderItems = this.Session.GetCollection<ShoppingCartModel>(GlobalConstants.NameOfCart),
             };
 
+            if (orderModel.OrderItems is null)
+            {
+                return this.BadRequest();
+            }
+
             await this.ordersService.ComplateOrderAsync(orderModel);
             this.Session.Clear();
 
-            this.TempData.Put(GlobalConstants.ComplatedOrder, orderModel);
-
-            return this.RedirectToAction(nameof(this.ComplatedOrder));
-        }
-
-        public IActionResult ComplatedOrder()
-        {
-            var viewModel = this.TempData.Get<OrderInputModel>(GlobalConstants.ComplatedOrder);
-            this.TempData.Put(GlobalConstants.ComplatedOrder, viewModel);
-            if (viewModel is null)
-            {
-                return this.NotFound();
-            }
-
-            return this.View(viewModel);
+            return this.View(GlobalConstants.NameOfComplatedOrder, orderModel);
         }
     }
 }
