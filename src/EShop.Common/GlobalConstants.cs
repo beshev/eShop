@@ -9,7 +9,7 @@
 
         public const string ReturnUrlKey = "ReturnUrl";
 
-        public const string SystemName = "EShop";
+        public const string SystemName = "Подаръците";
 
         public const string HomeController = "Home";
 
