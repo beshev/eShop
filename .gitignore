@@ -395,3 +395,4 @@ bin
 /src/Web/FitnessBuddy.Web/appsettings.Production.json
 /src/Web/EShop.Web/appsettings.Development.json
 /src/Web/EShop.Web/wwwroot/lib
+/src/Web/EShop.Web/appsettings.Production.json
