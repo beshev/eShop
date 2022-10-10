@@ -73,7 +73,6 @@
             }
 
             app.UseHttpsRedirection();
-            app.UseHsts();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
