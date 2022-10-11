@@ -46,54 +46,64 @@
                     <strong>@order.TotalPrice.ToString("F2") лв</strong>
                 </td>
                 <td>
-                    <a asp-area="@GlobalConstants.AdministrationArea"
-                       asp-action="@GlobalConstants.DetailsAction"
-                       asp-controller="@GlobalConstants.OrdersController"
-                       asp-route-id="@order.Id"
-                       class="btn btn-sm">
-                        Детайли
-                    </a>
+                    <span class="spinner-element">
+                        <a asp-area="@GlobalConstants.AdministrationArea"
+                           asp-action="@GlobalConstants.DetailsAction"
+                           asp-controller="@GlobalConstants.OrdersController"
+                           asp-route-id="@order.Id"
+                           class="btn btn-sm form-button">
+                            Детайли
+                        </a>
+                    </span>
                     /
                     @if (this.Model.Status.Equals(OrderStatus.Completed))
                     {
-                        <a asp-area="@GlobalConstants.AdministrationArea"
-                           asp-action="@GlobalConstants.RemoveAction"
-                           asp-controller="@GlobalConstants.OrdersController"
-                           asp-route-id="@order.Id"
-                           class="btn btn-sm">
-                            Изтриване
-                        </a>
+                        <span class="spinner-element">
+                            <a asp-area="@GlobalConstants.AdministrationArea"
+                               asp-action="@GlobalConstants.RemoveAction"
+                               asp-controller="@GlobalConstants.OrdersController"
+                               asp-route-id="@order.Id"
+                               class="btn btn-sm form-button">
+                                Изтриване
+                            </a>
+                        </span>
                     }
                     else if (this.Model.Status.Equals(OrderStatus.Active))
                     {
-                        <a asp-area="@GlobalConstants.AdministrationArea"
-                           asp-action="@GlobalConstants.ChangeStatusAction"
-                           asp-controller="@GlobalConstants.OrdersController"
-                           asp-route-id="@order.Id"
-                           asp-route-orderStatus="@OrderStatus.Completed"
-                           class="btn btn-sm">
-                            Завърши
-                        </a>
+                        <span class="spinner-element">
+                            <a asp-area="@GlobalConstants.AdministrationArea"
+                               asp-action="@GlobalConstants.ChangeStatusAction"
+                               asp-controller="@GlobalConstants.OrdersController"
+                               asp-route-id="@order.Id"
+                               asp-route-orderStatus="@OrderStatus.Completed"
+                               class="btn btn-sm form-button">
+                                Завърши
+                            </a>
+                        </span>
                         <text>/</text>
-                        <a asp-area="@GlobalConstants.AdministrationArea"
-                           asp-action="@GlobalConstants.ChangeStatusAction"
-                           asp-controller="@GlobalConstants.OrdersController"
-                           asp-route-id="@order.Id"
-                           asp-route-orderStatus="@OrderStatus.Info"
-                           class="btn btn-sm">
-                            Изчакване
-                        </a>
+                        <span class="spinner-element">
+                            <a asp-area="@GlobalConstants.AdministrationArea"
+                               asp-action="@GlobalConstants.ChangeStatusAction"
+                               asp-controller="@GlobalConstants.OrdersController"
+                               asp-route-id="@order.Id"
+                               asp-route-orderStatus="@OrderStatus.Info"
+                               class="btn btn-sm form-button">
+                                Изчакване
+                            </a>
+                        </span>
                     }
                     else
                     {
-                        <a asp-area="@GlobalConstants.AdministrationArea"
-                           asp-action="@GlobalConstants.ChangeStatusAction"
-                           asp-controller="@GlobalConstants.OrdersController"
-                           asp-route-id="@order.Id"
-                           asp-route-orderStatus="@OrderStatus.Completed"
-                           class="btn btn-sm">
-                            Завърши
-                        </a>
+                        <span class="spinner-element">
+                            <a asp-area="@GlobalConstants.AdministrationArea"
+                               asp-action="@GlobalConstants.ChangeStatusAction"
+                               asp-controller="@GlobalConstants.OrdersController"
+                               asp-route-id="@order.Id"
+                               asp-route-orderStatus="@OrderStatus.Completed"
+                               class="btn btn-sm form-button">
+                                Завърши
+                            </a>
+                        </span>
                     }
                 </td>
             </tr>

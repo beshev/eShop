@@ -32,7 +32,7 @@ function buttonSpinner() {
 function addSpinnerToElement(element) {
     let divElement = document.createElement('div');
     divElement.classList.add('center-element');
-    divElement.style.marginTop = '20px';
+    divElement.style.margin = '10px';
 
     let divChildElement = document.createElement('div');
     divChildElement.classList.add('loader');

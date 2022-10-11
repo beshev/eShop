@@ -154,6 +154,8 @@
         // Gallery
         public const string NameOfGallery = "Gallery";
 
+        public const string DeletePhotoAction = "DeletePhoto";
+
         public const string GalleryCloudFolder = "Gallery/{0}";
     }
 }

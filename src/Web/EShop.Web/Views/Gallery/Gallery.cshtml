@@ -31,6 +31,21 @@
         @foreach (var photo in this.Model)
         {
             <div class="gallery__item rounded-5">
+                @if (isAdmin)
+                {
+                    <span class="spinner-element">
+                        <a 
+                            asp-area="@GlobalConstants.AdministrationArea"
+                            asp-controller="@GlobalConstants.NameOfGallery"
+                            asp-action="@GlobalConstants.DeletePhotoAction"
+                            asp-route-id="@photo.Id"
+                            class="form-button"
+                            style="font-size: 25px;">
+                            &#160
+                            <i class="fa-solid fa-xmark text-warning"></i>
+                        </a>
+                    </span>
+                }
                 <img src="@photo.ImageUrl" />
             </div>
         }
@@ -38,9 +53,9 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/gallery.js"></script>
+<script src="~/js/gallery.js"></script>
 }
 
 @section Css{
-    <link rel="stylesheet" href="~/css/galeryCss.css" />
+<link rel="stylesheet" href="~/css/galeryCss.css" />
 }
