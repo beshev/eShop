@@ -3,8 +3,33 @@
 
 // Write your JavaScript code.
 
+formSubmitSpinner();
 templatesCarousel();
 productsCarousel();
+
+function formSubmitSpinner() {
+    let forms = [...document.querySelectorAll('.spinner-form')];
+    forms.forEach(form => {
+        addEventToForm(form);
+    })
+
+    function addEventToForm(form) {
+        form.onsubmit = (e) => {
+            e.preventDefault();
+            let divElement = document.createElement('div');
+            divElement.classList.add('center-element');
+            divElement.style.marginTop = '20px';
+
+            let divChildElement = document.createElement('div');
+            divChildElement.classList.add('loader');
+
+            divElement.append(divChildElement);
+            form.querySelector('.form-button').replaceWith(divElement);
+
+            form.submit();
+        }
+    }
+}
 
 function templatesCarousel() {
     Scroll("#carousel-control-next-temp", "#carousel-control-prev-temp", ".carousel-temp");

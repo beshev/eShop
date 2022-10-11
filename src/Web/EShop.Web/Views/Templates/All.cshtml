@@ -2,7 +2,7 @@
 @inject IHtmlSanitizer sanitizer
 
 @{
-    this.ViewData[GlobalConstants.Title] = "Темплейти";
+    this.ViewData[GlobalConstants.Title] = this.Model.Category.Name;
 }
 
 @if (this.Model.Templates.Any())
@@ -34,22 +34,22 @@
                                 <p>
                                     @if (template.ImagesCount > 0 && template.HasCustomText)
                                     {
-                                        <text>Към този темплейт може да добавите сника(ки) и собствен текст</text>
+                                        <text>Към този модел може да добавите сника(ки) и собствен текст</text>
                                         <p class="show-card-pading-template"></p>
                                     }
                                     else if (template.ImagesCount == 0 && template.HasCustomText)
                                     {
-                                        <text>Към този темплейт може да добавите собствен текст</text>
+                                        <text>Към този модел може да добавите собствен текст</text>
                                         <p class="show-card-pading"></p>
                                     }
                                     else if (template.ImagesCount > 0 && template.HasCustomText == false)
                                     {
-                                        <text>Към този темплейт може да добавите сника(ки)</text>
+                                        <text>Към този модел може да добавите сника(ки)</text>
                                         <p class="show-card-pading"></p>
                                     }
                                     else
                                     {
-                                        <text>Този темплей е направен от нас за вас</text>
+                                        <text>Този модел е направен от нас за вас</text>
                                         <p class="show-card-pading"></p>
                                     }
                                 </p>

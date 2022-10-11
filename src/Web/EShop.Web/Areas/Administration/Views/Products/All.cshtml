@@ -4,26 +4,26 @@
     this.ViewData["Title"] = "Продукти";
 }
 <div class="col-lg-3 offset-9 text-center">
-    <form asp-area="Administration" asp-controller="Products" asp-action="AddCategory" class="m-2">
+    <form asp-area="Administration" asp-controller="Products" asp-action="AddCategory" class="m-2 spinner-form">
         <span class="text-danger">@this.TempData[GlobalConstants.NameOfCategory]</span>
 
         <div class="form-group">
             <label>Създай категория</label>
             <input name="Name" class="form-control inputHover" placeholder="Създай категория..." />
         </div>
-        <div class="form-group">
+        <div class="form-group form-button">
             <input class="btn btn-success btn-sm m-1" type="submit" value="Създай" />
         </div>
     </form>
 
-    <form asp-area="Administration" asp-controller="Products" asp-action="RemoveCategory" class="m-2">
+    <form asp-area="Administration" asp-controller="Products" asp-action="RemoveCategory" class="m-2 spinner-form">
         <div class="form-grup">
             <label>Категория</label>
             <select name="CategoryId" class="form-select">
                 <vc:categories-select is-for-products="true"></vc:categories-select>
             </select>
         </div>
-        <input type="submit" value="Премахни" class="btn btn-danger m-2" />
+        <input type="submit" value="Премахни" class="btn btn-danger m-2 form-button" />
     </form>
 </div>
 <table class="table table-bordered table-hover text-center mt-2">

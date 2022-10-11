@@ -5,7 +5,7 @@
         Моля, попълнете всички полета
     </h4>
 
-    <form asp-area="" asp-controller="Cart" asp-action="AddItem" class="tab" enctype="multipart/form-data" oninput="isValid()">
+    <form asp-area="" asp-controller="Cart" asp-action="AddItem" class="tab spinner-form" enctype="multipart/form-data" oninput="isValid()">
         <div asp-validation-summary="All" class="text-danger"></div>
         <span class="text-danger">@this.TempData[GlobalConstants.ModelStateErrorsKey]</span>
         <input type="hidden" name="returnUrl" value="@this.Model.ReturnUrl" />
@@ -50,7 +50,7 @@
             <span asp-validation-for="OrderInfo.Quantity" class="text-danger"></span>
         </div>
 
-        <div class="form-grup mt-3">
+        <div class="form-grup mt-3 form-button">
             <input id="submitButton" type="submit" class="btn btn-warning btnHover" value="Купи" disabled />
         </div>
     </form>

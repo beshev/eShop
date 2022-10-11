@@ -9,7 +9,7 @@
         @this.ViewData["Title"]
     </h1>
 
-    <form asp-area="Administration" asp-controller="Templates" asp-action="Add" enctype="multipart/form-data" class="col-lg-6 offset-lg-3">
+    <form asp-area="Administration" asp-controller="Templates" asp-action="Add" enctype="multipart/form-data" class="col-lg-6 offset-lg-3 spinner-form">
         <div class="form-grup m-1">
             <label asp-for="Name"></label>
             <span asp-validation-for="Name" class="text-danger"></span>
@@ -59,7 +59,7 @@
             </select>
         </div>
 
-        <div class="form-grup m-1">
+        <div class="form-grup m-1 form-button">
             <input type="submit" class="btn btn-danger" value="Добави" />
         </div>
     </form>

@@ -98,9 +98,9 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public async Task<IActionResult> RemoveSubCategory(int categoryId)
+        public async Task<IActionResult> RemoveSubCategory(int subCategoryId)
         {
-            await this.templateService.RemoveSubCategoryAsync(categoryId);
+            await this.templateService.RemoveSubCategoryAsync(subCategoryId);
             return this.RedirectToAction(nameof(this.All));
         }
     }

@@ -2,15 +2,16 @@
 @inject IHtmlSanitizer sanitizer
 
 @{
-    this.ViewData["Title"] = "Поръчка";
+    this.ViewData[GlobalConstants.Title] = this.Model.Name;
     var isItemSuccessfullyAdded = this.TempData[GlobalConstants.SuccessKey] is not null;
 }
+
 @if (isItemSuccessfullyAdded)
 {
     <div class="col-12 col-sm-12 col-md-12 col-lg-4 offset-lg-7">
         <div class="alert alert-dismissible alert-danger">
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            Успешно добавихте този продукт в количката.
+            Успешно добавихте този продукт в <a asp-controller="@GlobalConstants.CartController" asp-action="@GlobalConstants.ItemsAction" style="text-decoration: underline;">количката</a>
         </div>
     </div>
 }
