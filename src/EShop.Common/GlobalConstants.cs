@@ -141,7 +141,7 @@
 
         public const string DisplayCarrier = "Куриер";
 
-        public const string DisplayPhone = "Телофон за връзка";
+        public const string DisplayPhone = "Телефон за връзка";
 
         public const string DisplayBullstat = "Булстат";
 
