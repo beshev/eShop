@@ -46,7 +46,7 @@
                 <td>@product.Description.TrimIfLongerThan(50)</td>
                 <td><a href="@product.ImageUrl" class="text-warning" target="_blank">Снимка</a></td>
                 <td>
-                    <a asp-area="Administration" asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-sm btn-danger">Изтриване</a>
+                    <span class="spinner-element"><a asp-area="Administration" asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-sm btn-danger form-button">Изтриване</a></span>
                 </td>
                 <td>
                     @if (product.IsOutOfStock)

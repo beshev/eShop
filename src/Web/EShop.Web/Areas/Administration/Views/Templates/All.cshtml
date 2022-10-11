@@ -92,7 +92,7 @@
                     <td>@template.Description.TrimIfLongerThan(50)</td>
                     <td><a href="@template.ImageUrl" class="text-warning" target="_blank">Снимка</a></td>
                     <td>
-                        <a asp-area="Administration" asp-controller="Templates" asp-action="Delete" asp-route-id="@template.Id" class="btn btn-sm btn-danger">Изтриване</a>
+                        <span class="spinner-element"><a asp-area="Administration" asp-controller="Templates" asp-action="Delete" asp-route-id="@template.Id" class="btn btn-sm btn-danger form-button">Изтриване</a></span>
                     </td>
                 </tr>
             }

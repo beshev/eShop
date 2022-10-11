@@ -12,13 +12,13 @@
         <form asp-area="@GlobalConstants.AdministrationArea"
           asp-action="AddPhoto"
           asp-controller="@GlobalConstants.NameOfGallery" enctype="multipart/form-data"
-          class="col-lg-3 col-md-3 col-sm-12 col-12 offset-md-9 offset-lg-9 text-center">
+          class="col-lg-3 col-md-3 col-sm-12 col-12 offset-md-9 offset-lg-9 text-center spinner-form">
             <div class="m-2">
                 <span class="text-warning">@this.TempData[GlobalConstants.NameOfGallery]</span>
                 <label>Снимка</label>
                 <input type="file" name="photo" class="form-control" />
             </div>
-            <div class="m-2">
+            <div class="m-2 form-button">
                 <input type="submit" name="photo" value="Добави" class="form-control btn btn-outline-light" />
             </div>
         </form>

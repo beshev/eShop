@@ -3,6 +3,7 @@
 
 // Write your JavaScript code.
 
+buttonSpinner();
 formSubmitSpinner();
 templatesCarousel();
 productsCarousel();
@@ -10,25 +11,34 @@ productsCarousel();
 function formSubmitSpinner() {
     let forms = [...document.querySelectorAll('.spinner-form')];
     forms.forEach(form => {
-        addEventToForm(form);
-    })
-
-    function addEventToForm(form) {
         form.onsubmit = (e) => {
             e.preventDefault();
-            let divElement = document.createElement('div');
-            divElement.classList.add('center-element');
-            divElement.style.marginTop = '20px';
-
-            let divChildElement = document.createElement('div');
-            divChildElement.classList.add('loader');
-
-            divElement.append(divChildElement);
-            form.querySelector('.form-button').replaceWith(divElement);
-
+            addSpinnerToElement(form);
             form.submit();
         }
-    }
+    })
+}
+
+function buttonSpinner() {
+    let elements = [...document.querySelectorAll('.spinner-element')];
+    elements.forEach(element => {
+        element.onclick = () => {
+            addSpinnerToElement(element);
+            return true;
+        }
+    })
+}
+
+function addSpinnerToElement(element) {
+    let divElement = document.createElement('div');
+    divElement.classList.add('center-element');
+    divElement.style.marginTop = '20px';
+
+    let divChildElement = document.createElement('div');
+    divChildElement.classList.add('loader');
+
+    divElement.append(divChildElement);
+    element.querySelector('.form-button').replaceWith(divElement);
 }
 
 function templatesCarousel() {
