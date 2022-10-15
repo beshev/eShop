@@ -47,6 +47,8 @@
 
         public const string NameOfDescription = "Описание";
 
+        public const string NameOfNote = "Бележка";
+
         public const string NameOfImage = "Снимка";
 
         public const string NameOfQuantity = "Количество";

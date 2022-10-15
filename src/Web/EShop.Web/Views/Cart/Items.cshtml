@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Количка";
 }
+
+<div class="main-font"></div>
 <div class="row">
     <div class="col-md-12 col-12 col-sm-12 col-lg-12">
         <h1 class="text-center mb-5 mt-3"><i class="fa-solid fa-cart-shopping fa-2xl"></i></h1>
@@ -22,9 +24,16 @@
                 <p><strong>Прикачени снимки - </strong> @item.Images.Count бр.</p>
                 @if (item.FontStyle.HasValue)
                 {
-                    <p><strong><a style="text-decoration: underline" href="https://res.cloudinary.com/beshev/image/upload/v1662290459/E-shop/templates/301015808_768770797700753_2492550915792899201_n_m0jlmu.jpg" target="_blank">Шрифт номер</a> - </strong> @item.FontStyle</p>
+                    <p>
+                        <strong>
+                            <a class="image-modal" style="text-decoration: underline" href="javascript:void(0)" src="https://res.cloudinary.com/beshev/image/upload/v1664627169/E-shop/301015808_768770797700753_2492550915792899201_n_pcztqe.jpg">
+                                Шрифт номер
+                            </a> -
+                        </strong> @item.FontStyle
+                    </p>
                 }
                 <p><strong>Вешето описание: </strong> @(item.Description ?? "няма")</p>
+                <p><strong>Бележка: </strong> @(item.CustomerNote ?? "няма")</p>
                 <h5>@item.Quantity бр. x @item.Price = @((item.Quantity * item.Price).ToString()) лв</h5>
                 <div class="center-element">
                     <a asp-area="" asp-action="RemoveItem" asp-controller="Cart" asp-route-id="@item.Id"><i class="fa-regular fa-circle-xmark fa-2xl text-danger"></i></a>
@@ -42,8 +51,14 @@
 
 <div class="row">
     <div class="mb-3 right">
-        <a asp-area="" asp-controller="Orders" asp-action="ComplateOrder" class="btn btn-success @if(!this.Model.Any()){
-        <text>disabled</text>
-}">Поръчай</a>
+        <a asp-area="" asp-controller="Orders" asp-action="ComplateOrder" class="btn btn-success @if(!this.Model.Any()){ <text>disabled</text> }">Поръчай</a>
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/js/image-modal.js"></script>
+}
+
+@section Css{
+    <link rel="stylesheet" href="~/css/galeryCss.css" />
+}

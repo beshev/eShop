@@ -5,10 +5,6 @@
 
     public class ProductDetailsModel : ProductViewModel, IMapFrom<Product>
     {
-        public bool HasCustomText { get; set; }
-
         public bool HasFontStyle { get; set; }
-
-        public int ImagesCount { get; set; }
     }
 }

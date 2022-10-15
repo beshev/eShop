@@ -13,6 +13,8 @@
 
         public string Description { get; set; }
 
+        public string CustomerNote { get; set; }
+
         public int Quantity { get; set; }
 
         public int? FontStyle { get; set; }

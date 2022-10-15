@@ -2,7 +2,7 @@
 
 <div class="col-lg-5 col-12 col-sm-12 col-md-12 text-center main-font">
     <h4>
-        Моля, попълнете всички полета
+        Моля, попълнете всички полета според продукта/темплейта
     </h4>
 
     <form asp-area="" asp-controller="Cart" asp-action="AddItem" class="tab spinner-form" enctype="multipart/form-data" oninput="isValid()">
@@ -15,8 +15,21 @@
         {
             <div class="form-grup">
                 <label asp-for="OrderInfo.Description"></label>
-                <textarea asp-for="OrderInfo.Description" class="form-control inputHover" name="Description" placeholder="Вашият текст тук..." rows="5" cols="5"></textarea>
+                <textarea asp-for="OrderInfo.Description" class="form-control inputHover" name="Description" placeholder="Вашият текст тук..." rows="10" cols="5"></textarea>
                 <span asp-validation-for="OrderInfo.Description" class="text-danger"></span>
+            </div>
+
+            <div class="m-1">
+                <div class="form-check form-switch text-center">
+                    <div class="center-element">
+                        <input class="form-check-input" type="checkbox" onclick="myFunction(this)">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">&#160- Бележка към продукта</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-grup" id="togle" style="display: none">
+                <label asp-for="OrderInfo.CustomerNote">Моля, въведете вашата бележка тук</label>
+                <textarea asp-for="OrderInfo.CustomerNote" class="form-control inputHover" rows="5" name="CustomerNote" placeholder="Вашата бележка тук..."></textarea>
             </div>
 
             @if (this.Model.HasFontStyle)

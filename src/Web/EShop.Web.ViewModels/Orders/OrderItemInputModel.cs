@@ -14,12 +14,15 @@
         [Display(Name = ErrorMessagesConstants.DisplayItemDescription)]
         public string Description { get; set; }
 
+        [Display(Name = ErrorMessagesConstants.DisplayItemCustomerNote)]
+        public string CustomerNote { get; set; }
+
         [Display(Name = GlobalConstants.NameOfQuantity)]
         [Range(1, int.MaxValue, ErrorMessage = ErrorMessagesConstants.QuantityField)]
         public int Quantity { get; set; }
 
         [Display(Name = GlobalConstants.NameOfFontStyle)]
-        public int FontStyle { get; set; }
+        public int? FontStyle { get; set; }
 
         [AllowedExtensions]
         public IEnumerable<IFormFile> Images { get; set; }

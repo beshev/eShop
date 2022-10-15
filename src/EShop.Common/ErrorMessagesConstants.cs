@@ -16,7 +16,8 @@
         // Order Item
         public const string DisplayItemDescription = "Моля, въведете вашият текст тук";
 
-        public const string DisplayItemFontStyle = "Моля, изберете шрифт";
+        public const string DisplayItemCustomerNote = "Моля, въведете вашата бележка тук";
 
+        public const string DisplayItemFontStyle = "Моля, изберете шрифт";
     }
 }

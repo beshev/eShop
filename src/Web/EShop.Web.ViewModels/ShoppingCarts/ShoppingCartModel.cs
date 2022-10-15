@@ -24,6 +24,9 @@
         [Display(Name = GlobalConstants.NameOfDescription)]
         public string Description { get; set; }
 
+        [Display(Name = GlobalConstants.NameOfNote)]
+        public string CustomerNote { get; set; }
+
         [Display(Name = GlobalConstants.NameOfQuantity)]
         public int Quantity { get; set; }
 

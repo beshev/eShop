@@ -64,6 +64,7 @@
                 {
                     Price = item.Price,
                     Description = item.Description,
+                    CustomerNote = item.CustomerNote,
                     FontStyle = item.FontStyle ?? null,
                     ProductName = item.ProductName,
                     Quantity = item.Quantity,
