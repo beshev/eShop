@@ -36,7 +36,7 @@
 <vc:order-item
     template-id="@Model.Id"
     product-id="@null"
-    price="@this.Model.Price" 
+    price="@this.Model.Price + this.Model.Category.Price" 
     product-name="@productName" 
     has-custom-text="@this.Model.HasCustomText" 
     images-count="@this.Model.ImagesCount"
