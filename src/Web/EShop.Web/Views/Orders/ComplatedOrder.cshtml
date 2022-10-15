@@ -17,7 +17,7 @@
     <h6>Вашите данни:</h6>
     <ul>
         <li>
-            @this.Model.UserInfo.FirstName @this.Model.UserInfo.LastName
+            Име: @this.Model.UserInfo.FirstName @this.Model.UserInfo.LastName
         </li>
         <li>
             гр. @this.Model.UserInfo.City, ул. @this.Model.UserInfo.DeliveryAddress - @addresTypeAsString
@@ -37,16 +37,16 @@
         <text class="h6">Данни на фирмата:</text>
         <ul>
             <li>
-                @this.Model.UserInfo.Bullstat
+               Булстат: @this.Model.UserInfo.Bullstat
             </li>
             <li>
-                @this.Model.UserInfo.Mall
+                МОЛ: @this.Model.UserInfo.Mall
             </li>
             <li>
-                @this.Model.UserInfo.CompanyAddress
+                Адрес на фирмата: @this.Model.UserInfo.CompanyAddress
             </li>
             <li>
-                @this.Model.UserInfo.IsRegisteredByVAT
+                Регистрирана ли е по ДДС: @(this.Model.UserInfo.IsRegisteredByVAT ? "Да" : "Не")
             </li>
         </ul>
     </div>
