@@ -76,8 +76,17 @@ function Scroll(nextCarouselSelector, prevCarouselSelector, carouselInner) {
 
 function isValid() {
     let inputElemets = [...document.querySelectorAll("form input.validator")];
+    let fontStyleInput = document.querySelector('.font-input');
 
-    let isNotValid = inputElemets.some(x => x.value === '') || inputElemets.some(x => x.value === '0');
+    if (fontStyleInput) {
+        let number = parseInt(fontStyleInput.value);
+        var isNumberValid = number > 0 && number <= 13;
+    }
+
+    let isNotValid =
+        inputElemets.some(x => x.value === '')
+        || inputElemets.some(x => x.value === '0')
+        || isNumberValid == false;
 
     var button = document.getElementById("submitButton");
 

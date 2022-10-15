@@ -43,7 +43,7 @@
                         </a>
                     </label>
                     <div class="center-element">
-                        <input asp-for="OrderInfo.FontStyle" class="rounded border-warning border-5 validator" value="1" min="1" name="FontStyle" type="number" />
+                        <input asp-for="OrderInfo.FontStyle" class="rounded border-warning border-5 validator font-input" value="1" min="1" name="FontStyle" type="number" />
                     </div>
                     <span asp-validation-for="OrderInfo.FontStyle" class="text-danger"></span>
                 </div>
@@ -64,7 +64,7 @@
         </div>
 
         <div class="form-grup mt-3 form-button">
-            <input id="submitButton" type="submit" class="btn btn-warning btnHover" value="Купи" disabled />
+            <input id="submitButton" type="submit" class="btn btn-warning btnHover" value="Купи" />
         </div>
     </form>
 </div>
