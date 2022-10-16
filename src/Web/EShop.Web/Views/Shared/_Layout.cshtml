@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="~/css/custom.css" />
     @await this.RenderSectionAsync("Css", required: false)
 </head>
-<body>
+<body class="text-lightsteelblue">
     <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@
         </div>
     </div>
 
-    <footer class="py-3 bg-dark footer mt-5">
+    <footer class="py-3 footer mt-5" style="background-color: #660033;">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6">
@@ -84,9 +84,9 @@
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                     <text class="text-warning">ИНФОРМАЦИЯ</text>
                     <hr />
-                    <a asp-area="" asp-action="Privacy" asp-controller="Home">Политика на поверителност</a>
+                    <a asp-area="" asp-action="Privacy" asp-controller="Home" class="text-lightsteelblue">Политика на поверителност</a>
                     <br />
-                    <a asp-area="" asp-action="GeneralTerms" asp-controller="Home">Общи условия</a>
+                    <a asp-area="" asp-action="GeneralTerms" asp-controller="Home" class="text-lightsteelblue">Общи условия</a>
                     <br />
                 </div>
             </div>

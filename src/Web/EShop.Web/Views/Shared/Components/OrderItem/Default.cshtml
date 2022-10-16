@@ -19,19 +19,6 @@
                 <span asp-validation-for="OrderInfo.Description" class="text-danger"></span>
             </div>
 
-            <div class="m-1">
-                <div class="form-check form-switch text-center">
-                    <div class="center-element">
-                        <input class="form-check-input" type="checkbox" onclick="myFunction(this)">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">&#160- Бележка към продукта</label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-grup" id="togle" style="display: none">
-                <label asp-for="OrderInfo.CustomerNote">Моля, въведете вашата бележка тук</label>
-                <textarea asp-for="OrderInfo.CustomerNote" class="form-control inputHover" rows="5" name="CustomerNote" placeholder="Вашата бележка тук..."></textarea>
-            </div>
-
             @if (this.Model.HasFontStyle)
             {
                 <div class="form-grup mt-2">
@@ -58,6 +45,19 @@
                 <input type="file" name="Images" class="form-control mt-2">
             }
         }
+
+        <div class="m-1">
+            <div class="form-check form-switch text-center">
+                <div class="center-element">
+                    <input class="form-check-input" type="checkbox" onclick="myFunction(this)">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">&#160- Бележка към продукта</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-grup" id="togle" style="display: none">
+            <label asp-for="OrderInfo.CustomerNote">Моля, въведете вашата бележка тук</label>
+            <textarea asp-for="OrderInfo.CustomerNote" class="form-control inputHover" rows="5" name="CustomerNote" placeholder="Вашата бележка тук..."></textarea>
+        </div>
 
         <div class="mt-2 form-grup child">
             <label asp-for="OrderInfo.Quantity"></label>
