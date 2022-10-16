@@ -7,8 +7,8 @@
     animation: spin 2s linear infinite;
 }
 
-.text-lightsteelblue {
-    color: lightsteelblue;
+.text-lightcyan {
+    color: lightcyan;
 }
 
 @keyframes spin {
