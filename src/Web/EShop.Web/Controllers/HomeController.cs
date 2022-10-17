@@ -26,9 +26,10 @@
 
         public async Task<IActionResult> Index()
         {
-            var templateCategorySelectModel = await this.templateService.GetRandomCategoryAsync<SelectViewModel>();
+            var templateCategorySelectModel = await this.templateService.GetRandomCategoryAsync<TemplateCategoryViewModel>();
             var viewModel = new IndexViewModel
             {
+                TemplateCategoryPrice = templateCategorySelectModel.Price,
                 TemplateCategoryName = templateCategorySelectModel.Name,
                 TemplateCategoryId = templateCategorySelectModel.Id,
                 Templates = await this.templateService.GetRandomAsync<TemplateBaseViewModel>(8, templateCategorySelectModel.Id),

@@ -7,6 +7,8 @@
 
     public class IndexViewModel
     {
+        public decimal TemplateCategoryPrice { get; set; }
+
         public string TemplateCategoryName { get; set; }
 
         public int TemplateCategoryId { get; set; }
