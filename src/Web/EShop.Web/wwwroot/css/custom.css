@@ -208,6 +208,7 @@ body {
 }
 
 .footer {
+    bottom: -13%;
     position: absolute;
     width: 100%;
     white-space: nowrap;

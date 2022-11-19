@@ -34,7 +34,25 @@
                 return this.View(model);
             }
 
-            await this.templateService.AddAsync(model.Name, model.Description, model.Price, model.Image, model.ImagesFixedCount, model.IsBaseModel, model.HasCustomText, model.SubCategoryId, model.CategoriesIds);
+            await this.templateService.AddAsync(model.Name, model.Description, model.Price, model.Images, model.ImagesCount, model.IsBaseModel, model.HasCustomText, model.SubCategoryId, model.CategoriesIds);
+            return this.RedirectToAction(nameof(this.All));
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var template = await this.templateService.GetByIdAsync<TemplateEditModel>(id);
+            return this.View(template);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(TemplateEditModel model)
+        {
+            if (this.ModelState.IsValid == false)
+            {
+                return this.View(model);
+            }
+
+            await this.templateService.EditAsync(model.Id, model.Name, model.Description, model.Price, model.Images, model.ImagesCount, model.IsBaseModel, model.HasCustomText, model.SubCategoryId, model.CategoriesIds);
             return this.RedirectToAction(nameof(this.All));
         }
 
@@ -59,15 +77,8 @@
 
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                await this.templateService.DeleteByIdAsync(id);
-                return this.RedirectToAction(nameof(this.All));
-            }
-            catch (Exception)
-            {
-                return this.RedirectToAction(GlobalConstants.ErrorAction, GlobalConstants.HomeController, new { Area = string.Empty });
-            }
+            await this.templateService.DeleteByIdAsync(id);
+            return this.RedirectToAction(nameof(this.All));
         }
 
         [SetTempDataErrorsAttribute(GlobalConstants.NameOfCategory)]

@@ -92,7 +92,8 @@
                     <td>@template.Description.TrimIfLongerThan(50)</td>
                     <td><a href="@template.ImageUrl" class="text-warning" target="_blank">Снимка</a></td>
                     <td>
-                        <span class="spinner-element"><a asp-area="Administration" asp-controller="Templates" asp-action="Delete" asp-route-id="@template.Id" class="btn btn-sm btn-danger form-button">Изтриване</a></span>
+                        <span class="spinner-element"><a asp-area="Administration" asp-controller="Templates" asp-action="Edit" asp-route-id="@template.Id" class="btn btn-sm btn-info form-button">Редактиране</a></span> /
+                        <span class="spinner-element"><a asp-area="Administration" asp-controller="Templates" asp-action="Delete" asp-route-id="@template.Id" class="btn btn-sm btn-danger form-button">Изтриване</a></span> 
                     </td>
                 </tr>
             }

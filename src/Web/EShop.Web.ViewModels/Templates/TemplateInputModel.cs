@@ -25,11 +25,11 @@
         [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
         [Display(Name = GlobalConstants.TemplateDisplayImage)]
         [AllowedExtensionsAttribute]
-        public IFormFile Image { get; set; }
+        public IFormFile[] Images { get; set; }
 
         [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
         [Display(Name = GlobalConstants.DisplayImagesCount)]
-        public int ImagesFixedCount { get; set; }
+        public int ImagesCount { get; set; }
 
         [Display(Name = GlobalConstants.DisplayHasCustomText)]
         public bool HasCustomText { get; set; }

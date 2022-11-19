@@ -14,7 +14,7 @@
             this.templateService = templateService;
         }
 
-        public IViewComponentResult Invoke(int categoryId)
+        public IViewComponentResult Invoke(int? categoryId)
         {
             var viewModel = this.templateService.GetAllSubCategoriesAsync<SelectViewModel>().GetAwaiter().GetResult();
             this.ViewData[GlobalConstants.NameOfCategory] = categoryId;

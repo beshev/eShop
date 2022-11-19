@@ -32,22 +32,23 @@
             this.cloudinaryService = cloudinaryService;
         }
 
-        public async Task AddAsync(string name, string description, decimal price, IFormFile image, int imagesFixedCount, bool isBaseModel, bool hasCustomText, int? subCategory, IEnumerable<int> categoriesIds)
+        public async Task AddAsync(string name, string description, decimal price, IFormFile[] images, int imagesFixedCount, bool isBaseModel, bool hasCustomText, int? subCategoryId, IEnumerable<int> categoriesIds)
         {
             var categories = await (from categoriesTable in this.templateCategoriesRepo.All()
                                     where categoriesIds.Any(id => categoriesTable.Id.Equals(id))
                                     select categoriesTable).ToListAsync();
 
+            var imagesUrl = await Task.WhenAll(this.AddImagesAsync(name, images));
             var template = new Template
             {
                 Name = name,
                 Description = description,
                 Price = price,
                 ImagesCount = imagesFixedCount,
-                SubCategoryId = subCategory,
+                SubCategoryId = subCategoryId,
                 HasCustomText = hasCustomText,
                 IsBaseModel = isBaseModel,
-                ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.TemplateCloundFolderName, name)),
+                ImageUrl = string.Join(GlobalConstants.Space, imagesUrl),
                 TemplateCategories = categories,
             };
 
@@ -85,7 +86,7 @@
             {
                 Name = name,
                 Price = price,
-                ImageUrl = await this.cloudinaryService.UploadAsync(imageUrl, string.Format(GlobalConstants.TemplateCloundFolderName, name)),
+                ImageUrl = await this.cloudinaryService.UploadAsync(imageUrl, string.Format(GlobalConstants.TemplateCloundFolderName, name, 1)),
             };
 
             if (tempalteIds is not null && tempalteIds.Any())
@@ -128,7 +129,7 @@
                    .All()
                    .FirstOrDefaultAsync(template => template.Id.Equals(id));
 
-            await this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.TemplateCloundFolderName, template.Name));
+            await Task.WhenAll(this.DeleteImagesAsync(template.Name, template.ImageUrl));
             this.templateRepo.Delete(template);
             await this.templateRepo.SaveChangesAsync();
         }
@@ -200,5 +201,65 @@
             .OrderBy(x => Guid.NewGuid())
             .To<TModel>()
             .FirstOrDefaultAsync();
+
+        public async Task EditAsync(int id, string name, string description, decimal price, IFormFile[] images, int imagesFixedCount, bool isBaseModel, bool hasCustomText, int? subCategoryId, IEnumerable<int> categoriesIds)
+        {
+            var categories = await (from categoriesTable in this.templateCategoriesRepo.All()
+                                    where categoriesIds.Any(id => categoriesTable.Id.Equals(id))
+                                    select categoriesTable).ToListAsync();
+
+            var template = this.templateRepo
+                .All()
+                .Include(x => x.TemplateCategories)
+                .FirstOrDefault(x => x.Id.Equals(id));
+
+            var imagesUrls = await this.ReplaceImagesAsync(name, images, template);
+
+            template.Name = name;
+            template.ImageUrl = string.Join(GlobalConstants.Space, imagesUrls);
+            template.Description = description;
+            template.Price = price;
+            template.ImagesCount = imagesFixedCount;
+            template.SubCategoryId = subCategoryId;
+            template.HasCustomText = hasCustomText;
+            template.IsBaseModel = isBaseModel;
+            template.TemplateCategories = categories;
+
+            this.templateRepo.Update(template);
+            await this.templateRepo.SaveChangesAsync();
+        }
+
+        private async Task<IEnumerable<string>> ReplaceImagesAsync(string newName, IFormFile[] images, Template template)
+        {
+            var updatedPicturesTask = this.AddImagesAsync(newName, images);
+            var deletedPicturesTask = this.DeleteImagesAsync(template.Name, template.ImageUrl);
+
+            await Task.WhenAll(Task.WhenAll(updatedPicturesTask), Task.WhenAll(deletedPicturesTask));
+
+            return updatedPicturesTask.Select(x => x.Result);
+        }
+
+        private IEnumerable<Task<string>> AddImagesAsync(string name, IFormFile[] images)
+        {
+            var updatedPictures = new List<Task<string>>();
+            for (int i = 0; i < images.Length; i++)
+            {
+                updatedPictures.Add(this.cloudinaryService.UploadAsync(images[i], string.Format(GlobalConstants.TemplateCloundFolderName, name, i)));
+            }
+
+            return updatedPictures;
+        }
+
+        private IEnumerable<Task> DeleteImagesAsync(string name, string imagesUrls)
+        {
+            var deletedPictures = new List<Task>();
+            var imagesCount = imagesUrls.Split(GlobalConstants.Space, StringSplitOptions.RemoveEmptyEntries).Length;
+            for (int i = 0; i < imagesCount; i++)
+            {
+                deletedPictures.Add(this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.TemplateCloundFolderName, name, i)));
+            }
+
+            return deletedPictures;
+        }
     }
 }
