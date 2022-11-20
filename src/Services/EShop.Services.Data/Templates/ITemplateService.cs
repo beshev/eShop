@@ -25,9 +25,9 @@
 
         public Task RemoveCategoryAsync(int categoryId);
 
-        public Task AddAsync(string name, string description, decimal price, IFormFile[] images, int imagesFixedCount, bool isBaseModel, bool hasCustomText, int? subCategoryId, IEnumerable<int> categoriesIds);
+        public Task AddAsync(string name, string description, decimal price, IFormFile image, IFormFile secondImage, IFormFile thirdImage, int imagesFixedCount, bool isBaseModel, bool hasCustomText, int? subCategoryId, IEnumerable<int> categoriesIds);
 
-        public Task EditAsync(int id, string name, string description, decimal price, IFormFile[] images, int imagesFixedCount, bool isBaseModel, bool hasCustomText, int? subCategoryId, IEnumerable<int> categoriesIds);
+        public Task EditAsync(int id, string name, string description, decimal price, IFormFile image, IFormFile secondImage, IFormFile thirdImage, int imagesFixedCount, bool isBaseModel, bool hasCustomText, int? subCategoryId, IEnumerable<int> categoriesIds);
 
         public Task<TModel> GetByIdAsync<TModel>(int id);
 

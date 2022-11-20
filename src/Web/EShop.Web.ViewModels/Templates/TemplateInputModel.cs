@@ -25,7 +25,15 @@
         [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
         [Display(Name = GlobalConstants.TemplateDisplayImage)]
         [AllowedExtensionsAttribute]
-        public IFormFile[] Images { get; set; }
+        public virtual IFormFile Image { get; set; }
+
+        [Display(Name = GlobalConstants.TemplateDisplayImage)]
+        [AllowedExtensionsAttribute]
+        public IFormFile SecondImage { get; set; }
+
+        [Display(Name = GlobalConstants.TemplateDisplayImage)]
+        [AllowedExtensionsAttribute]
+        public IFormFile ThirdImage { get; set; }
 
         [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
         [Display(Name = GlobalConstants.DisplayImagesCount)]

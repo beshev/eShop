@@ -21,9 +21,19 @@
             <textarea asp-for="Description" id="editor" class="form-control inputHover" placeholder="Описание на темплейта..."></textarea>
         </div>
         <div class="form-grup m-1">
-            <label asp-for="Images"></label>
-            <span asp-validation-for="Images" class="text-danger"></span>
-            <input asp-for="Images" class="form-control" placeholder="Снимка на темплейта..." />
+            <label asp-for="Image"></label>
+            <span asp-validation-for="Image" class="text-danger"></span>
+            <input asp-for="Image" class="form-control" placeholder="Снимка на темплейта..." />
+        </div>
+        <div class="form-grup m-1">
+            <label asp-for="SecondImage"></label>
+            <span asp-validation-for="SecondImage" class="text-danger"></span>
+            <input asp-for="SecondImage" class="form-control" placeholder="Снимка на темплейта..." />
+        </div>
+        <div class="form-grup m-1">
+            <label asp-for="ThirdImage"></label>
+            <span asp-validation-for="ThirdImage" class="text-danger"></span>
+            <input asp-for="ThirdImage" class="form-control" placeholder="Снимка на темплейта..." />
         </div>
         <div class="form-grup m-1 d-inline-block">
             <label asp-for="HasCustomText"></label>

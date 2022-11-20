@@ -15,6 +15,10 @@
 
         public string ImageUrl { get; set; }
 
+        public string SecondImageUrl { get; set; }
+
+        public string ThirdImageUrl { get; set; }
+
         public int ImagesCount { get; set; }
 
         public bool HasCustomText { get; set; }

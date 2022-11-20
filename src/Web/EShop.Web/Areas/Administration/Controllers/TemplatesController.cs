@@ -34,7 +34,7 @@
                 return this.View(model);
             }
 
-            await this.templateService.AddAsync(model.Name, model.Description, model.Price, model.Images, model.ImagesCount, model.IsBaseModel, model.HasCustomText, model.SubCategoryId, model.CategoriesIds);
+            await this.templateService.AddAsync(model.Name, model.Description, model.Price, model.Image, model.SecondImage, model.ThirdImage, model.ImagesCount, model.IsBaseModel, model.HasCustomText, model.SubCategoryId, model.CategoriesIds);
             return this.RedirectToAction(nameof(this.All));
         }
 
@@ -52,7 +52,7 @@
                 return this.View(model);
             }
 
-            await this.templateService.EditAsync(model.Id, model.Name, model.Description, model.Price, model.Images, model.ImagesCount, model.IsBaseModel, model.HasCustomText, model.SubCategoryId, model.CategoriesIds);
+            await this.templateService.EditAsync(model.Id, model.Name, model.Description, model.Price, model.Image, model.SecondImage, model.ThirdImage, model.ImagesCount, model.IsBaseModel, model.HasCustomText, model.SubCategoryId, model.CategoriesIds);
             return this.RedirectToAction(nameof(this.All));
         }
 

@@ -32,13 +32,12 @@
             this.cloudinaryService = cloudinaryService;
         }
 
-        public async Task AddAsync(string name, string description, decimal price, IFormFile[] images, int imagesFixedCount, bool isBaseModel, bool hasCustomText, int? subCategoryId, IEnumerable<int> categoriesIds)
+        public async Task AddAsync(string name, string description, decimal price, IFormFile image, IFormFile secondImage, IFormFile thirdImage, int imagesFixedCount, bool isBaseModel, bool hasCustomText, int? subCategoryId, IEnumerable<int> categoriesIds)
         {
             var categories = await (from categoriesTable in this.templateCategoriesRepo.All()
                                     where categoriesIds.Any(id => categoriesTable.Id.Equals(id))
                                     select categoriesTable).ToListAsync();
 
-            var imagesUrl = await Task.WhenAll(this.AddImagesAsync(name, images));
             var template = new Template
             {
                 Name = name,
@@ -48,7 +47,9 @@
                 SubCategoryId = subCategoryId,
                 HasCustomText = hasCustomText,
                 IsBaseModel = isBaseModel,
-                ImageUrl = string.Join(GlobalConstants.Space, imagesUrl),
+                ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.TemplateCloundFolderName, name, 1)),
+                SecondImageUrl = await this.cloudinaryService.UploadAsync(secondImage, string.Format(GlobalConstants.TemplateCloundFolderName, name, 2)),
+                ThirdImageUrl = await this.cloudinaryService.UploadAsync(thirdImage, string.Format(GlobalConstants.TemplateCloundFolderName, name, 3)),
                 TemplateCategories = categories,
             };
 
@@ -129,7 +130,11 @@
                    .All()
                    .FirstOrDefaultAsync(template => template.Id.Equals(id));
 
-            await Task.WhenAll(this.DeleteImagesAsync(template.Name, template.ImageUrl));
+            await Task.WhenAll(
+                this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.TemplateCloundFolderName, template.Name, 1)),
+                this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.TemplateCloundFolderName, template.Name, 2)),
+                this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.TemplateCloundFolderName, template.Name, 3)));
+
             this.templateRepo.Delete(template);
             await this.templateRepo.SaveChangesAsync();
         }
@@ -202,7 +207,7 @@
             .To<TModel>()
             .FirstOrDefaultAsync();
 
-        public async Task EditAsync(int id, string name, string description, decimal price, IFormFile[] images, int imagesFixedCount, bool isBaseModel, bool hasCustomText, int? subCategoryId, IEnumerable<int> categoriesIds)
+        public async Task EditAsync(int id, string name, string description, decimal price, IFormFile image, IFormFile secondImage, IFormFile thirdImage, int imagesFixedCount, bool isBaseModel, bool hasCustomText, int? subCategoryId, IEnumerable<int> categoriesIds)
         {
             var categories = await (from categoriesTable in this.templateCategoriesRepo.All()
                                     where categoriesIds.Any(id => categoriesTable.Id.Equals(id))
@@ -213,10 +218,20 @@
                 .Include(x => x.TemplateCategories)
                 .FirstOrDefault(x => x.Id.Equals(id));
 
-            var imagesUrls = await this.ReplaceImagesAsync(name, images, template);
+            if (secondImage is not null)
+            {
+                await this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.TemplateCloundFolderName, template.Name, 2));
+                template.SecondImageUrl = await this.cloudinaryService.UploadAsync(secondImage, string.Format(GlobalConstants.TemplateCloundFolderName, name, 2));
+            }
+
+            if (thirdImage is not null)
+            {
+                await this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.TemplateCloundFolderName, template.Name, 3));
+                template.ThirdImageUrl = await this.cloudinaryService.UploadAsync(thirdImage, string.Format(GlobalConstants.TemplateCloundFolderName, name, 3));
+            }
 
             template.Name = name;
-            template.ImageUrl = string.Join(GlobalConstants.Space, imagesUrls);
+            template.ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.TemplateCloundFolderName, name, 1));
             template.Description = description;
             template.Price = price;
             template.ImagesCount = imagesFixedCount;
@@ -227,39 +242,6 @@
 
             this.templateRepo.Update(template);
             await this.templateRepo.SaveChangesAsync();
-        }
-
-        private async Task<IEnumerable<string>> ReplaceImagesAsync(string newName, IFormFile[] images, Template template)
-        {
-            var updatedPicturesTask = this.AddImagesAsync(newName, images);
-            var deletedPicturesTask = this.DeleteImagesAsync(template.Name, template.ImageUrl);
-
-            await Task.WhenAll(Task.WhenAll(updatedPicturesTask), Task.WhenAll(deletedPicturesTask));
-
-            return updatedPicturesTask.Select(x => x.Result);
-        }
-
-        private IEnumerable<Task<string>> AddImagesAsync(string name, IFormFile[] images)
-        {
-            var updatedPictures = new List<Task<string>>();
-            for (int i = 0; i < images.Length; i++)
-            {
-                updatedPictures.Add(this.cloudinaryService.UploadAsync(images[i], string.Format(GlobalConstants.TemplateCloundFolderName, name, i)));
-            }
-
-            return updatedPictures;
-        }
-
-        private IEnumerable<Task> DeleteImagesAsync(string name, string imagesUrls)
-        {
-            var deletedPictures = new List<Task>();
-            var imagesCount = imagesUrls.Split(GlobalConstants.Space, StringSplitOptions.RemoveEmptyEntries).Length;
-            for (int i = 0; i < imagesCount; i++)
-            {
-                deletedPictures.Add(this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.TemplateCloundFolderName, name, i)));
-            }
-
-            return deletedPictures;
         }
     }
 }

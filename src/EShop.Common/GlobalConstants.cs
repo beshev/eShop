@@ -109,7 +109,7 @@
 
         public const string TemplateDisplayDescription = "Описание на темплейта";
 
-        public const string TemplateCloundFolderName = "templates/{0}-image {1}";
+        public const string TemplateCloundFolderName = "templates/{0} - image {1}";
 
         public const string TemplatesController = "Templates";
 
