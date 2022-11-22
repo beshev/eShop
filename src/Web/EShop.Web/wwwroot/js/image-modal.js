@@ -32,3 +32,29 @@ let imgModal = (src) => {
 
     modal.append(newImage, closeBtn);
 };
+
+
+let baseImage = document.getElementById('base-image');
+let additionalImages = [...document.querySelectorAll('.additiona-image')].map(x => x.src);
+let imagesUrls = [baseImage.href.baseVal, ...additionalImages];
+let nextImage = document.getElementById('next-image');
+let prevImage = document.getElementById('prev-image');
+let counter = 0;
+
+nextImage.addEventListener('click', () => {
+    counter++
+    if (counter >= imagesUrls.length) {
+        counter = 0;
+    }
+
+    baseImage.href.baseVal = imagesUrls[counter];
+})
+
+prevImage.addEventListener('click', () => {
+    counter--
+    if (counter < 0) {
+        counter = imagesUrls.length - 1;
+    }
+
+    baseImage.href.baseVal = imagesUrls[counter];
+})
