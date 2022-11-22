@@ -29,7 +29,7 @@
             this.cloudinaryService = cloudinaryService;
         }
 
-        public async Task AddAsync(string name, decimal price, string description, int categoryId, bool hasCustomText, bool hasFontStyle, IFormFile image, int imagesCount)
+        public async Task AddAsync(string name, decimal price, string description, int categoryId, bool hasCustomText, bool hasFontStyle, IFormFile image, IFormFile secondImage, IFormFile thirdImage, int imagesCount)
         {
             var prodcut = new Product
             {
@@ -40,7 +40,9 @@
                 HasFontStyle = hasFontStyle,
                 ImagesCount = imagesCount,
                 ProductCategoryId = categoryId,
-                ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.ProductCloundFolderName, name)),
+                ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.ProductCloundFolderName, name, 1)),
+                SecondImageUrl = await this.cloudinaryService.UploadAsync(secondImage, string.Format(GlobalConstants.ProductCloundFolderName, name, 2)),
+                ThirdImageUrl = await this.cloudinaryService.UploadAsync(thirdImage, string.Format(GlobalConstants.ProductCloundFolderName, name, 3)),
             };
 
             await this.productRepo.AddAsync(prodcut);
@@ -70,8 +72,43 @@
                 .All()
                 .FirstOrDefaultAsync(product => product.Id.Equals(id));
 
-            await this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.ProductCloundFolderName, product.Name));
+            await Task.WhenAll(
+                this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.ProductCloundFolderName, product.Name, 1)),
+                this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.ProductCloundFolderName, product.Name, 2)),
+                this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.ProductCloundFolderName, product.Name, 3)));
+
             this.productRepo.Delete(product);
+            await this.productRepo.SaveChangesAsync();
+        }
+
+        public async Task EditAsync(int id, string name, decimal price, string description, int categoryId, bool hasCustomText, bool hasFontStyle, IFormFile image, IFormFile secondImage, IFormFile thirdImage, int imagesCount)
+        {
+            var product = this.productRepo
+                   .All()
+                   .FirstOrDefault(x => x.Id.Equals(id));
+
+            if (secondImage is not null)
+            {
+                await this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.ProductCloundFolderName, product.Name, 2));
+                product.SecondImageUrl = await this.cloudinaryService.UploadAsync(secondImage, string.Format(GlobalConstants.ProductCloundFolderName, name, 2));
+            }
+
+            if (thirdImage is not null)
+            {
+                await this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.ProductCloundFolderName, product.Name, 3));
+                product.ThirdImageUrl = await this.cloudinaryService.UploadAsync(thirdImage, string.Format(GlobalConstants.ProductCloundFolderName, name, 3));
+            }
+
+            product.Name = name;
+            product.ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.ProductCloundFolderName, name, 1));
+            product.Description = description;
+            product.Price = price;
+            product.ImagesCount = imagesCount;
+            product.HasCustomText = hasCustomText;
+            product.HasFontStyle = hasFontStyle;
+            product.ProductCategoryId = categoryId;
+
+            this.productRepo.Update(product);
             await this.productRepo.SaveChangesAsync();
         }
 

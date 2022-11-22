@@ -53,7 +53,25 @@
                 return this.View(model);
             }
 
-            await this.productService.AddAsync(model.Name, model.Price, model.Description, model.CategoryId, model.HasCustomText, model.HasFontStyle, model.Image, model.ImagesCount);
+            await this.productService.AddAsync(model.Name, model.Price, model.Description, model.CategoryId, model.HasCustomText, model.HasFontStyle, model.Image, model.SecondImage, model.ThirdImage, model.ImagesCount);
+            return this.RedirectToAction(nameof(this.All));
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var template = await this.productService.GetByIdAsync<ProductEditModel>(id);
+            return this.View(template);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProductEditModel model)
+        {
+            if (this.ModelState.IsValid == false)
+            {
+                return this.View(model);
+            }
+
+            await this.productService.EditAsync(model.Id, model.Name, model.Price, model.Description, model.CategoryId, model.HasCustomText, model.HasFontStyle, model.Image, model.SecondImage, model.ThirdImage, model.ImagesCount);
             return this.RedirectToAction(nameof(this.All));
         }
 

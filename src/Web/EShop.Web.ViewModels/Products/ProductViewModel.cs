@@ -21,6 +21,10 @@
 
         public string ImageUrl { get; set; }
 
+        public string SecondImageUrl { get; set; }
+
+        public string ThirdImageUrl { get; set; }
+
         public string ProductCategoryName { get; set; }
     }
 }

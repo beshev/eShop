@@ -19,10 +19,25 @@
 
 <div class="col-lg-6 col-12 col-sm-12 col-md-12">
     <div class="card mb-4 p-1 cardHoverDetails">
+        <button class="carousel-control-prev" type="button" id="prev-image" style="background-color: midnightblue">
+            <span class="carousel-control-prev-icon carousel-control-next-prod" aria-hidden="true"></span>
+        </button>
         <svg class="card-img-top" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
             <rect width="100%" height="100%" fill="#FFFFFF"></rect>
-            <image href="@this.Model.ImageUrl" height="100%" width="100%"></image>
+            <image id="base-image" href="@this.Model.ImageUrl" height="100%" width="100%"></image>
         </svg>
+        <button class="carousel-control-next bg-midnigh-blue" type="button" id="next-image" style="background-color: midnightblue">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+        @if (string.IsNullOrWhiteSpace(this.Model.SecondImageUrl) == false)
+        {
+            <img class="additiona-image" src="@this.Model.SecondImageUrl" hidden />
+        }
+
+        @if (string.IsNullOrWhiteSpace(this.Model.ThirdImageUrl) == false)
+        {
+            <img class="additiona-image" src="@this.Model.ThirdImageUrl" hidden />
+        }
         <div class="card-body">
             <div class="small text-muted">@this.Model.Name</div>
             <h2 class="card-title">@this.Model.Price.ToString("F2") лв</h2>

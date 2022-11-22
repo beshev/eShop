@@ -91,7 +91,7 @@
 
         public const string ProductImageUrl = "Снимка на продукта";
 
-        public const string ProductCloundFolderName = "products/{0}";
+        public const string ProductCloundFolderName = "products/{0} - image {1}";
 
         // Categories
         public const string NameOfCategory = "Категория";

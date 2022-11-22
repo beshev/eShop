@@ -34,6 +34,14 @@
         [AllowedExtensionsAttribute]
         public IFormFile Image { get; set; }
 
+        [Display(Name = GlobalConstants.NameOfImage)]
+        [AllowedExtensionsAttribute]
+        public IFormFile SecondImage { get; set; }
+
+        [Display(Name = GlobalConstants.NameOfImage)]
+        [AllowedExtensionsAttribute]
+        public IFormFile ThirdImage { get; set; }
+
         [Required(ErrorMessage = ErrorMessagesConstants.RequiredField)]
         public int CategoryId { get; set; }
     }

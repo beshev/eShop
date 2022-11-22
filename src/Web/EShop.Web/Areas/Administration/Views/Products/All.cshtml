@@ -44,8 +44,19 @@
                 <td>@product.Name</td>
                 <td>@product.Price.ToString("F2") лв.</td>
                 <td>@product.Description.TrimIfLongerThan(50)</td>
-                <td><a href="@product.ImageUrl" class="text-warning" target="_blank">Снимка</a></td>
                 <td>
+                    <a href="@product.ImageUrl" class="text-warning" target="_blank">Снимка</a>
+                    @if (string.IsNullOrWhiteSpace(product.SecondImageUrl) == false)
+                    {
+                       <text>/</text> <a href="@product.SecondImageUrl" class="text-warning" target="_blank">Снимка 2</a>
+                    }
+                    @if (string.IsNullOrWhiteSpace(product.ThirdImageUrl) == false)
+                    {
+                       <text>/</text> <a href="@product.ThirdImageUrl" class="text-warning" target="_blank">Снимка 3</a>
+                    }
+                </td>
+                <td>
+                    <span class="spinner-element"><a asp-area="Administration" asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-sm btn-info form-button">Редактиране</a></span> /
                     <span class="spinner-element"><a asp-area="Administration" asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-sm btn-danger form-button">Изтриване</a></span>
                 </td>
                 <td>

@@ -5,17 +5,14 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using CommandLine;
     using EShop.Data;
     using EShop.Data.Common;
     using EShop.Data.Common.Repositories;
     using EShop.Data.Models;
     using EShop.Data.Repositories;
     using EShop.Data.Seeding;
-    using EShop.Services.Data;
     using EShop.Services.Messaging;
-
-    using CommandLine;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
