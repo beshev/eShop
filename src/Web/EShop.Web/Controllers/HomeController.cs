@@ -32,8 +32,8 @@
                 TemplateCategoryPrice = templateCategorySelectModel.Price,
                 TemplateCategoryName = templateCategorySelectModel.Name,
                 TemplateCategoryId = templateCategorySelectModel.Id,
-                Templates = await this.templateService.GetRandomAsync<TemplateBaseViewModel>(8, templateCategorySelectModel.Id),
-                Products = await this.productService.GetRandomAsync<ProductViewModel>(8, true),
+                Templates = await this.templateService.GetRandomAsync<TemplateBaseViewModel>(12, templateCategorySelectModel.Id),
+                Products = await this.productService.GetRandomAsync<ProductViewModel>(12, true),
             };
 
             return this.View(viewModel);

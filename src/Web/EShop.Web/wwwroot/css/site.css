@@ -3009,7 +3009,6 @@ textarea.form-control-lg {
 .btn {
     --bs-btn-padding-x: 1.5rem;
     --bs-btn-padding-y: 0.75rem;
-    --bs-btn-font-family:;
     --bs-btn-font-size: 1rem;
     --bs-btn-font-weight: 400;
     --bs-btn-line-height: 1.5;
@@ -3768,7 +3767,6 @@ textarea.form-control-lg {
     --bs-dropdown-color: #dee2e6;
     --bs-dropdown-bg: #343a40;
     --bs-dropdown-border-color: rgba(255, 255, 255, 0.2);
-    --bs-dropdown-box-shadow:;
     --bs-dropdown-link-color: #dee2e6;
     --bs-dropdown-link-hover-color: #fff;
     --bs-dropdown-divider-bg: rgba(255, 255, 255, 0.2);
@@ -3872,7 +3870,6 @@ textarea.form-control-lg {
 .nav {
     --bs-nav-link-padding-x: 1rem;
     --bs-nav-link-padding-y: 0.5rem;
-    --bs-nav-link-font-weight:;
     --bs-nav-link-color: var(--bs-link-color);
     --bs-nav-link-hover-color: var(--bs-link-hover-color);
     --bs-nav-link-disabled-color: rgba(255, 255, 255, 0.7);
@@ -4050,7 +4047,6 @@ textarea.form-control-lg {
 .navbar-nav {
     --bs-nav-link-padding-x: 0;
     --bs-nav-link-padding-y: 0.5rem;
-    --bs-nav-link-font-weight:;
     --bs-nav-link-color: var(--bs-navbar-color);
     --bs-nav-link-hover-color: var(--bs-navbar-hover-color);
     --bs-nav-link-disabled-color: var(--bs-navbar-disabled-color);
@@ -4486,13 +4482,11 @@ textarea.form-control-lg {
     --bs-card-border-width: 1px;
     --bs-card-border-color: rgba(255, 255, 255, 0.2);
     --bs-card-border-radius: 0.5rem;
-    --bs-card-box-shadow:;
     --bs-card-inner-border-radius: calc(0.5rem - 1px);
     --bs-card-cap-padding-y: 0.875rem;
     --bs-card-cap-padding-x: 2rem;
     --bs-card-cap-bg: transparent;
     --bs-card-cap-color: #fff;
-    --bs-card-height:;
     --bs-card-color: #fff;
     --bs-card-bg: transparent;
     --bs-card-img-overlay-padding: 2rem;
@@ -4825,8 +4819,6 @@ textarea.form-control-lg {
     --bs-breadcrumb-padding-x: 0;
     --bs-breadcrumb-padding-y: 0;
     --bs-breadcrumb-margin-bottom: 1rem;
-    --bs-breadcrumb-bg:;
-    --bs-breadcrumb-border-radius:;
     --bs-breadcrumb-divider-color: #fff;
     --bs-breadcrumb-item-padding-x: 0.5rem;
     --bs-breadcrumb-item-active-color: #fff;
@@ -5621,7 +5613,6 @@ textarea.form-control-lg {
     --bs-toast-spacing: 1.5rem;
     --bs-toast-max-width: 350px;
     --bs-toast-font-size: 0.875rem;
-    --bs-toast-color:;
     --bs-toast-bg: rgba(255, 255, 255, 0.85);
     --bs-toast-border-width: 1px;
     --bs-toast-border-color: var(--bs-border-color-translucent);
@@ -5691,7 +5682,6 @@ textarea.form-control-lg {
     --bs-modal-width: 500px;
     --bs-modal-padding: 2rem;
     --bs-modal-margin: 0.5rem;
-    --bs-modal-color:;
     --bs-modal-bg: #fff;
     --bs-modal-border-color: var(--bs-border-color-translucent);
     --bs-modal-border-width: 1px;
@@ -5705,7 +5695,6 @@ textarea.form-control-lg {
     --bs-modal-header-border-width: 1px;
     --bs-modal-title-line-height: 1.5;
     --bs-modal-footer-gap: 0.5rem;
-    --bs-modal-footer-bg:;
     --bs-modal-footer-border-color: var(--bs-border-color);
     --bs-modal-footer-border-width: 1px;
     position: fixed;
@@ -6014,7 +6003,6 @@ textarea.form-control-lg {
     --bs-tooltip-max-width: 200px;
     --bs-tooltip-padding-x: 1rem;
     --bs-tooltip-padding-y: 0.5rem;
-    --bs-tooltip-margin:;
     --bs-tooltip-font-size: 0.875rem;
     --bs-tooltip-color: #fff;
     --bs-tooltip-bg: #000;
@@ -6565,7 +6553,6 @@ textarea.form-control-lg {
     --bs-offcanvas-height: 30vh;
     --bs-offcanvas-padding-x: 2rem;
     --bs-offcanvas-padding-y: 2rem;
-    --bs-offcanvas-color:;
     --bs-offcanvas-bg: #fff;
     --bs-offcanvas-border-width: 1px;
     --bs-offcanvas-border-color: var(--bs-border-color-translucent);
@@ -12240,7 +12227,7 @@ body {
 }
 
 .table-secondary {
-    --bs-table-hover-color: $white
+    --bs-table-hover-color: white
 }
 
 .btn-secondary {
@@ -12823,7 +12810,7 @@ body {
 }
 
     .modal-content a {
-        color: #fff
+        color: #fff;
     }
 
     .modal-content .text-muted {
@@ -12840,7 +12827,7 @@ body {
 }
 
     .offcanvas a {
-        color: #fff
+        color: #fff;
     }
 
     .offcanvas .text-muted {
