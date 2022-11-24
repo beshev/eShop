@@ -27,29 +27,7 @@
                             <image href="@template.ImageUrl" height="100%" width="100%"></image>
                         </svg>
                         <div class="card-body p-1">
-                            @if (template.ImagesCount > 0 && template.HasCustomText)
-                            {
-                                <p class="card-text">Към този модел може да добавите снимка(ки) и собствен текст</p>
-                                <p class="show-card-pading"></p>
-                                <p class="show-card-pading-template"></p>
-                            }
-                            else if (template.ImagesCount == 0 && template.HasCustomText)
-                            {
-                                <p class="card-text">Към този модел може да добавите собствен текст &#160&#160&#160&#160&#160&#160&#160&#160</p>
-                                <p class="show-card-pading show-card-pading-onsmall"></p>
-                            }
-                            else if (template.ImagesCount > 0 && template.HasCustomText == false)
-                            {
-                                <p class="card-text">Към този модел може да добавите снимка(ки)</p>
-                                <p class="show-card-pading"></p>
-                                <p class="show-card-pading"></p>
-                            }
-                            else
-                            {
-                                <p class="card-text">Този модел е направен от нас за вас</p>
-                                <p class="show-card-pading"></p>
-                                <p class="show-card-pading"></p>
-                            }
+                            <p>@template.Name</p>
                             <h5 style="text-align: right">@(template.Price + this.Model.TemplateCategoryPrice) лв</h5>
                         </div>
                     </div>
@@ -80,29 +58,7 @@
                             <image href="@product.ImageUrl" height="100%" width="100%"></image>
                         </svg>
                         <div class="card-body p-1">
-                            @if (product.ImagesCount > 0 && product.HasCustomText)
-                            {
-                                <text>Към този продукт може да добавите снимка(ки) и собствен текст</text>
-                                <p class="show-card-pading"></p>
-                                <p class="show-card-pading-small"></p>
-                            }
-                            else if (product.ImagesCount == 0 && product.HasCustomText)
-                            {
-                                <text>Към този продукт може да добавите собствен текст</text>
-                                <p class="show-card-pading show-card-pading-onsmall"></p>
-                            }
-                            else if (product.ImagesCount > 0 && product.HasCustomText == false)
-                            {
-                                <text>Към този продукт може да добавите снимка(ки)</text>
-                                <p class="show-card-pading"></p>
-                                <p class="show-card-pading"></p>
-                            }
-                            else
-                            {
-                                <text>Този продукт те направен от нас за вас</text>
-                                <p class="show-card-pading"></p>
-                                <p class="show-card-pading"></p>
-                            }
+                           <p>@product.Name</p>
                             <h5 style="text-align: right">@product.Price лв</h5>
                         </div>
                     </div>
