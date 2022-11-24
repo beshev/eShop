@@ -11,5 +11,7 @@
         public Task<string> UploadAsync(string fileName, byte[] bytes, string cloudFolder);
 
         public Task DeleteAsync(string cloudFolder);
+
+        public Task RenameAsync(string oldCloudPath, string newCloudPath);
     }
 }

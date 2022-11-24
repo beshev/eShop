@@ -230,8 +230,10 @@
                 template.ThirdImageUrl = await this.cloudinaryService.UploadAsync(thirdImage, string.Format(GlobalConstants.TemplateCloundFolderName, name, 3));
             }
 
+            template.ImageUrl = await this.GetImageUrlAsync(template.ImageUrl, string.Format(GlobalConstants.TemplateCloundFolderName, template.Name, 1), string.Format(GlobalConstants.TemplateCloundFolderName, name, 1), image);
+            template.SecondImageUrl = await this.GetImageUrlAsync(template.SecondImageUrl, string.Format(GlobalConstants.TemplateCloundFolderName, template.Name, 2), string.Format(GlobalConstants.TemplateCloundFolderName, name, 2), secondImage);
+            template.ThirdImageUrl = await this.GetImageUrlAsync(template.ThirdImageUrl, string.Format(GlobalConstants.TemplateCloundFolderName, template.Name, 3), string.Format(GlobalConstants.TemplateCloundFolderName, name, 3), thirdImage);
             template.Name = name;
-            template.ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.TemplateCloundFolderName, name, 1));
             template.Description = description;
             template.Price = price;
             template.ImagesCount = imagesFixedCount;
@@ -242,6 +244,26 @@
 
             this.templateRepo.Update(template);
             await this.templateRepo.SaveChangesAsync();
+        }
+
+        private async Task<string> GetImageUrlAsync(string currentImageUrl, string oldPath, string newPath, IFormFile image)
+        {
+            var resultUrl = currentImageUrl;
+            if (oldPath.Equals(newPath, StringComparison.CurrentCultureIgnoreCase) && image is not null)
+            {
+                resultUrl = await this.cloudinaryService.UploadAsync(image, oldPath);
+            }
+            else if ((oldPath.Equals(newPath, StringComparison.CurrentCultureIgnoreCase) == false) && image is null)
+            {
+                await this.cloudinaryService.RenameAsync(oldPath, newPath);
+            }
+            else if ((oldPath.Equals(newPath, StringComparison.CurrentCultureIgnoreCase) == false) && image is not null)
+            {
+                await this.cloudinaryService.DeleteAsync(oldPath);
+                resultUrl = await this.cloudinaryService.UploadAsync(image, newPath);
+            }
+
+            return resultUrl;
         }
     }
 }

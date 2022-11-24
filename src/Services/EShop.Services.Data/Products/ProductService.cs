@@ -87,20 +87,10 @@
                    .All()
                    .FirstOrDefault(x => x.Id.Equals(id));
 
-            if (secondImage is not null)
-            {
-                await this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.ProductCloundFolderName, product.Name, 2));
-                product.SecondImageUrl = await this.cloudinaryService.UploadAsync(secondImage, string.Format(GlobalConstants.ProductCloundFolderName, name, 2));
-            }
-
-            if (thirdImage is not null)
-            {
-                await this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.ProductCloundFolderName, product.Name, 3));
-                product.ThirdImageUrl = await this.cloudinaryService.UploadAsync(thirdImage, string.Format(GlobalConstants.ProductCloundFolderName, name, 3));
-            }
-
+            product.ImageUrl = await this.GetImageUrlAsync(product.ImageUrl, string.Format(GlobalConstants.ProductCloundFolderName, product.Name, 1), string.Format(GlobalConstants.ProductCloundFolderName, name, 1), image);
+            product.SecondImageUrl = await this.GetImageUrlAsync(product.SecondImageUrl, string.Format(GlobalConstants.ProductCloundFolderName, product.Name, 2), string.Format(GlobalConstants.ProductCloundFolderName, name, 2), secondImage);
+            product.ThirdImageUrl = await this.GetImageUrlAsync(product.ThirdImageUrl, string.Format(GlobalConstants.ProductCloundFolderName, product.Name, 3), string.Format(GlobalConstants.ProductCloundFolderName, name, 3), thirdImage);
             product.Name = name;
-            product.ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.ProductCloundFolderName, name, 1));
             product.Description = description;
             product.Price = price;
             product.ImagesCount = imagesCount;
@@ -180,6 +170,26 @@
 
             this.productCategoryRepo.Delete(category);
             await this.productCategoryRepo.SaveChangesAsync();
+        }
+
+        private async Task<string> GetImageUrlAsync(string currentImageUrl, string oldPath, string newPath, IFormFile image)
+        {
+            var resultUrl = currentImageUrl;
+            if (oldPath.Equals(newPath, StringComparison.CurrentCultureIgnoreCase) && image is not null)
+            {
+                resultUrl = await this.cloudinaryService.UploadAsync(image, oldPath);
+            }
+            else if ((oldPath.Equals(newPath, StringComparison.CurrentCultureIgnoreCase) == false) && image is null)
+            {
+                await this.cloudinaryService.RenameAsync(oldPath, newPath);
+            }
+            else if ((oldPath.Equals(newPath, StringComparison.CurrentCultureIgnoreCase) == false) && image is not null)
+            {
+                await this.cloudinaryService.DeleteAsync(oldPath);
+                resultUrl = await this.cloudinaryService.UploadAsync(image, newPath);
+            }
+
+            return resultUrl;
         }
     }
 }

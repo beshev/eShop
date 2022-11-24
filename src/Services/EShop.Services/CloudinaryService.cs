@@ -57,5 +57,8 @@
 
         public async Task DeleteAsync(string cloudFolder)
          => await this.cloudinary.DestroyAsync(new DeletionParams($"E-shop/{cloudFolder}"));
+
+        public async Task RenameAsync(string oldCloudPath, string newCloudPath)
+         => await this.cloudinary.RenameAsync($"E-shop/{oldCloudPath}", $"E-shop/{newCloudPath}");
     }
 }

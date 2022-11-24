@@ -91,14 +91,14 @@
                     <td>@template.Price.ToString("F2") лв.</td>
                     <td>@template.Description.TrimIfLongerThan(50)</td>
                     <td>
-                        <a href="@template.ImageUrl" class="text-warning" target="_blank">Снимка</a> /
+                        <a href="@template.ImageUrl" class="text-warning" target="_blank">Снимка</a>
                         @if(string.IsNullOrWhiteSpace(template.SecondImageUrl) == false)
                         {
-                            <a href="@template.SecondImageUrl" class="text-warning" target="_blank">Снимка 2</a> <text>/</text>
+                            <text>/</text> <a href="@template.SecondImageUrl" class="text-warning" target="_blank">Снимка 2</a>
                         }
                         @if(string.IsNullOrWhiteSpace(template.ThirdImageUrl) == false)
                         {
-                            <a href="@template.ThirdImageUrl" class="text-warning" target="_blank">Снимка 3</a>
+                            <text>/</text> <a href="@template.ThirdImageUrl" class="text-warning" target="_blank">Снимка 3</a>
                         }
                     </td>
                     <td>
