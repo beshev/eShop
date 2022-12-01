@@ -181,7 +181,7 @@
             }
             else if ((oldPath.Equals(newPath, StringComparison.CurrentCultureIgnoreCase) == false) && image is null)
             {
-                await this.cloudinaryService.RenameAsync(oldPath, newPath);
+                resultUrl = await this.cloudinaryService.RenameAsync(oldPath, newPath);
             }
             else if ((oldPath.Equals(newPath, StringComparison.CurrentCultureIgnoreCase) == false) && image is not null)
             {

@@ -12,6 +12,6 @@
 
         public Task DeleteAsync(string cloudFolder);
 
-        public Task RenameAsync(string oldCloudPath, string newCloudPath);
+        public Task<string> RenameAsync(string oldCloudPath, string newCloudPath);
     }
 }
