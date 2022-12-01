@@ -1,5 +1,7 @@
 ﻿@using EShop.Common
+@using EShop.Services.Data.Products
 @using EShop.Web.ViewModels.ShoppingCarts
+@inject IProductService productService
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,9 +39,24 @@
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="themes">Модели за:</a>
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="themes">Модели за</a>
                         <div class="dropdown-menu" aria-labelledby="themes">
                             <vc:template-categories></vc:template-categories>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="themes">Продукти</a>
+                        <div class="dropdown-menu" aria-labelledby="themes">
+                            <a class="dropdown-item" asp-area="" asp-controller="@GlobalConstants.ProductsController" asp-action="@GlobalConstants.AllAction">Всички</a>
+                            @foreach (var category in await productService.GetCategoriesAsync<SelectViewModel>())
+                            {
+                                <a class="dropdown-item"
+                                   asp-area=""
+                                   asp-controller="@GlobalConstants.ProductsController"
+                                   asp-action="@GlobalConstants.AllAction"
+                                   asp-route-id="1"
+                                   asp-route-categoryId="@category.Id">@category.Name</a>
+                            }
                         </div>
                     </li>
                     <li class="nav-item">
@@ -64,7 +81,7 @@
 
     <div class="container">
         <div class="row mt-5">
-           @* <partial name="_CookieConsentPartial" />*@
+            @* <partial name="_CookieConsentPartial" />*@
             @this.RenderBody()
         </div>
     </div>

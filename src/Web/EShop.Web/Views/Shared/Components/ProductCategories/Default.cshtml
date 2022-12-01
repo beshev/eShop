@@ -3,15 +3,18 @@
 <div class="card">
     <div class="card-header">Категории</div>
     <div class="card-body">
+        <span class="badge bg-danger" style="margin-top: 2px">
+            <a class="category-style" asp-area="" asp-controller="@GlobalConstants.ProductsController" asp-action="@GlobalConstants.AllAction">Всички</a>
+        </span>
         @foreach (var category in this.Model)
         {
             <span class="badge bg-danger" style="margin-top: 2px">
                 <a class="category-style"
-                   asp-area=""
-                   asp-controller="@GlobalConstants.ProductsController"
-                   asp-action="@GlobalConstants.AllAction"
-                   asp-route-id="1"
-                   asp-route-categoryId="@category.Id">@category.Name</a>
+               asp-area=""
+               asp-controller="@GlobalConstants.ProductsController"
+               asp-action="@GlobalConstants.AllAction"
+               asp-route-id="1"
+               asp-route-categoryId="@category.Id">@category.Name</a>
             </span>
         }
     </div>
