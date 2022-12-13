@@ -38,5 +38,7 @@
         public Task<int> GetCountAsync(int? productId = null, int? categoryId = null);
 
         public Task<TModel> GetCategoryAsync<TModel>(int categoryId);
+
+        public Task EditCategoryImageAsync(int categoryId, IFormFile image);
     }
 }

@@ -1,6 +1,8 @@
 ﻿namespace EShop.Web.Areas.Administration.Controllers
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using EShop.Common;
@@ -8,6 +10,7 @@
     using EShop.Web.Infrastructure.Attributes;
     using EShop.Web.ViewModels;
     using EShop.Web.ViewModels.Templates;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     public class TemplatesController : AdministrationController
@@ -87,6 +90,23 @@
             if (this.ModelState.IsValid)
             {
                 await this.templateService.CreateCategoryAsync(model.Name, model.Price, model.Image, model.TemplatesIds);
+            }
+
+            return this.RedirectToAction(nameof(this.All));
+        }
+
+        public async Task<IActionResult> EditCategoryImage([Required] int categoryId, [Required(ErrorMessage = ErrorMessagesConstants.RequiredField), AllowedExtensions] IFormFile image)
+        {
+            this.TempData[GlobalConstants.ModelStateErrorsKey] = this.ModelState
+                .Values
+                .FirstOrDefault()?
+                .Errors?
+                .FirstOrDefault()?
+                .ErrorMessage;
+
+            if (this.ModelState.IsValid)
+            {
+               await this.templateService.EditCategoryImageAsync(categoryId, image);
             }
 
             return this.RedirectToAction(nameof(this.All));

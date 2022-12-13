@@ -246,6 +246,18 @@
             await this.templateRepo.SaveChangesAsync();
         }
 
+        public async Task EditCategoryImageAsync(int categoryId, IFormFile image)
+        {
+            var templateCategory = await this.templateCategoriesRepo
+                .All()
+                .FirstOrDefaultAsync(x => x.Id.Equals(categoryId));
+
+            templateCategory.ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.TemplateCloundFolderName, templateCategory.Name, 1));
+
+            this.templateCategoriesRepo.Update(templateCategory);
+            await this.templateCategoriesRepo.SaveChangesAsync();
+        }
+
         private async Task<string> GetImageUrlAsync(string currentImageUrl, string oldPath, string newPath, IFormFile image)
         {
             var resultUrl = currentImageUrl;

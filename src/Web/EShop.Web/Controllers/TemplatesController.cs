@@ -10,7 +10,7 @@
 
     public class TemplatesController : BaseController
     {
-        private const int TemplatesPerPage = 12;
+        private const int TemplatesPerPage = 16;
         private readonly ITemplateService templateService;
 
         public TemplatesController(

@@ -16,6 +16,20 @@
             <input type="submit" value="Премахни" class="btn btn-danger mt-2 form-button" />
         </form>
 
+        <form asp-area="Administration" asp-controller="Templates" asp-action="EditCategoryImage" class="spinner-form mt-3" enctype="multipart/form-data">
+            <div class="form-grup">
+                <label>Промяна на снимка на категория</label>
+                <select name="categoryId" class="form-select">
+                    <vc:categories-select is-for-products="false"></vc:categories-select>
+                </select>
+            </div>
+            <div class="form-grup m-1">
+                <span class="text-danger">@this.TempData[GlobalConstants.ModelStateErrorsKey]</span>
+                <input type="file" class="form-control" name="image"/>
+            </div>
+            <input type="submit" value="Смени" class="btn btn-danger mt-2 form-button" />
+        </form>
+
         <form asp-area="Administration" asp-controller="Templates" asp-action="RemoveSubCategory" class="mt-3 spinner-form">
             <vc:template-sub-categories category-id=0></vc:template-sub-categories>
             <input type="submit" value="Премахни" class="btn btn-danger mt-2 form-button" />
