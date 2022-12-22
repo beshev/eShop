@@ -51,20 +51,20 @@
                             @foreach (var category in await productService.GetCategoriesAsync<SelectViewModel>())
                             {
                                 <a class="dropdown-item"
-                                   asp-area=""
-                                   asp-controller="@GlobalConstants.ProductsController"
-                                   asp-action="@GlobalConstants.AllAction"
-                                   asp-route-id="1"
-                                   asp-route-categoryId="@category.Id">@category.Name</a>
+                               asp-area=""
+                               asp-controller="@GlobalConstants.ProductsController"
+                               asp-action="@GlobalConstants.AllAction"
+                               asp-route-id="1"
+                               asp-route-categoryId="@category.Id">@category.Name</a>
                             }
                         </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="@GlobalConstants.ProductsController" asp-action="@GlobalConstants.AllAction">Продукти</a>
                     </li>
-                    <li class="nav-item">
+                    @*<li class="nav-item">
                         <a class="nav-link active" asp-area="" asp-controller="Cart" asp-action="Items"><i class="fa-solid fa-cart-arrow-down"></i>Количка(@(this.Context.Session.GetCollectionCount<ShoppingCartModel>(GlobalConstants.NameOfCart)))</a>
-                    </li>
+                    </li>*@
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="@GlobalConstants.NameOfGallery" asp-action="@GlobalConstants.NameOfGallery">Галерия</a>
                     </li>
@@ -76,6 +76,7 @@
                     }
                 </ul>
             </div>
+            <a class="" asp-area="" asp-controller="Cart" asp-action="Items"><i class="fa-solid fa-cart-arrow-down fa-xl"></i>(@(this.Context.Session.GetCollectionCount<ShoppingCartModel>(GlobalConstants.NameOfCart)))</a>
         </div>
     </div>
 
