@@ -3,6 +3,7 @@
 
 // Write your JavaScript code.
 
+removeShowClass();
 buttonSpinner();
 formSubmitSpinner();
 templatesCarousel();
@@ -110,4 +111,16 @@ function myFunction() {
 
 function removeValueFromInputs(element) {
     [...element.querySelectorAll('input')].forEach(i => i.value = '');
+}
+
+function removeShowClass() {
+    document
+        .querySelector('#inner-body')
+        .addEventListener('click', function () {
+            let element = document.querySelector('.show');
+            if (element) {
+                console.log(element);
+                element.classList.remove('show');
+            }
+        });
 }

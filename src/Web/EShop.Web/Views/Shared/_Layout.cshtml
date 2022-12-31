@@ -60,12 +60,6 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="@GlobalConstants.ProductsController" asp-action="@GlobalConstants.AllAction">Продукти</a>
-                    </li>
-                    @*<li class="nav-item">
-                        <a class="nav-link active" asp-area="" asp-controller="Cart" asp-action="Items"><i class="fa-solid fa-cart-arrow-down"></i>Количка(@(this.Context.Session.GetCollectionCount<ShoppingCartModel>(GlobalConstants.NameOfCart)))</a>
-                    </li>*@
-                    <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="@GlobalConstants.NameOfGallery" asp-action="@GlobalConstants.NameOfGallery">Галерия</a>
                     </li>
                     @if (this.User.IsInRole(@GlobalConstants.AdministratorRoleName))
@@ -81,7 +75,7 @@
     </div>
 
     <div class="container">
-        <div class="row mt-5">
+        <div class="row mt-5" id="inner-body">
             @* <partial name="_CookieConsentPartial" />*@
             @this.RenderBody()
         </div>
