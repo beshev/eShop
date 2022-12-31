@@ -243,6 +243,10 @@ body {
         flex: 0 0 100%;
         display: block;
     }
+
+    .modal img {
+        width: 97%;
+    }
 }
 
 .carousel-control-prev,
@@ -267,3 +271,4 @@ body {
 .card img {
     max-height: 100%;
 }
+

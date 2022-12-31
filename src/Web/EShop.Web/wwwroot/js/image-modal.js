@@ -6,6 +6,9 @@ let imgSrc;
 images.forEach((img, i) => {
     img.addEventListener("click", (e) => {
         imgSrc = e.target.getAttribute('src');
+        if (!imgSrc) {
+            imgSrc = e.target.getAttribute('href');
+        }
         //run modal function
         imgModal(imgSrc);
         //index of the next image
