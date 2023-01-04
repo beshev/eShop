@@ -245,7 +245,15 @@ body {
     }
 
     .modal img {
-        width: 97%;
+        width: 89%;
+    }
+
+    .nextBtn {
+        margin-left: 0px;
+    }
+
+    .prevBtn {
+        margin-right: 0px;
     }
 }
 

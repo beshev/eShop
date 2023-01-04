@@ -82,7 +82,8 @@
 
 @media (min-width: 1240px) {
     .modal img {
-        height: 98%;
+        /*height: 98%;
+        width: 37%;*/
         object-fit: unset;
     }
 }
