@@ -19,7 +19,7 @@
                 <span asp-validation-for="OrderInfo.Description" class="text-danger"></span>
             </div>
 
-            @if (this.Model.HasFontStyle)
+           @* @if (this.Model.HasFontStyle)
             {
                 <div class="form-grup mt-2">
                     <label asp-for="OrderInfo.FontStyle"></label>
@@ -34,7 +34,7 @@
                     </div>
                     <span asp-validation-for="OrderInfo.FontStyle" class="text-danger"></span>
                 </div>
-            }
+            }*@
         }
 
         @if (this.Model.ImagesCount > 0)
