@@ -22,7 +22,7 @@
             <div class="card-body p-1">
                 <p><strong>Продукт - </strong> @item.ProductName</p>
                 <p><strong>Прикачени снимки - </strong> @item.Images.Count бр.</p>
-                @if (item.FontStyle.HasValue)
+                @*@if (item.FontStyle.HasValue)
                 {
                     <p>
                         <strong>
@@ -31,7 +31,7 @@
                             </a> -
                         </strong> @item.FontStyle
                     </p>
-                }
+                }*@
                 <p><strong>Вешето описание: </strong> @(item.Description ?? "няма")</p>
                 <p><strong>Бележка: </strong> @(item.CustomerNote ?? "няма")</p>
                 <h5>@item.Quantity бр. x @item.Price = @((item.Quantity * item.Price).ToString()) лв</h5>
