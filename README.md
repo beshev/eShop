@@ -1,2 +1,1 @@
 # eShop
-https://podaracitebg.com/
