@@ -91,8 +91,6 @@
 
         public const string ProductImageUrl = "Снимка на продукта";
 
-        public const string ProductCloundFolderName = "products/{0} - image {1}";
-
         // Categories
         public const string NameOfCategory = "Категория";
 
@@ -109,12 +107,9 @@
 
         public const string TemplateDisplayDescription = "Описание на темплейта";
 
-        public const string TemplateCloundFolderName = "templates/{0} - image {1}";
-
         public const string TemplatesController = "Templates";
 
         // Order
-        public const string OrdersCloundFolderName = "Orders/{0}";
 
         public const string NameOfOrderPrice = "OrderPrice";
 
@@ -158,6 +153,15 @@
 
         public const string DeletePhotoAction = "DeletePhoto";
 
-        public const string GalleryCloudFolder = "Gallery/{0}";
+        // Folders
+        public const string ImagesFolderName = "images";
+
+        public const string ProductsFolderName = "products";
+
+        public const string TemplatesFolderName = "templates";
+
+        public const string OrdersFolderName = "orders";
+
+        public const string GalleryFolderName = "gallery";
     }
 }

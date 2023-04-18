@@ -17,16 +17,16 @@
     {
         private readonly IRepository<Product> productRepo;
         private readonly IRepository<ProductCategory> productCategoryRepo;
-        private readonly ICloudinaryService cloudinaryService;
+        private readonly IImagesService imagesService;
 
         public ProductService(
             IRepository<Product> productRepo,
             IRepository<ProductCategory> productCategoryRepo,
-            ICloudinaryService cloudinaryService)
+            IImagesService imagesService)
         {
             this.productRepo = productRepo;
             this.productCategoryRepo = productCategoryRepo;
-            this.cloudinaryService = cloudinaryService;
+            this.imagesService = imagesService;
         }
 
         public async Task AddAsync(string name, decimal price, string description, int categoryId, bool hasCustomText, bool hasFontStyle, IFormFile image, IFormFile secondImage, IFormFile thirdImage, int imagesCount)
@@ -40,9 +40,9 @@
                 HasFontStyle = hasFontStyle,
                 ImagesCount = imagesCount,
                 ProductCategoryId = categoryId,
-                ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.ProductCloundFolderName, name, 1)),
-                SecondImageUrl = await this.cloudinaryService.UploadAsync(secondImage, string.Format(GlobalConstants.ProductCloundFolderName, name, 2)),
-                ThirdImageUrl = await this.cloudinaryService.UploadAsync(thirdImage, string.Format(GlobalConstants.ProductCloundFolderName, name, 3)),
+                ImageUrl = await this.imagesService.UploadAsync(image, GlobalConstants.ProductsFolderName),
+                SecondImageUrl = await this.imagesService.UploadAsync(secondImage, GlobalConstants.ProductsFolderName),
+                ThirdImageUrl = await this.imagesService.UploadAsync(thirdImage, GlobalConstants.ProductsFolderName),
             };
 
             await this.productRepo.AddAsync(prodcut);
@@ -72,10 +72,9 @@
                 .All()
                 .FirstOrDefaultAsync(product => product.Id.Equals(id));
 
-            await Task.WhenAll(
-                this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.ProductCloundFolderName, product.Name, 1)),
-                this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.ProductCloundFolderName, product.Name, 2)),
-                this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.ProductCloundFolderName, product.Name, 3)));
+            this.imagesService.Delete(product.ImageUrl, GlobalConstants.ProductsFolderName);
+            this.imagesService.Delete(product.SecondImageUrl, GlobalConstants.ProductsFolderName);
+            this.imagesService.Delete(product.ThirdImageUrl, GlobalConstants.ProductsFolderName);
 
             this.productRepo.Delete(product);
             await this.productRepo.SaveChangesAsync();
@@ -87,9 +86,13 @@
                    .All()
                    .FirstOrDefault(x => x.Id.Equals(id));
 
-            product.ImageUrl = await this.GetImageUrlAsync(product.ImageUrl, string.Format(GlobalConstants.ProductCloundFolderName, product.Name, 1), string.Format(GlobalConstants.ProductCloundFolderName, name, 1), image);
-            product.SecondImageUrl = await this.GetImageUrlAsync(product.SecondImageUrl, string.Format(GlobalConstants.ProductCloundFolderName, product.Name, 2), string.Format(GlobalConstants.ProductCloundFolderName, name, 2), secondImage);
-            product.ThirdImageUrl = await this.GetImageUrlAsync(product.ThirdImageUrl, string.Format(GlobalConstants.ProductCloundFolderName, product.Name, 3), string.Format(GlobalConstants.ProductCloundFolderName, name, 3), thirdImage);
+            this.imagesService.Delete(product.ImageUrl, GlobalConstants.ProductsFolderName);
+            this.imagesService.Delete(product.SecondImageUrl, GlobalConstants.ProductsFolderName);
+            this.imagesService.Delete(product.ThirdImageUrl, GlobalConstants.ProductsFolderName);
+
+            product.ImageUrl = await this.imagesService.UploadAsync(image, GlobalConstants.ProductsFolderName);
+            product.SecondImageUrl = await this.imagesService.UploadAsync(secondImage, GlobalConstants.ProductsFolderName);
+            product.ThirdImageUrl = await this.imagesService.UploadAsync(thirdImage, GlobalConstants.ProductsFolderName);
             product.Name = name;
             product.Description = description;
             product.Price = price;
@@ -170,26 +173,6 @@
 
             this.productCategoryRepo.Delete(category);
             await this.productCategoryRepo.SaveChangesAsync();
-        }
-
-        private async Task<string> GetImageUrlAsync(string currentImageUrl, string oldPath, string newPath, IFormFile image)
-        {
-            var resultUrl = currentImageUrl;
-            if (oldPath.Equals(newPath, StringComparison.CurrentCultureIgnoreCase) && image is not null)
-            {
-                resultUrl = await this.cloudinaryService.UploadAsync(image, oldPath);
-            }
-            else if ((oldPath.Equals(newPath, StringComparison.CurrentCultureIgnoreCase) == false) && image is null)
-            {
-                resultUrl = await this.cloudinaryService.RenameAsync(oldPath, newPath);
-            }
-            else if ((oldPath.Equals(newPath, StringComparison.CurrentCultureIgnoreCase) == false) && image is not null)
-            {
-                await this.cloudinaryService.DeleteAsync(oldPath);
-                resultUrl = await this.cloudinaryService.UploadAsync(image, newPath);
-            }
-
-            return resultUrl;
         }
     }
 }

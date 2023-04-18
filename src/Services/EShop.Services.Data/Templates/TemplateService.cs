@@ -18,18 +18,18 @@
         private readonly IRepository<Template> templateRepo;
         private readonly IRepository<TemplateCategory> templateCategoriesRepo;
         private readonly IRepository<TemplateSubCategory> templateSubCategoriesRepo;
-        private readonly ICloudinaryService cloudinaryService;
+        private readonly IImagesService imagesService;
 
         public TemplateService(
             IRepository<Template> templateRepo,
             IRepository<TemplateCategory> templateCategoriesRepo,
             IRepository<TemplateSubCategory> templateSubCategoriesRepo,
-            ICloudinaryService cloudinaryService)
+            IImagesService imagesService)
         {
             this.templateRepo = templateRepo;
             this.templateCategoriesRepo = templateCategoriesRepo;
             this.templateSubCategoriesRepo = templateSubCategoriesRepo;
-            this.cloudinaryService = cloudinaryService;
+            this.imagesService = imagesService;
         }
 
         public async Task AddAsync(string name, string description, decimal price, IFormFile image, IFormFile secondImage, IFormFile thirdImage, int imagesFixedCount, bool isBaseModel, bool hasCustomText, int? subCategoryId, IEnumerable<int> categoriesIds)
@@ -47,9 +47,9 @@
                 SubCategoryId = subCategoryId,
                 HasCustomText = hasCustomText,
                 IsBaseModel = isBaseModel,
-                ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.TemplateCloundFolderName, name, 1)),
-                SecondImageUrl = await this.cloudinaryService.UploadAsync(secondImage, string.Format(GlobalConstants.TemplateCloundFolderName, name, 2)),
-                ThirdImageUrl = await this.cloudinaryService.UploadAsync(thirdImage, string.Format(GlobalConstants.TemplateCloundFolderName, name, 3)),
+                ImageUrl = await this.imagesService.UploadAsync(image, GlobalConstants.TemplatesFolderName),
+                SecondImageUrl = await this.imagesService.UploadAsync(secondImage, GlobalConstants.TemplatesFolderName),
+                ThirdImageUrl = await this.imagesService.UploadAsync(thirdImage, GlobalConstants.TemplatesFolderName),
                 TemplateCategories = categories,
             };
 
@@ -87,7 +87,7 @@
             {
                 Name = name,
                 Price = price,
-                ImageUrl = await this.cloudinaryService.UploadAsync(imageUrl, string.Format(GlobalConstants.TemplateCloundFolderName, name, 1)),
+                ImageUrl = await this.imagesService.UploadAsync(imageUrl, GlobalConstants.TemplatesFolderName),
             };
 
             if (tempalteIds is not null && tempalteIds.Any())
@@ -130,10 +130,9 @@
                    .All()
                    .FirstOrDefaultAsync(template => template.Id.Equals(id));
 
-            await Task.WhenAll(
-                this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.TemplateCloundFolderName, template.Name, 1)),
-                this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.TemplateCloundFolderName, template.Name, 2)),
-                this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.TemplateCloundFolderName, template.Name, 3)));
+            this.imagesService.Delete(template.ImageUrl, GlobalConstants.TemplatesFolderName);
+            this.imagesService.Delete(template.SecondImageUrl, GlobalConstants.TemplatesFolderName);
+            this.imagesService.Delete(template.ThirdImageUrl, GlobalConstants.TemplatesFolderName);
 
             this.templateRepo.Delete(template);
             await this.templateRepo.SaveChangesAsync();
@@ -218,21 +217,13 @@
                 .Include(x => x.TemplateCategories)
                 .FirstOrDefault(x => x.Id.Equals(id));
 
-            if (secondImage is not null)
-            {
-                await this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.TemplateCloundFolderName, template.Name, 2));
-                template.SecondImageUrl = await this.cloudinaryService.UploadAsync(secondImage, string.Format(GlobalConstants.TemplateCloundFolderName, name, 2));
-            }
+            this.imagesService.Delete(template.ImageUrl, GlobalConstants.TemplatesFolderName);
+            this.imagesService.Delete(template.SecondImageUrl, GlobalConstants.TemplatesFolderName);
+            this.imagesService.Delete(template.ThirdImageUrl, GlobalConstants.TemplatesFolderName);
 
-            if (thirdImage is not null)
-            {
-                await this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.TemplateCloundFolderName, template.Name, 3));
-                template.ThirdImageUrl = await this.cloudinaryService.UploadAsync(thirdImage, string.Format(GlobalConstants.TemplateCloundFolderName, name, 3));
-            }
-
-            template.ImageUrl = await this.GetImageUrlAsync(template.ImageUrl, string.Format(GlobalConstants.TemplateCloundFolderName, template.Name, 1), string.Format(GlobalConstants.TemplateCloundFolderName, name, 1), image);
-            template.SecondImageUrl = await this.GetImageUrlAsync(template.SecondImageUrl, string.Format(GlobalConstants.TemplateCloundFolderName, template.Name, 2), string.Format(GlobalConstants.TemplateCloundFolderName, name, 2), secondImage);
-            template.ThirdImageUrl = await this.GetImageUrlAsync(template.ThirdImageUrl, string.Format(GlobalConstants.TemplateCloundFolderName, template.Name, 3), string.Format(GlobalConstants.TemplateCloundFolderName, name, 3), thirdImage);
+            template.ImageUrl = await this.imagesService.UploadAsync(image, GlobalConstants.TemplatesFolderName);
+            template.SecondImageUrl = await this.imagesService.UploadAsync(secondImage, GlobalConstants.TemplatesFolderName);
+            template.ThirdImageUrl = await this.imagesService.UploadAsync(thirdImage, GlobalConstants.TemplatesFolderName);
             template.Name = name;
             template.Description = description;
             template.Price = price;
@@ -252,30 +243,11 @@
                 .All()
                 .FirstOrDefaultAsync(x => x.Id.Equals(categoryId));
 
-            templateCategory.ImageUrl = await this.cloudinaryService.UploadAsync(image, string.Format(GlobalConstants.TemplateCloundFolderName, templateCategory.Name, 1));
+            this.imagesService.Delete(templateCategory.ImageUrl, GlobalConstants.TemplatesFolderName);
+            templateCategory.ImageUrl = await this.imagesService.UploadAsync(image, GlobalConstants.TemplatesFolderName);
 
             this.templateCategoriesRepo.Update(templateCategory);
             await this.templateCategoriesRepo.SaveChangesAsync();
-        }
-
-        private async Task<string> GetImageUrlAsync(string currentImageUrl, string oldPath, string newPath, IFormFile image)
-        {
-            var resultUrl = currentImageUrl;
-            if (oldPath.Equals(newPath, StringComparison.CurrentCultureIgnoreCase) && image is not null)
-            {
-                resultUrl = await this.cloudinaryService.UploadAsync(image, oldPath);
-            }
-            else if ((oldPath.Equals(newPath, StringComparison.CurrentCultureIgnoreCase) == false) && image is null)
-            {
-                resultUrl = await this.cloudinaryService.RenameAsync(oldPath, newPath);
-            }
-            else if ((oldPath.Equals(newPath, StringComparison.CurrentCultureIgnoreCase) == false) && image is not null)
-            {
-                await this.cloudinaryService.DeleteAsync(oldPath);
-                resultUrl = await this.cloudinaryService.UploadAsync(image, newPath);
-            }
-
-            return resultUrl;
         }
     }
 }

@@ -18,14 +18,14 @@
     public class OrdersService : IOrdersService
     {
         private readonly IRepository<Order> orderRepo;
-        private readonly ICloudinaryService cloudinaryService;
+        private readonly IImagesService imagesService;
 
         public OrdersService(
             IRepository<Order> orderRepo,
-            ICloudinaryService cloudinaryService)
+            IImagesService imagesService)
         {
             this.orderRepo = orderRepo;
-            this.cloudinaryService = cloudinaryService;
+            this.imagesService = imagesService;
         }
 
         public async Task ChangeStatus(int id, OrderStatus orderStatus)
@@ -75,7 +75,7 @@
                 var imageUrls = new StringBuilder();
                 foreach (var image in item.Images)
                 {
-                    imageUrls.Append(await this.cloudinaryService.UploadAsync(image.Key, image.Value, string.Format(GlobalConstants.OrdersCloundFolderName, image.Key)));
+                    imageUrls.Append(await this.imagesService.UploadAsync(image.Key, image.Value, GlobalConstants.OrdersFolderName));
                     imageUrls.Append(GlobalConstants.Space);
                 }
 
@@ -99,13 +99,7 @@
                 var imagesUrls = orderItem.ImagesUrls.Split(GlobalConstants.Space, StringSplitOptions.RemoveEmptyEntries);
                 foreach (var imageUrl in imagesUrls)
                 {
-                    var fileName = imageUrl
-                        .Split(GlobalConstants.Slash, StringSplitOptions.RemoveEmptyEntries)
-                        .Last()
-                        .Split(GlobalConstants.Comma, StringSplitOptions.RemoveEmptyEntries)
-                        .First();
-
-                    await this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.OrdersCloundFolderName, fileName));
+                    this.imagesService.Delete(imageUrl, GlobalConstants.OrdersFolderName);
                 }
             }
 

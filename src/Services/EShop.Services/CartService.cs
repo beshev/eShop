@@ -21,7 +21,7 @@
                     using var ms = new MemoryStream();
                     await image.CopyToAsync(ms);
 
-                    var key = Guid.NewGuid().ToString();
+                    var key = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
                     cartItem.Images.Add(key, ms.ToArray());
                 }
             }

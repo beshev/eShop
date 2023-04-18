@@ -3,7 +3,6 @@
     using System;
     using System.Reflection;
 
-    using CloudinaryDotNet;
     using EShop.Data;
     using EShop.Data.Seeding;
     using EShop.Services;
@@ -46,7 +45,6 @@
                 .AddSingleton(configuration);
 
             AddApplicationServices(services);
-            AddCloudinaryConfiguration(services, configuration);
         }
 
         private static void Configure(WebApplication app)
@@ -92,7 +90,7 @@
         {
             // Application services
             services.AddTransient<ITemplateService, TemplateService>();
-            services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IImagesService, ImagesService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ICartService, CartService>();
             services.AddTransient<IOrdersService, OrdersService>();
@@ -105,21 +103,6 @@
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = true;
             });
-        }
-
-        private static void AddCloudinaryConfiguration(
-            IServiceCollection services,
-            IConfiguration configuration)
-            => services.AddSingleton(CloudinaryConfiguration(configuration));
-
-        private static Cloudinary CloudinaryConfiguration(IConfiguration configuration)
-        {
-            var cloudinaryCredentials = new Account(
-                configuration["Cloudinary:CloudName"],
-                configuration["Cloudinary:ApiKey"],
-                configuration["Cloudinary:ApiSecret"]);
-
-            return new Cloudinary(cloudinaryCredentials);
         }
     }
 }

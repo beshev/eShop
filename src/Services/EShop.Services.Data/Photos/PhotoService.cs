@@ -15,14 +15,14 @@
     public class PhotoService : IPhotoService
     {
         private readonly IRepository<Photo> photoRepo;
-        private readonly ICloudinaryService cloudinaryService;
+        private readonly IImagesService imagesService;
 
         public PhotoService(
             IRepository<Photo> photoRepo,
-            ICloudinaryService cloudinaryService)
+            IImagesService imagesService)
         {
             this.photoRepo = photoRepo;
-            this.cloudinaryService = cloudinaryService;
+            this.imagesService = imagesService;
         }
 
         public async Task AddPhotoAsync(IFormFile photo)
@@ -30,7 +30,7 @@
             var image = new Photo
             {
                 Name = photo.FileName,
-                ImageUrl = await this.cloudinaryService.UploadAsync(photo, string.Format(GlobalConstants.GalleryCloudFolder, photo.FileName)),
+                ImageUrl = await this.imagesService.UploadAsync(photo, GlobalConstants.GalleryFolderName),
             };
 
             await this.photoRepo.AddAsync(image);
@@ -50,7 +50,7 @@
                 .All()
                 .FirstOrDefaultAsync(x => x.Id.Equals(id));
 
-            await this.cloudinaryService.DeleteAsync(string.Format(GlobalConstants.GalleryCloudFolder, photo.Name));
+            this.imagesService.Delete(photo.ImageUrl, GlobalConstants.GalleryFolderName);
             this.photoRepo.Delete(photo);
             await this.photoRepo.SaveChangesAsync();
         }
