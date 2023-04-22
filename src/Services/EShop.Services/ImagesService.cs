@@ -46,7 +46,8 @@
 
         public void Delete(string imagePath, string folder)
         {
-            if (string.IsNullOrWhiteSpace(imagePath) || string.IsNullOrWhiteSpace(folder))
+            if (string.IsNullOrWhiteSpace(imagePath)
+                || string.IsNullOrWhiteSpace(folder))
             {
                 return;
             }

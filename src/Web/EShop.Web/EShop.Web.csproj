@@ -42,11 +42,4 @@
     <ProjectReference Include="..\EShop.Web.Infrastructure\EShop.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\EShop.Web.ViewModels\EShop.Web.ViewModels.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\images\gallery\" />
-    <Folder Include="wwwroot\images\orders\" />
-    <Folder Include="wwwroot\images\templates\" />
-    <Folder Include="wwwroot\images\products\" />
-  </ItemGroup>
 </Project>
