@@ -2,10 +2,12 @@
 {
     using System.Threading.Tasks;
 
+    using EShop.Common;
     using EShop.Services.Data.Photos;
     using EShop.Web.ViewModels.Gallery;
     using Microsoft.AspNetCore.Mvc;
 
+    [ResponseCache(CacheProfileName = GlobalConstants.ItemsCacheProfileName)]
     public class GalleryController : BaseController
     {
         private readonly IPhotoService photoService;

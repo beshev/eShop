@@ -7,15 +7,21 @@
     using EShop.Services.Data.Products;
     using EShop.Web.ViewModels.Products;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
 
+    [ResponseCache(CacheProfileName = GlobalConstants.ItemsCacheProfileName)]
     public class Products : BaseController
     {
         private const int ProductsPerPage = 12;
         private readonly IProductService productService;
+        private readonly IMemoryCache memoryCache;
 
-        public Products(IProductService productService)
+        public Products(
+            IProductService productService,
+            IMemoryCache memoryCache)
         {
             this.productService = productService;
+            this.memoryCache = memoryCache;
         }
 
         public async Task<IActionResult> All(int? categoryId, int id = 1)
@@ -48,13 +54,18 @@
 
         public async Task<IActionResult> Details(int productId)
         {
-            var vieModel = await this.productService.GetByIdAsync<ProductDetailsModel>(productId);
+            var productCacheKey = string.Format(GlobalConstants.ProductCacheKey, productId);
+            if (!this.memoryCache.TryGetValue(productCacheKey, out ProductDetailsModel viewModel))
+            {
+                viewModel = await this.productService.GetByIdAsync<ProductDetailsModel>(productId);
+                this.memoryCache.Set(productCacheKey, viewModel, TimeSpan.FromSeconds(GlobalConstants.CacheExpirationTimeInSeconds));
+            }
 
             this.ViewData[GlobalConstants.ReturnUrlKey] = this.ReturnUrl;
 
             this.TempData[GlobalConstants.NameOfOrderProductId] = productId;
 
-            return this.View(vieModel);
+            return this.View(viewModel);
         }
     }
 }

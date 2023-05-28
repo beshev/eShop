@@ -40,6 +40,7 @@
                 .ConfigureCookiePolicyOptions()
                 .AddControllersWithAutoAntiforgeryTokenAttribute()
                 .AddRepositories()
+                .AddResponseCaching()
                 .AddRazorPagesExtension()
                 .AddDatabaseDeveloperPageExceptionFilter()
                 .AddSingleton(configuration);
@@ -75,6 +76,8 @@
             app.UseCookiePolicy();
 
             app.UseRouting();
+
+            app.UseResponseCaching();
 
             app.UseAuthentication();
             app.UseAuthorization();

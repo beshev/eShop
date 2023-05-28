@@ -1,5 +1,6 @@
 ﻿namespace EShop.Web.Infrastructure.Extensions
 {
+    using EShop.Common;
     using EShop.Data;
     using EShop.Data.Common;
     using EShop.Data.Common.Repositories;
@@ -42,6 +43,15 @@
                 options =>
                 {
                     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                    options.CacheProfiles.Add(
+                        GlobalConstants.ItemsCacheProfileName,
+                        new CacheProfile
+                        {
+                            Duration = GlobalConstants.CacheExpirationTimeInSeconds,
+                            Location = ResponseCacheLocation.Any,
+                            NoStore = false,
+                            VaryByQueryKeys = new[] { "*" },
+                        });
                 }).AddRazorRuntimeCompilation();
 
             return services;

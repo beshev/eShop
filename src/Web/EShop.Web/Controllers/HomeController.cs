@@ -3,6 +3,7 @@
     using System.Diagnostics;
     using System.Threading.Tasks;
 
+    using EShop.Common;
     using EShop.Services.Data.Products;
     using EShop.Services.Data.Templates;
     using EShop.Web.ViewModels;
@@ -11,6 +12,7 @@
     using EShop.Web.ViewModels.Templates;
     using Microsoft.AspNetCore.Mvc;
 
+    [ResponseCache(CacheProfileName = GlobalConstants.ItemsCacheProfileName)]
     public class HomeController : BaseController
     {
         private readonly ITemplateService templateService;

@@ -5,6 +5,8 @@
         // Common
         public const string Title = "Title";
 
+        public const string ItemsCacheProfileName = "ItemsCache";
+
         public const string SuccessKey = "Success";
 
         public const string ReturnUrlKey = "ReturnUrl";
@@ -67,6 +69,8 @@
 
         public const string ComplatedOrder = "ComplatedOrder";
 
+        public const int CacheExpirationTimeInSeconds = 60;
+
         public const char Space = ' ';
 
         public const char Comma = '.';
@@ -75,6 +79,10 @@
 
         // Keys
         public const string ModelStateErrorsKey = "ModelStateErrors";
+
+        public const string TemplateCacheKey = "TemplatIdKey-{0}-{1}";
+
+        public const string ProductCacheKey = "ProductId-{0}";
 
         // Products
         public const string ProductDisplayName = "Име на продукта";

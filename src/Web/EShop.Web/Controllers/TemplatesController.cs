@@ -7,16 +7,21 @@
     using EShop.Services.Data.Templates;
     using EShop.Web.ViewModels.Templates;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
 
+    [ResponseCache(CacheProfileName = GlobalConstants.ItemsCacheProfileName)]
     public class TemplatesController : BaseController
     {
         private const int TemplatesPerPage = 16;
         private readonly ITemplateService templateService;
+        private readonly IMemoryCache memoryCache;
 
         public TemplatesController(
-            ITemplateService templateService)
+            ITemplateService templateService,
+            IMemoryCache memoryCache)
         {
             this.templateService = templateService;
+            this.memoryCache = memoryCache;
         }
 
         public async Task<IActionResult> All(int id = 1, int? categoryId = null, int? subCategoryId = null)
@@ -62,8 +67,14 @@
                 return this.BadRequest();
             }
 
-            var viewModel = await this.templateService.GetByIdAsync<TemplateDetailsModel>(templateId);
-            viewModel.Category = await this.templateService.GetCategoryAsync<TemplateCategoryViewModel>(categoryId);
+            var templateCacheKey = string.Format(GlobalConstants.TemplateCacheKey, templateId, categoryId);
+            if (!this.memoryCache.TryGetValue(templateCacheKey, out TemplateDetailsModel viewModel))
+            {
+                viewModel = await this.templateService.GetByIdAsync<TemplateDetailsModel>(templateId);
+                viewModel.Category = await this.templateService.GetCategoryAsync<TemplateCategoryViewModel>(categoryId);
+
+                this.memoryCache.Set(templateCacheKey, viewModel, TimeSpan.FromSeconds(GlobalConstants.CacheExpirationTimeInSeconds));
+            }
 
             this.ViewData[GlobalConstants.ReturnUrlKey] = this.ReturnUrl;
 
