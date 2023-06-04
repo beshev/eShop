@@ -33,6 +33,9 @@
         [MaxLength(DataConstants.PhoneMaxLength)]
         public string Phone { get; set; }
 
+        [MaxLength(DataConstants.CompanyNameMaxLength)]
+        public string CompanyName { get; set; }
+
         [MaxLength(DataConstants.BullstatMaxLength)]
         public string Bullstat { get; set; }
 

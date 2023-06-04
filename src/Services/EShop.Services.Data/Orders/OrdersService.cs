@@ -51,6 +51,7 @@
                     DeliveryAddress = model.UserInfo.DeliveryAddress,
                     DeliveryAddressType = model.UserInfo.DeliveryAddressType,
                     Carrier = model.UserInfo.Carrier,
+                    CompanyName = model.UserInfo.CompanyName,
                     Bullstat = model.UserInfo.Bullstat,
                     Mall = model.UserInfo.Mall,
                     CompanyAddress = model.UserInfo.CompanyAddress,

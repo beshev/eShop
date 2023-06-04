@@ -27,5 +27,7 @@
         public const int MallMaxLength = 255;
 
         public const int CompanyAddressMaxLength = 500;
+
+        public const int CompanyNameMaxLength = 500;
     }
 }

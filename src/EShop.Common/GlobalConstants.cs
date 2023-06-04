@@ -148,6 +148,8 @@
 
         public const string DisplayPhone = "Телефон за връзка";
 
+        public const string DisplayCompanyName = "Име на фирмата";
+
         public const string DisplayBullstat = "Булстат";
 
         public const string DisplayMall = "МОЛ";

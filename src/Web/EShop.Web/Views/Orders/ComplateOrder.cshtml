@@ -75,6 +75,11 @@
     </div>
     <div class="row" id="togle" style="display: none">
         <div class="form-grup">
+            <span asp-validation-for="CompanyName" class="text-danger"></span>
+            <label asp-for="CompanyName"></label>
+            <input asp-for="CompanyName" class="form-control inputHover" placeholder="Име на фирмата..." />
+        </div>
+        <div class="form-grup">
             <span asp-validation-for="Bullstat" class="text-danger"></span>
             <label asp-for="Bullstat"></label>
             <input asp-for="Bullstat" class="form-control inputHover" placeholder="Булстат..." />

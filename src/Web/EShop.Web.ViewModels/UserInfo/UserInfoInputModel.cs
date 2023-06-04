@@ -40,6 +40,10 @@
         [Display(Name = GlobalConstants.DisplayPhone)]
         public string Phone { get; set; }
 
+        [MaxLength(DataConstants.CompanyNameMaxLength)]
+        [Display(Name = GlobalConstants.DisplayCompanyName)]
+        public string CompanyName { get; set; }
+
         [MaxLength(DataConstants.BullstatMaxLength)]
         [Display(Name = GlobalConstants.DisplayBullstat)]
         public string Bullstat { get; set; }
