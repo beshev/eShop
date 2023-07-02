@@ -18,6 +18,9 @@
 </svg>
 
 <h3 class="text-center">Модели за @this.Model.TemplateCategoryName</h3>
+<div class="category">
+    <vc:template-sub-categories category-id="@this.Model.TemplateCategoryId"></vc:template-sub-categories>
+</div>
 <div id="carouselExampleControlsTemp" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner carousel-temp">
         @foreach (var template in this.Model.Templates)
@@ -49,6 +52,9 @@
 </div>
 
 <h3 class="text-center">Продукти</h3>
+<div class="category">
+    <vc:product-categories></vc:product-categories>
+</div>
 <div id="carouselExampleControlsProd" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner carousel-prod">
         @foreach (var product in this.Model.Products)
@@ -61,7 +67,7 @@
                             <image href="@product.ImageUrl" height="100%" width="100%"></image>
                         </svg>
                         <div class="card-body p-1">
-                           <p style="font-family: cursive">@product.Name</p>
+                            <p style="font-family: cursive">@product.Name</p>
                             <h5 style="text-align: right">@product.Price лв</h5>
                         </div>
                     </div>
