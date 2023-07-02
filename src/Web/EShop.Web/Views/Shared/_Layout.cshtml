@@ -45,13 +45,13 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="themes">Модели за</a>
-                        <div class="dropdown-menu" aria-labelledby="themes">
+                        <div class="dropdown-menu scroll-overflow" aria-labelledby="themes">
                             <vc:template-categories></vc:template-categories>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="themes">Продукти</a>
-                        <div class="dropdown-menu" aria-labelledby="themes">
+                        <div class="dropdown-menu scroll-overflow" aria-labelledby="themes">
                             <a class="dropdown-item" asp-area="" asp-controller="@GlobalConstants.ProductsController" asp-action="@GlobalConstants.AllAction">Всички</a>
                             @foreach (var category in await productService.GetCategoriesAsync<SelectViewModel>())
                             {
