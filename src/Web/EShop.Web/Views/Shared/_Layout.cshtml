@@ -52,7 +52,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="themes">Продукти</a>
                         <div class="dropdown-menu scroll-overflow" aria-labelledby="themes">
-                            <a class="dropdown-item" asp-area="" asp-controller="@GlobalConstants.ProductsController" asp-action="@GlobalConstants.AllAction">Всички</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="@GlobalConstants.ProductsController" asp-action="@GlobalConstants.AllAction" asp-route-id="1">Всички</a>
                             @foreach (var category in await productService.GetCategoriesAsync<SelectViewModel>())
                             {
                                 <a class="dropdown-item"

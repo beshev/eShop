@@ -43,6 +43,7 @@
             var viewModel = new AllProductsViewModel
             {
                 PageNumber = id,
+                CategoryId = categoryId,
                 PagesCount = pagesCount,
                 ForAction = nameof(this.All),
                 ForController = this.GetType().Name.Replace(nameof(Controller), string.Empty),

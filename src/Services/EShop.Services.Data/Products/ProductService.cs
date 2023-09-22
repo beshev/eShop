@@ -142,7 +142,7 @@
 
             if (categoryId.HasValue)
             {
-                query = query.Where(x => x.Id.Equals(categoryId.Value));
+                query = query.Where(x => x.ProductCategoryId.Equals(categoryId.Value));
             }
 
             return await query.CountAsync();
